@@ -10,14 +10,14 @@ public class NamedEntityRecognizer {
 	
 	protected void printEntities(String sentence)
 	{
-		Properties props = new Properties();
+	    Properties props = new Properties();
 	    props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref, sentiment");
 	    StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 	    
-		Annotation document = new Annotation(sentence);
-		pipeline.annotate(document);
+	    Annotation document = new Annotation(sentence);
+	    pipeline.annotate(document);
 	
-		PrintWriter out = new PrintWriter(System.out); 
+	    PrintWriter out = new PrintWriter(System.out); 
 	    pipeline.prettyPrint(document, out);	    
 	}
 }
