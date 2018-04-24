@@ -1,23 +1,105 @@
 package utils;
 
-import java.io.PrintWriter;
-import java.util.Properties;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
-import edu.stanford.nlp.pipeline.Annotation;
-import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class NamedEntityRecognizer {
 	
-	protected void printEntities(String sentence)
-	{
-		Properties props = new Properties();
-	    props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref, sentiment");
-	    StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-	    
-		Annotation document = new Annotation(sentence);
-		pipeline.annotate(document);
+    private final String REQUESTURL = "http://model.dbpedia-spotlight.org/en/annotate";
+	private final String CONFIDENCE = "0.45"; 
+	private final String SUPPORT = "20";	
 	
-		PrintWriter out = new PrintWriter(System.out); 
-	    pipeline.prettyPrint(document, out);	    
+	public String getEntities(final String inputText) throws MalformedURLException, IOException, ProtocolException, ParseException {
+
+		String urlParameters = "text=" + URLEncoder.encode(inputText, "UTF-8");
+		urlParameters += "&confidence=" + CONFIDENCE;
+		urlParameters += "&support=" + SUPPORT;
+
+		return requestPOST(urlParameters, REQUESTURL);
 	}
+	
+	public List<Entity> getEntitiesProcessed(final String inputText) throws MalformedURLException, IOException, ProtocolException, ParseException {
+
+		String urlParameters = "text=" + URLEncoder.encode(inputText, "UTF-8");
+		urlParameters += "&confidence=" + CONFIDENCE;
+		urlParameters += "&support=" + SUPPORT;
+
+		return postProcessing(requestPOST(urlParameters, REQUESTURL));
+	}
+	
+	/**
+	 * 
+	 * @param urlParameters
+	 * @param requestURL
+	 * @return response as String from the requestURL
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 * @throws ProtocolException
+	 */
+	
+	private String requestPOST(final String urlParameters, final String requestURL) throws MalformedURLException, IOException, ProtocolException {
+		URL url = new URL(requestURL);
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.setRequestMethod("POST");
+		connection.setDoOutput(true);
+		connection.setDoInput(true);
+		connection.setUseCaches(false);
+		connection.setRequestProperty("Accept", "application/json");
+		connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+		connection.setRequestProperty("Content-Length", String.valueOf(urlParameters.length()));
+
+		DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+		wr.writeBytes(urlParameters);
+		wr.flush();
+
+		InputStream inputStream = connection.getInputStream();
+		InputStreamReader in = new InputStreamReader(inputStream);
+		BufferedReader reader = new BufferedReader(in);
+
+		StringBuilder sb = new StringBuilder();
+		while (reader.ready()) {
+			sb.append(reader.readLine());
+		}
+
+		wr.close();
+		reader.close();
+		connection.disconnect();
+
+		return sb.toString();
+	}
+	
+	public List<Entity> postProcessing(final String response) throws ParseException{
+		
+		List<Entity> namedEntities = new ArrayList<>();
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) parser.parse(response);
+
+		JSONArray resources = (JSONArray) jsonObject.get("Resources");
+		if (resources != null) {
+			for (Object res : resources.toArray()) {
+				JSONObject next = (JSONObject) res;
+				String uri = ((String) next.get("@URI"));
+				String type = ((String) next.get("@types"));
+				Entity entity = new Entity(type,uri);
+				namedEntities.add(entity);
+			}
+		}
+		return namedEntities;
+	}
+	
 }
