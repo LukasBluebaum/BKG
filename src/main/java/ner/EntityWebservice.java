@@ -1,4 +1,4 @@
-package utils;
+package ner;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -18,7 +18,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class NamedEntityRecognizer {
+import utils.Entity;
+
+public class EntityWebservice {
 	
     private final String REQUESTURL = "http://model.dbpedia-spotlight.org/en/annotate";
 	private final String CONFIDENCE = "0.45"; 
@@ -41,16 +43,6 @@ public class NamedEntityRecognizer {
 
 		return postProcessing(requestPOST(urlParameters, REQUESTURL));
 	}
-	
-	/**
-	 * 
-	 * @param urlParameters
-	 * @param requestURL
-	 * @return response as String from the requestURL
-	 * @throws MalformedURLException
-	 * @throws IOException
-	 * @throws ProtocolException
-	 */
 	
 	private String requestPOST(final String urlParameters, final String requestURL) throws MalformedURLException, IOException, ProtocolException {
 		URL url = new URL(requestURL);
