@@ -68,7 +68,7 @@ public class WikiParser {
 //	    }
 //	}
 	
-	private String cleanArticle(String article) {
+	private static String cleanArticle(String article) {
 		article = NULLCHAR.matcher(article).replaceAll("");
 		article = URLS.matcher(article).replaceAll("");
 		article = PARENTHESES.matcher(article).replaceAll("");
@@ -96,40 +96,42 @@ public class WikiParser {
 	
 
 	
-//	public static void main(String[] args) throws ParseException {		
-//		BufferedReader rd = null;
-//		BufferedWriter bw = null;
-//			
-//		try {
-//		    File file = new File("enwiki-20171103-pages.tsv");
-//		    rd =  new BufferedReader(new FileReader(new File("enwiki-20171103-pages.tsv")));
-//		    
-//		    File fout = new File("out2.txt");
-////			FileOutputStream fos = new FileOutputStream(fout);		 
-////			bw = new BufferedWriter(new OutputStreamWriter(fos));
-//		    FileWriter writer = new FileWriter(fout);
-//		    
-//			WikiParser wiki = new WikiParser();
-//			
-//		    String nextLine;
-//		    int i = 1;
-//		    while((nextLine = rd.readLine()) != null) {		
-//		    	//if(nextLine.length() > 1 && nextLine.charAt(1) == 'h') {
-//		    		 writer.write((nextLine + "\r\n"));
-//		    	//}
-//		    	//i++;	
-//		    }
-//		    writer.flush();
-//		    writer.close();    
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} finally {		   
-//		    try {
-//		    	rd.close();
-//		    	//bw.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}		    		    
-//		}
-//	}
+	public static void main(String[] args) throws ParseException {		
+		BufferedReader rd = null;
+		BufferedWriter bw = null;
+			
+		try {
+		    File file = new File("resources/enwiki-20171103-pages.tsv");
+		    rd =  new BufferedReader(new FileReader(new File("resources/enwiki-20171103-pages.tsv")));
+		    
+		    File fout = new File("resources/out2.txt");
+//			FileOutputStream fos = new FileOutputStream(fout);		 
+//			bw = new BufferedWriter(new OutputStreamWriter(fos));
+		    FileWriter writer = new FileWriter(fout);
+		    
+			WikiParser wiki = new WikiParser();
+			
+		    String nextLine;
+		    int i = 1;
+		    while((nextLine = rd.readLine()) != null && i<= 100) {		
+		    	//if(nextLine.length() > 1 && nextLine.charAt(1) == 'h') {
+		    		if(i == 29) {
+		    			 writer.write((cleanArticle(nextLine) + "\r\n"));
+		    		}
+		    	//}
+		    	i++;	
+		    }
+		    writer.flush();
+		    writer.close();    
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {		   
+		    try {
+		    	rd.close();
+		    	//bw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}		    		    
+		}
+	}
 }
