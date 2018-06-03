@@ -1,24 +1,33 @@
 package utils;
 
+import java.util.ArrayList;
+
 public class Entity {
 	
-	private String types;
+	private ArrayList<String> types = new ArrayList<String>();
 	
 	private String uri;
 	
-	public Entity(String types, String uri) {
-		this.setType(types);
+	private String surfaceForm;
+	
+	public Entity(String types, String uri, String surfaceForm) {
+		this.toList(types);
 		this.setUri(uri);
+		this.setSurfaceForm(surfaceForm);
 	}
 
-	public String getType() {
+	private void toList(String t) {
+		String[] comma = t.split(",");
+		for(String typeLink: comma) {
+			String[] type = typeLink.split(":");
+			if(type.length == 2) types.add(type[1]);
+		}
+	}
+	
+	public ArrayList<String> getTypes() {
 		return types;
 	}
-
-	public void setType(String type) {
-		this.types = type;
-	}
-
+	
 	public String getUri() {
 		return uri;
 	}
@@ -28,6 +37,14 @@ public class Entity {
 	}
 	
 	public String toString() {
-		return "URI: " + uri + "- Type:" + types;
+		return "URI: " + uri + "- Type:" + types + "- Surface Form: " + surfaceForm;
+	}
+
+	public String getSurfaceForm() {
+		return surfaceForm;
+	}
+
+	public void setSurfaceForm(String surfaceForm) {
+		this.surfaceForm = surfaceForm;
 	}
 }
