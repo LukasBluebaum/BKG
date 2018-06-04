@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +29,9 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.json.simple.parser.ParseException;
 
+import edu.stanford.nlp.ie.util.RelationTriple;
 import edu.stanford.nlp.util.CoreMap;
+import utils.Entity;
 import utils.Relation;
 
 public class RelationExtraction {
@@ -40,6 +45,8 @@ public class RelationExtraction {
 	private static final int STARTLINE = 0;
 	
 	private static final int LINESPERWRITE = 10;
+	
+	private static final int CHARACTERLIMIT = 2000;
 	
 	private static AtomicInteger count;
 		
@@ -63,6 +70,8 @@ public class RelationExtraction {
 		System.out.println(triple);		
 		graph.add(triple);	
 	}
+	
+
 	
 	private void getRelations(String article) throws MalformedURLException, ProtocolException, IOException, ParseException {
 		count = new AtomicInteger(0);
@@ -108,7 +117,64 @@ public class RelationExtraction {
 		executor.scheduleWithFixedDelay(askFox, 0, DELAYSECONDS, TimeUnit.SECONDS);	
 	}
 	
-	public void retrieveRelations(File input, String model, String ontology) throws MalformedURLException, ProtocolException, IOException, ParseException  {		
+	private void spotlightTriples(Map<Integer, Collection<RelationTriple>> binaryRelations, Map<Integer, ArrayList<Entity>> entities) {
+		for(int i: binaryRelations.keySet()) {
+			for(RelationTriple triple: binaryRelations.get(i)) {
+				for(Entity entity: entities.get(i)) {
+					for(Entity entity2: entities.get(i)) {
+						if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())){
+							
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public void prepareArticle(String article) throws InterruptedException {
+		List<CoreMap> sentencesRaw = PARSER.getSentences(article);
+		List<CoreMap> sentences = new ArrayList<CoreMap>();
+		int countC = 0;
+		for(CoreMap sentence: sentencesRaw) {
+			if(sentence.size() == 600) continue;
+			if(countC + sentence.toString().length() < CHARACTERLIMIT) {
+				countC += sentence.toString().length();
+				sentences.add(sentence);
+			} else {
+				break;
+			}
+		}
+		
+		Map<Integer, Collection<RelationTriple>> binaryRelations = PARSER.binaryRelation(sentences);	
+		
+		SpotlightWebservice service = new SpotlightWebservice();
+
+		Map<Integer, ArrayList<Entity>> entities = new LinkedHashMap<>();
+
+		try {	
+			for(int i = 0; i<sentences.size(); i++) {
+				Thread.sleep(1000);
+				entities.put(i, (ArrayList<Entity>) service.getEntitiesProcessed(sentences.get(i).toString()));
+			}
+//			for(int i = 0; i<sentences.size(); i++) {
+//				if(countC + sentences.get(i).toString().length() < 600) {
+//					question += sentences.get(i).toString();
+//				} else if(countC + sentences.get(i).toString().length() > 600 || i == sentences.size()-1){
+//					Thread.sleep(1000);
+//					temp.addAll(service.getEntitiesProcessed(question));
+//					countC = 0;
+//				}	
+//			}
+		
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+		if(entities == null || entities.size() == 0) return;
+		
+		spotlightTriples(binaryRelations,entities);
+	}
+	
+	public void retrieveRelations(File input, String model, String ontology) throws MalformedURLException, ProtocolException, IOException, ParseException, InterruptedException  {		
 		parseProperties(ontology);
 		
 		BufferedReader reader = null;
@@ -127,7 +193,8 @@ public class RelationExtraction {
 		    int linesLastWrite = 0;
 		    while((nextLine = reader.readLine()) != null) {		
 		    	if(currentLine >= STARTLINE) {
-		    		getRelations(nextLine);	
+		    		//getRelations(nextLine);
+		    		prepareArticle(nextLine);
 		    	}
 		    	if(linesLastWrite == LINESPERWRITE) {
 		    		graph.write(writer, "TTL");
@@ -137,7 +204,7 @@ public class RelationExtraction {
 		    	currentLine++;
 		    	linesLastWrite++;
 		    }
-		} catch (IOException | ParseException e) {
+		} catch (IOException  e) {
 			e.printStackTrace();
 		} finally {		   
 		    try {
@@ -182,11 +249,15 @@ public class RelationExtraction {
 //		FoxWebservice n = new FoxWebservice();
 //		System.out.println(n.extract("The philosopher and mathematician Leibniz was born in Leipzig in 1646. He died in Hanover.", "en", "re"));
 		
-		NLPParser p = new NLPParser();
-		List<CoreMap> list = p.getSentences("Austin is the capital of Texas and is a city in the USA.");
-		//SpotlightWebservice service = new SpotlightWebservice();
+		SpotlightWebservice service = new SpotlightWebservice();
+		System.out.println(service.getEntities("Barack Obama."));
 		
-		
+//		NLPParser p = new NLPParser();
+//		List<CoreMap> list = p.getSentences("Albert Einstein (14 March 1879 – 18 April 1955) was a German-born theoretical physicist[5] who developed the theory"
+//				+ " of relativity, one of the two pillars of modern physics (alongside quantum mechanics).");
+//		//SpotlightWebservice service = new SpotlightWebservice();
+//		p.binary(list);
+//		
 //		RelationExtraction n = new RelationExtraction();	
 //		n.parseProperties("resources/ontology_english.nt");
 	

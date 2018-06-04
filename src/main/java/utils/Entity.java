@@ -10,10 +10,13 @@ public class Entity {
 	
 	private String surfaceForm;
 	
-	public Entity(String types, String uri, String surfaceForm) {
+	private int offset;
+	
+	public Entity(String types, String uri, String surfaceForm, int offset) {
 		this.toList(types);
 		this.setUri(uri);
 		this.setSurfaceForm(surfaceForm);
+		this.setOffset(offset);
 	}
 
 	private void toList(String t) {
@@ -46,5 +49,13 @@ public class Entity {
 
 	public void setSurfaceForm(String surfaceForm) {
 		this.surfaceForm = surfaceForm;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 }

@@ -99,8 +99,8 @@ public class SpotlightWebservice {
 				String uri = ((String) next.get("@URI"));
 				String type = ((String) next.get("@types"));
 				String surface = ((String) next.get("@surfaceForm"));
-				
-				Entity entity = new Entity(type,uri,surface);
+				int offset = Integer.parseInt((String) next.get("@offset"));
+				Entity entity = new Entity(type,uri,surface, offset);
 				namedEntities.add(entity);
 			}
 		}
