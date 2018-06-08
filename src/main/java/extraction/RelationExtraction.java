@@ -117,19 +117,7 @@ public class RelationExtraction {
 		executor.scheduleWithFixedDelay(askFox, 0, DELAYSECONDS, TimeUnit.SECONDS);	
 	}
 	
-	private void spotlightTriples(Map<Integer, Collection<RelationTriple>> binaryRelations, Map<Integer, ArrayList<Entity>> entities) {
-		for(int i: binaryRelations.keySet()) {
-			for(RelationTriple triple: binaryRelations.get(i)) {
-				for(Entity entity: entities.get(i)) {
-					for(Entity entity2: entities.get(i)) {
-						if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())){
-							
-						}
-					}
-				}
-			}
-		}
-	}
+
 	
 	public void prepareArticle(String article) throws InterruptedException {
 		List<CoreMap> sentencesRaw = PARSER.getSentences(article);
@@ -155,6 +143,7 @@ public class RelationExtraction {
 			for(int i = 0; i<sentences.size(); i++) {
 				Thread.sleep(1000);
 				entities.put(i, (ArrayList<Entity>) service.getEntitiesProcessed(sentences.get(i).toString()));
+				spotlightTriples(i, binaryRelations, entities);
 			}
 //			for(int i = 0; i<sentences.size(); i++) {
 //				if(countC + sentences.get(i).toString().length() < 600) {
@@ -171,9 +160,53 @@ public class RelationExtraction {
 		}
 		if(entities == null || entities.size() == 0) return;
 		
-		spotlightTriples(binaryRelations,entities);
+		// spotlightTriples(binaryRelations,entities);
 	}
 	
+	private void spotlightTriples(int i, Map<Integer, Collection<RelationTriple>> binaryRelations,
+		Map<Integer, ArrayList<Entity>> entities) {
+		for(Entity entity: entities.get(i))		{
+			for(Entity entity2: entities.get(i)) {
+				for(RelationTriple triple: binaryRelations.get(i)) {
+					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())){
+						String tripleRelation = triple.relationGloss();
+						for(Relation r: properties) {
+							if(entity.getTypes().contains(r.getDomain()) && entity2.getTypes().contains(r.getRange())) {
+								if(r.getKeywords().contains(tripleRelation)) {
+									Resource subject = ResourceFactory.createResource(entity.getUri());
+									Property predicate = ResourceFactory.createProperty(r.getLabel());
+									RDFNode object = ResourceFactory.createResource(entity2.getUri());
+									Statement t = ResourceFactory.createStatement(subject, predicate, object);
+									System.out.println(t);		
+									graph.add(t);	
+								}
+							}
+						}
+						
+				}
+				}
+			}
+		}
+	
+	
+}
+
+	
+//	private void spotlightTriples(Map<Integer, Collection<RelationTriple>> binaryRelations, Map<Integer, ArrayList<Entity>> entities) {
+//	for(int i: binaryRelations.keySet()) {
+//		for(RelationTriple triple: binaryRelations.get(i)) {
+//			for(Entity entity: entities.get(i)) {
+//				for(Entity entity2: entities.get(i)) {
+//					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())){
+//						
+//					}
+//				}
+//			}
+//		}
+//	}
+//}
+
+
 	public void retrieveRelations(File input, String model, String ontology) throws MalformedURLException, ProtocolException, IOException, ParseException, InterruptedException  {		
 		parseProperties(ontology);
 		

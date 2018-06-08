@@ -10,6 +10,8 @@ public class Relation {
 	
 	private String domain;
 	
+	private String uri;
+	
 	
 	public Relation() {
 		
@@ -50,5 +52,13 @@ public class Relation {
 	@Override
 	public String toString() {
 		return "Label: " + label + " Keywords: " + keywords  + " Range: " + range + " Domain: " + domain;
+	}
+
+	public String getUri() {
+		return uri;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 }
