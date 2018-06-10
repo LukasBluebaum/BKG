@@ -46,7 +46,9 @@ public class SpotlightWebservice {
 		urlParameters += "&confidence=" + CONFIDENCE;
 		urlParameters += "&support=" + SUPPORT;
 
-		return postProcessing(requestPOST(urlParameters, REQUESTURL));
+		List<Entity> entities = postProcessing(requestPOST(urlParameters, REQUESTURL));
+		System.out.println("Entities: " + entities);
+		return entities;
 	}
 	
 	private String requestPOST(final String urlParameters, final String requestURL) throws MalformedURLException, IOException, ProtocolException {

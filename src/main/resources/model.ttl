@@ -1,0 +1,19 @@
+<http://dbpedia.org/resource/Texas>
+        <http://dbpedia.org/ontology/capital>
+                <http://dbpedia.org/resource/Austin,_Texas> ;
+        <http://dbpedia.org/ontology/closeTo>
+                <http://dbpedia.org/resource/Austin,_Texas> ;
+        <http://dbpedia.org/ontology/coatOfArms>
+                <http://dbpedia.org/resource/Austin,_Texas> ;
+        <http://dbpedia.org/ontology/isPartOf>
+                <http://dbpedia.org/resource/Austin,_Texas> .
+
+<http://dbpedia.org/resource/Austin,_Texas>
+        <http://dbpedia.org/ontology/associationOfLocalGovernment>
+                <http://dbpedia.org/resource/Texas> ;
+        <http://dbpedia.org/ontology/closeTo>
+                <http://dbpedia.org/resource/Texas> ;
+        <http://dbpedia.org/ontology/coatOfArms>
+                <http://dbpedia.org/resource/Texas> ;
+        <http://dbpedia.org/ontology/isPartOf>
+                <http://dbpedia.org/resource/Texas> .

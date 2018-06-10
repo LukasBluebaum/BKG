@@ -1,20 +1,23 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Relation {
 	
 	private String label;
 	
-	private String keywords;
+	private ArrayList<String> keywords ;
 	
 	private String range;
 	
 	private String domain;
 	
-	private String uri;
-	
-	
+	private int countRelation;
+			
 	public Relation() {
-		
+		range = "";
+		domain = "";
 	}
 	
 	public String getDomain() {
@@ -22,7 +25,7 @@ public class Relation {
 	}
 
 	public void setDomain(String domain) {
-		this.domain = domain;
+		this.domain = domain.substring(domain.lastIndexOf("/")+1, domain.length());
 	}
 
 	public String getRange() {
@@ -30,15 +33,15 @@ public class Relation {
 	}
 
 	public void setRange(String range) {
-		this.range = range;
+		this.range = range.substring(range.lastIndexOf("/")+1, range.length());
 	}
 
-	public String getKeywords() {
+	public ArrayList<String> getKeywords() {
 		return keywords;
 	}
 
 	public void setKeywords(String keywords) {
-		this.keywords = keywords;
+		this.keywords = new ArrayList<String>(Arrays.asList(keywords.split(" ")));
 	}
 
 	public String getLabel() {
@@ -54,11 +57,12 @@ public class Relation {
 		return "Label: " + label + " Keywords: " + keywords  + " Range: " + range + " Domain: " + domain;
 	}
 
-	public String getUri() {
-		return uri;
+	public int getCountRelation() {
+		return countRelation;
 	}
 
-	public void setUri(String uri) {
-		this.uri = uri;
+	public void setCountRelation(int countRelation) {
+		this.countRelation = countRelation;
 	}
+
 }

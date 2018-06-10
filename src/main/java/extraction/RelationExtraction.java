@@ -73,7 +73,7 @@ public class RelationExtraction {
 	
 
 	
-	private void getRelations(String article) throws MalformedURLException, ProtocolException, IOException, ParseException {
+	private void getRelationsFox(String article) throws MalformedURLException, ProtocolException, IOException, ParseException {
 		count = new AtomicInteger(0);
 				
 		final List<CoreMap> sentences = PARSER.getSentences(article);
@@ -119,71 +119,64 @@ public class RelationExtraction {
 	
 
 	
-	public void prepareArticle(String article) throws InterruptedException {
-		List<CoreMap> sentencesRaw = PARSER.getSentences(article);
-		List<CoreMap> sentences = new ArrayList<CoreMap>();
-		int countC = 0;
-		for(CoreMap sentence: sentencesRaw) {
-			if(sentence.size() == 600) continue;
-			if(countC + sentence.toString().length() < CHARACTERLIMIT) {
-				countC += sentence.toString().length();
-				sentences.add(sentence);
-			} else {
-				break;
-			}
+	public void getRelationsSpotlight(String article) throws InterruptedException {
+		String a = null;
+		if(article.length() > CHARACTERLIMIT+1) {
+			a = article.substring(0, CHARACTERLIMIT+1);
+		} else {
+			a = article;
 		}
-		
+		List<CoreMap> sentences = PARSER.getSentences(a);
+	
 		Map<Integer, Collection<RelationTriple>> binaryRelations = PARSER.binaryRelation(sentences);	
 		
 		SpotlightWebservice service = new SpotlightWebservice();
 
 		Map<Integer, ArrayList<Entity>> entities = new LinkedHashMap<>();
 
-		try {	
 			for(int i = 0; i<sentences.size(); i++) {
-				Thread.sleep(1000);
-				entities.put(i, (ArrayList<Entity>) service.getEntitiesProcessed(sentences.get(i).toString()));
+				Thread.sleep(5000);
+				System.out.println(sentences.get(i));
+				try {
+					entities.put(i, (ArrayList<Entity>) service.getEntitiesProcessed(sentences.get(i).toString()));
+				} catch (IOException | ParseException  e) {
+					entities.put(i, null);
+					e.printStackTrace();
+				}
 				spotlightTriples(i, binaryRelations, entities);
 			}
-//			for(int i = 0; i<sentences.size(); i++) {
-//				if(countC + sentences.get(i).toString().length() < 600) {
-//					question += sentences.get(i).toString();
-//				} else if(countC + sentences.get(i).toString().length() > 600 || i == sentences.size()-1){
-//					Thread.sleep(1000);
-//					temp.addAll(service.getEntitiesProcessed(question));
-//					countC = 0;
-//				}	
-//			}
 		
-		} catch (IOException | ParseException e) {
-			e.printStackTrace();
-		}
 		if(entities == null || entities.size() == 0) return;
-		
-		// spotlightTriples(binaryRelations,entities);
 	}
 	
 	private void spotlightTriples(int i, Map<Integer, Collection<RelationTriple>> binaryRelations,
 		Map<Integer, ArrayList<Entity>> entities) {
 		for(Entity entity: entities.get(i))		{
+			if(entity == null) return;
 			for(Entity entity2: entities.get(i)) {
-				for(RelationTriple triple: binaryRelations.get(i)) {
-					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())){
+				for(RelationTriple triple: binaryRelations.get(i)) {					
+								
+					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())
+							|| triple.subjectGloss().contains(entity2.getSurfaceForm()) && triple.objectGloss().contains(entity.getSurfaceForm())){
+						System.out.println(i +": " + triple.subjectGloss() + " - " + binaryRelations.get(i) + " - " + triple.objectGloss());
 						String tripleRelation = triple.relationGloss();
 						for(Relation r: properties) {
-							if(entity.getTypes().contains(r.getDomain()) && entity2.getTypes().contains(r.getRange())) {
-								if(r.getKeywords().contains(tripleRelation)) {
-									Resource subject = ResourceFactory.createResource(entity.getUri());
-									Property predicate = ResourceFactory.createProperty(r.getLabel());
-									RDFNode object = ResourceFactory.createResource(entity2.getUri());
-									Statement t = ResourceFactory.createStatement(subject, predicate, object);
-									System.out.println(t);		
-									graph.add(t);	
+							if( (entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && (entity2.getTypes().contains(r.getRange()) || r.getRange().equals(""))) {
+								String[] tripleR = tripleRelation.split(" ");
+								System.out.println("Entity1: " + entity + "entity2" + entity2 + " domain & range true for " + r);
+								for(String s: tripleR) {
+									if(r.getKeywords().contains(s)) {
+										Resource subject = ResourceFactory.createResource(entity.getUri());
+										Property predicate = ResourceFactory.createProperty(r.getLabel());
+										RDFNode object = ResourceFactory.createResource(entity2.getUri());
+										Statement t = ResourceFactory.createStatement(subject, predicate, object);
+										System.out.println(t);		
+										graph.add(t);	
+									}
 								}
 							}
-						}
-						
-				}
+						}					
+					}
 				}
 			}
 		}
@@ -207,8 +200,8 @@ public class RelationExtraction {
 //}
 
 
-	public void retrieveRelations(File input, String model, String ontology) throws MalformedURLException, ProtocolException, IOException, ParseException, InterruptedException  {		
-		parseProperties(ontology);
+	public void retrieveRelations(File input, String model) throws MalformedURLException, ProtocolException, IOException, ParseException, InterruptedException  {		
+		parseProperties();
 		
 		BufferedReader reader = null;
 		FileWriter writer = null;
@@ -219,15 +212,16 @@ public class RelationExtraction {
 		    File out = new File(model);
 		    writer = new FileWriter(out);		
 
-		    graph.read(model,null, "TTL");
+		    
+		    if(out.length() != 0) graph.read(model,null, "TTL");
 
 		    String nextLine;
 		    int currentLine = 0;
 		    int linesLastWrite = 0;
 		    while((nextLine = reader.readLine()) != null) {		
 		    	if(currentLine >= STARTLINE) {
-		    		//getRelations(nextLine);
-		    		prepareArticle(nextLine);
+		    		//getRelationsFox(nextLine);
+		    		getRelationsSpotlight(nextLine);
 		    	}
 		    	if(linesLastWrite == LINESPERWRITE) {
 		    		graph.write(writer, "TTL");
@@ -237,6 +231,7 @@ public class RelationExtraction {
 		    	currentLine++;
 		    	linesLastWrite++;
 		    }
+		    graph.write(writer, "TTL");
 		} catch (IOException  e) {
 			e.printStackTrace();
 		} finally {		   
@@ -248,11 +243,22 @@ public class RelationExtraction {
 		}
 	}
 	
+	private void countOfRangeDomain() {
+		for(Relation r: properties) {
+			int count = 0;
+			for(Relation r2: properties) {		
+				if( r.getDomain().equals(r2.getDomain())  && r.getRange().equals(r2.getRange())) {
+					count++;
+				}
+			}
+			r.setCountRelation(count);
+		}
+	}
 	
-	private void parseProperties(String o) {
+	private void parseProperties() {
 		properties = new ArrayList<Relation>();
 		Model ontology = ModelFactory.createDefaultModel();
-		ontology.read(o);
+		ontology.read("src/main/resources/ontology_english.nt");
 		
 		ResIterator subjects = ontology.listSubjects();
 
@@ -274,26 +280,21 @@ public class RelationExtraction {
 				}
 			}					
 		}	
+		
+		countOfRangeDomain();
 	}
 	
 	public static void main(String[] args) throws Exception  {
-//		NamedEntityRecognizer n = new NamedEntityRecognizer();	
-//		n.retrieveEntities(new File("resources/out2.txt","graph.ttl"));
-//		FoxWebservice n = new FoxWebservice();
-//		System.out.println(n.extract("The philosopher and mathematician Leibniz was born in Leipzig in 1646. He died in Hanover.", "en", "re"));
+		RelationExtraction n = new RelationExtraction();	
+		n.retrieveRelations(new File("resources/out.txt"), "src/main/resources/model.ttl");
 		
-		SpotlightWebservice service = new SpotlightWebservice();
-		System.out.println(service.getEntities("Barack Obama."));
-		
-//		NLPParser p = new NLPParser();
-//		List<CoreMap> list = p.getSentences("Albert Einstein (14 March 1879 – 18 April 1955) was a German-born theoretical physicist[5] who developed the theory"
-//				+ " of relativity, one of the two pillars of modern physics (alongside quantum mechanics).");
-//		//SpotlightWebservice service = new SpotlightWebservice();
-//		p.binary(list);
-//		
-//		RelationExtraction n = new RelationExtraction();	
-//		n.parseProperties("resources/ontology_english.nt");
 	
-		
+//		NLPParser p = new NLPParser();
+//		List<CoreMap> list = p.getSentences("Linkin Park's genre is rock");
+//		Map<Integer, Collection<RelationTriple>> binaryRelations = p.binaryRelation(list);
+//		for(RelationTriple triple: binaryRelations.get(0)) {			
+//			System.out.println(0 +": " + triple.subjectGloss() + " - " + triple.relationGloss() + " - " + triple.objectGloss());
+//		}
+//		p.binaryRelation2(null);
 	}
 }
