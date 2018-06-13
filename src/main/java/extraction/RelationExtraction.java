@@ -81,8 +81,7 @@ public class RelationExtraction {
 		
 		Runnable askFox = new Runnable() {
 		    public void run() {
-		        try {
-		        	
+		        try {		        	
 		        	Model model = ModelFactory.createDefaultModel() ;
 		        	System.out.println(sentences.get(count.get()));
 		    		model.read(new ByteArrayInputStream(SERVICE.extract(sentences.get(count.get()).toString(), "en" , "re").getBytes()),null, "TTL");
@@ -97,15 +96,14 @@ public class RelationExtraction {
 		    		}
 		    		System.out.println("------------------------");
 		    		
-					if(count.incrementAndGet() == sentences.size()) {
-						executor.shutdownNow();
-						
+					if(count.incrementAndGet() == sentences.size()) {				
 						StmtIterator foundTriples = graph.listStatements();
 						
 						while(foundTriples.hasNext())
 						{
 							System.out.println(foundTriples.next());
 						}
+						executor.shutdownNow();	
 					}
 				} catch (Exception e) {
 					executor.shutdownNow();
@@ -120,13 +118,7 @@ public class RelationExtraction {
 
 	
 	public void getRelationsSpotlight(String article) throws InterruptedException {
-		String a = null;
-		if(article.length() > CHARACTERLIMIT+1) {
-			a = article.substring(0, CHARACTERLIMIT+1);
-		} else {
-			a = article;
-		}
-		List<CoreMap> sentences = PARSER.getSentences(a);
+		List<CoreMap> sentences = PARSER.getSentences(article);
 	
 		Map<Integer, Collection<RelationTriple>> binaryRelations = PARSER.binaryRelation(sentences);	
 		
@@ -182,7 +174,7 @@ public class RelationExtraction {
 		}
 	
 	
-}
+	}
 
 	
 //	private void spotlightTriples(Map<Integer, Collection<RelationTriple>> binaryRelations, Map<Integer, ArrayList<Entity>> entities) {
@@ -204,15 +196,12 @@ public class RelationExtraction {
 		parseProperties();
 		
 		BufferedReader reader = null;
-		FileWriter writer = null;
-		
+		FileWriter writer = null;		
 		try {		   
 		    reader =  new BufferedReader(new FileReader(input));
 		    
 		    File out = new File(model);
-		    writer = new FileWriter(out);		
-
-		    
+		    writer = new FileWriter(out);			    
 		    if(out.length() != 0) graph.read(model,null, "TTL");
 
 		    String nextLine;
@@ -220,8 +209,9 @@ public class RelationExtraction {
 		    int linesLastWrite = 0;
 		    while((nextLine = reader.readLine()) != null) {		
 		    	if(currentLine >= STARTLINE) {
-		    		//getRelationsFox(nextLine);
-		    		getRelationsSpotlight(nextLine);
+		    		String line = nextLine.length() > CHARACTERLIMIT+1 ? nextLine.substring(0, CHARACTERLIMIT+1) : nextLine;
+		    		getRelationsSpotlight(PARSER.coreferenceResolution(line));
+		    		//getRelationsFox(line);
 		    	}
 		    	if(linesLastWrite == LINESPERWRITE) {
 		    		graph.write(writer, "TTL");
