@@ -18,7 +18,7 @@ public class Worker implements Runnable{
 	private BlockingQueue<String> readQueue = null;
 	
 	private BlockingQueue<String> writeQueue = null;
-	
+		
 	public Worker(BlockingQueue<String> readQueue, BlockingQueue<String> writeQueue){
 		this.readQueue = readQueue; 
 		this.writeQueue = writeQueue; 
@@ -38,7 +38,7 @@ public class Worker implements Runnable{
 			}          
 		} catch(InterruptedException e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	private String cleanArticle(String article) {
@@ -49,4 +49,5 @@ public class Worker implements Runnable{
 		article = WHITESPACE.matcher(article).replaceAll(" ");
 		return article;
 	}
+	
 }
