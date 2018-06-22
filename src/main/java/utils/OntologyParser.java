@@ -14,6 +14,10 @@ public class OntologyParser {
 	
 	private static final String COMMENT = "http://www.w3.org/2000/01/rdf-schema#comment";
 	
+	private static final String OBJECT = "http://www.w3.org/2002/07/owl#ObjectProperty";
+	
+	private static final String DATA = "http://www.w3.org/2002/07/owl#DatatypeProperty";
+	
 	private static final int CLASSESENDLINE = 8388;
 	
 	private static final int DATATYPESTARTLINE = 29324;
@@ -28,7 +32,7 @@ public class OntologyParser {
     	 		String nextLine =null;
     	 		int i = 0;
     	 		while((nextLine=reader.readLine())!=null) { 
-    	 				if(i>CLASSESENDLINE && !(i>DATATYPESTARTLINE && i<30089) && (nextLine.contains("@en") && !nextLine.contains(COMMENT)) || nextLine.contains(RANGE) || nextLine.contains(DOMAIN)) {
+    	 				if(i>CLASSESENDLINE && !(i>DATATYPESTARTLINE && i<30089) && (nextLine.contains("@en") && !nextLine.contains(COMMENT)) || nextLine.contains(RANGE) || nextLine.contains(DOMAIN) || nextLine.contains(DATA) || nextLine.contains(OBJECT)) {
     	 					writer.write(nextLine + "\r\n");
     	 			}
     	 			i++;

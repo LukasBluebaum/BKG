@@ -277,24 +277,27 @@ public class RelationExtraction {
 					property.setDomain(next.getObject().toString());
 				} else if(next.getPredicate().toString().equals("http://www.w3.org/2000/01/rdf-schema#range")){
 					property.setRange(next.getObject().toString());
+				} else if (next.getPredicate().toString().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")){
+					property.setPropertyType(next.getObject().toString());
 				}
+						
 			}					
 		}	
 		
 		countOfRangeDomain();
 	}
 	
-	public static void main(String[] args) throws Exception  {
-		RelationExtraction n = new RelationExtraction();	
-		n.retrieveRelations(new File("resources/out.txt"), "src/main/resources/model.ttl");
-		
-	
-//		NLPParser p = new NLPParser();
-//		List<CoreMap> list = p.getSentences("Linkin Park's genre is rock");
-//		Map<Integer, Collection<RelationTriple>> binaryRelations = p.binaryRelation(list);
-//		for(RelationTriple triple: binaryRelations.get(0)) {			
-//			System.out.println(0 +": " + triple.subjectGloss() + " - " + triple.relationGloss() + " - " + triple.objectGloss());
-//		}
-//		p.binaryRelation2(null);
-	}
+//	public static void main(String[] args) throws Exception  {
+//		RelationExtraction n = new RelationExtraction();	
+//		n.retrieveRelations(new File("resources/out.txt"), "src/main/resources/model.ttl");
+//		
+//	
+////		NLPParser p = new NLPParser();
+////		List<CoreMap> list = p.getSentences("Linkin Park's genre is rock");
+////		Map<Integer, Collection<RelationTriple>> binaryRelations = p.binaryRelation(list);
+////		for(RelationTriple triple: binaryRelations.get(0)) {			
+////			System.out.println(0 +": " + triple.subjectGloss() + " - " + triple.relationGloss() + " - " + triple.objectGloss());
+////		}
+////		p.binaryRelation2(null);
+//	}
 }

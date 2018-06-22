@@ -14,6 +14,8 @@ public class Relation {
 	private String domain;
 	
 	private int countRelation;
+	
+	private String propertyType;
 			
 	public Relation() {
 		range = "";
@@ -54,7 +56,7 @@ public class Relation {
 	
 	@Override
 	public String toString() {
-		return "Label: " + label + " Keywords: " + keywords  + " Range: " + range + " Domain: " + domain;
+		return "Label: " + label + " Keywords: " + keywords  + " Range: " + range + " Domain: " + domain + "type:" + propertyType;
 	}
 
 	public int getCountRelation() {
@@ -63,6 +65,22 @@ public class Relation {
 
 	public void setCountRelation(int countRelation) {
 		this.countRelation = countRelation;
+	}
+	
+	public String getPropertyType() {
+		return propertyType;
+	}
+	
+	public void setPropertyType(String propertyType) {
+		if(propertyType.equals("http://www.w3.org/2002/07/owl#DatatypeProperty")) {
+			this.propertyType = "data";
+		}
+		else
+		{
+			this.propertyType = "object";
+		}
+			
+		
 	}
 
 }
