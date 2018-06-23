@@ -3,12 +3,16 @@ package extraction;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,10 +33,17 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.json.simple.parser.ParseException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 import edu.stanford.nlp.ie.util.RelationTriple;
 import edu.stanford.nlp.util.CoreMap;
 import utils.Entity;
 import utils.Relation;
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 
 public class RelationExtraction {
 	
@@ -233,6 +244,39 @@ public class RelationExtraction {
 		}
 	}
 	
+	private void toJsonFile() {
+
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		String json = null;
+
+		try {
+			json = ow.writeValueAsString(properties);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		 try {
+				OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("properties.json"));
+				writer.write(json);
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	
+	private void readJson() {
+		ObjectMapper mapper = new ObjectMapper();
+		try 
+		{  String json = Files.toString(new File("properties.json"), Charsets.UTF_8);
+			
+			properties =   mapper.readValue(json , new TypeReference<ArrayList<Relation>>(){});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private void countOfRangeDomain() {
 		for(Relation r: properties) {
 			int count = 0;
@@ -251,7 +295,7 @@ public class RelationExtraction {
 		ontology.read("src/main/resources/ontology_english.nt");
 		
 		ResIterator subjects = ontology.listSubjects();
-
+        int x = 0;
 		while(subjects.hasNext()) {
 			Relation property = new Relation();
 			properties.add(property);
@@ -262,7 +306,7 @@ public class RelationExtraction {
 				if(next.getPredicate().toString().equals("http://www.w3.org/2000/01/rdf-schema#label")) {
 					property.setLabel(next.getSubject().toString());
 					String temp = next.getObject().toString();
-					property.setKeywords(temp.substring(0, temp.length()-3));
+					property.setKeys(temp.substring(0, temp.length()-3));
 				} else if(next.getPredicate().toString().equals("http://www.w3.org/2000/01/rdf-schema#domain")) {
 					property.setDomain(next.getObject().toString());
 				} else if(next.getPredicate().toString().equals("http://www.w3.org/2000/01/rdf-schema#range")){
@@ -272,22 +316,32 @@ public class RelationExtraction {
 				}
 						
 			}					
-		}	
+		}
+		
 		
 		countOfRangeDomain();
 	}
 	
-//	public static void main(String[] args) throws Exception  {
+	
+	public static void main(String[] args) throws Exception  {
+		RelationExtraction n = new RelationExtraction();
+		n.parseProperties();
+		n.toJsonFile();
+		properties = null;
+		n.readJson();
+		for(Relation r: properties) {
+			System.out.println(r);
+		}
 //		RelationExtraction n = new RelationExtraction();	
 //		n.retrieveRelations(new File("resources/out.txt"), "src/main/resources/model.ttl");
-//		
-//	
-////		NLPParser p = new NLPParser();
-////		List<CoreMap> list = p.getSentences("Linkin Park's genre is rock");
-////		Map<Integer, Collection<RelationTriple>> binaryRelations = p.binaryRelation(list);
-////		for(RelationTriple triple: binaryRelations.get(0)) {			
-////			System.out.println(0 +": " + triple.subjectGloss() + " - " + triple.relationGloss() + " - " + triple.objectGloss());
-////		}
-////		p.binaryRelation2(null);
-//	}
+		
+	
+//		NLPParser p = new NLPParser();
+//		List<CoreMap> list = p.getSentences("Linkin Park's genre is rock");
+//		Map<Integer, Collection<RelationTriple>> binaryRelations = p.binaryRelation(list);
+//		for(RelationTriple triple: binaryRelations.get(0)) {			
+//			System.out.println(0 +": " + triple.subjectGloss() + " - " + triple.relationGloss() + " - " + triple.objectGloss());
+//		}
+//		p.binaryRelation2(null);
+	}
 }

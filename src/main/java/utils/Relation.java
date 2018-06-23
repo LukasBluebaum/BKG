@@ -2,6 +2,7 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class Relation {
 	
@@ -15,8 +16,8 @@ public class Relation {
 	
 	private int countRelation;
 	
-	private String propertyType;
-			
+	private String propertyType;	
+				
 	public Relation() {
 		range = "";
 		domain = "";
@@ -42,10 +43,12 @@ public class Relation {
 		return keywords;
 	}
 
-	public void setKeywords(String keywords) {
-		this.keywords = new ArrayList<String>(Arrays.asList(keywords.split(" ")));
+	public void setKeys(String keywords) {
+		this.keywords = new ArrayList<String>(Arrays.asList(Pattern.compile("\\(.*?\\)").matcher(keywords).replaceAll("").split(" ")));
 	}
-
+    public void setKeywords(ArrayList<String> keywords) {
+		this.keywords = keywords;
+	}
 	public String getLabel() {
 		return label;
 	}
@@ -72,7 +75,7 @@ public class Relation {
 	}
 	
 	public void setPropertyType(String propertyType) {
-		if(propertyType.equals("http://www.w3.org/2002/07/owl#DatatypeProperty")) {
+		if(propertyType.equals("http://www.w3.org/2002/07/owl#DatatypeProperty") || propertyType.equals("data") ) {
 			this.propertyType = "data";
 		}
 		else
