@@ -183,8 +183,6 @@ public class RelationExtraction {
 				}
 			}
 		}
-	
-	
 	}
 
 	
@@ -222,8 +220,9 @@ public class RelationExtraction {
 		    	if(currentLine >= STARTLINE) {
 		    		String line = nextLine.length() > CHARACTERLIMIT+1 ? nextLine.substring(0, CHARACTERLIMIT+1) : nextLine;
 		    		getRelationsSpotlight(PARSER.coreferenceResolution(line));
-		    		//getRelationsFox(line);
+		    		//getRelationsFox(line);	    		
 		    	}
+		    	
 		    	if(linesLastWrite == LINESPERWRITE) {
 		    		graph.write(writer, "TTL");
 		    		linesLastWrite = 0;
