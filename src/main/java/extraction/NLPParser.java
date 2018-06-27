@@ -49,7 +49,6 @@ public class NLPParser {
 	    Properties props2 = new Properties();
 	    props2.setProperty("annotators",ANNOTATORSREF);
 	    PIPELINEREF = new StanfordCoreNLP(props2);
-	    
 	}
 
 	public List<CoreMap> getSentences(String article) {

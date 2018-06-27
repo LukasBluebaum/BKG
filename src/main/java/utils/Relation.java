@@ -8,7 +8,7 @@ public class Relation {
 	
 	private String label;
 	
-	private ArrayList<String> keywords ;
+	private ArrayList<String> keywords;
 	
 	private String range;
 	
@@ -21,6 +21,7 @@ public class Relation {
 	public Relation() {
 		range = "";
 		domain = "";
+		keywords = new ArrayList<String>();
 	}
 	
 	public String getDomain() {
@@ -44,11 +45,16 @@ public class Relation {
 	}
 
 	public void setKeys(String keywords) {
-		this.keywords = new ArrayList<String>(Arrays.asList(Pattern.compile("\\(.*?\\)").matcher(keywords).replaceAll("").split(" ")));
+		String[] keyList = Pattern.compile("\\(.*?\\)").matcher(keywords).replaceAll("").split(" ");
+		for(String key: keyList) {
+			if(key.length() > 2) this.keywords.add(key);
+		}
 	}
+	
     public void setKeywords(ArrayList<String> keywords) {
 		this.keywords = keywords;
 	}
+    
 	public String getLabel() {
 		return label;
 	}

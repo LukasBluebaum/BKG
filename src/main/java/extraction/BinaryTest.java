@@ -1,22 +1,45 @@
 package extraction;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
 import edu.stanford.nlp.ie.util.RelationTriple;
 import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
 import edu.stanford.nlp.naturalli.NaturalLogicAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 
 public class BinaryTest {
+	private static final Pattern URLS = Pattern.compile("http.*?\\s");
+	
+	private static final Pattern PARENTHESES = Pattern.compile("\\(.*?\\)");
+	
+	private static final Pattern SYMBOLS = Pattern.compile("[^a-zA-Z0-9. ]");
+	
+	private static final Pattern NULLCHAR = Pattern.compile("\0");
+	
+	private static final Pattern WHITESPACE1 = Pattern.compile("\\s+");
+	
 	private static final StanfordCoreNLP pipeline;
 	
 	private static final String ANNOTATORS = "tokenize,ssplit,pos,lemma,depparse,natlog,openie";
+	
+	//private static final  String ANNOTATORS = "tokenize,ssplit,pos,lemma,ner,parse,coref";
 	
 	private static final ArrayList<String> MONTHS = new ArrayList<String>(Arrays.asList("January", "February" ,"March" ,
 			"April", "May","June","July","August","September","October","November","December"));
@@ -33,9 +56,30 @@ public class BinaryTest {
 	    pipeline = new StanfordCoreNLP(props);
 	}
 
-	public static void main(String[] args) {	
-			System.out.println("------");
-		 	Annotation doc = new Annotation("The western sectors, controlled by France, the United Kingdom, and the United States, were merged on 23 May 1949 to form the Federal Republic of Germany on 7 October 1949, the Soviet Zone became the German Democratic Republic. ");
+	public static void main(String[] args) throws IOException {	
+		
+//			File input = new File("resources/enwiki-20171103-pages.tsv");
+//			System.out.println("------");
+//			
+//			BufferedReader reader = new BufferedReader(new FileReader(input));
+//			FileWriter writer = new FileWriter(new File("out2.txt"));
+//	 		String article =null;
+//	 		while((article=reader.readLine())!=null) { 
+//	 			// only consider lines with valid articles
+//	 			if(article.length() > 1 && article.charAt(1) == 'h') {  
+//	 				
+//	 				article = article.length() > 10000+1 ? article.substring(0, 10000+1) : article;
+//	 				System.out.println(article.length());
+//	 				Annotation annotation = new Annotation(cleanArticle(article));
+//				    pipeline.annotate(annotation);
+//				    System.out.println("----------------------------------");
+//				    writer.write(annotation.toString() +"\r\n");
+//	 			}
+//	 		}
+//	 		writer.close();
+	 		
+	 		
+		 	Annotation doc = new Annotation("Albert Einstein was not born in Württemberg. ");
 		 	
 			pipeline.annotate(doc);
 			for (CoreMap sentence : doc.get(CoreAnnotations.SentencesAnnotation.class)) {
@@ -74,15 +118,35 @@ public class BinaryTest {
 			        	}
 			      }
 			}
-			
-			
+////			
+//			
 	}
 		
 	
 	private static int containsMonth(String object) {
 		for(int i = 0; i<MONTHS.size(); i++) {
-			if(object.contains(" " + MONTHS.get(i) + " ")) return i+1;
+			if(object.contains(" " + MONTHS.get(i) + " ") || object.contains(MONTHS.get(i) + " ") ||
+					object.contains(" " + MONTHS.get(i))) return i+1;
 		}
 		return 0;
+	}
+	
+	public static String getLemma(String input) {
+ 		Annotation noun = new Annotation(input);
+ 		pipeline.annotate(noun);
+ 		List<CoreMap> sentences = noun.get(SentencesAnnotation.class);
+ 		if(sentences.size() > 1) return null;
+ 		CoreMap sentence = sentences.get(0);
+ 		List<CoreLabel> token = sentence.get(TokensAnnotation.class);
+ 		return token.get(0).get(LemmaAnnotation.class);
+ 	}
+	
+	private static String cleanArticle(String article) {
+		article = NULLCHAR.matcher(article).replaceAll("");
+		article = URLS.matcher(article).replaceAll("");
+		article = PARENTHESES.matcher(article).replaceAll("");
+		article = SYMBOLS.matcher(article).replaceAll("");
+		article = WHITESPACE1.matcher(article).replaceAll(" ");
+		return article;
 	}
 }

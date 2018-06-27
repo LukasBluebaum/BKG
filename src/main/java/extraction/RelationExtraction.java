@@ -21,7 +21,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
 
+import org.apache.jena.datatypes.RDFDatatype;
+import org.apache.jena.datatypes.TypeMapper;
+import org.apache.jena.datatypes.xsd.XSDDatatype;
+import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
@@ -50,7 +55,16 @@ public class RelationExtraction {
 	private static final FoxWebservice SERVICE = new FoxWebservice();
 	
 	private static final NLPParser PARSER = new NLPParser();
-		
+
+	private static final Pattern WHITESPACE = Pattern.compile("\\s+");
+	
+	private static final Pattern COMMA = Pattern.compile(",");
+	
+	private static final Pattern NUMBERS = Pattern.compile("[^0-9.]");
+	
+	private static final ArrayList<String> MONTHS = new ArrayList<String>(Arrays.asList("January", "February" ,"March" ,
+			"April", "May","June","July","August","September","October","November","December"));
+	
 	private static final int DELAYSECONDS = 10; 
 	
 	private static final int STARTLINE = 0;
@@ -62,7 +76,7 @@ public class RelationExtraction {
 	private static AtomicInteger count;
 		
 	private static Model graph = ModelFactory.createDefaultModel() ;
-	
+		
 	private static ArrayList<Relation> properties;
 	
 	private void getTriple(Statement statement, StmtIterator iterator) {
@@ -156,17 +170,18 @@ public class RelationExtraction {
 		Map<Integer, ArrayList<Entity>> entities) {
 		for(Entity entity: entities.get(i))		{
 			if(entity == null) return;
+			literalRelation(entity, i, binaryRelations);
 			for(Entity entity2: entities.get(i)) {
 				for(RelationTriple triple: binaryRelations.get(i)) {					
 								
 					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())
 							|| triple.subjectGloss().contains(entity2.getSurfaceForm()) && triple.objectGloss().contains(entity.getSurfaceForm())){
-						System.out.println(i +": " + triple.subjectGloss() + " - " + binaryRelations.get(i) + " - " + triple.objectGloss());
-						String tripleRelation = triple.relationGloss();
+						//System.out.println(i +": " + triple.subjectGloss() + " - " + binaryRelations.get(i) + " - " + triple.objectGloss());
+						String tripleRelation = triple.relationLemmaGloss();
 						for(Relation r: properties) {
 							if( (entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && (entity2.getTypes().contains(r.getRange()) || r.getRange().equals(""))) {
 								String[] tripleR = tripleRelation.split(" ");
-								System.out.println("Entity1: " + entity + "entity2" + entity2 + " domain & range true for " + r);
+								//System.out.println("Entity1: " + entity + "entity2" + entity2 + " domain & range true for " + r);
 								for(String s: tripleR) {
 									if(r.getKeywords().contains(s)) {
 										Resource subject = ResourceFactory.createResource(entity.getUri());
@@ -183,6 +198,62 @@ public class RelationExtraction {
 				}
 			}
 		}
+	}
+	
+	private static void literalRelation(Entity entity, int i, Map<Integer, Collection<RelationTriple>> binaryRelations) {
+		for(RelationTriple triple: binaryRelations.get(i)) {
+			String data = null;
+			if(triple.subjectGloss().contains(entity.getSurfaceForm())){
+				String value = COMMA.matcher(triple.objectLemmaGloss()).replaceAll("");
+				value = NUMBERS.matcher(value).replaceAll(" ");
+	        	if(!value.trim().isEmpty()) {
+	        		int month = containsMonth(triple.objectLemmaGloss());
+	        		value = WHITESPACE.matcher(value).replaceAll(" ");
+	    			String[] numbers = value.trim().split(" ");
+	        		if(month != 0) {	        			
+	        			if(numbers.length == 2) {
+	        				data = numbers[1] + "-" + (month < 10 ? "0" + month : month) + "-" +
+	        						(numbers[0].length() != 1 ? numbers[0] : "0" + numbers[0]);
+	        			}         			
+	        		} else {
+	        			if(numbers.length == 1) {
+	        				data = numbers[0];
+	        			} 
+	        		}
+	        		
+	        	}
+	        	if(data != null) {
+	        		for(Relation r: properties) {
+						if((entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && r.getPropertyType().equals("data")) {
+							String tripleRelation = triple.relationLemmaGloss();
+							String[] tripleR = tripleRelation.split(" ");
+							//System.out.println("Entity1: " + entity + " domain & range true for " + r);
+							for(String s: tripleR) {
+								if(r.getKeywords().contains(s)) {
+									Resource subject = ResourceFactory.createResource(entity.getUri());
+									Property predicate = ResourceFactory.createProperty(r.getLabel());
+									TypeMapper mapper = TypeMapper.getInstance();
+									RDFDatatype type = mapper.getSafeTypeByName(r.getRange());
+									RDFNode object = ResourceFactory.createTypedLiteral(data, type);
+									Statement t = ResourceFactory.createStatement(subject, predicate, object);
+									System.out.println(t);		
+									graph.add(t);	
+								}
+							}
+						}
+					}		
+	        	}        	
+			}		
+		}		
+	}
+	
+
+	private static int containsMonth(String object) {
+		for(int i = 0; i<MONTHS.size(); i++) {
+			if(object.contains(" " + MONTHS.get(i) + " ") || object.contains(MONTHS.get(i) + " ") ||
+					object.contains(" " + MONTHS.get(i))) return i+1;
+		}
+		return 0;
 	}
 
 	
@@ -294,10 +365,8 @@ public class RelationExtraction {
 		ontology.read("src/main/resources/ontology_english.nt");
 		
 		ResIterator subjects = ontology.listSubjects();
-        int x = 0;
-		while(subjects.hasNext()) {
+		while(subjects.hasNext()) {	
 			Relation property = new Relation();
-			properties.add(property);
 			Resource resource = subjects.next();
 			StmtIterator predicates = resource.listProperties();
 			while(predicates.hasNext()) {
@@ -312,10 +381,11 @@ public class RelationExtraction {
 					property.setRange(next.getObject().toString());
 				} else if (next.getPredicate().toString().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")){
 					property.setPropertyType(next.getObject().toString());
-				}
-						
-			}					
+				}					
+			}	
+			if(!property.toString().contains("null")) properties.add(property);			
 		}
+		
 		
 		
 		countOfRangeDomain();
@@ -323,16 +393,16 @@ public class RelationExtraction {
 	
 	
 	public static void main(String[] args) throws Exception  {
-		RelationExtraction n = new RelationExtraction();
-		n.parseProperties();
-		n.toJsonFile();
-		properties = null;
-		n.readJson();
-		for(Relation r: properties) {
-			System.out.println(r);
-		}
-//		RelationExtraction n = new RelationExtraction();	
-//		n.retrieveRelations(new File("resources/out.txt"), "src/main/resources/model.ttl");
+//		RelationExtraction n = new RelationExtraction();
+//		n.parseProperties();
+//		n.toJsonFile();
+//		properties = null;
+//		n.readJson();
+//		for(Relation r: properties) {
+//			System.out.println(r);
+//		}
+		RelationExtraction n = new RelationExtraction();	
+		n.retrieveRelations(new File("resources/out.txt"), "src/main/resources/model.ttl");
 		
 	
 //		NLPParser p = new NLPParser();

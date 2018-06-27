@@ -18,7 +18,7 @@ public class Worker implements Runnable{
 	private BlockingQueue<String> readQueue = null;
 	
 	private BlockingQueue<String> writeQueue = null;
-		
+
 	public Worker(BlockingQueue<String> readQueue, BlockingQueue<String> writeQueue){
 		this.readQueue = readQueue; 
 		this.writeQueue = writeQueue; 
@@ -33,7 +33,7 @@ public class Worker implements Runnable{
 					readQueue.put(WikiCleaner.END);
 					writeQueue.put(WikiCleaner.END);
 					break;
-				}		
+				}										
 				writeQueue.put(cleanArticle(article));
 			}          
 		} catch(InterruptedException e) {
@@ -48,6 +48,5 @@ public class Worker implements Runnable{
 		article = SYMBOLS.matcher(article).replaceAll("");
 		article = WHITESPACE.matcher(article).replaceAll(" ");
 		return article;
-	}
-	
+	}	
 }

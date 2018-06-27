@@ -5750,7 +5750,7 @@
 <http://dbpedia.org/ontology/freeFlightTime> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dbpedia.org/ontology/Spacecraft> .
 <http://dbpedia.org/ontology/freeFlightTime> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#double> .
 <http://dbpedia.org/ontology/birthDate> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
-<http://dbpedia.org/ontology/birthDate> <http://www.w3.org/2000/01/rdf-schema#label> "birth date"@en .
+<http://dbpedia.org/ontology/birthDate> <http://www.w3.org/2000/01/rdf-schema#label> "birth date bear"@en .
 <http://dbpedia.org/ontology/birthDate> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dbpedia.org/ontology/Person> .
 <http://dbpedia.org/ontology/birthDate> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
 <http://dbpedia.org/ontology/eruption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
