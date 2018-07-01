@@ -79,7 +79,7 @@ public class BinaryTest {
 //	 		writer.close();
 	 		
 	 		
-		 	Annotation doc = new Annotation("Albert Einstein was not born in Württemberg. ");
+		 	Annotation doc = new Annotation("The philosopher and mathematician Leibniz was born in Leipzig in 1646 and attended the University of Leipzig from 1661-1666");
 		 	
 			pipeline.annotate(doc);
 			for (CoreMap sentence : doc.get(CoreAnnotations.SentencesAnnotation.class)) {
@@ -93,29 +93,29 @@ public class BinaryTest {
 			            triple.relationLemmaGloss() + "\t" +
 			            triple.objectLemmaGloss());
 			        	
-			        	String s = COMMA.matcher(triple.objectLemmaGloss()).replaceAll("");
-			        	s = NUMBERS.matcher(s).replaceAll(" ");
-			        	if(!s.trim().isEmpty()) {
-			        		int month = containsMonth(triple.objectLemmaGloss());
-			        		s = WHITESPACE.matcher(s).replaceAll(" ");
-		        			String[] numbers = s.trim().split(" ");
-			        		if(month != 0) {
-			        			if(numbers.length != 2) {
-			        				System.out.println("shit");
-			        			} else {
-			        				
-			        				System.out.println(numbers[1] + "-" + (month < 10 ? "0" + month : month) + "-" +
-			        						(numbers[0].length() != 1 ? numbers[0] : "0" + numbers[0]));
-			        			}		        			
-			        		} else {
-			        			if(numbers.length > 1) {
-			        				System.out.println("shit2");
-			        			} else {
-			        				System.out.println(numbers[0]);
-			        			}
-			        		}
-			        		
-			        	}
+//			        	String s = COMMA.matcher(triple.objectLemmaGloss()).replaceAll("");
+//			        	s = NUMBERS.matcher(s).replaceAll(" ");
+//			        	if(!s.trim().isEmpty()) {
+//			        		int month = containsMonth(triple.objectLemmaGloss());
+//			        		s = WHITESPACE.matcher(s).replaceAll(" ");
+//		        			String[] numbers = s.trim().split(" ");
+//			        		if(month != 0) {
+//			        			if(numbers.length != 2) {
+//			        				System.out.println("shit");
+//			        			} else {
+//			        				
+//			        				System.out.println(numbers[1] + "-" + (month < 10 ? "0" + month : month) + "-" +
+//			        						(numbers[0].length() != 1 ? numbers[0] : "0" + numbers[0]));
+//			        			}		        			
+//			        		} else {
+//			        			if(numbers.length > 1) {
+//			        				System.out.println("shit2");
+//			        			} else {
+//			        				System.out.println(numbers[0]);
+//			        			}
+//			        		}
+//			        		
+//			        	}
 			      }
 			}
 ////			

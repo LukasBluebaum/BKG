@@ -3988,7 +3988,7 @@
 <http://dbpedia.org/ontology/inscription> <http://www.w3.org/2000/01/rdf-schema#label> "inscription"@en .
 <http://dbpedia.org/ontology/inscription> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
 <http://dbpedia.org/ontology/birthYear> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
-<http://dbpedia.org/ontology/birthYear> <http://www.w3.org/2000/01/rdf-schema#label> "birth year"@en .
+<http://dbpedia.org/ontology/birthYear> <http://www.w3.org/2000/01/rdf-schema#label> "birth year bear"@en .
 <http://dbpedia.org/ontology/birthYear> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dbpedia.org/ontology/Person> .
 <http://dbpedia.org/ontology/birthYear> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#gYear> .
 <http://dbpedia.org/ontology/maxApparentMagnitude> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
@@ -5212,7 +5212,7 @@
 <http://dbpedia.org/ontology/wineYear> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dbpedia.org/ontology/WineRegion> .
 <http://dbpedia.org/ontology/wineYear> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
 <http://dbpedia.org/ontology/almaMater> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<http://dbpedia.org/ontology/almaMater> <http://www.w3.org/2000/01/rdf-schema#label> "alma mater"@en .
+<http://dbpedia.org/ontology/almaMater> <http://www.w3.org/2000/01/rdf-schema#label> "alma mater attend"@en .
 <http://dbpedia.org/ontology/almaMater> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dbpedia.org/ontology/Person> .
 <http://dbpedia.org/ontology/almaMater> <http://www.w3.org/2000/01/rdf-schema#range> <http://dbpedia.org/ontology/EducationalInstitution> .
 <http://dbpedia.org/ontology/viceLeader> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
@@ -8747,7 +8747,7 @@
 <http://dbpedia.org/ontology/occupation> <http://www.w3.org/2000/01/rdf-schema#label> "occupation"@en .
 <http://dbpedia.org/ontology/occupation> <http://www.w3.org/2000/01/rdf-schema#range> <http://dbpedia.org/ontology/PersonFunction> .
 <http://dbpedia.org/ontology/birthPlace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<http://dbpedia.org/ontology/birthPlace> <http://www.w3.org/2000/01/rdf-schema#label> "birth place"@en .
+<http://dbpedia.org/ontology/birthPlace> <http://www.w3.org/2000/01/rdf-schema#label> "birth place bear"@en .
 <http://dbpedia.org/ontology/birthPlace> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dbpedia.org/ontology/Person> .
 <http://dbpedia.org/ontology/birthPlace> <http://www.w3.org/2000/01/rdf-schema#range> <http://dbpedia.org/ontology/Place> .
 <http://dbpedia.org/ontology/flagCaption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .

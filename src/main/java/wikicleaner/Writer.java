@@ -25,18 +25,23 @@ public class Writer implements Runnable{
 			writer = new FileWriter(output);
 
 			int workerDone = 0;
+			long i = 0;
 			while(true) {
 				String article = writeQueue.take();
 				if(article.equals(WikiCleaner.END)) {
 					workerDone++;
 					if(workerDone == WikiCleaner.WORKERAMOUNT) break;
 				} else {
-					writer.write(article + "\r\n");
+					if(article.length() > 100) {
+						writer.write(article + "\r\n");
+						i++;
+					}				
 				}			
 			}               
  	 			
 			final long endTime = System.currentTimeMillis();
 	 		System.out.println("Total execution time: " + (endTime - startTime) );
+	 		System.out.println(i);
 		} catch ( IOException | InterruptedException e) {
 			e.printStackTrace();   
 		} finally{

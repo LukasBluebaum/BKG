@@ -1,39 +1,22 @@
 package extraction;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.regex.Pattern;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
-import org.apache.jena.datatypes.RDFDatatype;
-import org.apache.jena.datatypes.TypeMapper;
-import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.json.simple.parser.ParseException;
@@ -42,267 +25,67 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-
-import edu.stanford.nlp.ie.util.RelationTriple;
-import edu.stanford.nlp.util.CoreMap;
-import utils.Entity;
-import utils.Relation;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
+import edu.stanford.nlp.util.CoreMap;
+import utils.Relation;
+
 public class RelationExtraction {
-	
-	private static final FoxWebservice SERVICE = new FoxWebservice();
+		
+	private final static int QUEUESIZE = 1000;
 	
 	private static final NLPParser PARSER = new NLPParser();
-
-	private static final Pattern WHITESPACE = Pattern.compile("\\s+");
-	
-	private static final Pattern COMMA = Pattern.compile(",");
-	
-	private static final Pattern NUMBERS = Pattern.compile("[^0-9.]");
-	
-	private static final ArrayList<String> MONTHS = new ArrayList<String>(Arrays.asList("January", "February" ,"March" ,
-			"April", "May","June","July","August","September","October","November","December"));
-	
-	private static final int DELAYSECONDS = 10; 
 	
 	private static final int STARTLINE = 0;
 	
-	private static final int LINESPERWRITE = 10;
+	protected static final int ARTICLESPERWRITE = 10;
+	
+	protected static ArrayList<Relation> properties;
 	
 	private static final int CHARACTERLIMIT = 2000;
-	
-	private static AtomicInteger count;
 		
 	private static Model graph = ModelFactory.createDefaultModel() ;
 		
-	private static ArrayList<Relation> properties;
-	
-	private void getTriple(Statement statement, StmtIterator iterator) {
-		Resource subject = ResourceFactory.createResource(statement.getObject().toString());
-		Statement next = iterator.next();
-		Property predicate = ResourceFactory.createProperty(next.getObject().toString());
-		next = iterator.next();
-		
-		RDFNode object = null;
-		if(next.getObject().isResource()) {
-			 object = ResourceFactory.createResource(next.getObject().toString());
-		} else {
-			object = ResourceFactory.createStringLiteral(next.getObject().toString());
-		}	
-		Statement triple = ResourceFactory.createStatement(subject, predicate, object);
-		System.out.println(triple);		
-		graph.add(triple);	
-	}
-	
-
-	
-	private void getRelationsFox(String article) throws MalformedURLException, ProtocolException, IOException, ParseException {
-		count = new AtomicInteger(0);
-				
-		final List<CoreMap> sentences = PARSER.getSentences(article);
-		final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-		
-		Runnable askFox = new Runnable() {
-		    public void run() {
-		        try {		        	
-		        	Model model = ModelFactory.createDefaultModel() ;
-		        	System.out.println(sentences.get(count.get()));
-		    		model.read(new ByteArrayInputStream(SERVICE.extract(sentences.get(count.get()).toString(), "en" , "re").getBytes()),null, "TTL");
-		    		StmtIterator iterator = model.listStatements();
-		    					    		
-		    		while(iterator.hasNext())
-		    		{
-		    			Statement s = iterator.next();
-		    			if(s.getPredicate().toString().contains("subject")) {
-		    				getTriple(s , iterator);
-		    			}
-		    		}
-		    		System.out.println("------------------------");
-		    		
-					if(count.incrementAndGet() == sentences.size()) {				
-						StmtIterator foundTriples = graph.listStatements();
-						
-						while(foundTriples.hasNext())
-						{
-							System.out.println(foundTriples.next());
-						}
-						executor.shutdownNow();	
-					}
-				} catch (Exception e) {
-					executor.shutdownNow();
-					e.printStackTrace();
-				}
-		    }
-		};
-		
-		executor.scheduleWithFixedDelay(askFox, 0, DELAYSECONDS, TimeUnit.SECONDS);	
-	}
-	
-
-	
-	public void getRelationsSpotlight(String article) throws InterruptedException {
-		List<CoreMap> sentences = PARSER.getSentences(article);
-	
-		Map<Integer, Collection<RelationTriple>> binaryRelations = PARSER.binaryRelation(sentences);	
-		
-		SpotlightWebservice service = new SpotlightWebservice();
-
-		Map<Integer, ArrayList<Entity>> entities = new LinkedHashMap<>();
-
-			for(int i = 0; i<sentences.size(); i++) {
-				Thread.sleep(5000);
-				System.out.println(sentences.get(i));
-				try {
-					entities.put(i, (ArrayList<Entity>) service.getEntitiesProcessed(sentences.get(i).toString()));
-				} catch (IOException | ParseException  e) {
-					entities.put(i, null);
-					e.printStackTrace();
-				}
-				spotlightTriples(i, binaryRelations, entities);
-			}
-		
-		if(entities == null || entities.size() == 0) return;
-	}
-	
-	private void spotlightTriples(int i, Map<Integer, Collection<RelationTriple>> binaryRelations,
-		Map<Integer, ArrayList<Entity>> entities) {
-		for(Entity entity: entities.get(i))		{
-			if(entity == null) return;
-			literalRelation(entity, i, binaryRelations);
-			for(Entity entity2: entities.get(i)) {
-				for(RelationTriple triple: binaryRelations.get(i)) {					
-								
-					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())
-							|| triple.subjectGloss().contains(entity2.getSurfaceForm()) && triple.objectGloss().contains(entity.getSurfaceForm())){
-						//System.out.println(i +": " + triple.subjectGloss() + " - " + binaryRelations.get(i) + " - " + triple.objectGloss());
-						String tripleRelation = triple.relationLemmaGloss();
-						for(Relation r: properties) {
-							if( (entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && (entity2.getTypes().contains(r.getRange()) || r.getRange().equals(""))) {
-								String[] tripleR = tripleRelation.split(" ");
-								//System.out.println("Entity1: " + entity + "entity2" + entity2 + " domain & range true for " + r);
-								for(String s: tripleR) {
-									if(r.getKeywords().contains(s)) {
-										Resource subject = ResourceFactory.createResource(entity.getUri());
-										Property predicate = ResourceFactory.createProperty(r.getLabel());
-										RDFNode object = ResourceFactory.createResource(entity2.getUri());
-										Statement t = ResourceFactory.createStatement(subject, predicate, object);
-										System.out.println(t);		
-										graph.add(t);	
-									}
-								}
-							}
-						}					
-					}
-				}
-			}
-		}
-	}
-	
-	private static void literalRelation(Entity entity, int i, Map<Integer, Collection<RelationTriple>> binaryRelations) {
-		for(RelationTriple triple: binaryRelations.get(i)) {
-			String data = null;
-			if(triple.subjectGloss().contains(entity.getSurfaceForm())){
-				String value = COMMA.matcher(triple.objectLemmaGloss()).replaceAll("");
-				value = NUMBERS.matcher(value).replaceAll(" ");
-	        	if(!value.trim().isEmpty()) {
-	        		int month = containsMonth(triple.objectLemmaGloss());
-	        		value = WHITESPACE.matcher(value).replaceAll(" ");
-	    			String[] numbers = value.trim().split(" ");
-	        		if(month != 0) {	        			
-	        			if(numbers.length == 2) {
-	        				data = numbers[1] + "-" + (month < 10 ? "0" + month : month) + "-" +
-	        						(numbers[0].length() != 1 ? numbers[0] : "0" + numbers[0]);
-	        			}         			
-	        		} else {
-	        			if(numbers.length == 1) {
-	        				data = numbers[0];
-	        			} 
-	        		}
-	        		
-	        	}
-	        	if(data != null) {
-	        		for(Relation r: properties) {
-						if((entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && r.getPropertyType().equals("data")) {
-							String tripleRelation = triple.relationLemmaGloss();
-							String[] tripleR = tripleRelation.split(" ");
-							//System.out.println("Entity1: " + entity + " domain & range true for " + r);
-							for(String s: tripleR) {
-								if(r.getKeywords().contains(s)) {
-									Resource subject = ResourceFactory.createResource(entity.getUri());
-									Property predicate = ResourceFactory.createProperty(r.getLabel());
-									TypeMapper mapper = TypeMapper.getInstance();
-									RDFDatatype type = mapper.getSafeTypeByName(r.getRange());
-									RDFNode object = ResourceFactory.createTypedLiteral(data, type);
-									Statement t = ResourceFactory.createStatement(subject, predicate, object);
-									System.out.println(t);		
-									graph.add(t);	
-								}
-							}
-						}
-					}		
-	        	}        	
-			}		
-		}		
-	}
-	
-
-	private static int containsMonth(String object) {
-		for(int i = 0; i<MONTHS.size(); i++) {
-			if(object.contains(" " + MONTHS.get(i) + " ") || object.contains(MONTHS.get(i) + " ") ||
-					object.contains(" " + MONTHS.get(i))) return i+1;
-		}
-		return 0;
-	}
-
-	
-//	private void spotlightTriples(Map<Integer, Collection<RelationTriple>> binaryRelations, Map<Integer, ArrayList<Entity>> entities) {
-//	for(int i: binaryRelations.keySet()) {
-//		for(RelationTriple triple: binaryRelations.get(i)) {
-//			for(Entity entity: entities.get(i)) {
-//				for(Entity entity2: entities.get(i)) {
-//					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())){
-//						
-//					}
-//				}
-//			}
-//		}
-//	}
-//}
-
-
-	public void retrieveRelations(File input, String model) throws MalformedURLException, ProtocolException, IOException, ParseException, InterruptedException  {		
+	private void retrieveRelations(File input, String model) throws MalformedURLException, ProtocolException, IOException, ParseException, InterruptedException  {		
 		parseProperties();
 		
-		BufferedReader reader = null;
-		FileWriter writer = null;		
+		BufferedReader reader = null;	
 		try {		   
-		    reader =  new BufferedReader(new FileReader(input));
-		    
-		    File out = new File(model);
-		    writer = new FileWriter(out);			    
+		    reader =  new BufferedReader(new FileReader(input));		    
+		    File out = new File(model);		    
 		    if(out.length() != 0) graph.read(model,null, "TTL");
 
 		    String nextLine;
 		    int currentLine = 0;
-		    int linesLastWrite = 0;
+		    
+		    BlockingQueue<List<CoreMap>> spotlightQueue = new ArrayBlockingQueue<List<CoreMap>>(QUEUESIZE);	    
+		    BlockingQueue<List<CoreMap>> foxQueue = new ArrayBlockingQueue<List<CoreMap>>(QUEUESIZE);		    
+		    SpotlightThread spotlightThread = new SpotlightThread(PARSER,graph,out,spotlightQueue);
+		    FoxThread foxThread = new FoxThread(graph,out,foxQueue);
+		    
+		    Thread spotlight = new Thread(spotlightThread);
+		    spotlight.start();
+		    
+		    Thread fox = new Thread(foxThread);
+		    fox.start();
+		    
 		    while((nextLine = reader.readLine()) != null) {		
 		    	if(currentLine >= STARTLINE) {
 		    		String line = nextLine.length() > CHARACTERLIMIT+1 ? nextLine.substring(0, CHARACTERLIMIT+1) : nextLine;
-		    		getRelationsSpotlight(PARSER.coreferenceResolution(line));
-		    		//getRelationsFox(line);	    		
-		    	}
-		    	
-		    	if(linesLastWrite == LINESPERWRITE) {
-		    		graph.write(writer, "TTL");
-		    		linesLastWrite = 0;
-		    	}
-		    		
+		    		line = PARSER.coreferenceResolution(line);
+		    		List<CoreMap> sentences = PARSER.getSentences(line);		    		
+		    		spotlightQueue.put(sentences);
+		    		foxQueue.put(sentences);
+		    	}	
 		    	currentLine++;
-		    	linesLastWrite++;
 		    }
-		    graph.write(writer, "TTL");
+		    
+		    spotlightQueue.put(new ArrayList<CoreMap>());
+		    foxQueue.put(new ArrayList<CoreMap>());
+		    spotlight.join();
+		    fox.join();
+		    
 		} catch (IOException  e) {
 			e.printStackTrace();
 		} finally {		   
@@ -403,7 +186,10 @@ public class RelationExtraction {
 //		}
 		RelationExtraction n = new RelationExtraction();	
 		n.retrieveRelations(new File("resources/out.txt"), "src/main/resources/model.ttl");
-		
+//		SpotlightWebservice service = new SpotlightWebservice();
+//		for(Entity e: service.getEntitiesProcessed("During his first two years in office, Obama signed many landmark bills into law. The main reforms were the Patient Protection and Affordable Care Act (often referred to as \"Obamacare\", shortened as the \"Affordable Care Act\"), the Dodd–Frank Wall Street Reform and Consumer Protection Act, and the Don't Ask, Don't Tell Repeal Act of 2010. The American Recovery and Reinvestment Act of 2009 and Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act of 2010 served as economic stimulus amidst the Great Recession. After a lengthy debate over the national debt limit, he signed the Budget Control and the American Taxpayer Relief Acts. In foreign policy, he increased U.S. troop levels in Afghanistan, reduced nuclear weapons with the United States–Russia New START treaty, and ended military involvement in the Iraq War. He ordered military involvement in Libya in opposition to Muammar Gaddafi; Gaddafi was killed by NATO-assisted forces, and he also ordered the military operation that resulted in the deaths of Osama bin Laden and suspected Yemeni Al-Qaeda operative Anwar al-Awlaki.")) {
+//			System.out.println(e);
+//		}
 	
 //		NLPParser p = new NLPParser();
 //		List<CoreMap> list = p.getSentences("Linkin Park's genre is rock");

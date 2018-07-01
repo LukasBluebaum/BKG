@@ -40,7 +40,7 @@ public class Entity {
 	}
 	
 	public String toString() {
-		return "URI: " + uri + "- Type:" + types + "- Surface Form: " + surfaceForm;
+		return "URI: " + uri + "- Type:" + types + "- Surface Form: " + surfaceForm + "- Offset: " + offset;
 	}
 
 	public String getSurfaceForm() {
