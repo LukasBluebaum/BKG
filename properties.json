@@ -7,7 +7,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/defeatAsMgr",
-  "keywords" : [ "defeat", "as", "team", "manager" ],
+  "keywords" : [ "defeat", "as", "team", "manager", "mgr" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Coach",
   "countRelation" : 1,
@@ -56,28 +56,28 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/subFamily",
-  "keywords" : [ "sub-family" ],
+  "keywords" : [ "sub-family", "sub", "family" ],
   "range" : "Taxon",
   "domain" : "Species",
   "countRelation" : 3,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/municipalityAbsorbedBy",
-  "keywords" : [ "absorbed", "by" ],
+  "keywords" : [ "absorbed", "by", "municipality" ],
   "range" : "Municipality",
   "domain" : "FormerMunicipality",
   "countRelation" : 2,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/cmykCoordinateYellow",
-  "keywords" : [ "yellow", "coordinate", "in", "the", "CMYK", "space" ],
+  "keywords" : [ "yellow", "coordinate", "in", "the", "CMYK", "space", "cmyk" ],
   "range" : "XMLSchema#integer",
   "domain" : "Colour",
   "countRelation" : 7,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/imdbId",
-  "keywords" : [ "IMDB", "id" ],
+  "keywords" : [ "IMDB", "id", "imdb" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -112,7 +112,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerTournamentMostSuccesfull",
-  "keywords" : [ "most", "successfull" ],
+  "keywords" : [ "most", "successfull", "soccer", "tournament", "succesfull" ],
   "range" : "SoccerClub",
   "domain" : "SoccerTournament",
   "countRelation" : 3,
@@ -126,7 +126,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/simcCode",
-  "keywords" : [ "SIMC", "code" ],
+  "keywords" : [ "SIMC", "code", "simc" ],
   "range" : "",
   "domain" : "PopulatedPlace",
   "countRelation" : 8,
@@ -154,7 +154,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/stadium",
-  "keywords" : [ "Stadium" ],
+  "keywords" : [ "Stadium", "stadium" ],
   "range" : "Stadium",
   "domain" : "",
   "countRelation" : 2,
@@ -175,7 +175,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/radius_ly",
-  "keywords" : [ "Radius_ly" ],
+  "keywords" : [ "Radius_ly", "radius_ly" ],
   "range" : "XMLSchema#integer",
   "domain" : "Globularswarm",
   "countRelation" : 2,
@@ -189,7 +189,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/birthPlace",
-  "keywords" : [ "birth", "place" ],
+  "keywords" : [ "birth", "place", "birthplace", "come", "from", "bear" ],
   "range" : "Place",
   "domain" : "Person",
   "countRelation" : 9,
@@ -238,7 +238,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/isPartOfName",
-  "keywords" : [ "is", "part", "of" ],
+  "keywords" : [ "is", "part", "of", "name" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -252,7 +252,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/lccn",
-  "keywords" : [ "LCCN" ],
+  "keywords" : [ "LCCN", "lccn" ],
   "range" : "XMLSchema#string",
   "domain" : "WrittenWork",
   "countRelation" : 6,
@@ -315,7 +315,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/alias",
-  "keywords" : [ "alias" ],
+  "keywords" : [ "alias", "call" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -350,7 +350,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/dutchRKDCode",
-  "keywords" : [ "Dutch", "RKD", "code" ],
+  "keywords" : [ "Dutch", "RKD", "code", "dutch" ],
   "range" : "XMLSchema#string",
   "domain" : "Artist",
   "countRelation" : 1,
@@ -378,7 +378,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/iobdbId",
-  "keywords" : [ "IOBDB", "ID" ],
+  "keywords" : [ "IOBDB", "ID", "iobdb" ],
   "range" : "XMLSchema#string",
   "domain" : "Play",
   "countRelation" : 7,
@@ -392,7 +392,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/province",
-  "keywords" : [ "province" ],
+  "keywords" : [ "province", "situate", "located" ],
   "range" : "Province",
   "domain" : "Place",
   "countRelation" : 2,
@@ -406,14 +406,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/galicianSpeakersDate",
-  "keywords" : [ "galicianSpeakersDate" ],
+  "keywords" : [ "galicianSpeakersDate", "galician", "speaker", "date" ],
   "range" : "XMLSchema#gYear",
   "domain" : "Language",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/broadcastArea",
-  "keywords" : [ "broadcast", "area" ],
+  "keywords" : [ "broadcast", "area", "broadcast", "cover" ],
   "range" : "PopulatedPlace",
   "domain" : "Broadcaster",
   "countRelation" : 1,
@@ -448,7 +448,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/canton",
-  "keywords" : [ "canton" ],
+  "keywords" : [ "canton", "situate", "located" ],
   "range" : "Settlement",
   "domain" : "Settlement",
   "countRelation" : 5,
@@ -469,7 +469,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/activeYearsEndDateMgr",
-  "keywords" : [ "active", "years", "end", "date", "manager" ],
+  "keywords" : [ "active", "years", "end", "date", "manager", "mgr" ],
   "range" : "XMLSchema#string",
   "domain" : "Person",
   "countRelation" : 98,
@@ -483,7 +483,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/occupation",
-  "keywords" : [ "occupation" ],
+  "keywords" : [ "occupation", "work" ],
   "range" : "PersonFunction",
   "domain" : "",
   "countRelation" : 1,
@@ -497,7 +497,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/headteacher",
-  "keywords" : [ "head", "teacher" ],
+  "keywords" : [ "head", "teacher", "headteacher" ],
   "range" : "Person",
   "domain" : "School",
   "countRelation" : 8,
@@ -525,7 +525,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/president",
-  "keywords" : [ "president" ],
+  "keywords" : [ "president", "serve", "under" ],
   "range" : "Person",
   "domain" : "Organisation",
   "countRelation" : 6,
@@ -567,7 +567,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/blackLongDistancePisteNumber",
-  "keywords" : [ "long", "distance", "piste", "number" ],
+  "keywords" : [ "long", "distance", "piste", "number", "black" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Place",
   "countRelation" : 19,
@@ -609,7 +609,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/minTime",
-  "keywords" : [ "minimum", "preparation", "time" ],
+  "keywords" : [ "minimum", "preparation", "time", "min" ],
   "range" : "XMLSchema#double",
   "domain" : "Food",
   "countRelation" : 7,
@@ -637,14 +637,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/publisher",
-  "keywords" : [ "publisher" ],
+  "keywords" : [ "publisher", "publish" ],
   "range" : "Agent",
   "domain" : "Work",
   "countRelation" : 2,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/league",
-  "keywords" : [ "league" ],
+  "keywords" : [ "league", "play" ],
   "range" : "SportsLeague",
   "domain" : "",
   "countRelation" : 1,
@@ -658,7 +658,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/administrativeHeadCity",
-  "keywords" : [ "head", "city" ],
+  "keywords" : [ "head", "city", "administrative" ],
   "range" : "City",
   "domain" : "PopulatedPlace",
   "countRelation" : 2,
@@ -749,7 +749,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/subClassis",
-  "keywords" : [ "sub-classis" ],
+  "keywords" : [ "sub-classis", "sub", "classis" ],
   "range" : "",
   "domain" : "Species",
   "countRelation" : 13,
@@ -784,7 +784,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/emmyAward",
-  "keywords" : [ "Emmy", "Award" ],
+  "keywords" : [ "Emmy", "Award", "emmy", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -819,7 +819,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/recordDate",
-  "keywords" : [ "record", "date" ],
+  "keywords" : [ "record", "date", "record" ],
   "range" : "XMLSchema#date",
   "domain" : "MusicalWork",
   "countRelation" : 1,
@@ -840,7 +840,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/programmingLanguage",
-  "keywords" : [ "programming", "language" ],
+  "keywords" : [ "programming", "language", "write" ],
   "range" : "",
   "domain" : "Software",
   "countRelation" : 7,
@@ -861,7 +861,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/sourceText",
-  "keywords" : [ "sourceText" ],
+  "keywords" : [ "sourceText", "source", "text" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -917,14 +917,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/refseqmrna",
-  "keywords" : [ "refseq", "mRNA" ],
+  "keywords" : [ "refseq", "mRNA", "refseqmrna" ],
   "range" : "XMLSchema#string",
   "domain" : "Biomolecule",
   "countRelation" : 9,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/peabodyAward",
-  "keywords" : [ "Peabody", "Award" ],
+  "keywords" : [ "Peabody", "Award", "peabody", "award" ],
   "range" : "Award",
   "domain" : "Comedian",
   "countRelation" : 4,
@@ -973,7 +973,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/distanceToBelfast",
-  "keywords" : [ "distance", "to", "Belfast" ],
+  "keywords" : [ "distance", "to", "Belfast", "belfast" ],
   "range" : "XMLSchema#double",
   "domain" : "Settlement",
   "countRelation" : 12,
@@ -1015,14 +1015,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/goldenCalfAward",
-  "keywords" : [ "Golden", "Calf", "Award" ],
+  "keywords" : [ "Golden", "Calf", "Award", "golden", "calf", "award" ],
   "range" : "Award",
   "domain" : "Actor",
   "countRelation" : 9,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/routeStartDirection",
-  "keywords" : [ "road", "start", "direction" ],
+  "keywords" : [ "road", "start", "direction", "route" ],
   "range" : "XMLSchema#string",
   "domain" : "RouteOfTransportation",
   "countRelation" : 6,
@@ -1043,7 +1043,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/tvComId",
-  "keywords" : [ "tv.com", "id" ],
+  "keywords" : [ "tv.com", "id", "com" ],
   "range" : "XMLSchema#integer",
   "domain" : "TelevisionShow",
   "countRelation" : 1,
@@ -1078,14 +1078,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/bibsysId",
-  "keywords" : [ "BIBSYS", "Id" ],
+  "keywords" : [ "BIBSYS", "Id", "bibsy" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/student",
-  "keywords" : [ "diploma" ],
+  "keywords" : [ "diploma", "student" ],
   "range" : "Person",
   "domain" : "Person",
   "countRelation" : 20,
@@ -1099,7 +1099,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/instrument",
-  "keywords" : [ "instrument" ],
+  "keywords" : [ "instrument", "play" ],
   "range" : "Instrument",
   "domain" : "Artist",
   "countRelation" : 1,
@@ -1169,7 +1169,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/modelLineVehicle",
-  "keywords" : [ "type", "series" ],
+  "keywords" : [ "type", "series", "model", "line", "vehicle" ],
   "range" : "XMLSchema#string",
   "domain" : "MeanOfTransportation",
   "countRelation" : 1,
@@ -1204,7 +1204,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/subOrder",
-  "keywords" : [ "sub-order" ],
+  "keywords" : [ "sub-order", "sub", "order" ],
   "range" : "",
   "domain" : "Species",
   "countRelation" : 13,
@@ -1225,7 +1225,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/college",
-  "keywords" : [ "college" ],
+  "keywords" : [ "college", "attend", "graduate", "from", "play", "for" ],
   "range" : "EducationalInstitution",
   "domain" : "Person",
   "countRelation" : 4,
@@ -1239,7 +1239,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/faaLocationIdentifier",
-  "keywords" : [ "FAA", "Location", "Identifier" ],
+  "keywords" : [ "FAA", "Location", "Identifier", "faa", "location", "identifier" ],
   "range" : "XMLSchema#string",
   "domain" : "Airport",
   "countRelation" : 6,
@@ -1253,14 +1253,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/superOrder",
-  "keywords" : [ "super-order" ],
+  "keywords" : [ "super-order", "super", "order" ],
   "range" : "",
   "domain" : "Species",
   "countRelation" : 13,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/sisterStation",
-  "keywords" : [ "sister", "station" ],
+  "keywords" : [ "sister", "station", "network", "channel" ],
   "range" : "Broadcaster",
   "domain" : "Broadcaster",
   "countRelation" : 2,
@@ -1281,7 +1281,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/birthDate",
-  "keywords" : [ "birth", "date" ],
+  "keywords" : [ "birth", "date", "bear" ],
   "range" : "XMLSchema#date",
   "domain" : "Person",
   "countRelation" : 11,
@@ -1330,14 +1330,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/bioavailability",
-  "keywords" : [ "Bioavailability" ],
+  "keywords" : [ "Bioavailability", "bioavailability" ],
   "range" : "XMLSchema#float",
   "domain" : "Drug",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/retentionTime",
-  "keywords" : [ "relation", "time" ],
+  "keywords" : [ "relation", "time", "retention" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -1358,7 +1358,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/distanceToEdinburgh",
-  "keywords" : [ "distance", "to", "Edinburgh" ],
+  "keywords" : [ "distance", "to", "Edinburgh", "edinburgh" ],
   "range" : "XMLSchema#double",
   "domain" : "Settlement",
   "countRelation" : 12,
@@ -1379,7 +1379,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/bustWaistHipSize",
-  "keywords" : [ "bust-waist-hip", "Size" ],
+  "keywords" : [ "bust-waist-hip", "Size", "bust", "waist", "hip", "size" ],
   "range" : "XMLSchema#string",
   "domain" : "Person",
   "countRelation" : 98,
@@ -1393,14 +1393,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/iso6392Code",
-  "keywords" : [ "ISO", "639-2", "code" ],
+  "keywords" : [ "ISO", "639-2", "code", "iso6392" ],
   "range" : "XMLSchema#string",
   "domain" : "Language",
   "countRelation" : 5,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/ndlId",
-  "keywords" : [ "NDL", "id" ],
+  "keywords" : [ "NDL", "id", "ndl" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -1428,14 +1428,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/unitedStatesNationalBridgeId",
-  "keywords" : [ "United", "States", "National", "Bridge", "ID" ],
+  "keywords" : [ "United", "States", "National", "Bridge", "ID", "unite", "state", "national", "bridge" ],
   "range" : "XMLSchema#string",
   "domain" : "Bridge",
   "countRelation" : 2,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/activeYearsStartYear",
-  "keywords" : [ "active", "years", "start", "year" ],
+  "keywords" : [ "active", "years", "start", "year", "since" ],
   "range" : "XMLSchema#gYear",
   "domain" : "",
   "countRelation" : 16,
@@ -1505,7 +1505,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/tvShow",
-  "keywords" : [ "tvShow" ],
+  "keywords" : [ "tvShow", "show" ],
   "range" : "TelevisionShow",
   "domain" : "Person",
   "countRelation" : 1,
@@ -1540,7 +1540,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/winsAtSenEuro",
-  "keywords" : [ "wins", "at", "Senior", "Euro" ],
+  "keywords" : [ "wins", "at", "Senior", "Euro", "sen", "euro" ],
   "range" : "",
   "domain" : "GolfPlayer",
   "countRelation" : 19,
@@ -1568,14 +1568,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/intercommunality",
-  "keywords" : [ "intercommunality" ],
+  "keywords" : [ "intercommunality", "part", "suburb" ],
   "range" : "PopulatedPlace",
   "domain" : "",
   "countRelation" : 12,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/leaderFunction",
-  "keywords" : [ "leaderFunction" ],
+  "keywords" : [ "leaderFunction", "leader", "function" ],
   "range" : "PersonFunction",
   "domain" : "Organisation",
   "countRelation" : 1,
@@ -1589,7 +1589,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/silverMedalist",
-  "keywords" : [ "siler", "medalist" ],
+  "keywords" : [ "siler", "medalist", "silver" ],
   "range" : "Person",
   "domain" : "SportsEvent",
   "countRelation" : 4,
@@ -1638,7 +1638,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/graySubject",
-  "keywords" : [ "Gray", "subject" ],
+  "keywords" : [ "Gray", "subject", "gray" ],
   "range" : "XMLSchema#positiveInteger",
   "domain" : "AnatomicalStructure",
   "countRelation" : 2,
@@ -1659,7 +1659,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/distanceToCharingCross",
-  "keywords" : [ "distance", "to", "Charing", "Cross" ],
+  "keywords" : [ "distance", "to", "Charing", "Cross", "chare", "cross" ],
   "range" : "XMLSchema#double",
   "domain" : "Settlement",
   "countRelation" : 12,
@@ -1673,7 +1673,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/millsCodeNLVerdwenen",
-  "keywords" : [ "mill", "dissapeared", "code", "NL" ],
+  "keywords" : [ "mill", "dissapeared", "code", "NL", "mill", "verdwenen" ],
   "range" : "XMLSchema#string",
   "domain" : "Mill",
   "countRelation" : 7,
@@ -1687,14 +1687,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/hsvCoordinateValue",
-  "keywords" : [ "value", "coordinate", "in", "the", "HSV", "colour", "space" ],
+  "keywords" : [ "value", "coordinate", "in", "the", "HSV", "colour", "space", "hsv" ],
   "range" : "XMLSchema#integer",
   "domain" : "Colour",
   "countRelation" : 7,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/baftaAward",
-  "keywords" : [ "BAFTA", "Award" ],
+  "keywords" : [ "BAFTA", "Award", "bafta", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -1715,7 +1715,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/geolocDual",
-  "keywords" : [ "geolocdual" ],
+  "keywords" : [ "geolocdual", "geoloc", "dual" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -1743,7 +1743,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/foundingYear",
-  "keywords" : [ "founding", "year" ],
+  "keywords" : [ "founding", "year", "establish", "found" ],
   "range" : "XMLSchema#gYear",
   "domain" : "",
   "countRelation" : 16,
@@ -1813,7 +1813,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/formationDate",
-  "keywords" : [ "formation", "date" ],
+  "keywords" : [ "formation", "date", "establish", "form" ],
   "range" : "XMLSchema#date",
   "domain" : "Organisation",
   "countRelation" : 1,
@@ -1834,14 +1834,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/co2Emission",
-  "keywords" : [ "CO2", "emission" ],
+  "keywords" : [ "CO2", "emission", "co2" ],
   "range" : "XMLSchema#double",
   "domain" : "AutomobileEngine",
   "countRelation" : 8,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/airDate",
-  "keywords" : [ "airdate" ],
+  "keywords" : [ "airdate", "air", "date" ],
   "range" : "XMLSchema#date",
   "domain" : "RadioStation",
   "countRelation" : 1,
@@ -1904,7 +1904,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/approvedByUpperParliament",
-  "keywords" : [ "date", "of", "approval", "by", "upper", "parliament" ],
+  "keywords" : [ "date", "of", "approval", "by", "upper", "parliament", "approve" ],
   "range" : "XMLSchema#date",
   "domain" : "Law",
   "countRelation" : 2,
@@ -1918,7 +1918,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/county",
-  "keywords" : [ "county" ],
+  "keywords" : [ "county", "situate", "located" ],
   "range" : "PopulatedPlace",
   "domain" : "",
   "countRelation" : 12,
@@ -1946,7 +1946,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerLeagueWinner",
-  "keywords" : [ "league", "champion" ],
+  "keywords" : [ "league", "champion", "soccer", "winner" ],
   "range" : "SportsTeam",
   "domain" : "SoccerLeagueSeason",
   "countRelation" : 3,
@@ -2023,7 +2023,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/binomialAuthority",
-  "keywords" : [ "binomial", "authority" ],
+  "keywords" : [ "binomial", "authority", "first", "describe", "name" ],
   "range" : "",
   "domain" : "Species",
   "countRelation" : 13,
@@ -2051,7 +2051,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/associatedMusicalArtist",
-  "keywords" : [ "associated", "musical", "artist" ],
+  "keywords" : [ "associated", "musical", "artist", "act" ],
   "range" : "MusicalArtist",
   "domain" : "",
   "countRelation" : 1,
@@ -2065,7 +2065,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/cmpEvaDuration",
-  "keywords" : [ "CMP", "EVA", "duration" ],
+  "keywords" : [ "CMP", "EVA", "duration", "cmp", "eva" ],
   "range" : "XMLSchema#double",
   "domain" : "SpaceMission",
   "countRelation" : 9,
@@ -2093,7 +2093,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/iihfHof",
-  "keywords" : [ "lihf", "hof" ],
+  "keywords" : [ "lihf", "hof", "iihf" ],
   "range" : "XMLSchema#string",
   "domain" : "Person",
   "countRelation" : 98,
@@ -2128,7 +2128,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/mukhtar",
-  "keywords" : [ "mukthar", "of", "a", "lebanon", "settlement" ],
+  "keywords" : [ "mukthar", "of", "a", "lebanon", "settlement", "mukhtar" ],
   "range" : "XMLSchema#string",
   "domain" : "LebanonSettlement",
   "countRelation" : 1,
@@ -2149,14 +2149,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInTraditionalChinese",
-  "keywords" : [ "name", "in", "Traditional", "Chinese" ],
+  "keywords" : [ "name", "in", "Traditional", "Chinese", "traditional", "chinese" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wagon",
-  "keywords" : [ "train", "carriage" ],
+  "keywords" : [ "train", "carriage", "wagon" ],
   "range" : "TrainCarriage",
   "domain" : "Train",
   "countRelation" : 1,
@@ -2212,7 +2212,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/review",
-  "keywords" : [ "review" ],
+  "keywords" : [ "review", "review" ],
   "range" : "XMLSchema#anyURI",
   "domain" : "Album",
   "countRelation" : 1,
@@ -2233,7 +2233,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/previousWork",
-  "keywords" : [ "previous", "work" ],
+  "keywords" : [ "previous", "work", "prequel" ],
   "range" : "Work",
   "domain" : "Work",
   "countRelation" : 3,
@@ -2317,7 +2317,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageHistoryLink",
-  "keywords" : [ "Link", "to", "the", "Wikipage", "history", "URL" ],
+  "keywords" : [ "Link", "to", "the", "Wikipage", "history", "URL", "wiki", "page", "link" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -2387,7 +2387,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/field",
-  "keywords" : [ "field" ],
+  "keywords" : [ "field", "work" ],
   "range" : "",
   "domain" : "Artist",
   "countRelation" : 4,
@@ -2408,7 +2408,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/decommissioningDate",
-  "keywords" : [ "decommissioning", "date" ],
+  "keywords" : [ "decommissioning", "date", "decommission" ],
   "range" : "XMLSchema#date",
   "domain" : "Ship",
   "countRelation" : 10,
@@ -2422,14 +2422,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/viafId",
-  "keywords" : [ "VIAF", "Id" ],
+  "keywords" : [ "VIAF", "Id", "viaf" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/foundationPlace",
-  "keywords" : [ "foundation", "place" ],
+  "keywords" : [ "foundation", "place", "find" ],
   "range" : "City",
   "domain" : "Organisation",
   "countRelation" : 2,
@@ -2464,7 +2464,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/periapsis",
-  "keywords" : [ "periapsis" ],
+  "keywords" : [ "periapsis", "periapse" ],
   "range" : "XMLSchema#double",
   "domain" : "CelestialBody",
   "countRelation" : 6,
@@ -2506,7 +2506,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerTournamentMostSteady",
-  "keywords" : [ "most", "steady" ],
+  "keywords" : [ "most", "steady", "soccer", "tournament" ],
   "range" : "SoccerClub",
   "domain" : "SoccerTournament",
   "countRelation" : 3,
@@ -2541,7 +2541,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/activeYearsStartDateMgr",
-  "keywords" : [ "active", "years", "start", "date", "manager" ],
+  "keywords" : [ "active", "years", "start", "date", "manager", "mgr" ],
   "range" : "XMLSchema#date",
   "domain" : "Person",
   "countRelation" : 11,
@@ -2597,14 +2597,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/musicFusionGenre",
-  "keywords" : [ "music", "fusion", "genre" ],
+  "keywords" : [ "music", "fusion", "genre", "fuse", "into" ],
   "range" : "MusicGenre",
   "domain" : "MusicGenre",
   "countRelation" : 4,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/length",
-  "keywords" : [ "length" ],
+  "keywords" : [ "length", "long" ],
   "range" : "XMLSchema#double",
   "domain" : "",
   "countRelation" : 34,
@@ -2653,7 +2653,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/weddingParentsDate",
-  "keywords" : [ "Parents", "Wedding", "Date" ],
+  "keywords" : [ "Parents", "Wedding", "Date", "wedding", "parent", "date" ],
   "range" : "XMLSchema#date",
   "domain" : "Person",
   "countRelation" : 11,
@@ -2674,7 +2674,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/dutchArtworkCode",
-  "keywords" : [ "Dutch", "artwork", "code" ],
+  "keywords" : [ "Dutch", "artwork", "code", "dutch" ],
   "range" : "XMLSchema#string",
   "domain" : "Artwork",
   "countRelation" : 1,
@@ -2772,7 +2772,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/espnId",
-  "keywords" : [ "ESPN", "id" ],
+  "keywords" : [ "ESPN", "id", "espn" ],
   "range" : "XMLSchema#integer",
   "domain" : "Athlete",
   "countRelation" : 1,
@@ -2786,14 +2786,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/launchDate",
-  "keywords" : [ "launch", "date" ],
+  "keywords" : [ "launch", "date", "launch" ],
   "range" : "XMLSchema#date",
   "domain" : "SpaceMission",
   "countRelation" : 4,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageRedirects",
-  "keywords" : [ "Wikipage", "redirect" ],
+  "keywords" : [ "Wikipage", "redirect", "wiki", "page", "redirect" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -2863,7 +2863,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/ensembl",
-  "keywords" : [ "ensemble" ],
+  "keywords" : [ "ensemble", "ensembl" ],
   "range" : "XMLSchema#string",
   "domain" : "Biomolecule",
   "countRelation" : 9,
@@ -2891,7 +2891,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/discovered",
-  "keywords" : [ "discovery", "date" ],
+  "keywords" : [ "discovery", "date", "discover" ],
   "range" : "XMLSchema#date",
   "domain" : "CelestialBody",
   "countRelation" : 1,
@@ -3059,7 +3059,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/architect",
-  "keywords" : [ "architect" ],
+  "keywords" : [ "architect", "build", "design" ],
   "range" : "Architect",
   "domain" : "ArchitecturalStructure",
   "countRelation" : 1,
@@ -3087,7 +3087,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/icdo",
-  "keywords" : [ "ICDO" ],
+  "keywords" : [ "ICDO", "icdo" ],
   "range" : "XMLSchema#string",
   "domain" : "Disease",
   "countRelation" : 8,
@@ -3108,7 +3108,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/bpnId",
-  "keywords" : [ "BPN", "Id" ],
+  "keywords" : [ "BPN", "Id", "bpn" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -3171,7 +3171,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/yearOfConstruction",
-  "keywords" : [ "year", "of", "construction" ],
+  "keywords" : [ "year", "of", "construction", "construct" ],
   "range" : "XMLSchema#gYear",
   "domain" : "Place",
   "countRelation" : 1,
@@ -3241,7 +3241,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/reffBourgmestre",
-  "keywords" : [ "referent", "bourgmestre" ],
+  "keywords" : [ "referent", "bourgmestre", "reff" ],
   "range" : "Person",
   "domain" : "Settlement",
   "countRelation" : 3,
@@ -3269,7 +3269,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/family",
-  "keywords" : [ "family" ],
+  "keywords" : [ "family", "contain", "member", "belong" ],
   "range" : "Species",
   "domain" : "Species",
   "countRelation" : 6,
@@ -3325,7 +3325,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/medlinePlus",
-  "keywords" : [ "MedlinePlus" ],
+  "keywords" : [ "MedlinePlus", "medline", "plus" ],
   "range" : "XMLSchema#string",
   "domain" : "Disease",
   "countRelation" : 8,
@@ -3346,7 +3346,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/albumRuntime",
-  "keywords" : [ "album", "duration" ],
+  "keywords" : [ "album", "duration", "runtime" ],
   "range" : "XMLSchema#double",
   "domain" : "Album",
   "countRelation" : 1,
@@ -3367,7 +3367,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/otherSportsExperience",
-  "keywords" : [ "otherSportsExperience" ],
+  "keywords" : [ "otherSportsExperience", "other", "sport", "experience" ],
   "range" : "Athletics",
   "domain" : "Athlete",
   "countRelation" : 2,
@@ -3402,7 +3402,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/locationCountry",
-  "keywords" : [ "państwo" ],
+  "keywords" : [ "państwo", "location", "country", "located", "base" ],
   "range" : "Country",
   "domain" : "",
   "countRelation" : 2,
@@ -3416,7 +3416,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageInterLanguageLink",
-  "keywords" : [ "Link", "from", "a", "Wikipage", "to", "a", "Wikipage", "in", "a", "different", "language", "about", "the", "same", "or", "a", "related", "subject." ],
+  "keywords" : [ "Link", "from", "a", "Wikipage", "to", "a", "Wikipage", "in", "a", "different", "language", "about", "the", "same", "or", "a", "related", "subject.", "wiki", "page", "inter", "link" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -3479,7 +3479,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/numberOfPeopleLicensed",
-  "keywords" : [ "number", "of", "licensed" ],
+  "keywords" : [ "number", "of", "licensed", "people" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Activity",
   "countRelation" : 4,
@@ -3570,7 +3570,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/ratio",
-  "keywords" : [ "CalculationNeeds" ],
+  "keywords" : [ "CalculationNeeds", "ratio" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -3605,7 +3605,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/dutchMIPCode",
-  "keywords" : [ "monument", "code", "for", "the", "Monuments", "Inventory", "Project" ],
+  "keywords" : [ "monument", "code", "for", "the", "Monuments", "Inventory", "Project", "dutch" ],
   "range" : "XMLSchema#string",
   "domain" : "ArchitecturalStructure,_Monument",
   "countRelation" : 1,
@@ -3689,7 +3689,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/kinOfLanguage",
-  "keywords" : [ "kindOfLanguage" ],
+  "keywords" : [ "kindOfLanguage", "kin", "language" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -3710,7 +3710,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nisCode",
-  "keywords" : [ "NIS", "code" ],
+  "keywords" : [ "NIS", "code", "nis" ],
   "range" : "XMLSchema#string",
   "domain" : "PopulatedPlace",
   "countRelation" : 56,
@@ -3759,14 +3759,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/deathYear",
-  "keywords" : [ "death", "year" ],
+  "keywords" : [ "death", "year", "die" ],
   "range" : "XMLSchema#gYear",
   "domain" : "Person",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/councilArea",
-  "keywords" : [ "Council", "area" ],
+  "keywords" : [ "Council", "area", "council" ],
   "range" : "PopulatedPlace",
   "domain" : "PopulatedPlace",
   "countRelation" : 16,
@@ -3829,7 +3829,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/representative",
-  "keywords" : [ "number", "of", "representatives" ],
+  "keywords" : [ "number", "of", "representatives", "representative" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Place",
   "countRelation" : 19,
@@ -3850,7 +3850,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/sharingOutPopulationYear",
-  "keywords" : [ "sharing", "out", "year" ],
+  "keywords" : [ "sharing", "out", "year", "population" ],
   "range" : "XMLSchema#string",
   "domain" : "PopulatedPlace",
   "countRelation" : 56,
@@ -3878,7 +3878,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/dutchNAIdentifier",
-  "keywords" : [ "Identifier", "for", "Duch", "National", "Archive" ],
+  "keywords" : [ "Identifier", "for", "Duch", "National", "Archive", "dutch", "identifier" ],
   "range" : "XMLSchema#string",
   "domain" : "MemberResistanceMovement",
   "countRelation" : 3,
@@ -3899,7 +3899,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/awardName",
-  "keywords" : [ "awardName" ],
+  "keywords" : [ "awardName", "award", "name" ],
   "range" : "XMLSchema#string",
   "domain" : "Person",
   "countRelation" : 98,
@@ -3997,7 +3997,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageWikiLink",
-  "keywords" : [ "Link", "from", "a", "Wikipage", "to", "another", "Wikipage" ],
+  "keywords" : [ "Link", "from", "a", "Wikipage", "to", "another", "Wikipage", "wiki", "page", "link" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -4067,7 +4067,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/musicFormat",
-  "keywords" : [ "musicFormat" ],
+  "keywords" : [ "musicFormat", "music", "format" ],
   "range" : "XMLSchema#string",
   "domain" : "Album",
   "countRelation" : 2,
@@ -4123,35 +4123,35 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/computingPlatform",
-  "keywords" : [ "computing", "platform" ],
+  "keywords" : [ "computing", "platform", "port", "develop", "for" ],
   "range" : "",
   "domain" : "Software",
   "countRelation" : 7,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/refpol",
-  "keywords" : [ "reference", "for", "politic", "data" ],
+  "keywords" : [ "reference", "for", "politic", "data", "refpol" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/superTribus",
-  "keywords" : [ "supertribus" ],
+  "keywords" : [ "supertribus", "super", "tribus" ],
   "range" : "Species",
   "domain" : "Species",
   "countRelation" : 6,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/filmFareAward",
-  "keywords" : [ "Film", "Fare", "Award" ],
+  "keywords" : [ "Film", "Fare", "Award", "film", "fare", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInMinnanyuChinese",
-  "keywords" : [ "name", "in", "Minnanyu", "Chinese" ],
+  "keywords" : [ "name", "in", "Minnanyu", "Chinese", "minnanyu", "chinese" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -4179,7 +4179,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/maxApparentMagnitude",
-  "keywords" : [ "maximum", "apparent", "magnitude" ],
+  "keywords" : [ "maximum", "apparent", "magnitude", "max" ],
   "range" : "XMLSchema#double",
   "domain" : "CelestialBody",
   "countRelation" : 6,
@@ -4207,7 +4207,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/alpsSupergroup",
-  "keywords" : [ "Alps", "supergroup" ],
+  "keywords" : [ "Alps", "supergroup", "alp" ],
   "range" : "MountainRange",
   "domain" : "Mountain",
   "countRelation" : 8,
@@ -4249,7 +4249,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageDisambiguates",
-  "keywords" : [ "Wikipage", "disambiguates" ],
+  "keywords" : [ "Wikipage", "disambiguates", "wiki", "page" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -4270,14 +4270,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/icaoLocationIdentifier",
-  "keywords" : [ "ICAO", "Location", "Identifier" ],
+  "keywords" : [ "ICAO", "Location", "Identifier", "icao", "location", "identifier", "code", "indicator" ],
   "range" : "XMLSchema#string",
   "domain" : "Airport",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/percentageLiteracyMen",
-  "keywords" : [ "percentage", "of", "a", "place's", "male", "population", "that", "is", "literate,", "degree", "of", "analphabetism" ],
+  "keywords" : [ "percentage", "of", "a", "place's", "male", "population", "that", "is", "literate,", "degree", "of", "analphabetism", "literacy", "man" ],
   "range" : "XMLSchema#float",
   "domain" : "PopulatedPlace",
   "countRelation" : 7,
@@ -4305,7 +4305,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/abbreviation",
-  "keywords" : [ "abbreviation" ],
+  "keywords" : [ "abbreviation", "abbreviate", "abbreviated" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -4333,7 +4333,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/latestReleaseVersion",
-  "keywords" : [ "latest", "release", "version" ],
+  "keywords" : [ "latest", "release", "version", "current" ],
   "range" : "XMLSchema#string",
   "domain" : "Software",
   "countRelation" : 3,
@@ -4368,7 +4368,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/profession",
-  "keywords" : [ "profession" ],
+  "keywords" : [ "profession", "work" ],
   "range" : "",
   "domain" : "Person",
   "countRelation" : 27,
@@ -4438,7 +4438,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/lunarEvaTime",
-  "keywords" : [ "lunar", "EVA", "time" ],
+  "keywords" : [ "lunar", "EVA", "time", "eva" ],
   "range" : "XMLSchema#double",
   "domain" : "SpaceMission",
   "countRelation" : 9,
@@ -4452,7 +4452,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nutsCode",
-  "keywords" : [ "NUTS", "code" ],
+  "keywords" : [ "NUTS", "code", "nut" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -4501,7 +4501,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/individualisedPnd",
-  "keywords" : [ "individualised", "PND", "number" ],
+  "keywords" : [ "individualised", "PND", "number", "pnd" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Person",
   "countRelation" : 26,
@@ -4543,7 +4543,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/creator",
-  "keywords" : [ "creator" ],
+  "keywords" : [ "creator", "create" ],
   "range" : "Agent",
   "domain" : "",
   "countRelation" : 6,
@@ -4620,7 +4620,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/war",
-  "keywords" : [ "wars" ],
+  "keywords" : [ "wars", "war" ],
   "range" : "XMLSchema#string",
   "domain" : "MilitaryPerson",
   "countRelation" : 7,
@@ -4641,7 +4641,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/abbeychurchBlessingCharge",
-  "keywords" : [ "abbey", "church", "blessing", "charge" ],
+  "keywords" : [ "abbey", "church", "blessing", "charge", "abbeychurch" ],
   "range" : "XMLSchema#string",
   "domain" : "Cleric",
   "countRelation" : 3,
@@ -4739,7 +4739,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/firstAscentPerson",
-  "keywords" : [ "person", "that", "first", "ascented", "a", "mountain" ],
+  "keywords" : [ "person", "that", "first", "ascented", "a", "mountain", "ascent" ],
   "range" : "Person",
   "domain" : "Mountain",
   "countRelation" : 1,
@@ -4795,7 +4795,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/millsCodeBE",
-  "keywords" : [ "mill", "code", "BE" ],
+  "keywords" : [ "mill", "code", "BE", "mill" ],
   "range" : "XMLSchema#string",
   "domain" : "Mill",
   "countRelation" : 7,
@@ -4830,14 +4830,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/almaMater",
-  "keywords" : [ "alma", "mater" ],
+  "keywords" : [ "alma", "mater", "study", "graduate", "from", "alma", "mater" ],
   "range" : "EducationalInstitution",
   "domain" : "Person",
   "countRelation" : 4,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/alpsSection",
-  "keywords" : [ "Alps", "section" ],
+  "keywords" : [ "Alps", "section", "alp" ],
   "range" : "MountainRange",
   "domain" : "Mountain",
   "countRelation" : 8,
@@ -4879,7 +4879,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/personName",
-  "keywords" : [ "personName" ],
+  "keywords" : [ "personName", "person", "name" ],
   "range" : "XMLSchema#string",
   "domain" : "PersonFunction",
   "countRelation" : 1,
@@ -4963,14 +4963,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/isbn",
-  "keywords" : [ "ISBN" ],
+  "keywords" : [ "ISBN", "isbn" ],
   "range" : "XMLSchema#string",
   "domain" : "WrittenWork",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/successor",
-  "keywords" : [ "successor" ],
+  "keywords" : [ "successor", "preceed", "predecessor", "succeed" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -5005,7 +5005,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/gross",
-  "keywords" : [ "gross" ],
+  "keywords" : [ "gross", "take", "make", "over" ],
   "range" : "XMLSchema#double",
   "domain" : "Film",
   "countRelation" : 2,
@@ -5033,7 +5033,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/crosses",
-  "keywords" : [ "crosses" ],
+  "keywords" : [ "crosses", "cross", "span", "bridge", "over", "traverse" ],
   "range" : "River",
   "domain" : "Bridge",
   "countRelation" : 1,
@@ -5061,14 +5061,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/openingDate",
-  "keywords" : [ "opening", "date" ],
+  "keywords" : [ "opening", "date", "open" ],
   "range" : "XMLSchema#date",
   "domain" : "",
   "countRelation" : 23,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/votesAgainst",
-  "keywords" : [ "Votes", "against", "the", "resolution" ],
+  "keywords" : [ "Votes", "against", "the", "resolution", "vote" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "StatedResolution",
   "countRelation" : 3,
@@ -5152,7 +5152,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/capacity",
-  "keywords" : [ "capacity" ],
+  "keywords" : [ "capacity", "accommodate" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "",
   "countRelation" : 23,
@@ -5180,7 +5180,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/populationPlace",
-  "keywords" : [ "population", "place" ],
+  "keywords" : [ "population", "place", "live" ],
   "range" : "PopulatedPlace",
   "domain" : "EthnicGroup",
   "countRelation" : 1,
@@ -5208,7 +5208,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/idAllocine",
-  "keywords" : [ "Allocine", "ID" ],
+  "keywords" : [ "Allocine", "ID", "allocine" ],
   "range" : "XMLSchema#string",
   "domain" : "Film",
   "countRelation" : 14,
@@ -5236,7 +5236,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/numberOfCantons",
-  "keywords" : [ "Number", "Of", "Cantons" ],
+  "keywords" : [ "Number", "Of", "Cantons", "number", "canton" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "PopulatedPlace",
   "countRelation" : 18,
@@ -5264,7 +5264,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/source",
-  "keywords" : [ "source" ],
+  "keywords" : [ "source", "originate" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -5299,7 +5299,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/ibdbId",
-  "keywords" : [ "IBDB", "ID" ],
+  "keywords" : [ "IBDB", "ID", "ibdb" ],
   "range" : "XMLSchema#string",
   "domain" : "Play",
   "countRelation" : 7,
@@ -5313,7 +5313,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/polishFilmAward",
-  "keywords" : [ "Polish", "Film", "Award" ],
+  "keywords" : [ "Polish", "Film", "Award", "polish", "film", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -5369,21 +5369,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/secondPopularVote",
-  "keywords" : [ "secondPopularVote" ],
+  "keywords" : [ "secondPopularVote", "second", "popular", "vote" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nssdcId",
-  "keywords" : [ "NSSDC", "ID" ],
+  "keywords" : [ "NSSDC", "ID", "nssdc" ],
   "range" : "XMLSchema#string",
   "domain" : "SpaceStation",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/spokenIn",
-  "keywords" : [ "spoken", "in" ],
+  "keywords" : [ "spoken", "in", "language" ],
   "range" : "PopulatedPlace",
   "domain" : "Language",
   "countRelation" : 1,
@@ -5404,7 +5404,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/sudocId",
-  "keywords" : [ "SUDOC", "id" ],
+  "keywords" : [ "SUDOC", "id", "sudoc" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -5432,14 +5432,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/influenced",
-  "keywords" : [ "influenced" ],
+  "keywords" : [ "influenced", "influence" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/distanceToDublin",
-  "keywords" : [ "distance", "to", "Dublin" ],
+  "keywords" : [ "distance", "to", "Dublin", "dublin" ],
   "range" : "XMLSchema#double",
   "domain" : "Settlement",
   "countRelation" : 12,
@@ -5467,7 +5467,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/aspectRatio",
-  "keywords" : [ "Aspect", "Ratio" ],
+  "keywords" : [ "Aspect", "Ratio", "aspect", "ratio" ],
   "range" : "",
   "domain" : "Software",
   "countRelation" : 7,
@@ -5502,7 +5502,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/probowlPick",
-  "keywords" : [ "pro", "bowl", "pick" ],
+  "keywords" : [ "pro", "bowl", "pick", "probowl" ],
   "range" : "XMLSchema#string",
   "domain" : "Athlete",
   "countRelation" : 36,
@@ -5558,14 +5558,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/messierName",
-  "keywords" : [ "Messier", "name" ],
+  "keywords" : [ "Messier", "name", "messier" ],
   "range" : "XMLSchema#string",
   "domain" : "CelestialBody",
   "countRelation" : 4,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/meshNumber",
-  "keywords" : [ "MeSH", "number" ],
+  "keywords" : [ "MeSH", "number", "mesh" ],
   "range" : "XMLSchema#string",
   "domain" : "AnatomicalStructure",
   "countRelation" : 5,
@@ -5621,7 +5621,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/localizationThumbnailCaption",
-  "keywords" : [ "legend", "thumbnail", "localization" ],
+  "keywords" : [ "legend", "thumbnail", "localization", "caption" ],
   "range" : "XMLSchema#string",
   "domain" : "PopulatedPlace",
   "countRelation" : 56,
@@ -5656,14 +5656,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/discovery",
-  "keywords" : [ "date", "when", "the", "island", "has", "been", "discovered" ],
+  "keywords" : [ "date", "when", "the", "island", "has", "been", "discovered", "discovery" ],
   "range" : "XMLSchema#string",
   "domain" : "Island",
   "countRelation" : 10,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/secondLeader",
-  "keywords" : [ "secondLeader" ],
+  "keywords" : [ "secondLeader", "second", "leader" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
@@ -5705,7 +5705,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/eMedicineSubject",
-  "keywords" : [ "eMedicine", "subject" ],
+  "keywords" : [ "eMedicine", "subject", "medicine" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "Disease",
   "countRelation" : 3,
@@ -5754,7 +5754,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/municipalityRenamedTo",
-  "keywords" : [ "a", "municipality's", "new", "name" ],
+  "keywords" : [ "a", "municipality's", "new", "name", "municipality", "rename" ],
   "range" : "XMLSchema#string",
   "domain" : "Municipality",
   "countRelation" : 4,
@@ -5768,7 +5768,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/refseqprotein",
-  "keywords" : [ "refseq", "protein" ],
+  "keywords" : [ "refseq", "protein", "refseqprotein" ],
   "range" : "XMLSchema#string",
   "domain" : "Biomolecule",
   "countRelation" : 9,
@@ -5803,21 +5803,21 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/smiles",
-  "keywords" : [ "SMILES" ],
+  "keywords" : [ "SMILES", "smile" ],
   "range" : "XMLSchema#string",
   "domain" : "ChemicalCompound",
   "countRelation" : 3,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/issn",
-  "keywords" : [ "issn" ],
+  "keywords" : [ "issn", "issn" ],
   "range" : "XMLSchema#string",
   "domain" : "PeriodicalLiterature",
   "countRelation" : 4,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/goldenGlobeAward",
-  "keywords" : [ "Golden", "Globe", "Award" ],
+  "keywords" : [ "Golden", "Globe", "Award", "golden", "globe", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -5852,7 +5852,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/country",
-  "keywords" : [ "country" ],
+  "keywords" : [ "country", "located" ],
   "range" : "Country",
   "domain" : "",
   "countRelation" : 2,
@@ -5873,28 +5873,28 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerLeagueSeason",
-  "keywords" : [ "season" ],
+  "keywords" : [ "season", "soccer", "league" ],
   "range" : "SoccerLeagueSeason",
   "domain" : "SoccerLeagueSeason",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/starring",
-  "keywords" : [ "starring" ],
+  "keywords" : [ "starring", "star", "feature", "play" ],
   "range" : "Actor",
   "domain" : "Work",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/weight",
-  "keywords" : [ "weight" ],
+  "keywords" : [ "weight", "weigh" ],
   "range" : "XMLSchema#double",
   "domain" : "",
   "countRelation" : 34,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInJapanese",
-  "keywords" : [ "name", "in", "Japanese" ],
+  "keywords" : [ "name", "in", "Japanese", "japanese" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -5908,7 +5908,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/unloCode",
-  "keywords" : [ "UN/LOCODE" ],
+  "keywords" : [ "UN/LOCODE", "unlo", "code" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -5936,7 +5936,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/pdb",
-  "keywords" : [ "PDB", "ID" ],
+  "keywords" : [ "PDB", "ID", "pdb" ],
   "range" : "XMLSchema#string",
   "domain" : "Protein",
   "countRelation" : 6,
@@ -5950,7 +5950,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/theology",
-  "keywords" : [ "Theology" ],
+  "keywords" : [ "Theology", "theology" ],
   "range" : "XMLSchema#string",
   "domain" : "ChristianDoctrine",
   "countRelation" : 4,
@@ -6055,7 +6055,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/Engine/co2Emission",
-  "keywords" : [ "CO2", "emission" ],
+  "keywords" : [ "CO2", "emission", "co2" ],
   "range" : "gramPerKilometre",
   "domain" : "Engine",
   "countRelation" : 1,
@@ -6069,14 +6069,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/hasAnnotation",
-  "keywords" : [ "Indicates", "an", "annotation", "associated", "with", "this", "document" ],
+  "keywords" : [ "Indicates", "an", "annotation", "associated", "with", "this", "document", "have" ],
   "range" : "Annotation",
   "domain" : "Document",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/symbol",
-  "keywords" : [ "Symbol" ],
+  "keywords" : [ "Symbol", "symbol" ],
   "range" : "XMLSchema#string",
   "domain" : "Biomolecule",
   "countRelation" : 9,
@@ -6125,7 +6125,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/layingDown",
-  "keywords" : [ "laying", "down" ],
+  "keywords" : [ "laying", "down", "lay" ],
   "range" : "XMLSchema#date",
   "domain" : "Ship",
   "countRelation" : 10,
@@ -6153,7 +6153,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/canonizedPlace",
-  "keywords" : [ "canonized", "place" ],
+  "keywords" : [ "canonized", "place", "canonize" ],
   "range" : "PopulatedPlace",
   "domain" : "Saint",
   "countRelation" : 2,
@@ -6209,14 +6209,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/ridId",
-  "keywords" : [ "RID", "Id" ],
+  "keywords" : [ "RID", "Id", "rid" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/fuelTypeName",
-  "keywords" : [ "fuel", "type" ],
+  "keywords" : [ "fuel", "type", "name" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "PowerStation",
   "countRelation" : 2,
@@ -6335,7 +6335,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/parentCompany",
-  "keywords" : [ "parent", "company" ],
+  "keywords" : [ "parent", "company", "subsidiary", "daughter" ],
   "range" : "Company",
   "domain" : "",
   "countRelation" : 2,
@@ -6377,7 +6377,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/surfaceFormOccurrenceOffset",
-  "keywords" : [ "position", "in", "which", "a", "surface", "occurs", "in", "a", "text" ],
+  "keywords" : [ "position", "in", "which", "a", "surface", "occurs", "in", "a", "text", "form", "occurrence", "offset" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -6426,7 +6426,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/dateLastUpdated",
-  "keywords" : [ "Date", "Last", "Updated" ],
+  "keywords" : [ "Date", "Last", "Updated", "date", "last", "update" ],
   "range" : "XMLSchema#date",
   "domain" : "Document",
   "countRelation" : 1,
@@ -6545,7 +6545,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/coden",
-  "keywords" : [ "CODEN" ],
+  "keywords" : [ "CODEN", "coden" ],
   "range" : "XMLSchema#string",
   "domain" : "WrittenWork",
   "countRelation" : 6,
@@ -6594,7 +6594,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/atcSuffix",
-  "keywords" : [ "ATC", "suffix" ],
+  "keywords" : [ "ATC", "suffix", "atc" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -6615,7 +6615,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/elo",
-  "keywords" : [ "ELO", "rating" ],
+  "keywords" : [ "ELO", "rating", "elo" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "ChessPlayer",
   "countRelation" : 2,
@@ -6650,14 +6650,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/broadcastNetwork",
-  "keywords" : [ "broadcast", "network" ],
+  "keywords" : [ "broadcast", "network", "part", "operate" ],
   "range" : "BroadcastNetwork",
   "domain" : "Broadcaster",
   "countRelation" : 2,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/dbnlCodeDutch",
-  "keywords" : [ "Digital", "Library", "code", "NL" ],
+  "keywords" : [ "Digital", "Library", "code", "NL", "dbnl", "dutch" ],
   "range" : "XMLSchema#string",
   "domain" : "Writer",
   "countRelation" : 1,
@@ -6678,7 +6678,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/hsvCoordinateHue",
-  "keywords" : [ "hue", "coordinate", "in", "the", "HSV", "colour", "space" ],
+  "keywords" : [ "hue", "coordinate", "in", "the", "HSV", "colour", "space", "hsv" ],
   "range" : "XMLSchema#integer",
   "domain" : "Colour",
   "countRelation" : 7,
@@ -6734,7 +6734,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/topLevelDomain",
-  "keywords" : [ "country", "top", "level" ],
+  "keywords" : [ "country", "top", "level", "domain" ],
   "range" : "XMLSchema#string",
   "domain" : "Country",
   "countRelation" : 2,
@@ -6755,14 +6755,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/relatedMeanOfTransportation",
-  "keywords" : [ "related", "mean", "of", "transportation" ],
+  "keywords" : [ "related", "mean", "of", "transportation", "base" ],
   "range" : "MeanOfTransportation",
   "domain" : "MeanOfTransportation",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/atcSupplemental",
-  "keywords" : [ "ATC", "supplemental" ],
+  "keywords" : [ "ATC", "supplemental", "atc" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -6776,7 +6776,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/dutchPPNCode",
-  "keywords" : [ "Dutch", "PPN", "code" ],
+  "keywords" : [ "Dutch", "PPN", "code", "dutch" ],
   "range" : "XMLSchema#string",
   "domain" : "WrittenWork",
   "countRelation" : 6,
@@ -6839,7 +6839,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/deathDate",
-  "keywords" : [ "death", "date" ],
+  "keywords" : [ "death", "date", "die" ],
   "range" : "XMLSchema#date",
   "domain" : "Person",
   "countRelation" : 11,
@@ -6874,7 +6874,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/landtag",
-  "keywords" : [ "austrian", "land", "tag" ],
+  "keywords" : [ "austrian", "land", "tag", "landtag" ],
   "range" : "XMLSchema#string",
   "domain" : "AdministrativeRegion",
   "countRelation" : 2,
@@ -6888,7 +6888,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/firstDriverTeam",
-  "keywords" : [ "winning", "team" ],
+  "keywords" : [ "winning", "team", "first", "driver" ],
   "range" : "SportsTeam",
   "domain" : "GrandPrix",
   "countRelation" : 5,
@@ -6909,7 +6909,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/codeProvincialMonument",
-  "keywords" : [ "monument", "code" ],
+  "keywords" : [ "monument", "code", "provincial" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -6986,14 +6986,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/superFamily",
-  "keywords" : [ "super-family" ],
+  "keywords" : [ "super-family", "super", "family" ],
   "range" : "Taxon",
   "domain" : "Species",
   "countRelation" : 3,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/fdaUniiCode",
-  "keywords" : [ "FDA", "UNII", "code" ],
+  "keywords" : [ "FDA", "UNII", "code", "fda", "unius" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -7063,7 +7063,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/winsAtAlpg",
-  "keywords" : [ "wins", "at", "ALPG" ],
+  "keywords" : [ "wins", "at", "ALPG", "alpg" ],
   "range" : "",
   "domain" : "GolfPlayer",
   "countRelation" : 19,
@@ -7091,7 +7091,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/similar",
-  "keywords" : [ "similar" ],
+  "keywords" : [ "similar", "like" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -7105,14 +7105,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/usk",
-  "keywords" : [ "approved", "rating", "of", "the", "Entertainment", "Software", "Self-Regulation", "Body", "in", "Germany" ],
+  "keywords" : [ "approved", "rating", "of", "the", "Entertainment", "Software", "Self-Regulation", "Body", "in", "Germany", "usk" ],
   "range" : "XMLSchema#integer",
   "domain" : "",
   "countRelation" : 12,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/ngcName",
-  "keywords" : [ "NGC", "name" ],
+  "keywords" : [ "NGC", "name", "ngc" ],
   "range" : "XMLSchema#string",
   "domain" : "CelestialBody",
   "countRelation" : 4,
@@ -7126,7 +7126,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nlaId",
-  "keywords" : [ "NLA", "Id" ],
+  "keywords" : [ "NLA", "Id", "nla" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -7175,7 +7175,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageExternalLink",
-  "keywords" : [ "Link", "from", "a", "Wikipage", "to", "an", "external", "page" ],
+  "keywords" : [ "Link", "from", "a", "Wikipage", "to", "an", "external", "page", "wiki", "link" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -7343,14 +7343,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/locationIdentifier",
-  "keywords" : [ "Location", "Identifier" ],
+  "keywords" : [ "Location", "Identifier", "location", "identifier" ],
   "range" : "XMLSchema#string",
   "domain" : "Airport",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/subsequentWork",
-  "keywords" : [ "subsequent", "work" ],
+  "keywords" : [ "subsequent", "work", "sequel", "follow-up" ],
   "range" : "Work",
   "domain" : "Work",
   "countRelation" : 3,
@@ -7378,21 +7378,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/range",
-  "keywords" : [ "range" ],
+  "keywords" : [ "range", "part", "located" ],
   "range" : "XMLSchema#positiveInteger",
   "domain" : "MeanOfTransportation_,_Instrument",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/musicBand",
-  "keywords" : [ "Music", "Band" ],
+  "keywords" : [ "Music", "Band", "music", "band" ],
   "range" : "Band",
   "domain" : "MusicalArtist",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/millsCodeNL",
-  "keywords" : [ "mill", "code", "NL" ],
+  "keywords" : [ "mill", "code", "NL", "mill" ],
   "range" : "XMLSchema#string",
   "domain" : "Mill",
   "countRelation" : 7,
@@ -7406,7 +7406,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/iso6393Code",
-  "keywords" : [ "ISO", "639-3", "code" ],
+  "keywords" : [ "ISO", "639-3", "code", "iso6393" ],
   "range" : "XMLSchema#string",
   "domain" : "Language",
   "countRelation" : 5,
@@ -7427,14 +7427,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/battle",
-  "keywords" : [ "battle" ],
+  "keywords" : [ "battle", "fight", "serve" ],
   "range" : "MilitaryConflict",
   "domain" : "",
   "countRelation" : 2,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/originalDanseCompetition",
-  "keywords" : [ "original", "danse", "competititon" ],
+  "keywords" : [ "original", "danse", "competititon", "competition" ],
   "range" : "XMLSchema#string",
   "domain" : "Person",
   "countRelation" : 98,
@@ -7469,7 +7469,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/servingRailwayLine",
-  "keywords" : [ "serving", "railway", "line" ],
+  "keywords" : [ "serving", "railway", "line", "serve" ],
   "range" : "",
   "domain" : "Station",
   "countRelation" : 2,
@@ -7490,7 +7490,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/numberOfStudents",
-  "keywords" : [ "number", "of", "students" ],
+  "keywords" : [ "number", "of", "students", "student", "population", "serve", "enrollment" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "EducationalInstitution",
   "countRelation" : 6,
@@ -7511,28 +7511,28 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/selibrId",
-  "keywords" : [ "SELIBR", "Id" ],
+  "keywords" : [ "SELIBR", "Id", "selibr" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/order",
-  "keywords" : [ "order" ],
+  "keywords" : [ "order", "contain", "member", "belong" ],
   "range" : "",
   "domain" : "Species",
   "countRelation" : 13,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/numberOfCapitalDeputies",
-  "keywords" : [ "Number", "Of", "Capital", "Deputies" ],
+  "keywords" : [ "Number", "Of", "Capital", "Deputies", "number", "capital", "deputy" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "PopulatedPlace",
   "countRelation" : 18,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/pubchem",
-  "keywords" : [ "PubChem" ],
+  "keywords" : [ "PubChem", "pubchem" ],
   "range" : "XMLSchema#string",
   "domain" : "ChemicalSubstance",
   "countRelation" : 8,
@@ -7553,21 +7553,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/vonKlitzingConstant",
-  "keywords" : [ "von", "Klitzing", "electromagnetic", "constant" ],
+  "keywords" : [ "von", "Klitzing", "electromagnetic", "constant", "klitz" ],
   "range" : "XMLSchema#double",
   "domain" : "CelestialBody",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/flagSize",
-  "keywords" : [ "flagSize" ],
+  "keywords" : [ "flagSize", "flag", "size" ],
   "range" : "XMLSchema#integer",
   "domain" : "Flag",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/gameEngine",
-  "keywords" : [ "Game", "Engine" ],
+  "keywords" : [ "Game", "Engine", "game", "engine" ],
   "range" : "",
   "domain" : "VideoGame",
   "countRelation" : 1,
@@ -7602,7 +7602,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/competitionTitle",
-  "keywords" : [ "death", "place" ],
+  "keywords" : [ "death", "place", "competition", "title" ],
   "range" : "SportsEvent",
   "domain" : "Person",
   "countRelation" : 1,
@@ -7644,7 +7644,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/cmykCoordinateMagenta",
-  "keywords" : [ "magenta", "coordinate", "in", "the", "CMYK", "space" ],
+  "keywords" : [ "magenta", "coordinate", "in", "the", "CMYK", "space", "cmyk" ],
   "range" : "XMLSchema#integer",
   "domain" : "Colour",
   "countRelation" : 7,
@@ -7658,7 +7658,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/maxTime",
-  "keywords" : [ "maximum", "preparation", "time" ],
+  "keywords" : [ "maximum", "preparation", "time", "max" ],
   "range" : "XMLSchema#double",
   "domain" : "Food",
   "countRelation" : 7,
@@ -7686,7 +7686,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/bSide",
-  "keywords" : [ "b", "side" ],
+  "keywords" : [ "b", "side", "b-side" ],
   "range" : "XMLSchema#string",
   "domain" : "Single",
   "countRelation" : 3,
@@ -7735,14 +7735,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/guest",
-  "keywords" : [ "guest" ],
+  "keywords" : [ "guest", "star", "feature", "appear" ],
   "range" : "Person",
   "domain" : "TelevisionEpisode",
   "countRelation" : 2,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/dorlandsSuffix",
-  "keywords" : [ "Dorlands", "suffix" ],
+  "keywords" : [ "Dorlands", "suffix", "dorland" ],
   "range" : "XMLSchema#string",
   "domain" : "AnatomicalStructure",
   "countRelation" : 5,
@@ -7791,7 +7791,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/topFloorHeight",
-  "keywords" : [ "tor", "floor", "height" ],
+  "keywords" : [ "tor", "floor", "height", "top" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Skyscraper",
   "countRelation" : 5,
@@ -7826,7 +7826,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/structuralSystem",
-  "keywords" : [ "structural", "system" ],
+  "keywords" : [ "structural", "system", "make" ],
   "range" : "",
   "domain" : "Building",
   "countRelation" : 2,
@@ -7840,7 +7840,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/tradeMark",
-  "keywords" : [ "TradeMark" ],
+  "keywords" : [ "TradeMark", "trade", "mark" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -7896,7 +7896,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/commandStructure",
-  "keywords" : [ "command", "structure" ],
+  "keywords" : [ "command", "structure", "part", "subordinate" ],
   "range" : "MilitaryUnit",
   "domain" : "MilitaryUnit",
   "countRelation" : 1,
@@ -7973,28 +7973,28 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/affiliation",
-  "keywords" : [ "affiliation" ],
+  "keywords" : [ "affiliation", "affiliate", "with", "affiliate" ],
   "range" : "Organisation",
   "domain" : "Organisation",
   "countRelation" : 3,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/codeNationalMonument",
-  "keywords" : [ "monument", "code" ],
+  "keywords" : [ "monument", "code", "national" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/believers",
-  "keywords" : [ "Believers" ],
+  "keywords" : [ "Believers", "believer" ],
   "range" : "XMLSchema#string",
   "domain" : "ChristianDoctrine",
   "countRelation" : 4,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/victoryPercentageAsMgr",
-  "keywords" : [ "victory", "percentage", "as", "manager" ],
+  "keywords" : [ "victory", "percentage", "as", "manager", "mgr" ],
   "range" : "XMLSchema#double",
   "domain" : "Person",
   "countRelation" : 6,
@@ -8008,14 +8008,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/distanceToLondon",
-  "keywords" : [ "distance", "to", "London" ],
+  "keywords" : [ "distance", "to", "London", "london" ],
   "range" : "XMLSchema#double",
   "domain" : "Settlement",
   "countRelation" : 12,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/landtagMandate",
-  "keywords" : [ "austrian", "land", "tag", "mandate" ],
+  "keywords" : [ "austrian", "land", "tag", "mandate", "landtag" ],
   "range" : "XMLSchema#string",
   "domain" : "AdministrativeRegion",
   "countRelation" : 2,
@@ -8043,28 +8043,28 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/date",
-  "keywords" : [ "date" ],
+  "keywords" : [ "date", "take", "place" ],
   "range" : "XMLSchema#date",
   "domain" : "",
   "countRelation" : 23,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/postalCode",
-  "keywords" : [ "postal", "code" ],
+  "keywords" : [ "postal", "code", "post" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/squadNumber",
-  "keywords" : [ "squad", "number" ],
+  "keywords" : [ "squad", "number", "shirt" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "SportsTeamMember",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/otherFamilyBranch",
-  "keywords" : [ "other", "branch" ],
+  "keywords" : [ "other", "branch", "family" ],
   "range" : "Family",
   "domain" : "NobleFamily",
   "countRelation" : 2,
@@ -8141,7 +8141,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/victoryAsMgr",
-  "keywords" : [ "victory", "as", "manager" ],
+  "keywords" : [ "victory", "as", "manager", "mgr" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Person",
   "countRelation" : 26,
@@ -8176,7 +8176,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/iftaAward",
-  "keywords" : [ "IFTA", "Award" ],
+  "keywords" : [ "IFTA", "Award", "ifta", "award" ],
   "range" : "Award",
   "domain" : "Actor",
   "countRelation" : 9,
@@ -8211,7 +8211,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/employersCelebration",
-  "keywords" : [ "employer's", "celebration" ],
+  "keywords" : [ "employer's", "celebration", "employer" ],
   "range" : "XMLSchema#string",
   "domain" : "Settlement",
   "countRelation" : 13,
@@ -8246,14 +8246,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/product",
-  "keywords" : [ "product" ],
+  "keywords" : [ "product", "produce", "develop", "create" ],
   "range" : "",
   "domain" : "Organisation",
   "countRelation" : 3,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/tonyAward",
-  "keywords" : [ "Tony", "Award" ],
+  "keywords" : [ "Tony", "Award", "tony", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -8281,7 +8281,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/v_hb",
-  "keywords" : [ "V_hb" ],
+  "keywords" : [ "V_hb", "v_hb" ],
   "range" : "XMLSchema#integer",
   "domain" : "Globularswarm",
   "countRelation" : 2,
@@ -8295,7 +8295,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/dutchWinkelID",
-  "keywords" : [ "Dutch", "PPN", "code" ],
+  "keywords" : [ "Dutch", "PPN", "code", "dutch", "winkel" ],
   "range" : "XMLSchema#string",
   "domain" : "UndergroundJournal",
   "countRelation" : 1,
@@ -8372,14 +8372,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/minimumElevation",
-  "keywords" : [ "minimum", "elevation" ],
+  "keywords" : [ "minimum", "elevation", "altitude" ],
   "range" : "XMLSchema#double",
   "domain" : "Place",
   "countRelation" : 15,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/dutchCOROPCode",
-  "keywords" : [ "Dutch", "COROP", "code" ],
+  "keywords" : [ "Dutch", "COROP", "code", "dutch" ],
   "range" : "XMLSchema#string",
   "domain" : "Region",
   "countRelation" : 1,
@@ -8407,7 +8407,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/jstor",
-  "keywords" : [ "JSTOR" ],
+  "keywords" : [ "JSTOR", "jstor" ],
   "range" : "XMLSchema#string",
   "domain" : "AcademicJournal",
   "countRelation" : 1,
@@ -8442,7 +8442,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/codeListOfHonour",
-  "keywords" : [ "code", "on", "List", "of", "Honour" ],
+  "keywords" : [ "code", "on", "List", "of", "Honour", "list", "honour" ],
   "range" : "XMLSchema#string",
   "domain" : "MemberResistanceMovement",
   "countRelation" : 3,
@@ -8456,14 +8456,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/refgeo",
-  "keywords" : [ "reference", "for", "geographic", "data" ],
+  "keywords" : [ "reference", "for", "geographic", "data", "refgeo" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/birthYear",
-  "keywords" : [ "birth", "year" ],
+  "keywords" : [ "birth", "year", "bear" ],
   "range" : "XMLSchema#gYear",
   "domain" : "Person",
   "countRelation" : 6,
@@ -8491,7 +8491,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/hasVariant",
-  "keywords" : [ "variant", "or", "variation" ],
+  "keywords" : [ "variant", "or", "variation", "have" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -8505,7 +8505,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/subMunicipalityType",
-  "keywords" : [ "type", "of", "municipality" ],
+  "keywords" : [ "type", "of", "municipality", "sub" ],
   "range" : "XMLSchema#string",
   "domain" : "SubMunicipality",
   "countRelation" : 1,
@@ -8526,7 +8526,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/climbUpNumber",
-  "keywords" : [ "clip", "up", "number" ],
+  "keywords" : [ "clip", "up", "number", "climb" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Place",
   "countRelation" : 19,
@@ -8561,7 +8561,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/distanceToDouglas",
-  "keywords" : [ "distance", "to", "Douglas" ],
+  "keywords" : [ "distance", "to", "Douglas", "dougla" ],
   "range" : "XMLSchema#double",
   "domain" : "Settlement",
   "countRelation" : 12,
@@ -8596,7 +8596,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/refgen",
-  "keywords" : [ "reference", "for", "general", "data" ],
+  "keywords" : [ "reference", "for", "general", "data", "refgen" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -8750,7 +8750,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/americanComedyAward",
-  "keywords" : [ "American", "Comedy", "Award" ],
+  "keywords" : [ "American", "Comedy", "Award", "american", "comedy", "award" ],
   "range" : "Award",
   "domain" : "Comedian",
   "countRelation" : 4,
@@ -8841,7 +8841,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/orthologousGene",
-  "keywords" : [ "Orthologous", "Gene" ],
+  "keywords" : [ "Orthologous", "Gene", "orthologous", "gene" ],
   "range" : "Gene",
   "domain" : "Gene",
   "countRelation" : 1,
@@ -8883,14 +8883,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/subTribus",
-  "keywords" : [ "subtribus" ],
+  "keywords" : [ "subtribus", "sub", "tribus" ],
   "range" : "Species",
   "domain" : "Species",
   "countRelation" : 6,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/languageFamily",
-  "keywords" : [ "family" ],
+  "keywords" : [ "family", "belong", "language" ],
   "range" : "",
   "domain" : "Language",
   "countRelation" : 2,
@@ -8918,7 +8918,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/causalties",
-  "keywords" : [ "causalties" ],
+  "keywords" : [ "causalties", "casualty" ],
   "range" : "XMLSchema#string",
   "domain" : "MilitaryConflict",
   "countRelation" : 4,
@@ -8960,7 +8960,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/stateOfOrigin",
-  "keywords" : [ "state", "of", "origin" ],
+  "keywords" : [ "state", "of", "origin", "come", "from", "bear" ],
   "range" : "Country",
   "domain" : "Person",
   "countRelation" : 2,
@@ -9044,7 +9044,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/cultivatedVariety",
-  "keywords" : [ "cultivar" ],
+  "keywords" : [ "cultivar", "cultivate", "variety" ],
   "range" : "CultivatedVariety",
   "domain" : "Plant",
   "countRelation" : 1,
@@ -9072,7 +9072,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/owningCompany",
-  "keywords" : [ "owning", "company" ],
+  "keywords" : [ "owning", "company", "subsidiary", "own", "daughter", "parent" ],
   "range" : "Company",
   "domain" : "",
   "countRelation" : 2,
@@ -9100,14 +9100,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/activeYearsEndYearMgr",
-  "keywords" : [ "active", "years", "end", "year", "manager" ],
+  "keywords" : [ "active", "years", "end", "year", "manager", "mgr" ],
   "range" : "XMLSchema#gYear",
   "domain" : "Person",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/screenActorsGuildAward",
-  "keywords" : [ "Screen", "Actors", "Guild", "Award" ],
+  "keywords" : [ "Screen", "Actors", "Guild", "Award", "screen", "actor", "guild", "award" ],
   "range" : "Award",
   "domain" : "Actor",
   "countRelation" : 9,
@@ -9128,7 +9128,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerLeaguePromoted",
-  "keywords" : [ "promoted" ],
+  "keywords" : [ "promoted", "soccer", "league" ],
   "range" : "SportsTeam",
   "domain" : "SoccerLeagueSeason",
   "countRelation" : 3,
@@ -9142,7 +9142,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/title",
-  "keywords" : [ "title" ],
+  "keywords" : [ "title", "know" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -9163,14 +9163,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/fileSize",
-  "keywords" : [ "size" ],
+  "keywords" : [ "size", "file" ],
   "range" : "XMLSchema#double",
   "domain" : "Work",
   "countRelation" : 2,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/riverBranchOf",
-  "keywords" : [ "branch", "of" ],
+  "keywords" : [ "branch", "of", "river" ],
   "range" : "River",
   "domain" : "River",
   "countRelation" : 4,
@@ -9191,7 +9191,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/foundedBy",
-  "keywords" : [ "founded", "by" ],
+  "keywords" : [ "founded", "by", "establish", "founder", "find" ],
   "range" : "Agent",
   "domain" : "",
   "countRelation" : 6,
@@ -9247,7 +9247,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/percentageLiteracyWomen",
-  "keywords" : [ "percentage", "of", "a", "place's", "female", "population", "that", "is", "literate,", "degree", "of", "analphabetism" ],
+  "keywords" : [ "percentage", "of", "a", "place's", "female", "population", "that", "is", "literate,", "degree", "of", "analphabetism", "literacy", "woman" ],
   "range" : "XMLSchema#float",
   "domain" : "PopulatedPlace",
   "countRelation" : 7,
@@ -9268,7 +9268,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/activeYearsStartYearMgr",
-  "keywords" : [ "active", "years", "start", "year", "manager" ],
+  "keywords" : [ "active", "years", "start", "year", "manager", "mgr" ],
   "range" : "XMLSchema#gYear",
   "domain" : "Person",
   "countRelation" : 6,
@@ -9310,7 +9310,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/height",
-  "keywords" : [ "height" ],
+  "keywords" : [ "height", "tall", "high" ],
   "range" : "XMLSchema#double",
   "domain" : "",
   "countRelation" : 34,
@@ -9331,7 +9331,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/actScore",
-  "keywords" : [ "ACT", "score" ],
+  "keywords" : [ "ACT", "score", "act" ],
   "range" : "",
   "domain" : "School",
   "countRelation" : 14,
@@ -9352,7 +9352,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerTournamentOpeningSeason",
-  "keywords" : [ "opening", "season" ],
+  "keywords" : [ "opening", "season", "soccer", "tournament" ],
   "range" : "SoccerTournament",
   "domain" : "SoccerTournament",
   "countRelation" : 3,
@@ -9401,7 +9401,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageRevisionLink",
-  "keywords" : [ "Link", "to", "the", "Wikipage", "revision", "URL" ],
+  "keywords" : [ "Link", "to", "the", "Wikipage", "revision", "URL", "wiki", "page", "link" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -9414,22 +9414,15 @@
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
-  "label" : null,
-  "keywords" : null,
-  "range" : "XMLSchema#string",
-  "domain" : "",
-  "countRelation" : 113,
-  "propertyType" : "data"
-}, {
   "label" : "http://dbpedia.org/ontology/locationName",
-  "keywords" : [ "locationName" ],
+  "keywords" : [ "locationName", "location", "name" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/class",
-  "keywords" : [ "class" ],
+  "keywords" : [ "class", "contain", "member", "belong" ],
   "range" : "",
   "domain" : "MeanOfTransportation",
   "countRelation" : 6,
@@ -9471,7 +9464,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/terytCode",
-  "keywords" : [ "TERYT", "code" ],
+  "keywords" : [ "TERYT", "code", "teryt" ],
   "range" : "",
   "domain" : "PopulatedPlace",
   "countRelation" : 8,
@@ -9492,7 +9485,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/flagLink",
-  "keywords" : [ "flag", "Link" ],
+  "keywords" : [ "flag", "Link", "link" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -9534,7 +9527,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/stockExchange",
-  "keywords" : [ "Registered", "at", "Stock", "Exchange" ],
+  "keywords" : [ "Registered", "at", "Stock", "Exchange", "stock", "exchange" ],
   "range" : "XMLSchema#string",
   "domain" : "Company",
   "countRelation" : 3,
@@ -9660,14 +9653,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/galicianSpeakersPercentage",
-  "keywords" : [ "galicianSpeakersPercentage" ],
+  "keywords" : [ "galicianSpeakersPercentage", "galician", "speaker", "percentage" ],
   "range" : "XMLSchema#string",
   "domain" : "Language",
   "countRelation" : 5,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/maximumElevation",
-  "keywords" : [ "maximum", "elevation" ],
+  "keywords" : [ "maximum", "elevation", "altitude", "rise" ],
   "range" : "XMLSchema#double",
   "domain" : "Place",
   "countRelation" : 15,
@@ -9688,7 +9681,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerTournamentTopScorer",
-  "keywords" : [ "top", "scorer" ],
+  "keywords" : [ "top", "scorer", "soccer", "tournament" ],
   "range" : "SoccerPlayer",
   "domain" : "SoccerTournament",
   "countRelation" : 1,
@@ -9737,7 +9730,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/board",
-  "keywords" : [ "board" ],
+  "keywords" : [ "board", "member" ],
   "range" : "",
   "domain" : "Person",
   "countRelation" : 27,
@@ -9758,21 +9751,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/riverBranch",
-  "keywords" : [ "branch" ],
+  "keywords" : [ "branch", "river" ],
   "range" : "River",
   "domain" : "River",
   "countRelation" : 4,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/freeLabel",
-  "keywords" : [ "freeLabel" ],
+  "keywords" : [ "freeLabel", "free", "label" ],
   "range" : "XMLSchema#string",
   "domain" : "FictionalCharacter",
   "countRelation" : 11,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/gaudiAward",
-  "keywords" : [ "Gaudí", "Award" ],
+  "keywords" : [ "Gaudí", "Award", "gaudus", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -9807,7 +9800,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/channel",
-  "keywords" : [ "channel" ],
+  "keywords" : [ "channel", "air" ],
   "range" : "Broadcaster",
   "domain" : "",
   "countRelation" : 1,
@@ -9884,7 +9877,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/officialSchoolColour",
-  "keywords" : [ "official", "school", "colour" ],
+  "keywords" : [ "official", "school", "colour", "color" ],
   "range" : "XMLSchema#string",
   "domain" : "EducationalInstitution",
   "countRelation" : 1,
@@ -9912,7 +9905,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/musicalBand",
-  "keywords" : [ "musical", "band" ],
+  "keywords" : [ "musical", "band", "write", "record" ],
   "range" : "Band",
   "domain" : "Single",
   "countRelation" : 1,
@@ -9940,7 +9933,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/phylum",
-  "keywords" : [ "phylum" ],
+  "keywords" : [ "phylum", "contain", "member", "belong" ],
   "range" : "",
   "domain" : "Species",
   "countRelation" : 13,
@@ -9989,7 +9982,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/rgbCoordinateBlue",
-  "keywords" : [ "bluecoordinate", "in", "the", "RGB", "space" ],
+  "keywords" : [ "bluecoordinate", "in", "the", "RGB", "space", "rgb", "coordinate", "blue" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Colour",
   "countRelation" : 3,
@@ -10101,14 +10094,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageOutDegree",
-  "keywords" : [ "Wiki", "page", "out", "degree" ],
+  "keywords" : [ "Wiki", "page", "out", "degree", "wiki" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "",
   "countRelation" : 23,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/militaryBranch",
-  "keywords" : [ "military", "branch" ],
+  "keywords" : [ "military", "branch", "serve" ],
   "range" : "MilitaryUnit",
   "domain" : "MilitaryPerson",
   "countRelation" : 2,
@@ -10122,7 +10115,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/academyAward",
-  "keywords" : [ "Academy", "Award" ],
+  "keywords" : [ "Academy", "Award", "academy", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -10164,7 +10157,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/lcc",
-  "keywords" : [ "LCC" ],
+  "keywords" : [ "LCC", "lcc", "classification" ],
   "range" : "XMLSchema#string",
   "domain" : "WrittenWork",
   "countRelation" : 6,
@@ -10185,7 +10178,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/artPatron",
-  "keywords" : [ "patron" ],
+  "keywords" : [ "patron", "art" ],
   "range" : "Artist",
   "domain" : "Agent",
   "countRelation" : 1,
@@ -10227,7 +10220,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nationalOlympicCommittee",
-  "keywords" : [ "National", "Olympic", "Committee" ],
+  "keywords" : [ "National", "Olympic", "Committee", "national", "olympic", "committee" ],
   "range" : "",
   "domain" : "OlympicResult",
   "countRelation" : 1,
@@ -10248,7 +10241,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/omim",
-  "keywords" : [ "OMIM", "id" ],
+  "keywords" : [ "OMIM", "id", "omim" ],
   "range" : "XMLSchema#integer",
   "domain" : "Biomolecule",
   "countRelation" : 1,
@@ -10276,7 +10269,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/SpaceMission/stationEvaDuration",
-  "keywords" : [ "station", "EVA", "duration" ],
+  "keywords" : [ "station", "EVA", "duration", "eva" ],
   "range" : "hour",
   "domain" : "SpaceMission",
   "countRelation" : 6,
@@ -10304,21 +10297,21 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/manager",
-  "keywords" : [ "manager" ],
+  "keywords" : [ "manager", "manage" ],
   "range" : "Person",
   "domain" : "SportsTeam",
   "countRelation" : 4,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/commander",
-  "keywords" : [ "commander" ],
+  "keywords" : [ "commander", "command", "during", "leader" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/influencedBy",
-  "keywords" : [ "influenced", "by" ],
+  "keywords" : [ "influenced", "by", "influence" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -10346,7 +10339,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/icaoAirlineCode",
-  "keywords" : [ "ICAO", "code" ],
+  "keywords" : [ "ICAO", "code", "icao", "airline" ],
   "range" : "XMLSchema#string",
   "domain" : "Airline",
   "countRelation" : 2,
@@ -10374,7 +10367,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/locationCity",
-  "keywords" : [ "location", "city" ],
+  "keywords" : [ "location", "city", "located" ],
   "range" : "City",
   "domain" : "Organisation",
   "countRelation" : 2,
@@ -10416,21 +10409,21 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/designer",
-  "keywords" : [ "designer" ],
+  "keywords" : [ "designer", "design", "create", "develop" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/northWestPlace",
-  "keywords" : [ "north-west", "place" ],
+  "keywords" : [ "north-west", "place", "north", "west" ],
   "range" : "Place",
   "domain" : "Place",
   "countRelation" : 20,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/alpsGroup",
-  "keywords" : [ "Alps", "group" ],
+  "keywords" : [ "Alps", "group", "alp" ],
   "range" : "MountainRange",
   "domain" : "Mountain",
   "countRelation" : 8,
@@ -10479,7 +10472,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/meltingPoint",
-  "keywords" : [ "melting", "point" ],
+  "keywords" : [ "melting", "point", "melt" ],
   "range" : "XMLSchema#double",
   "domain" : "",
   "countRelation" : 34,
@@ -10514,7 +10507,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/raceHorse",
-  "keywords" : [ "race", "horse" ],
+  "keywords" : [ "race", "horse", "ride" ],
   "range" : "RaceHorse",
   "domain" : "",
   "countRelation" : 1,
@@ -10535,7 +10528,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/owner",
-  "keywords" : [ "owner" ],
+  "keywords" : [ "owner", "own" ],
   "range" : "Agent",
   "domain" : "",
   "countRelation" : 6,
@@ -10549,21 +10542,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/eloRecord",
-  "keywords" : [ "maximum", "ELO", "rating" ],
+  "keywords" : [ "maximum", "ELO", "rating", "elo", "record" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "ChessPlayer",
   "countRelation" : 2,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nationalTournament",
-  "keywords" : [ "continental", "tournament" ],
+  "keywords" : [ "continental", "tournament", "national" ],
   "range" : "Tournament",
   "domain" : "Person",
   "countRelation" : 4,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/dateUse",
-  "keywords" : [ "date", "use" ],
+  "keywords" : [ "date", "use", "open" ],
   "range" : "XMLSchema#date",
   "domain" : "Canal",
   "countRelation" : 6,
@@ -10584,7 +10577,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/computingMedia",
-  "keywords" : [ "Computing", "Media" ],
+  "keywords" : [ "Computing", "Media", "computing", "media", "release" ],
   "range" : "",
   "domain" : "Software",
   "countRelation" : 7,
@@ -10619,21 +10612,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/uciCode",
-  "keywords" : [ "UCI", "code" ],
+  "keywords" : [ "UCI", "code", "uci" ],
   "range" : "XMLSchema#string",
   "domain" : "CyclingTeam",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/monarch",
-  "keywords" : [ "monarch" ],
+  "keywords" : [ "monarch", "king" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/satScore",
-  "keywords" : [ "SAT", "score" ],
+  "keywords" : [ "SAT", "score", "sit" ],
   "range" : "",
   "domain" : "School",
   "countRelation" : 14,
@@ -10675,7 +10668,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/hgncid",
-  "keywords" : [ "HGNCid" ],
+  "keywords" : [ "HGNCid", "hgncid" ],
   "range" : "XMLSchema#string",
   "domain" : "Biomolecule",
   "countRelation" : 9,
@@ -10696,7 +10689,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/city",
-  "keywords" : [ "city" ],
+  "keywords" : [ "city", "located" ],
   "range" : "City",
   "domain" : "",
   "countRelation" : 2,
@@ -10717,7 +10710,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/editing",
-  "keywords" : [ "editing" ],
+  "keywords" : [ "editing", "edit" ],
   "range" : "Person",
   "domain" : "Film",
   "countRelation" : 7,
@@ -10752,21 +10745,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/rgbCoordinateGreen",
-  "keywords" : [ "green", "coordinate", "in", "the", "RGB", "space" ],
+  "keywords" : [ "green", "coordinate", "in", "the", "RGB", "space", "rgb" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Colour",
   "countRelation" : 3,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/releaseDate",
-  "keywords" : [ "release", "date" ],
+  "keywords" : [ "release", "date", "come", "out", "release" ],
   "range" : "XMLSchema#date",
   "domain" : "",
   "countRelation" : 23,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/diseasesDb",
-  "keywords" : [ "diseasesDb" ],
+  "keywords" : [ "diseasesDb", "disease" ],
   "range" : "XMLSchema#string",
   "domain" : "Disease",
   "countRelation" : 8,
@@ -10780,7 +10773,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/populationPctChildren",
-  "keywords" : [ "population", "percentage", "under", "12", "years" ],
+  "keywords" : [ "population", "percentage", "under", "12", "years", "pct", "child" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "PopulatedPlace",
   "countRelation" : 18,
@@ -10794,7 +10787,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/boilingPoint",
-  "keywords" : [ "boiling", "point" ],
+  "keywords" : [ "boiling", "point", "boil" ],
   "range" : "XMLSchema#double",
   "domain" : "ChemicalSubstance",
   "countRelation" : 1,
@@ -10962,7 +10955,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/spouse",
-  "keywords" : [ "spouse" ],
+  "keywords" : [ "spouse", "marry", "wife", "husband" ],
   "range" : "Person",
   "domain" : "Person",
   "countRelation" : 20,
@@ -11004,7 +10997,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/rankingsSingles",
-  "keywords" : [ "single", "rankings" ],
+  "keywords" : [ "single", "rankings", "singles" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "TennisPlayer",
   "countRelation" : 3,
@@ -11116,7 +11109,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/hasAbsorbedMunicipality",
-  "keywords" : [ "the", "previous", "municipality", "from", "which", "this", "one", "has", "been", "created", "or", "enlarged" ],
+  "keywords" : [ "the", "previous", "municipality", "from", "which", "this", "one", "has", "been", "created", "or", "enlarged", "absorb" ],
   "range" : "FormerMunicipality",
   "domain" : "Municipality",
   "countRelation" : 1,
@@ -11172,7 +11165,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/cosparId",
-  "keywords" : [ "COSPAR", "id" ],
+  "keywords" : [ "COSPAR", "id", "cospar" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -11193,7 +11186,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/amsterdamCode",
-  "keywords" : [ "Amsterdam", "Code" ],
+  "keywords" : [ "Amsterdam", "Code", "amsterdam", "code" ],
   "range" : "XMLSchema#string",
   "domain" : "Municipality",
   "countRelation" : 4,
@@ -11284,7 +11277,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/geneReviewsId",
-  "keywords" : [ "geneReviewsId" ],
+  "keywords" : [ "geneReviewsId", "gene", "review" ],
   "range" : "XMLSchema#string",
   "domain" : "Disease",
   "countRelation" : 8,
@@ -11298,7 +11291,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/riverMouth",
-  "keywords" : [ "river", "mouth" ],
+  "keywords" : [ "river", "mouth", "run", "into", "flow" ],
   "range" : "BodyOfWater",
   "domain" : "River",
   "countRelation" : 1,
@@ -11312,7 +11305,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/winsAtAsia",
-  "keywords" : [ "wins", "at", "ASIA" ],
+  "keywords" : [ "wins", "at", "ASIA", "asia" ],
   "range" : "",
   "domain" : "GolfPlayer",
   "countRelation" : 19,
@@ -11347,7 +11340,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nearestCity",
-  "keywords" : [ "nearest", "city" ],
+  "keywords" : [ "nearest", "city", "close" ],
   "range" : "PopulatedPlace",
   "domain" : "Place",
   "countRelation" : 8,
@@ -11361,14 +11354,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/codeMemorial",
-  "keywords" : [ "memorial", "ID", "number" ],
+  "keywords" : [ "memorial", "ID", "number", "code" ],
   "range" : "XMLSchema#string",
   "domain" : "Memorial",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/effectiveRadiatedPower",
-  "keywords" : [ "effectiveRadiatedPower" ],
+  "keywords" : [ "effectiveRadiatedPower", "effective", "radiate", "power" ],
   "range" : "XMLSchema#double",
   "domain" : "Broadcaster",
   "countRelation" : 2,
@@ -11403,14 +11396,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/asWikiText",
-  "keywords" : [ "Contains", "a", "WikiText", "representation", "of", "this", "thing" ],
+  "keywords" : [ "Contains", "a", "WikiText", "representation", "of", "this", "thing", "wiki", "text" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/ceremonialCounty",
-  "keywords" : [ "Ceremonial", "County" ],
+  "keywords" : [ "Ceremonial", "County", "ceremonial", "county" ],
   "range" : "PopulatedPlace",
   "domain" : "PopulatedPlace",
   "countRelation" : 16,
@@ -11466,7 +11459,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/mouthMountain",
-  "keywords" : [ "mouth", "mountain" ],
+  "keywords" : [ "mouth", "mountain", "run", "into", "flow" ],
   "range" : "Mountain",
   "domain" : "River",
   "countRelation" : 2,
@@ -11494,7 +11487,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/cesarAward",
-  "keywords" : [ "Cesar", "Award" ],
+  "keywords" : [ "Cesar", "Award", "cesar", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -11739,7 +11732,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/millsCodeDutch",
-  "keywords" : [ "mill", "code", "NL" ],
+  "keywords" : [ "mill", "code", "NL", "mill", "dutch" ],
   "range" : "XMLSchema#string",
   "domain" : "Mill",
   "countRelation" : 7,
@@ -11830,7 +11823,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/humanDevelopmentIndex",
-  "keywords" : [ "Human", "Development", "Index" ],
+  "keywords" : [ "Human", "Development", "Index", "human", "development", "index" ],
   "range" : "XMLSchema#float",
   "domain" : "PopulatedPlace",
   "countRelation" : 7,
@@ -11893,7 +11886,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/division",
-  "keywords" : [ "division" ],
+  "keywords" : [ "division", "belong" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -11907,7 +11900,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/distributor",
-  "keywords" : [ "distributor" ],
+  "keywords" : [ "distributor", "distribute" ],
   "range" : "Organisation",
   "domain" : "",
   "countRelation" : 6,
@@ -11956,7 +11949,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/numberOfFederalDeputies",
-  "keywords" : [ "Number", "Of", "Federal", "Deputies" ],
+  "keywords" : [ "Number", "Of", "Federal", "Deputies", "number", "federal", "deputy" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "PopulatedPlace",
   "countRelation" : 18,
@@ -12082,7 +12075,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/grayPage",
-  "keywords" : [ "Gray", "page" ],
+  "keywords" : [ "Gray", "page", "gray" ],
   "range" : "XMLSchema#positiveInteger",
   "domain" : "AnatomicalStructure",
   "countRelation" : 2,
@@ -12096,7 +12089,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/greekName",
-  "keywords" : [ "name", "in", "ancient", "Greek" ],
+  "keywords" : [ "name", "in", "ancient", "Greek", "greek" ],
   "range" : "XMLSchema#string",
   "domain" : "AnatomicalStructure",
   "countRelation" : 5,
@@ -12152,14 +12145,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/lchfDraftTeam",
-  "keywords" : [ "lchf", "draft", "year" ],
+  "keywords" : [ "lchf", "draft", "year", "team" ],
   "range" : "HockeyTeam",
   "domain" : "IceHockeyPlayer",
   "countRelation" : 4,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/license",
-  "keywords" : [ "license" ],
+  "keywords" : [ "license", "licensed", "under" ],
   "range" : "",
   "domain" : "Work",
   "countRelation" : 1,
@@ -12194,7 +12187,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nrhpType",
-  "keywords" : [ "NRHP", "type" ],
+  "keywords" : [ "NRHP", "type", "nrhp" ],
   "range" : "",
   "domain" : "HistoricPlace",
   "countRelation" : 1,
@@ -12243,7 +12236,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/millsCodeNLWindmotoren",
-  "keywords" : [ "millsCodeNLWindmotoren" ],
+  "keywords" : [ "millsCodeNLWindmotoren", "mill", "code", "windmotoren" ],
   "range" : "XMLSchema#string",
   "domain" : "Mill",
   "countRelation" : 7,
@@ -12264,7 +12257,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerTournamentThisSeason",
-  "keywords" : [ "this", "season" ],
+  "keywords" : [ "this", "season", "soccer", "tournament" ],
   "range" : "SoccerTournament",
   "domain" : "SoccerTournament",
   "countRelation" : 3,
@@ -12334,7 +12327,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/militaryUnit",
-  "keywords" : [ "military", "unit" ],
+  "keywords" : [ "military", "unit", "serve" ],
   "range" : "MilitaryUnit",
   "domain" : "MilitaryPerson",
   "countRelation" : 2,
@@ -12369,14 +12362,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/icd1",
-  "keywords" : [ "ICD1" ],
+  "keywords" : [ "ICD1", "icd1" ],
   "range" : "XMLSchema#string",
   "domain" : "Disease",
   "countRelation" : 8,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/iataLocationIdentifier",
-  "keywords" : [ "IATA", "Location", "Identifier" ],
+  "keywords" : [ "IATA", "Location", "Identifier", "iata", "location", "identifier", "code" ],
   "range" : "XMLSchema#string",
   "domain" : "Infrastructure",
   "countRelation" : 1,
@@ -12390,14 +12383,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/genus",
-  "keywords" : [ "genus" ],
+  "keywords" : [ "genus", "member", "belong" ],
   "range" : "",
   "domain" : "Species",
   "countRelation" : 13,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/series",
-  "keywords" : [ "series" ],
+  "keywords" : [ "series", "part" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -12439,14 +12432,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/arrondissement",
-  "keywords" : [ "arrondissement" ],
+  "keywords" : [ "arrondissement", "situate", "located" ],
   "range" : "PopulatedPlace",
   "domain" : "PopulatedPlace",
   "countRelation" : 16,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/isil",
-  "keywords" : [ "International", "Standard", "Identifier", "for", "Libraries", "and", "Related", "Organizations" ],
+  "keywords" : [ "International", "Standard", "Identifier", "for", "Libraries", "and", "Related", "Organizations", "isil" ],
   "range" : "XMLSchema#string",
   "domain" : "Library",
   "countRelation" : 1,
@@ -12516,21 +12509,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/ekatteCode",
-  "keywords" : [ "EKATTE", "code" ],
+  "keywords" : [ "EKATTE", "code", "ekatte" ],
   "range" : "XMLSchema#string",
   "domain" : "PopulatedPlace",
   "countRelation" : 56,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/arielAward",
-  "keywords" : [ "Ariel", "Award" ],
+  "keywords" : [ "Ariel", "Award", "ariel", "award" ],
   "range" : "Award",
   "domain" : "Actor",
   "countRelation" : 9,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/mouthPlace",
-  "keywords" : [ "mouth", "place" ],
+  "keywords" : [ "mouth", "place", "run", "into", "flow" ],
   "range" : "PopulatedPlace",
   "domain" : "River",
   "countRelation" : 5,
@@ -12544,7 +12537,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/Software/fileSize",
-  "keywords" : [ "size" ],
+  "keywords" : [ "size", "file" ],
   "range" : "megabyte",
   "domain" : "Software",
   "countRelation" : 1,
@@ -12565,21 +12558,21 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/elevation",
-  "keywords" : [ "elevation" ],
+  "keywords" : [ "elevation", "tall", "height", "high", "rise", "stand", "altitude" ],
   "range" : "XMLSchema#double",
   "domain" : "Place",
   "countRelation" : 15,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/kingdom",
-  "keywords" : [ "kingdom" ],
+  "keywords" : [ "kingdom", "contain", "member", "belong" ],
   "range" : "",
   "domain" : "Species",
   "countRelation" : 13,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/afiAward",
-  "keywords" : [ "AFI", "Award" ],
+  "keywords" : [ "AFI", "Award", "afi", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -12635,7 +12628,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/entrezgene",
-  "keywords" : [ "EntrezGene" ],
+  "keywords" : [ "EntrezGene", "entrezgene", "Entrez", "gene" ],
   "range" : "XMLSchema#string",
   "domain" : "Biomolecule",
   "countRelation" : 9,
@@ -12649,14 +12642,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/twinTown",
-  "keywords" : [ "twin", "city" ],
+  "keywords" : [ "twin", "city", "town" ],
   "range" : "Settlement",
   "domain" : "Settlement",
   "countRelation" : 5,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/votesFor",
-  "keywords" : [ "Number", "of", "votes", "in", "favour", "of", "the", "resolution" ],
+  "keywords" : [ "Number", "of", "votes", "in", "favour", "of", "the", "resolution", "for" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "StatedResolution",
   "countRelation" : 3,
@@ -12677,14 +12670,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/rgbCoordinateRed",
-  "keywords" : [ "red", "coordinate", "in", "the", "RGB", "space" ],
+  "keywords" : [ "red", "coordinate", "in", "the", "RGB", "space", "rgb" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Colour",
   "countRelation" : 3,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/lieutenancyArea",
-  "keywords" : [ "Lieutenancy", "area" ],
+  "keywords" : [ "Lieutenancy", "area", "lieutenancy" ],
   "range" : "PopulatedPlace",
   "domain" : "PopulatedPlace",
   "countRelation" : 16,
@@ -12705,7 +12698,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/precursor",
-  "keywords" : [ "precursor" ],
+  "keywords" : [ "precursor", "develop", "from", "precede" ],
   "range" : "Embryology",
   "domain" : "AnatomicalStructure",
   "countRelation" : 1,
@@ -12719,7 +12712,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/activeYearsEndDate",
-  "keywords" : [ "active", "years", "end", "date" ],
+  "keywords" : [ "active", "years", "end", "date", "until" ],
   "range" : "XMLSchema#date",
   "domain" : "",
   "countRelation" : 23,
@@ -12775,14 +12768,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/drugbank",
-  "keywords" : [ "DrugBank" ],
+  "keywords" : [ "DrugBank", "drugbank" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/ground",
-  "keywords" : [ "ground" ],
+  "keywords" : [ "ground", "home" ],
   "range" : "Place",
   "domain" : "SoccerClub",
   "countRelation" : 1,
@@ -12831,28 +12824,28 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/geneLocation",
-  "keywords" : [ "Gene", "Location" ],
+  "keywords" : [ "Gene", "Location", "gene", "location" ],
   "range" : "GeneLocation",
   "domain" : "Gene",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/predecessor",
-  "keywords" : [ "predecessor" ],
+  "keywords" : [ "predecessor", "preceed", "successor", "succeed" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/buildingType",
-  "keywords" : [ "buildingType" ],
+  "keywords" : [ "buildingType", "building", "type" ],
   "range" : "",
   "domain" : "Building",
   "countRelation" : 2,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/codeMunicipalMonument",
-  "keywords" : [ "monument", "code" ],
+  "keywords" : [ "monument", "code", "municipal" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -12894,7 +12887,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/numberOfIsland",
-  "keywords" : [ "number", "of", "islands" ],
+  "keywords" : [ "number", "of", "islands", "island" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -12922,14 +12915,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/ceo",
-  "keywords" : [ "chief", "executive", "officer" ],
+  "keywords" : [ "chief", "executive", "officer", "ceo" ],
   "range" : "Person",
   "domain" : "Organisation",
   "countRelation" : 6,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/winsAtAus",
-  "keywords" : [ "wins", "at", "AUS" ],
+  "keywords" : [ "wins", "at", "AUS", "aus" ],
   "range" : "",
   "domain" : "GolfPlayer",
   "countRelation" : 19,
@@ -13020,7 +13013,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/visitorsPercentageChange",
-  "keywords" : [ "visitor", "percentage", "change" ],
+  "keywords" : [ "visitor", "percentage", "change", "visitor" ],
   "range" : "XMLSchema#double",
   "domain" : "ArchitecturalStructure",
   "countRelation" : 1,
@@ -13111,7 +13104,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/managerClub",
-  "keywords" : [ "manager", "club" ],
+  "keywords" : [ "manager", "club", "manage" ],
   "range" : "SportsTeam",
   "domain" : "Athlete",
   "countRelation" : 15,
@@ -13132,14 +13125,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nonFictionSubject",
-  "keywords" : [ "non-fiction", "subject" ],
+  "keywords" : [ "non-fiction", "subject", "non", "fiction" ],
   "range" : "",
   "domain" : "WrittenWork",
   "countRelation" : 3,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/silCode",
-  "keywords" : [ "SIL", "code" ],
+  "keywords" : [ "SIL", "code", "sil" ],
   "range" : "",
   "domain" : "Language",
   "countRelation" : 2,
@@ -13160,21 +13153,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/formerCallsign",
-  "keywords" : [ "former", "call", "sign" ],
+  "keywords" : [ "former", "call", "sign", "callsign" ],
   "range" : "XMLSchema#string",
   "domain" : "Broadcaster",
   "countRelation" : 12,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/numberOfStateDeputies",
-  "keywords" : [ "Number", "Of", "State", "Deputies" ],
+  "keywords" : [ "Number", "Of", "State", "Deputies", "number", "state", "deputy" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "PopulatedPlace",
   "countRelation" : 18,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/book",
-  "keywords" : [ "name" ],
+  "keywords" : [ "name", "book" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -13209,7 +13202,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/homeArena",
-  "keywords" : [ "home", "arena" ],
+  "keywords" : [ "home", "arena", "stadium" ],
   "range" : "Arena",
   "domain" : "",
   "countRelation" : 1,
@@ -13251,7 +13244,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/mayorMandate",
-  "keywords" : [ "mayorMandate" ],
+  "keywords" : [ "mayorMandate", "mayor", "mandate" ],
   "range" : "XMLSchema#string",
   "domain" : "Mayor",
   "countRelation" : 1,
@@ -13265,7 +13258,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/populationPctMen",
-  "keywords" : [ "population", "percentage", "male" ],
+  "keywords" : [ "population", "percentage", "male", "pct", "man" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "PopulatedPlace",
   "countRelation" : 18,
@@ -13342,7 +13335,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerTournamentLastChampion",
-  "keywords" : [ "last", "champion" ],
+  "keywords" : [ "last", "champion", "soccer", "tournament" ],
   "range" : "SoccerClub",
   "domain" : "SoccerTournament",
   "countRelation" : 3,
@@ -13391,7 +13384,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/uniprot",
-  "keywords" : [ "UniProt" ],
+  "keywords" : [ "UniProt", "uniprot" ],
   "range" : "XMLSchema#string",
   "domain" : "Biomolecule",
   "countRelation" : 9,
@@ -13433,7 +13426,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/approvedByLowerParliament",
-  "keywords" : [ "date", "of", "approval", "by", "lower", "parliament" ],
+  "keywords" : [ "date", "of", "approval", "by", "lower", "parliament", "approve" ],
   "range" : "XMLSchema#date",
   "domain" : "Law",
   "countRelation" : 2,
@@ -13461,14 +13454,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/patron",
-  "keywords" : [ "patron" ],
+  "keywords" : [ "patron", "saint" ],
   "range" : "Person",
   "domain" : "MilitaryUnit",
   "countRelation" : 5,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/callsignMeaning",
-  "keywords" : [ "call", "sign", "meaning" ],
+  "keywords" : [ "call", "sign", "meaning", "callsign", "stand", "for", "mean" ],
   "range" : "XMLSchema#string",
   "domain" : "Broadcaster",
   "countRelation" : 12,
@@ -13482,14 +13475,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/residence",
-  "keywords" : [ "residence" ],
+  "keywords" : [ "residence", "live", "reside" ],
   "range" : "Place",
   "domain" : "Person",
   "countRelation" : 9,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/region",
-  "keywords" : [ "region" ],
+  "keywords" : [ "region", "located" ],
   "range" : "Place",
   "domain" : "",
   "countRelation" : 3,
@@ -13510,7 +13503,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/gameModus",
-  "keywords" : [ "Modus", "the", "game", "can", "be", "played", "in" ],
+  "keywords" : [ "Modus", "the", "game", "can", "be", "played", "in", "modus" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -13531,7 +13524,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/developer",
-  "keywords" : [ "developer" ],
+  "keywords" : [ "developer", "develop" ],
   "range" : "Agent",
   "domain" : "",
   "countRelation" : 6,
@@ -13573,14 +13566,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/hometown",
-  "keywords" : [ "home", "town" ],
+  "keywords" : [ "home", "town", "hometown", "come", "from" ],
   "range" : "Settlement",
   "domain" : "Agent",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/philosophicalSchool",
-  "keywords" : [ "philosophicalSchool" ],
+  "keywords" : [ "philosophicalSchool", "philosophical", "school" ],
   "range" : "",
   "domain" : "Person",
   "countRelation" : 27,
@@ -13622,7 +13615,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/assembly",
-  "keywords" : [ "assembly" ],
+  "keywords" : [ "assembly", "assemble" ],
   "range" : "",
   "domain" : "MeanOfTransportation",
   "countRelation" : 6,
@@ -13636,7 +13629,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/icd9",
-  "keywords" : [ "ICD9" ],
+  "keywords" : [ "ICD9", "icd9" ],
   "range" : "XMLSchema#string",
   "domain" : "Disease",
   "countRelation" : 8,
@@ -13664,7 +13657,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/collectionSize",
-  "keywords" : [ "country" ],
+  "keywords" : [ "country", "collection", "size" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -13685,7 +13678,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/primate",
-  "keywords" : [ "Primite" ],
+  "keywords" : [ "Primite", "primate" ],
   "range" : "XMLSchema#string",
   "domain" : "ChristianDoctrine",
   "countRelation" : 4,
@@ -13720,7 +13713,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/oclc",
-  "keywords" : [ "OCLC" ],
+  "keywords" : [ "OCLC", "oclc", "number" ],
   "range" : "XMLSchema#string",
   "domain" : "WrittenWork",
   "countRelation" : 6,
@@ -13762,7 +13755,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/number",
-  "keywords" : [ "number" ],
+  "keywords" : [ "number", "shirt", "squad" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -13797,7 +13790,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/mainFamilyBranch",
-  "keywords" : [ "main", "branch" ],
+  "keywords" : [ "main", "branch", "family" ],
   "range" : "Family",
   "domain" : "NobleFamily",
   "countRelation" : 2,
@@ -13811,14 +13804,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageID",
-  "keywords" : [ "Wikipage", "page", "ID" ],
+  "keywords" : [ "Wikipage", "page", "ID", "wiki" ],
   "range" : "XMLSchema#integer",
   "domain" : "",
   "countRelation" : 12,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/activeYearsStartDate",
-  "keywords" : [ "active", "years", "start", "date" ],
+  "keywords" : [ "active", "years", "start", "date", "since" ],
   "range" : "XMLSchema#date",
   "domain" : "",
   "countRelation" : 23,
@@ -13902,7 +13895,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/headquarter",
-  "keywords" : [ "headquarter" ],
+  "keywords" : [ "headquarter", "base" ],
   "range" : "PopulatedPlace",
   "domain" : "Organisation",
   "countRelation" : 1,
@@ -14021,7 +14014,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/longName",
-  "keywords" : [ "longName" ],
+  "keywords" : [ "longName", "long", "name" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -14175,7 +14168,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/manufacturer",
-  "keywords" : [ "manufacturer" ],
+  "keywords" : [ "manufacturer", "produce", "manufacture" ],
   "range" : "Organisation",
   "domain" : "",
   "countRelation" : 6,
@@ -14203,14 +14196,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/state",
-  "keywords" : [ "state" ],
+  "keywords" : [ "state", "situate", "located" ],
   "range" : "PopulatedPlace",
   "domain" : "",
   "countRelation" : 12,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerLeagueRelegated",
-  "keywords" : [ "relegated", "teams" ],
+  "keywords" : [ "relegated", "teams", "soccer", "league" ],
   "range" : "SportsTeam",
   "domain" : "SoccerLeagueSeason",
   "countRelation" : 3,
@@ -14238,7 +14231,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/pseudonym",
-  "keywords" : [ "pseudonym" ],
+  "keywords" : [ "pseudonym", "call" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "Person",
   "countRelation" : 2,
@@ -14308,7 +14301,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/routeJunction",
-  "keywords" : [ "route", "junction" ],
+  "keywords" : [ "route", "junction", "intersect", "with", "cross" ],
   "range" : "RouteOfTransportation",
   "domain" : "RouteOfTransportation",
   "countRelation" : 3,
@@ -14322,7 +14315,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/rkdArtistsId",
-  "keywords" : [ "RKDartists", "id" ],
+  "keywords" : [ "RKDartists", "id", "rkd", "artist" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -14343,28 +14336,28 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/alpsMainPart",
-  "keywords" : [ "Alps", "main", "part" ],
+  "keywords" : [ "Alps", "main", "part", "alp" ],
   "range" : "MountainRange",
   "domain" : "Mountain",
   "countRelation" : 8,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/popularVote",
-  "keywords" : [ "Number", "of", "votes", "given", "to", "candidate" ],
+  "keywords" : [ "Number", "of", "votes", "given", "to", "candidate", "popular", "vote" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Election",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/northEastPlace",
-  "keywords" : [ "north-east", "place" ],
+  "keywords" : [ "north-east", "place", "north", "east" ],
   "range" : "Place",
   "domain" : "Place",
   "countRelation" : 20,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/wikidataSplitIri",
-  "keywords" : [ "Wikidata", "IRI", "slit" ],
+  "keywords" : [ "Wikidata", "IRI", "slit", "wikidata", "split", "iri" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -14378,7 +14371,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/musicalArtist",
-  "keywords" : [ "musical", "artist" ],
+  "keywords" : [ "musical", "artist", "write", "interpreter", "record" ],
   "range" : "MusicalArtist",
   "domain" : "Single",
   "countRelation" : 1,
@@ -14392,7 +14385,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nrhpReferenceNumber",
-  "keywords" : [ "NRHP", "Reference", "Number" ],
+  "keywords" : [ "NRHP", "Reference", "Number", "nrhp", "reference", "number", "National", "Register" ],
   "range" : "XMLSchema#string",
   "domain" : "HistoricPlace",
   "countRelation" : 2,
@@ -14448,14 +14441,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nndbId",
-  "keywords" : [ "NNDB", "id" ],
+  "keywords" : [ "NNDB", "id", "nndb" ],
   "range" : "XMLSchema#string",
   "domain" : "Person",
   "countRelation" : 98,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/iupacName",
-  "keywords" : [ "IUPAC", "name" ],
+  "keywords" : [ "IUPAC", "name", "iupac" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "Drug",
   "countRelation" : 1,
@@ -14490,7 +14483,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/cinematography",
-  "keywords" : [ "cinematography" ],
+  "keywords" : [ "cinematography", "cinematographer" ],
   "range" : "Person",
   "domain" : "Film",
   "countRelation" : 7,
@@ -14567,7 +14560,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/network",
-  "keywords" : [ "network" ],
+  "keywords" : [ "network", "broadcast", "air" ],
   "range" : "Broadcaster",
   "domain" : "Broadcaster",
   "countRelation" : 2,
@@ -14623,7 +14616,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/genomeDB",
-  "keywords" : [ "Genome", "DB" ],
+  "keywords" : [ "Genome", "DB", "genome" ],
   "range" : "XMLSchema#string",
   "domain" : "GeneLocation",
   "countRelation" : 1,
@@ -14651,7 +14644,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInHangulKorean",
-  "keywords" : [ "name", "in", "Hangul-written", "Korean" ],
+  "keywords" : [ "name", "in", "Hangul-written", "Korean", "hangul", "korean" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -14686,7 +14679,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/routeEndDirection",
-  "keywords" : [ "road", "end", "direction" ],
+  "keywords" : [ "road", "end", "direction", "route" ],
   "range" : "XMLSchema#string",
   "domain" : "RouteOfTransportation",
   "countRelation" : 6,
@@ -14707,7 +14700,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/foundingDate",
-  "keywords" : [ "founding", "date" ],
+  "keywords" : [ "founding", "date", "establish", "found" ],
   "range" : "XMLSchema#date",
   "domain" : "",
   "countRelation" : 23,
@@ -14763,7 +14756,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/address",
-  "keywords" : [ "address" ],
+  "keywords" : [ "address", "located" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "Place",
   "countRelation" : 2,
@@ -14784,21 +14777,21 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/mbaId",
-  "keywords" : [ "MBA", "Id" ],
+  "keywords" : [ "MBA", "Id", "mba" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/winsInEurope",
-  "keywords" : [ "wins", "in", "Europe" ],
+  "keywords" : [ "wins", "in", "Europe", "europe" ],
   "range" : "",
   "domain" : "GolfPlayer",
   "countRelation" : 19,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/iso6391Code",
-  "keywords" : [ "ISO", "639-1", "code" ],
+  "keywords" : [ "ISO", "639-1", "code", "iso6391" ],
   "range" : "XMLSchema#string",
   "domain" : "Language",
   "countRelation" : 5,
@@ -14840,14 +14833,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/refseq",
-  "keywords" : [ "RefSeq" ],
+  "keywords" : [ "RefSeq", "refseq" ],
   "range" : "XMLSchema#string",
   "domain" : "Protein",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageWikiLinkText",
-  "keywords" : [ "Text", "used", "to", "link", "from", "a", "Wikipage", "to", "another", "Wikipage" ],
+  "keywords" : [ "Text", "used", "to", "link", "from", "a", "Wikipage", "to", "another", "Wikipage", "wiki", "page", "text" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -14896,14 +14889,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/ncaaTeam",
-  "keywords" : [ "ncaa", "season" ],
+  "keywords" : [ "ncaa", "season", "team" ],
   "range" : "SportsTeam",
   "domain" : "Athlete",
   "countRelation" : 15,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/hasKMLData",
-  "keywords" : [ "Has", "KML", "data", "associated", "with", "it" ],
+  "keywords" : [ "Has", "KML", "data", "associated", "with", "it", "have" ],
   "range" : "XMLSchema#string",
   "domain" : "File",
   "countRelation" : 2,
@@ -14924,7 +14917,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/meshId",
-  "keywords" : [ "MeSH", "ID" ],
+  "keywords" : [ "MeSH", "ID", "mesh" ],
   "range" : "XMLSchema#string",
   "domain" : "Disease",
   "countRelation" : 8,
@@ -14945,7 +14938,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/individualisedGnd",
-  "keywords" : [ "individualised", "GND", "number" ],
+  "keywords" : [ "individualised", "GND", "number", "gnd" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -14973,14 +14966,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/frequency",
-  "keywords" : [ "frequency" ],
+  "keywords" : [ "frequency", "broadcast" ],
   "range" : "XMLSchema#double",
   "domain" : "",
   "countRelation" : 34,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/established",
-  "keywords" : [ "Established" ],
+  "keywords" : [ "Established", "establish" ],
   "range" : "XMLSchema#string",
   "domain" : "ChristianDoctrine",
   "countRelation" : 4,
@@ -14994,7 +14987,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nameAsOf",
-  "keywords" : [ "so", "named", "since" ],
+  "keywords" : [ "so", "named", "since", "name" ],
   "range" : "XMLSchema#gYear",
   "domain" : "",
   "countRelation" : 16,
@@ -15043,14 +15036,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/openingYear",
-  "keywords" : [ "opening", "year" ],
+  "keywords" : [ "opening", "year", "open" ],
   "range" : "XMLSchema#gYear",
   "domain" : "",
   "countRelation" : 16,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/shipDisplacement",
-  "keywords" : [ "displacement" ],
+  "keywords" : [ "displacement", "ship" ],
   "range" : "XMLSchema#double",
   "domain" : "Ship",
   "countRelation" : 3,
@@ -15064,7 +15057,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/isoCodeRegion",
-  "keywords" : [ "ISO", "region", "code" ],
+  "keywords" : [ "ISO", "region", "code", "iso" ],
   "range" : "XMLSchema#string",
   "domain" : "Settlement",
   "countRelation" : 13,
@@ -15078,7 +15071,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/associatedRocket",
-  "keywords" : [ "associated", "rocket" ],
+  "keywords" : [ "associated", "rocket", "blast", "off", "from", "launch", "take" ],
   "range" : "Rocket",
   "domain" : "LaunchPad",
   "countRelation" : 3,
@@ -15204,7 +15197,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/participatingIn",
-  "keywords" : [ "participates/participated", "in" ],
+  "keywords" : [ "participates/participated", "in", "participate" ],
   "range" : "SocietalEvent",
   "domain" : "MemberResistanceMovement",
   "countRelation" : 1,
@@ -15260,14 +15253,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/hsvCoordinateSaturation",
-  "keywords" : [ "saturation", "coordinate", "in", "the", "HSV", "colour", "space" ],
+  "keywords" : [ "saturation", "coordinate", "in", "the", "HSV", "colour", "space", "hsv" ],
   "range" : "XMLSchema#integer",
   "domain" : "Colour",
   "countRelation" : 7,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/casNumber",
-  "keywords" : [ "CAS", "number" ],
+  "keywords" : [ "CAS", "number", "ca" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -15288,7 +15281,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/atcPrefix",
-  "keywords" : [ "ATC", "prefix" ],
+  "keywords" : [ "ATC", "prefix", "atc" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -15330,7 +15323,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/regionServed",
-  "keywords" : [ "region", "served" ],
+  "keywords" : [ "region", "served", "operate" ],
   "range" : "Place",
   "domain" : "Organisation",
   "countRelation" : 1,
@@ -15365,7 +15358,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/detectionMethod",
-  "keywords" : [ "Method", "of", "discovery" ],
+  "keywords" : [ "Method", "of", "discovery", "detection", "method" ],
   "range" : "XMLSchema#string",
   "domain" : "Planet",
   "countRelation" : 3,
@@ -15379,14 +15372,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInPinyinChinese",
-  "keywords" : [ "name", "in", "Pinyin", "Chinese" ],
+  "keywords" : [ "name", "in", "Pinyin", "Chinese", "pinyin", "chinese" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/iso31661Code",
-  "keywords" : [ "ISO", "3166-1", "code" ],
+  "keywords" : [ "ISO", "3166-1", "code", "iso31661" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -15421,7 +15414,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/announcedFrom",
-  "keywords" : [ "announcedFrom" ],
+  "keywords" : [ "announcedFrom", "announce", "from" ],
   "range" : "Place",
   "domain" : "Person",
   "countRelation" : 9,
@@ -15456,14 +15449,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/perCapitaIncomeRank",
-  "keywords" : [ "per", "capital", "income", "rank" ],
+  "keywords" : [ "per", "capital", "income", "rank", "capita" ],
   "range" : "XMLSchema#string",
   "domain" : "PopulatedPlace",
   "countRelation" : 56,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/SpaceMission/cmpEvaDuration",
-  "keywords" : [ "CMP", "EVA", "duration" ],
+  "keywords" : [ "CMP", "EVA", "duration", "cmp", "eva" ],
   "range" : "hour",
   "domain" : "SpaceMission",
   "countRelation" : 6,
@@ -15484,14 +15477,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/displacement",
-  "keywords" : [ "displacement" ],
+  "keywords" : [ "displacement", "engine" ],
   "range" : "XMLSchema#double",
   "domain" : "AutomobileEngine",
   "countRelation" : 8,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/commonName",
-  "keywords" : [ "common", "name" ],
+  "keywords" : [ "common", "name", "call" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -15512,14 +15505,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/operatingSystem",
-  "keywords" : [ "operating", "system" ],
+  "keywords" : [ "operating", "system", "run", "under" ],
   "range" : "",
   "domain" : "Software",
   "countRelation" : 7,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageExtracted",
-  "keywords" : [ "extraction", "datetime" ],
+  "keywords" : [ "extraction", "datetime", "wiki", "page", "extract" ],
   "range" : "XMLSchema#dateTime",
   "domain" : "",
   "countRelation" : 2,
@@ -15561,7 +15554,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/cpu",
-  "keywords" : [ "CPU" ],
+  "keywords" : [ "CPU", "cpu" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -15603,7 +15596,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/grammyAward",
-  "keywords" : [ "Grammy", "Award" ],
+  "keywords" : [ "Grammy", "Award", "grammy", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
@@ -15631,7 +15624,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/district",
-  "keywords" : [ "district" ],
+  "keywords" : [ "district", "situate", "located" ],
   "range" : "PopulatedPlace",
   "domain" : "Place",
   "countRelation" : 8,
@@ -15694,7 +15687,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/debutTeam",
-  "keywords" : [ "debut", "team" ],
+  "keywords" : [ "debut", "team", "for" ],
   "range" : "SportsTeam",
   "domain" : "Athlete",
   "countRelation" : 15,
@@ -15715,7 +15708,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/britishOpen",
-  "keywords" : [ "britishOpen" ],
+  "keywords" : [ "britishOpen", "british", "open" ],
   "range" : "XMLSchema#string",
   "domain" : "Athlete",
   "countRelation" : 36,
@@ -15750,7 +15743,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/colorChart",
-  "keywords" : [ "colorChart" ],
+  "keywords" : [ "colorChart", "color", "chart" ],
   "range" : "XMLSchema#string",
   "domain" : "FictionalCharacter",
   "countRelation" : 11,
@@ -15785,14 +15778,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/award",
-  "keywords" : [ "award" ],
+  "keywords" : [ "award", "win", "receive", "recipient", "award" ],
   "range" : "Award",
   "domain" : "",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/iataAirlineCode",
-  "keywords" : [ "IATA", "code" ],
+  "keywords" : [ "IATA", "code", "iata", "airline" ],
   "range" : "XMLSchema#string",
   "domain" : "Airline",
   "countRelation" : 2,
@@ -15806,7 +15799,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/relativeAtomicMass",
-  "keywords" : [ "atomic", "weight" ],
+  "keywords" : [ "atomic", "weight", "relative", "mass" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "ChemicalElement",
   "countRelation" : 4,
@@ -15869,7 +15862,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageEditLink",
-  "keywords" : [ "Link", "to", "the", "Wikipage", "edit", "URL" ],
+  "keywords" : [ "Link", "to", "the", "Wikipage", "edit", "URL", "wiki", "page", "link" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -15883,14 +15876,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/soccerTournamentClosingSeason",
-  "keywords" : [ "closing", "season" ],
+  "keywords" : [ "closing", "season", "soccer", "tournament" ],
   "range" : "SoccerTournament",
   "domain" : "SoccerTournament",
   "countRelation" : 3,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageModified",
-  "keywords" : [ "Wikipage", "modification", "datetime" ],
+  "keywords" : [ "Wikipage", "modification", "datetime", "wiki", "page", "modify" ],
   "range" : "XMLSchema#dateTime",
   "domain" : "",
   "countRelation" : 2,
@@ -15911,21 +15904,21 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/inchi",
-  "keywords" : [ "The", "IUPAC", "International", "Chemical", "Identifier" ],
+  "keywords" : [ "The", "IUPAC", "International", "Chemical", "Identifier", "inchi" ],
   "range" : "XMLSchema#string",
   "domain" : "ChemicalCompound",
   "countRelation" : 3,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/requirement",
-  "keywords" : [ "requirement" ],
+  "keywords" : [ "requirement", "require" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageCharacterSize",
-  "keywords" : [ "Character", "size", "of", "wiki", "page" ],
+  "keywords" : [ "Character", "size", "of", "wiki", "page", "character" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "",
   "countRelation" : 23,
@@ -15946,7 +15939,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/initiallyUsedFor",
-  "keywords" : [ "initally", "used", "for" ],
+  "keywords" : [ "initally", "used", "for", "initially" ],
   "range" : "XMLSchema#string",
   "domain" : "ArchitecturalStructure",
   "countRelation" : 2,
@@ -15967,7 +15960,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/alpsSubsection",
-  "keywords" : [ "Alps", "subsection" ],
+  "keywords" : [ "Alps", "subsection", "alp" ],
   "range" : "MountainRange",
   "domain" : "Mountain",
   "countRelation" : 8,
@@ -15988,7 +15981,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/firstLeader",
-  "keywords" : [ "firstLeader" ],
+  "keywords" : [ "firstLeader", "first", "leader" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
@@ -16037,7 +16030,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/runtime",
-  "keywords" : [ "runtime" ],
+  "keywords" : [ "runtime", "long" ],
   "range" : "XMLSchema#double",
   "domain" : "Work",
   "countRelation" : 2,
@@ -16051,14 +16044,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/subPrefecture",
-  "keywords" : [ "subprefecture" ],
+  "keywords" : [ "subprefecture", "sub", "prefecture" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/bnfId",
-  "keywords" : [ "BNF", "Id" ],
+  "keywords" : [ "BNF", "Id", "bnf" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -16079,7 +16072,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/cmykCoordinateCyanic",
-  "keywords" : [ "cyanic", "coordinate", "in", "the", "CMYK", "space" ],
+  "keywords" : [ "cyanic", "coordinate", "in", "the", "CMYK", "space", "cmyk" ],
   "range" : "XMLSchema#integer",
   "domain" : "Colour",
   "countRelation" : 7,
@@ -16149,7 +16142,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/operator",
-  "keywords" : [ "operator" ],
+  "keywords" : [ "operator", "home" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -16191,7 +16184,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInCantoneseChinese",
-  "keywords" : [ "name", "in", "Yue", "Chinese" ],
+  "keywords" : [ "name", "in", "Yue", "Chinese", "cantonese", "chinese" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -16219,21 +16212,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/designCompany",
-  "keywords" : [ "designer", "company" ],
+  "keywords" : [ "designer", "company", "design" ],
   "range" : "Company",
   "domain" : "MeanOfTransportation",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/facultySize",
-  "keywords" : [ "faculty", "size" ],
+  "keywords" : [ "faculty", "size", "employ" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "EducationalInstitution",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/filmPolskiId",
-  "keywords" : [ "FilmPolski.pl", "id" ],
+  "keywords" : [ "FilmPolski.pl", "id", "film", "polski" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -16247,7 +16240,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/debutWork",
-  "keywords" : [ "debutWork" ],
+  "keywords" : [ "debutWork", "debut", "work" ],
   "range" : "Work",
   "domain" : "Person",
   "countRelation" : 2,
@@ -16268,7 +16261,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/origin",
-  "keywords" : [ "origin" ],
+  "keywords" : [ "origin", "make" ],
   "range" : "PopulatedPlace",
   "domain" : "",
   "countRelation" : 12,
@@ -16282,7 +16275,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/artist",
-  "keywords" : [ "performer" ],
+  "keywords" : [ "performer", "artist" ],
   "range" : "Agent",
   "domain" : "MusicalWork",
   "countRelation" : 1,
@@ -16296,7 +16289,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/naacpImageAward",
-  "keywords" : [ "NAACP", "Image", "Award" ],
+  "keywords" : [ "NAACP", "Image", "Award", "naacp", "image", "award" ],
   "range" : "Award",
   "domain" : "Actor",
   "countRelation" : 9,
@@ -16310,7 +16303,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/restingPlace",
-  "keywords" : [ "resting", "place" ],
+  "keywords" : [ "resting", "place", "bury" ],
   "range" : "Place",
   "domain" : "Person",
   "countRelation" : 9,
@@ -16324,7 +16317,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/completionDate",
-  "keywords" : [ "completion", "date" ],
+  "keywords" : [ "completion", "date", "complete" ],
   "range" : "XMLSchema#date",
   "domain" : "Work",
   "countRelation" : 1,
@@ -16380,7 +16373,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/office",
-  "keywords" : [ "office" ],
+  "keywords" : [ "office", "position" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -16394,7 +16387,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/establishment",
-  "keywords" : [ "Establishment" ],
+  "keywords" : [ "Establishment", "establishment" ],
   "range" : "XMLSchema#integer",
   "domain" : "ChristianDoctrine",
   "countRelation" : 1,
@@ -16408,7 +16401,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/associatedBand",
-  "keywords" : [ "associated", "band" ],
+  "keywords" : [ "associated", "band", "act" ],
   "range" : "Band",
   "domain" : "",
   "countRelation" : 1,
@@ -16422,7 +16415,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/sublimationPoint",
-  "keywords" : [ "sublimation", "point" ],
+  "keywords" : [ "sublimation", "point", "sublime" ],
   "range" : "XMLSchema#double",
   "domain" : "",
   "countRelation" : 34,
@@ -16436,7 +16429,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/depth",
-  "keywords" : [ "depth" ],
+  "keywords" : [ "depth", "deep" ],
   "range" : "XMLSchema#double",
   "domain" : "Place",
   "countRelation" : 15,
@@ -16492,7 +16485,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/percentageLiterate",
-  "keywords" : [ "percentage", "of", "a", "place's", "population", "that", "is", "literate,", "degree", "of", "analphabetism" ],
+  "keywords" : [ "percentage", "of", "a", "place's", "population", "that", "is", "literate,", "degree", "of", "analphabetism", "literate" ],
   "range" : "XMLSchema#float",
   "domain" : "PopulatedPlace",
   "countRelation" : 7,
@@ -16527,14 +16520,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInMindongyuChinese",
-  "keywords" : [ "name", "in", "Mindongyu", "Chinese" ],
+  "keywords" : [ "name", "in", "Mindongyu", "Chinese", "mindongyu", "chinese" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/refcul",
-  "keywords" : [ "reference", "for", "cultural", "data" ],
+  "keywords" : [ "reference", "for", "cultural", "data", "refcul" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -16555,7 +16548,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/provCode",
-  "keywords" : [ "prove", "code" ],
+  "keywords" : [ "prove", "code", "prov" ],
   "range" : "XMLSchema#string",
   "domain" : "Settlement",
   "countRelation" : 13,
@@ -16604,7 +16597,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/amgid",
-  "keywords" : [ "amgId" ],
+  "keywords" : [ "amgId", "amgid" ],
   "range" : "XMLSchema#string",
   "domain" : "Film",
   "countRelation" : 14,
@@ -16660,7 +16653,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/alpsMajorSector",
-  "keywords" : [ "Alps", "major", "sector" ],
+  "keywords" : [ "Alps", "major", "sector", "alp" ],
   "range" : "MountainRange",
   "domain" : "Mountain",
   "countRelation" : 8,
@@ -16674,7 +16667,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/ulanId",
-  "keywords" : [ "ULAN", "id" ],
+  "keywords" : [ "ULAN", "id", "ulan" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -16688,7 +16681,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/dcc",
-  "keywords" : [ "Dewey", "Decimal", "Classification" ],
+  "keywords" : [ "Dewey", "Decimal", "Classification", "dcc", "classification" ],
   "range" : "XMLSchema#string",
   "domain" : "Work",
   "countRelation" : 4,
@@ -16772,7 +16765,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/maxAbsoluteMagnitude",
-  "keywords" : [ "maximum", "absolute", "magnitude" ],
+  "keywords" : [ "maximum", "absolute", "magnitude", "max" ],
   "range" : "XMLSchema#double",
   "domain" : "CelestialBody",
   "countRelation" : 6,
@@ -16807,14 +16800,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/relative",
-  "keywords" : [ "relative" ],
+  "keywords" : [ "relative", "related" ],
   "range" : "Person",
   "domain" : "Person",
   "countRelation" : 20,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/ordination",
-  "keywords" : [ "Ordination" ],
+  "keywords" : [ "Ordination", "ordination" ],
   "range" : "XMLSchema#date",
   "domain" : "Priest",
   "countRelation" : 1,
@@ -16835,7 +16828,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/meshName",
-  "keywords" : [ "MeSH", "name" ],
+  "keywords" : [ "MeSH", "name", "mesh" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "AnatomicalStructure",
   "countRelation" : 1,
@@ -16884,7 +16877,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/album",
-  "keywords" : [ "album" ],
+  "keywords" : [ "album", "track", "song" ],
   "range" : "Album",
   "domain" : "",
   "countRelation" : 1,
@@ -16898,7 +16891,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/startWct",
-  "keywords" : [ "start", "xct" ],
+  "keywords" : [ "start", "xct", "wct" ],
   "range" : "XMLSchema#string",
   "domain" : "Person",
   "countRelation" : 98,
@@ -16919,7 +16912,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/otherFuelType",
-  "keywords" : [ "secondary/other", "fuel", "type" ],
+  "keywords" : [ "secondary/other", "fuel", "type", "other" ],
   "range" : "",
   "domain" : "PowerStation",
   "countRelation" : 2,
@@ -17024,7 +17017,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/computingInput",
-  "keywords" : [ "Computing", "input" ],
+  "keywords" : [ "Computing", "input", "computing", "use", "play", "with" ],
   "range" : "",
   "domain" : "Software",
   "countRelation" : 7,
@@ -17045,7 +17038,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/musicType",
-  "keywords" : [ "musicType" ],
+  "keywords" : [ "musicType", "music", "type" ],
   "range" : "",
   "domain" : "MusicalWork",
   "countRelation" : 1,
@@ -17059,7 +17052,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/einecsNumber",
-  "keywords" : [ "EINECS", "number" ],
+  "keywords" : [ "EINECS", "number", "einec" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -17101,7 +17094,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/codeStockExchange",
-  "keywords" : [ "code", "Stock", "Exchange" ],
+  "keywords" : [ "code", "Stock", "Exchange", "stock", "exchange" ],
   "range" : "XMLSchema#string",
   "domain" : "Company",
   "countRelation" : 3,
@@ -17143,7 +17136,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/peopleName",
-  "keywords" : [ "peopleName" ],
+  "keywords" : [ "peopleName", "people", "name" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "PopulatedPlace",
   "countRelation" : 3,
@@ -17199,21 +17192,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/picturesCommonsCategory",
-  "keywords" : [ "pictures", "Commons", "category" ],
+  "keywords" : [ "pictures", "Commons", "category", "common" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/SpaceMission/lunarEvaTime",
-  "keywords" : [ "lunar", "EVA", "time" ],
+  "keywords" : [ "lunar", "EVA", "time", "eva" ],
   "range" : "hour",
   "domain" : "SpaceMission",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/writer",
-  "keywords" : [ "writer" ],
+  "keywords" : [ "writer", "author", "write" ],
   "range" : "Person",
   "domain" : "Work",
   "countRelation" : 8,
@@ -17241,7 +17234,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/boxerStyle",
-  "keywords" : [ "boxing", "style" ],
+  "keywords" : [ "boxing", "style", "boxer" ],
   "range" : "BoxingStyle",
   "domain" : "Boxer",
   "countRelation" : 1,
@@ -17290,14 +17283,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/sourceCountry",
-  "keywords" : [ "source", "country" ],
+  "keywords" : [ "source", "country", "originate" ],
   "range" : "Country",
   "domain" : "Stream",
   "countRelation" : 1,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/colourName",
-  "keywords" : [ "colour", "name" ],
+  "keywords" : [ "colour", "name", "color" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -17318,7 +17311,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/shipLaunch",
-  "keywords" : [ "ship", "launched" ],
+  "keywords" : [ "ship", "launched", "launch" ],
   "range" : "XMLSchema#date",
   "domain" : "Ship",
   "countRelation" : 10,
@@ -17353,7 +17346,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/alpsSoiusaCode",
-  "keywords" : [ "Alps", "SOIUSA", "code" ],
+  "keywords" : [ "Alps", "SOIUSA", "code", "alp", "soiusa" ],
   "range" : "XMLSchema#string",
   "domain" : "Mountain",
   "countRelation" : 1,
@@ -17381,14 +17374,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/airportUsing",
-  "keywords" : [ "Different", "usage", "of", "an", "airport" ],
+  "keywords" : [ "Different", "usage", "of", "an", "airport", "use" ],
   "range" : "XMLSchema#string",
   "domain" : "Airport",
   "countRelation" : 6,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/agglomerationPopulationYear",
-  "keywords" : [ "agglomerationPopulationYear" ],
+  "keywords" : [ "agglomerationPopulationYear", "agglomeration", "population", "year" ],
   "range" : "XMLSchema#string",
   "domain" : "Settlement",
   "countRelation" : 13,
@@ -17409,7 +17402,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/parent",
-  "keywords" : [ "parent" ],
+  "keywords" : [ "parent", "child" ],
   "range" : "Person",
   "domain" : "Person",
   "countRelation" : 20,
@@ -17430,7 +17423,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/alpsSubgroup",
-  "keywords" : [ "Alps", "subgroup" ],
+  "keywords" : [ "Alps", "subgroup", "alp" ],
   "range" : "MountainRange",
   "domain" : "Mountain",
   "countRelation" : 8,
@@ -17549,7 +17542,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/numberOfCity",
-  "keywords" : [ "number", "of", "contries", "inside", "en", "continent" ],
+  "keywords" : [ "number", "of", "contries", "inside", "en", "continent", "city" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "Continent",
   "countRelation" : 2,
@@ -17570,7 +17563,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/foresterDistrict",
-  "keywords" : [ "foresterDistrict" ],
+  "keywords" : [ "foresterDistrict", "forester", "district" ],
   "range" : "",
   "domain" : "Place",
   "countRelation" : 6,
@@ -17591,7 +17584,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/distanceToCardiff",
-  "keywords" : [ "distance", "to", "Cardiff" ],
+  "keywords" : [ "distance", "to", "Cardiff", "cardiff" ],
   "range" : "XMLSchema#double",
   "domain" : "Settlement",
   "countRelation" : 12,
@@ -17605,7 +17598,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/deathPlace",
-  "keywords" : [ "death", "place" ],
+  "keywords" : [ "death", "place", "die" ],
   "range" : "Place",
   "domain" : "Person",
   "countRelation" : 9,
@@ -17619,7 +17612,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/humanDevelopmentIndexRankingCategory",
-  "keywords" : [ "human", "development", "index", "", "category" ],
+  "keywords" : [ "human", "development", "index", "", "category", "rank" ],
   "range" : "",
   "domain" : "PopulatedPlace",
   "countRelation" : 8,
@@ -17661,7 +17654,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/swimmingStyle",
-  "keywords" : [ "Swimming", "style" ],
+  "keywords" : [ "Swimming", "style", "swim" ],
   "range" : "XMLSchema#string",
   "domain" : "Swimmer",
   "countRelation" : 1,
@@ -17717,7 +17710,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/programmeFormat",
-  "keywords" : [ "programme", "format" ],
+  "keywords" : [ "programme", "format", "play" ],
   "range" : "",
   "domain" : "Broadcaster",
   "countRelation" : 2,
@@ -17766,7 +17759,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/numberOfMunicipalities",
-  "keywords" : [ "Number", "Of", "Municipalities" ],
+  "keywords" : [ "Number", "Of", "Municipalities", "number", "municipality" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "PopulatedPlace",
   "countRelation" : 18,
@@ -17780,7 +17773,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/stationEvaDuration",
-  "keywords" : [ "station", "EVA", "duration" ],
+  "keywords" : [ "station", "EVA", "duration", "eva" ],
   "range" : "XMLSchema#double",
   "domain" : "SpaceMission",
   "countRelation" : 9,
@@ -17822,7 +17815,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/casSupplemental",
-  "keywords" : [ "CAS", "supplemental" ],
+  "keywords" : [ "CAS", "supplemental", "ca" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -17836,14 +17829,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/goyaAward",
-  "keywords" : [ "Goya", "Award" ],
+  "keywords" : [ "Goya", "Award", "goya", "award" ],
   "range" : "Award",
   "domain" : "Artist",
   "countRelation" : 12,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInSimplifiedChinese",
-  "keywords" : [ "name", "in", "Simplified", "Chinese" ],
+  "keywords" : [ "name", "in", "Simplified", "Chinese", "simplify", "chinese" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -17864,14 +17857,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/orcidId",
-  "keywords" : [ "ORCID", "Id" ],
+  "keywords" : [ "ORCID", "Id", "orcid" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/populationPctWomen",
-  "keywords" : [ "population", "percentage", "female" ],
+  "keywords" : [ "population", "percentage", "female", "pct", "woman" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "PopulatedPlace",
   "countRelation" : 18,
@@ -17913,7 +17906,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/southWestPlace",
-  "keywords" : [ "south-west", "place" ],
+  "keywords" : [ "south-west", "place", "south", "west" ],
   "range" : "Place",
   "domain" : "Place",
   "countRelation" : 20,
@@ -17941,7 +17934,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/firstPopularVote",
-  "keywords" : [ "firstPopularVote" ],
+  "keywords" : [ "firstPopularVote", "first", "popular", "vote" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
@@ -17983,14 +17976,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/circle",
-  "keywords" : [ "region" ],
+  "keywords" : [ "region", "circle" ],
   "range" : "XMLSchema#string",
   "domain" : "PopulatedPlace",
   "countRelation" : 56,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/university",
-  "keywords" : [ "university" ],
+  "keywords" : [ "university", "study" ],
   "range" : "EducationalInstitution",
   "domain" : "Person",
   "countRelation" : 4,
@@ -18004,14 +17997,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/groundsForLiquidation",
-  "keywords" : [ "grounds", "for", "termination", "of", "activities" ],
+  "keywords" : [ "grounds", "for", "termination", "of", "activities", "liquidation" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "Company",
   "countRelation" : 2,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/memberOfParliament",
-  "keywords" : [ "Member", "of", "Parliament" ],
+  "keywords" : [ "Member", "of", "Parliament", "member", "parliament" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
@@ -18025,7 +18018,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInHanjaKorean",
-  "keywords" : [ "name", "in", "Hanja-written", "", "Korean" ],
+  "keywords" : [ "name", "in", "Hanja-written", "", "Korean", "hanja", "korean" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -18039,7 +18032,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageRevisionID",
-  "keywords" : [ "Wikipage", "revision", "ID" ],
+  "keywords" : [ "Wikipage", "revision", "ID", "wiki", "page" ],
   "range" : "XMLSchema#integer",
   "domain" : "",
   "countRelation" : 12,
@@ -18095,7 +18088,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/shipCrew",
-  "keywords" : [ "crew" ],
+  "keywords" : [ "crew", "ship" ],
   "range" : "Person",
   "domain" : "Ship",
   "countRelation" : 1,
@@ -18151,21 +18144,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/location",
-  "keywords" : [ "location" ],
+  "keywords" : [ "location", "located" ],
   "range" : "Place",
   "domain" : "",
   "countRelation" : 3,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/blazonCaption",
-  "keywords" : [ "Blazon", "caption" ],
+  "keywords" : [ "Blazon", "caption", "blazon" ],
   "range" : "XMLSchema#string",
   "domain" : "Blazon",
   "countRelation" : 1,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/cmykCoordinateBlack",
-  "keywords" : [ "black", "coordinate", "in", "the", "CMYK", "space" ],
+  "keywords" : [ "black", "coordinate", "in", "the", "CMYK", "space", "cmyk" ],
   "range" : "XMLSchema#integer",
   "domain" : "Colour",
   "countRelation" : 7,
@@ -18186,7 +18179,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/language",
-  "keywords" : [ "language" ],
+  "keywords" : [ "language", "write" ],
   "range" : "Language",
   "domain" : "",
   "countRelation" : 4,
@@ -18347,14 +18340,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/composer",
-  "keywords" : [ "composer" ],
+  "keywords" : [ "composer", "write", "compose" ],
   "range" : "Person",
   "domain" : "Work",
   "countRelation" : 8,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/width",
-  "keywords" : [ "width" ],
+  "keywords" : [ "width", "wide" ],
   "range" : "XMLSchema#double",
   "domain" : "",
   "countRelation" : 34,
@@ -18396,7 +18389,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/seatNumber",
-  "keywords" : [ "number", "of", "seats", "in", "the", "land", "parlement" ],
+  "keywords" : [ "number", "of", "seats", "in", "the", "land", "parlement", "seat" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "AdministrativeRegion",
   "countRelation" : 1,
@@ -18417,7 +18410,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/isniId",
-  "keywords" : [ "ISNI", "Id" ],
+  "keywords" : [ "ISNI", "Id", "isnus" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -18473,7 +18466,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/subGenus",
-  "keywords" : [ "subgenus" ],
+  "keywords" : [ "subgenus", "sub", "genus" ],
   "range" : "",
   "domain" : "Species",
   "countRelation" : 13,
@@ -18487,14 +18480,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/notableIdea",
-  "keywords" : [ "notableIdea" ],
+  "keywords" : [ "notableIdea", "notable", "idea" ],
   "range" : "",
   "domain" : "Person",
   "countRelation" : 27,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/showJudge",
-  "keywords" : [ "showJudge" ],
+  "keywords" : [ "showJudge", "show", "judge" ],
   "range" : "Person",
   "domain" : "TelevisionShow",
   "countRelation" : 6,
@@ -18508,7 +18501,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/departmentPosition",
-  "keywords" : [ "geolocDepartment" ],
+  "keywords" : [ "geolocDepartment", "department", "position" ],
   "range" : "XMLSchema#string",
   "domain" : "PopulatedPlace",
   "countRelation" : 56,
@@ -18599,21 +18592,21 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/laurenceOlivierAward",
-  "keywords" : [ "Laurence", "Olivier", "Award" ],
+  "keywords" : [ "Laurence", "Olivier", "Award", "laurence", "olivier", "award" ],
   "range" : "Award",
   "domain" : "Actor",
   "countRelation" : 9,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/inn",
-  "keywords" : [ "INN" ],
+  "keywords" : [ "INN", "inn" ],
   "range" : "XMLSchema#string",
   "domain" : "ChemicalCompound",
   "countRelation" : 3,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nationalFilmAward",
-  "keywords" : [ "National", "Film", "Award" ],
+  "keywords" : [ "National", "Film", "Award", "national", "film", "award" ],
   "range" : "Award",
   "domain" : "Actor",
   "countRelation" : 9,
@@ -18683,7 +18676,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/footedness",
-  "keywords" : [ "Footedness" ],
+  "keywords" : [ "Footedness", "footedness" ],
   "range" : "Person",
   "domain" : "Sport",
   "countRelation" : 1,
@@ -18697,14 +18690,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/primogenitor",
-  "keywords" : [ "primogenitor,", "first", "forebear" ],
+  "keywords" : [ "primogenitor,", "first", "forebear", "primogenitor" ],
   "range" : "Person",
   "domain" : "Family",
   "countRelation" : 4,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/icd10",
-  "keywords" : [ "ICD10" ],
+  "keywords" : [ "ICD10", "icd10" ],
   "range" : "XMLSchema#string",
   "domain" : "Disease",
   "countRelation" : 8,
@@ -18753,7 +18746,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/builder",
-  "keywords" : [ "builder" ],
+  "keywords" : [ "builder", "build" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 73,
@@ -18816,7 +18809,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/inseeCode",
-  "keywords" : [ "INSEE", "code" ],
+  "keywords" : [ "INSEE", "code", "insee" ],
   "range" : "XMLSchema#string",
   "domain" : "Settlement",
   "countRelation" : 13,
@@ -18851,21 +18844,21 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/aggregation",
-  "keywords" : [ "Aggregation" ],
+  "keywords" : [ "Aggregation", "aggregation" ],
   "range" : "XMLSchema#string",
   "domain" : "ChemicalSubstance",
   "countRelation" : 8,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/britishComedyAwards",
-  "keywords" : [ "British", "Comedy", "Awards" ],
+  "keywords" : [ "British", "Comedy", "Awards", "british", "comedy", "award" ],
   "range" : "Award",
   "domain" : "Comedian",
   "countRelation" : 4,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/penaltiesTeamB",
-  "keywords" : [ "Penalties", "Team", "B" ],
+  "keywords" : [ "Penalties", "Team", "B", "penalty", "team" ],
   "range" : "XMLSchema#string",
   "domain" : "PenaltyShootOut",
   "countRelation" : 2,
@@ -18907,7 +18900,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/routeLine",
-  "keywords" : [ "line" ],
+  "keywords" : [ "line", "route" ],
   "range" : "",
   "domain" : "RouteStop",
   "countRelation" : 2,
@@ -18984,14 +18977,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/lccnId",
-  "keywords" : [ "LCCN", "Id" ],
+  "keywords" : [ "LCCN", "Id", "lccn" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/olivierAward",
-  "keywords" : [ "Olivier", "Award" ],
+  "keywords" : [ "Olivier", "Award", "olivier", "award" ],
   "range" : "Award",
   "domain" : "Comedian",
   "countRelation" : 4,
@@ -19012,14 +19005,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/penaltiesTeamA",
-  "keywords" : [ "Penalties", "Team", "A" ],
+  "keywords" : [ "Penalties", "Team", "A", "penalty", "team" ],
   "range" : "XMLSchema#string",
   "domain" : "PenaltyShootOut",
   "countRelation" : 2,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/feastDay",
-  "keywords" : [ "feast", "day,", "holiday" ],
+  "keywords" : [ "feast", "day,", "holiday", "day" ],
   "range" : "XMLSchema#date",
   "domain" : "",
   "countRelation" : 23,
@@ -19047,14 +19040,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/secretaryGeneral",
-  "keywords" : [ "secretary" ],
+  "keywords" : [ "secretary", "general" ],
   "range" : "Person",
   "domain" : "Organisation",
   "countRelation" : 6,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/eMedicineTopic",
-  "keywords" : [ "eMedicine", "topic" ],
+  "keywords" : [ "eMedicine", "topic", "medicine" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "Disease",
   "countRelation" : 3,
@@ -19096,7 +19089,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/eTeatrId",
-  "keywords" : [ "e-teatr.pl", "id" ],
+  "keywords" : [ "e-teatr.pl", "id", "teatr" ],
   "range" : "XMLSchema#string",
   "domain" : "Film",
   "countRelation" : 14,
@@ -19110,7 +19103,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/department",
-  "keywords" : [ "department" ],
+  "keywords" : [ "department", "situate", "located" ],
   "range" : "PopulatedPlace",
   "domain" : "PopulatedPlace",
   "countRelation" : 16,
@@ -19180,7 +19173,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/formationYear",
-  "keywords" : [ "formation", "year" ],
+  "keywords" : [ "formation", "year", "establish", "form" ],
   "range" : "XMLSchema#gYear",
   "domain" : "Organisation",
   "countRelation" : 1,
@@ -19201,7 +19194,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nameInWadeGilesChinese",
-  "keywords" : [ "name", "in", "the", "Wade-Giles", "transscription", "of", "Chinese" ],
+  "keywords" : [ "name", "in", "the", "Wade-Giles", "transscription", "of", "Chinese", "wade", "gile", "chinese" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "",
   "countRelation" : 26,
@@ -19236,7 +19229,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/associateStar",
-  "keywords" : [ "associateStar" ],
+  "keywords" : [ "associateStar", "associate", "star" ],
   "range" : "Constellation",
   "domain" : "",
   "countRelation" : 1,
@@ -19250,7 +19243,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/nationalTopographicSystemMapNumber",
-  "keywords" : [ "National", "Topographic", "System", "map", "number" ],
+  "keywords" : [ "National", "Topographic", "System", "map", "number", "national", "topographic", "system" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -19271,7 +19264,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/geolocDepartment",
-  "keywords" : [ "geolocDepartment" ],
+  "keywords" : [ "geolocDepartment", "geoloc", "department" ],
   "range" : "PopulatedPlace",
   "domain" : "Settlement",
   "countRelation" : 8,
@@ -19355,7 +19348,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/child",
-  "keywords" : [ "child" ],
+  "keywords" : [ "child", "parent" ],
   "range" : "Person",
   "domain" : "Person",
   "countRelation" : 20,
@@ -19425,7 +19418,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/museumType",
-  "keywords" : [ "museumType" ],
+  "keywords" : [ "museumType", "museum", "type" ],
   "range" : "",
   "domain" : "Museum",
   "countRelation" : 1,
@@ -19460,7 +19453,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/geneReviewsName",
-  "keywords" : [ "geneReviewsName" ],
+  "keywords" : [ "geneReviewsName", "gene", "review", "name" ],
   "range" : "22-rdf-syntax-ns#langString",
   "domain" : "Disease",
   "countRelation" : 3,
@@ -19530,7 +19523,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/utcOffset",
-  "keywords" : [ "UTC", "offset" ],
+  "keywords" : [ "UTC", "offset", "utc", "time", "zone" ],
   "range" : "XMLSchema#string",
   "domain" : "Place",
   "countRelation" : 83,
@@ -19544,7 +19537,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/place",
-  "keywords" : [ "place", "of", "military", "conflict" ],
+  "keywords" : [ "place", "of", "military", "conflict", "take" ],
   "range" : "PopulatedPlace",
   "domain" : "MilitaryConflict",
   "countRelation" : 1,
@@ -19691,7 +19684,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/documentDesignation",
-  "keywords" : [ "String", "designation", "of", "the", "WrittenWork", "describing", "the", "resource" ],
+  "keywords" : [ "String", "designation", "of", "the", "WrittenWork", "describing", "the", "resource", "document" ],
   "range" : "XMLSchema#string",
   "domain" : "",
   "countRelation" : 113,
@@ -19719,7 +19712,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/endYear",
-  "keywords" : [ "start", "year" ],
+  "keywords" : [ "start", "year", "end" ],
   "range" : "XMLSchema#gYear",
   "domain" : "",
   "countRelation" : 16,
@@ -19782,14 +19775,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/activeYearsEndYear",
-  "keywords" : [ "active", "years", "end", "year" ],
+  "keywords" : [ "active", "years", "end", "year", "until" ],
   "range" : "XMLSchema#gYear",
   "domain" : "",
   "countRelation" : 16,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/mountainRange",
-  "keywords" : [ "mountain", "range" ],
+  "keywords" : [ "mountain", "range", "part" ],
   "range" : "MountainRange",
   "domain" : "Mountain",
   "countRelation" : 8,
@@ -19824,14 +19817,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/populationMetro",
-  "keywords" : [ "population", "metro" ],
+  "keywords" : [ "population", "metro", "metropolitan" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "PopulatedPlace",
   "countRelation" : 18,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/dorlandsPrefix",
-  "keywords" : [ "Dorlands", "prefix" ],
+  "keywords" : [ "Dorlands", "prefix", "dorland" ],
   "range" : "XMLSchema#string",
   "domain" : "AnatomicalStructure",
   "countRelation" : 5,
@@ -19845,14 +19838,14 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/commissioningDate",
-  "keywords" : [ "commissioning", "date" ],
+  "keywords" : [ "commissioning", "date", "commission" ],
   "range" : "XMLSchema#date",
   "domain" : "Ship",
   "countRelation" : 10,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/tempPlace",
-  "keywords" : [ "Temporary", "Placement", "in", "the", "Music", "Charts" ],
+  "keywords" : [ "Temporary", "Placement", "in", "the", "Music", "Charts", "temp", "place" ],
   "range" : "XMLSchema#string",
   "domain" : "ChartsPlacements",
   "countRelation" : 1,
@@ -19880,14 +19873,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/wikiPageInDegree",
-  "keywords" : [ "Wiki", "page", "in", "degree" ],
+  "keywords" : [ "Wiki", "page", "in", "degree", "wiki" ],
   "range" : "XMLSchema#nonNegativeInteger",
   "domain" : "",
   "countRelation" : 23,
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/eruptionYear",
-  "keywords" : [ "eruption", "date" ],
+  "keywords" : [ "eruption", "date", "year" ],
   "range" : "XMLSchema#gYear",
   "domain" : "Volcano",
   "countRelation" : 1,
@@ -19908,7 +19901,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/goldenRaspberryAward",
-  "keywords" : [ "Golden", "Raspberry", "Award" ],
+  "keywords" : [ "Golden", "Raspberry", "Award", "golden", "raspberry", "award" ],
   "range" : "Award",
   "domain" : "Actor",
   "countRelation" : 9,
@@ -19943,7 +19936,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/abbeychurchBlessing",
-  "keywords" : [ "abbey", "church", "blessing" ],
+  "keywords" : [ "abbey", "church", "blessing", "abbeychurch" ],
   "range" : "XMLSchema#string",
   "domain" : "Cleric",
   "countRelation" : 3,
@@ -19957,14 +19950,14 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/geminiAward",
-  "keywords" : [ "Gemini", "Award" ],
+  "keywords" : [ "Gemini", "Award", "geminus", "award" ],
   "range" : "Award",
   "domain" : "Actor",
   "countRelation" : 9,
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/livingPlace",
-  "keywords" : [ "livingPlace" ],
+  "keywords" : [ "livingPlace", "live", "place" ],
   "range" : "Place",
   "domain" : "Person",
   "countRelation" : 9,
@@ -20020,7 +20013,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/southEastPlace",
-  "keywords" : [ "south-east", "place" ],
+  "keywords" : [ "south-east", "place", "south", "east" ],
   "range" : "Place",
   "domain" : "Place",
   "countRelation" : 20,
@@ -20034,7 +20027,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/lastProMatch",
-  "keywords" : [ "first", "pro", "match" ],
+  "keywords" : [ "first", "pro", "match", "last" ],
   "range" : "XMLSchema#string",
   "domain" : "Athlete",
   "countRelation" : 36,
