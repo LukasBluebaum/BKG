@@ -60,24 +60,27 @@ public class SpotlightThread implements Runnable {
 		try {
 			writer = new FileWriter(model);
 			
+			int lastWrite = 0;
 			int currentLine = 0;
 			while(true) {
 				currentLine++;
+				lastWrite++;
 				List<CoreMap> article = articles.take();
 				if(article.size() == 0) break;
 				
 				getRelationsSpotlight(article);
 								
-				if(currentLine >= RelationExtraction.ARTICLESPERWRITE) {
+				if(lastWrite >= RelationExtraction.ARTICLESPERWRITE) {
 					graph.enterCriticalSection(Lock.WRITE);
 					try {
 						System.out.println("Spotlight Enter Critical. Write.");
+						System.out.println("Spotlight:" + lastWrite);
 						graph.write(writer, "TTL");
 					} finally {
 						System.out.println("Spotlight Leave Critical. Write.");
 						graph.leaveCriticalSection();
 					}
-					currentLine = 0;
+					lastWrite = 0;
 				}
 			}               
  	 			
@@ -213,7 +216,7 @@ public class SpotlightThread implements Runnable {
 									Resource subject = ResourceFactory.createResource(entity.getUri());
 									Property predicate = ResourceFactory.createProperty(r.getLabel());
 									TypeMapper mapper = TypeMapper.getInstance();
-									RDFDatatype type = mapper.getSafeTypeByName(r.getRange());
+									RDFDatatype type = mapper.getTypeByName(r.getRange());
 									RDFNode object = ResourceFactory.createTypedLiteral(data, type);
 									Statement t = ResourceFactory.createStatement(subject, predicate, object);
 									System.out.println(t);	

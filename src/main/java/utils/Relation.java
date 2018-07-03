@@ -37,7 +37,13 @@ public class Relation {
 	}
 
 	public void setRange(String range) {
+		if(range.contains("http://www.w3.org/2001/")) {
+			this.range = range;
+			
+		}else {	
+		
 		this.range = range.substring(range.lastIndexOf("/")+1, range.length());
+		}
 	}
 
 	public ArrayList<String> getKeywords() {

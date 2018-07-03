@@ -16,6 +16,9 @@ import edu.stanford.nlp.coref.data.Dictionaries;
 import edu.stanford.nlp.ie.util.RelationTriple;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
 import edu.stanford.nlp.naturalli.NaturalLogicAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
@@ -142,4 +145,14 @@ public class NLPParser {
 		}
 		return false;
 	}
+	
+	public static String getLemma(String input) {
+ 		Annotation noun = new Annotation(input);
+ 		pipeline.annotate(noun);
+ 		List<CoreMap> sentences = noun.get(SentencesAnnotation.class);
+ 		if(sentences.size() > 1) return null;
+ 		CoreMap sentence = sentences.get(0);
+ 		List<CoreLabel> token = sentence.get(TokensAnnotation.class);
+ 		return token.get(0).get(LemmaAnnotation.class);
+ 	}
 }
