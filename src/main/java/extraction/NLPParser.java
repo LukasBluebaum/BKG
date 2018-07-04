@@ -38,12 +38,6 @@ public class NLPParser {
 	
 	private static final List<String> REFERENCES = Arrays.asList("he", "his", "him", "she", "her", "it", "its");
 			
-	protected ArrayList<String> verbs;
-	
-	protected ArrayList<String> adjectives;
-	
-	protected ArrayList<String> nouns;
-		
 	static {
 		Properties props = new Properties();
 	    props.setProperty("annotators",ANNOTATORS);
@@ -64,6 +58,17 @@ public class NLPParser {
     
         return sentences;
  	}
+	
+	public boolean isNounVerb(String word) {
+		Annotation annotation = new Annotation(word);
+        pipeline.annotate(annotation);
+
+        List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
+        CoreMap sentence = sentences.get(0);
+        List<CoreLabel> tokens = sentence.get(CoreAnnotations.TokensAnnotation.class);
+        CoreLabel token = tokens.get(0);
+        return token.tag().startsWith("N") || token.tag().startsWith("V");      
+	}
 		
 	public Map<Integer, Collection<RelationTriple>> binaryRelation(List<CoreMap> sentences){
 		Map<Integer, Collection<RelationTriple>> binaryRelations = new LinkedHashMap<>();

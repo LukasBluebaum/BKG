@@ -1,15 +1,15 @@
-<http://dbpedia.org/resource/Gottfried_Wilhelm_Leibniz>
-        <http://dbpedia.org/ontology/almaMater>
-                <http://dbpedia.org/resource/Leipzig_University> ;
-        <http://dbpedia.org/ontology/birthPlace>
-                <http://dbpedia.org/resource/Leipzig> ;
-        <http://dbpedia.org/ontology/birthYear>
-                "1646"^^<XMLSchema#gYear> ;
-        <http://dbpedia.org/ontology/deathPlace>
-                <http://dbpedia.org/resource/Leipzig> ;
-        <http://ns.aksw.org/fox/ontology#stanford_livein>
-                <http://dbpedia.org/resource/Leipzig> .
-
 <http://dbpedia.org/resource/Barack_Obama>
-        <http://dbpedia.org/ontology/birthDate>
-                "1961-08-04"^^<XMLSchema#date> .
+        <http://dbpedia.org/ontology/birthPlace>
+                <http://dbpedia.org/resource/Honolulu> , <http://dbpedia.org/resource/Hawaii> ;
+        <http://dbpedia.org/ontology/birthYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/knownFor>
+                <http://dbpedia.org/resource/Illinois_Senate> .
+
+<http://dbpedia.org/resource/Illinois_Senate>
+        <http://dbpedia.org/ontology/knownFor>
+                <http://dbpedia.org/resource/Barack_Obama> .
+
+<http://dbpedia.org/resource/Harvard_Law_Review>
+        <http://dbpedia.org/ontology/vicePresident>
+                <http://dbpedia.org/resource/Barack_Obama> .

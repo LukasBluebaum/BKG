@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -155,10 +156,21 @@ public class RelationExtraction {
 			StmtIterator predicates = resource.listProperties();
 			while(predicates.hasNext()) {
 				Statement next = predicates.next();
-				if(next.getPredicate().toString().equals("http://www.w3.org/2000/01/rdf-schema#label")) {
+				if(next.getPredicate().toString().equals("http://www.w3.org/2000/01/rdf-schema#label") &&
+						!resource.toString().contains("wiki")) {
 					property.setLabel(next.getSubject().toString());
 					String temp = next.getObject().toString();
 					property.setKeys(temp.substring(0, temp.length()-3));
+					
+					ArrayList<String> keys = property.getKeywords();
+					if(keys.size() >= 2 && !PARSER.isNounVerb(keys.get(0))) {
+						String newKey = "";
+						for(String key: keys) {
+							newKey += " " + key;
+						}
+						newKey = newKey.substring(1);						
+						property.setKeywords(new ArrayList<>(Arrays.asList(newKey)));
+					}
 				} else if(next.getPredicate().toString().equals("http://www.w3.org/2000/01/rdf-schema#domain")) {
 					property.setDomain(next.getObject().toString());
 				} else if(next.getPredicate().toString().equals("http://www.w3.org/2000/01/rdf-schema#range")){
@@ -186,7 +198,7 @@ public class RelationExtraction {
 //			System.out.println(r);
 //		}
 		RelationExtraction n = new RelationExtraction();	
-		n.retrieveRelations(new File("out.txt"), "src/main/resources/model.ttl");
+		n.retrieveRelations(new File("resources/out.txt"), "src/main/resources/model.ttl");
 //		SpotlightWebservice service = new SpotlightWebservice();
 //		for(Entity e: service.getEntitiesProcessed("During his first two years in office, Obama signed many landmark bills into law. The main reforms were the Patient Protection and Affordable Care Act (often referred to as \"Obamacare\", shortened as the \"Affordable Care Act\"), the Dodd–Frank Wall Street Reform and Consumer Protection Act, and the Don't Ask, Don't Tell Repeal Act of 2010. The American Recovery and Reinvestment Act of 2009 and Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act of 2010 served as economic stimulus amidst the Great Recession. After a lengthy debate over the national debt limit, he signed the Budget Control and the American Taxpayer Relief Acts. In foreign policy, he increased U.S. troop levels in Afghanistan, reduced nuclear weapons with the United States–Russia New START treaty, and ended military involvement in the Iraq War. He ordered military involvement in Libya in opposition to Muammar Gaddafi; Gaddafi was killed by NATO-assisted forces, and he also ordered the military operation that resulted in the deaths of Osama bin Laden and suspected Yemeni Al-Qaeda operative Anwar al-Awlaki.")) {
 //			System.out.println(e);

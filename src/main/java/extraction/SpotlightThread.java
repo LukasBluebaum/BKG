@@ -150,6 +150,7 @@ public class SpotlightThread implements Runnable {
 						//System.out.println(i +": " + triple.subjectGloss() + " - " + binaryRelations.get(i) + " - " + triple.objectGloss());
 						String tripleRelation = triple.relationLemmaGloss();
 						for(Relation r: RelationExtraction.properties) {
+							
 							if( (entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && (entity2.getTypes().contains(r.getRange()) || r.getRange().equals(""))) {
 								String[] tripleR = tripleRelation.split(" ");
 								//System.out.println("Entity1: " + entity + "entity2" + entity2 + " domain & range true for " + r);
@@ -203,14 +204,15 @@ public class SpotlightThread implements Runnable {
 	        	}
 	        	if(data != null) {
 	        		for(Relation r: RelationExtraction.properties) {
-						if((entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && r.getPropertyType().equals("data")) {
+						if((entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && r.getPropertyType().equals("data") &&
+								!r.getRange().toLowerCase().contains("string")) {
 							String tripleRelation = triple.relationLemmaGloss();
 							String[] tripleR = tripleRelation.split(" ");
 							//System.out.println("Entity1: " + entity + " domain & range true for " + r);
 							for(String s: tripleR) {
 								if(r.getKeywords().contains(s)) {
 									if((data.contains("-") && !r.getRange().contains("date")) ||
-											r.getRange().contains("date") && !data.contains("-")) {
+											r.getRange().contains("date") && !data.contains("-") ) {
 										break;
 									}									
 									Resource subject = ResourceFactory.createResource(entity.getUri());

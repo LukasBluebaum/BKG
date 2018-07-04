@@ -79,7 +79,7 @@ public class BinaryTest {
 //	 		writer.close();
 	 		
 	 		
-		 	Annotation doc = new Annotation("The philosopher and mathematician Leibniz was born in Leipzig in 1646 and attended the University of Leipzig from 1661-1666");
+		 	Annotation doc = new Annotation("In 1988, Obama enrolled in Harvard Law School, where he was the first black president of the Harvard Law Review.");
 		 	
 			pipeline.annotate(doc);
 			for (CoreMap sentence : doc.get(CoreAnnotations.SentencesAnnotation.class)) {
