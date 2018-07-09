@@ -67,7 +67,6 @@ public class SpotlightThread implements Runnable {
 				lastWrite++;
 				List<CoreMap> article = articles.take();
 				if(article.size() == 0) break;
-				
 				getRelationsSpotlight(article);
 								
 				if(lastWrite >= RelationExtraction.ARTICLESPERWRITE) {
@@ -163,11 +162,11 @@ public class SpotlightThread implements Runnable {
 										//System.out.println(t);	
 										graph.enterCriticalSection(Lock.WRITE);
 										try {
-											System.out.println("Spotlight Enter Critical. Add triple.");
+											//System.out.println("Spotlight Enter Critical. Add triple.");
 											graph.add(t);	
-											graph.write(System.out, "TTL");
+											//graph.write(System.out, "TTL");
 										} finally {
-											System.out.println("Spotlight Leave Critical. Add triple.");
+											//System.out.println("Spotlight Leave Critical. Add triple.");
 											graph.leaveCriticalSection();
 										}
 									}
@@ -200,22 +199,22 @@ public class SpotlightThread implements Runnable {
 	        				int zeros = mapNumber(triple.objectLemmaGloss(), numbers[0]);
 	        				data = numbers[0];
 	        				if(data.contains(".")) {
-	        					data.replace(".", "");
+	        					data = data.replace(".", "");
 	        				}
 	        				for(int j = 0; j<zeros; j++) {
-	        				data = data + "0";
+	        					data = data + "0";
 	        				}
 	        			} 
-	        		}
-	        		
+	        		}	        		
 	        	}
 	        	if(data != null) {
+	        		//System.out.println(data);
 	        		for(Relation r: RelationExtraction.properties) {
 						if((entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && r.getPropertyType().equals("data") &&
 								!r.getRange().toLowerCase().contains("string")) {
-							String tripleRelation = triple.relationLemmaGloss();
-							String[] tripleR = tripleRelation.split(" ");
-							//System.out.println("Entity1: " + entity + " domain & range true for " + r);
+							String tripleRelation = triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
+							String[] tripleR = tripleRelation.split(" ");	
+							//System.out.println(tripleRelation);
 							for(String s: tripleR) {
 								if(r.getKeywords().contains(s)) {
 									if((data.contains("-") && !r.getRange().contains("date")) ||
@@ -231,11 +230,11 @@ public class SpotlightThread implements Runnable {
 									System.out.println(t);	
 									graph.enterCriticalSection(Lock.WRITE);
 									try {
-										System.out.println("Spotlight Enter Critical. Add triple.");
+										//System.out.println("Spotlight Enter Critical. Add triple.");
 										graph.add(t);	
-										graph.write(System.out, "TTL");
+										//graph.write(System.out, "TTL");
 									} finally {
-										System.out.println("Spotlight Leave Critical. Add triple.");
+										//System.out.println("Spotlight Leave Critical. Add triple.");
 										graph.leaveCriticalSection();
 									}
 								}
@@ -250,7 +249,7 @@ public class SpotlightThread implements Runnable {
 
 	private int mapNumber(String objectLemmaGloss, String number) {					
 		int comma = number.lastIndexOf('.') != -1 ? ( number.length()-1) - number.lastIndexOf('.') : 0;
-		if(objectLemmaGloss.contains("hundret"))
+		if(objectLemmaGloss.contains("hundred"))
 			return (2-comma);
 		if(objectLemmaGloss.contains("thousand"))	
 			return (3-comma);
@@ -260,8 +259,7 @@ public class SpotlightThread implements Runnable {
 			return (9-comma);
 		if(objectLemmaGloss.contains("trillion"))
 			return (12-comma);
-		
-		
+				
 		return 0;
 	}
 

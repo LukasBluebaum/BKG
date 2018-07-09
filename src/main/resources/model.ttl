@@ -1,10 +1,40 @@
 <http://dbpedia.org/resource/Barack_Obama>
         <http://dbpedia.org/ontology/birthPlace>
-                <http://dbpedia.org/resource/Honolulu> , <http://dbpedia.org/resource/Hawaii> ;
+                <http://dbpedia.org/resource/Hawaii> , <http://dbpedia.org/resource/Honolulu> ;
         <http://dbpedia.org/ontology/birthYear>
                 "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/closingYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/creationYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/deathYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/draftYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/endYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/foundingYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/juniorYearsEndYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/juniorYearsStartYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
         <http://dbpedia.org/ontology/knownFor>
-                <http://dbpedia.org/resource/Illinois_Senate> .
+                <http://dbpedia.org/resource/Illinois_Senate> ;
+        <http://dbpedia.org/ontology/managerYearsEndYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/managerYearsStartYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/openingYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/productionEndYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/productionStartYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/startYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/year>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> .
 
 <http://dbpedia.org/resource/Illinois_Senate>
         <http://dbpedia.org/ontology/knownFor>

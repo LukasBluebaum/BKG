@@ -34,7 +34,11 @@ public class NLPParser {
 	
 	private static final  StanfordCoreNLP PIPELINEREF;
 	
-	private static final  String ANNOTATORSREF = "tokenize,ssplit,pos,lemma,ner,parse,coref";
+	private static final  String ANNOTATORSREF = "pos,lemma,ner,parse,coref";
+	
+	private static final  StanfordCoreNLP PIPELINESENTENCES;
+	
+	private static final  String ANNOTATORSSENTENCES = "tokenize,ssplit";
 	
 	private static final List<String> REFERENCES = Arrays.asList("he", "his", "him", "she", "her", "it", "its");
 			
@@ -45,14 +49,30 @@ public class NLPParser {
 	    
 	    Properties props2 = new Properties();
 	    props2.setProperty("annotators",ANNOTATORSREF);
+	    props2.setProperty("enforceRequirements", "false");
 	    PIPELINEREF = new StanfordCoreNLP(props2);
+	    
+	    Properties props3 = new Properties();
+	    props3.setProperty("annotators",ANNOTATORSSENTENCES);
+	    PIPELINESENTENCES = new StanfordCoreNLP(props3);
 	}
 
-	public List<CoreMap> getSentences(String article) {
-        System.out.println(article);
+	public List<CoreMap> calculateRelations(String article) {
+        System.out.println(article.length());
 
         Annotation annotation = new Annotation(article);
         pipeline.annotate(annotation);
+
+        List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
+    
+        return sentences;
+ 	}
+	
+	public List<CoreMap> getSentences(String article) {
+        //System.out.println(article);
+
+        Annotation annotation = new Annotation(article);
+        PIPELINESENTENCES.annotate(annotation);
 
         List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
     
@@ -79,9 +99,10 @@ public class NLPParser {
 		return binaryRelations;    
 	}	
 	
-	public String coreferenceResolution(String article) {
+	public String coreferenceResolution(List<CoreMap> article) {
+		//Annotation document = new Annotation(article);
 		Annotation document = new Annotation(article);
-	 	System.out.println(article);
+	 	System.out.println(article.size());
 		PIPELINEREF.annotate(document);	    
 	    ArrayList<CoreMap> sentences = (ArrayList<CoreMap>) document.get(CoreAnnotations.SentencesAnnotation.class);	      
 	    Map<Integer, CorefChain> coreChain = document.get(CorefCoreAnnotations.CorefChainAnnotation.class);

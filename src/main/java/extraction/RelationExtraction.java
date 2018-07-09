@@ -45,7 +45,7 @@ public class RelationExtraction {
 	
 	protected static ArrayList<Relation> properties;
 	
-	private static final int CHARACTERLIMIT = 2000;
+	private static final int CHARACTERLIMIT = 5000;
 		
 	private static Model graph = ModelFactory.createDefaultModel() ;
 		
@@ -71,15 +71,43 @@ public class RelationExtraction {
 		    
 		    Thread fox = new Thread(foxThread);
 		//    fox.start();
-		    System.out.println("X");
 		    while((nextLine = reader.readLine()) != null) {		
-		    	if(currentLine >= STARTLINE) {
-		    		String line = nextLine.length() > CHARACTERLIMIT+1 ? nextLine.substring(0, CHARACTERLIMIT+1) : nextLine;
-		    		line = PARSER.coreferenceResolution(line);
-		    		List<CoreMap> sentences = PARSER.getSentences(line);		    		
-		    		spotlightQueue.put(sentences);
-		    		foxQueue.put(sentences);
-		    	}	
+		    	System.out.println("----");
+		    	List<CoreMap> sentences = PARSER.getSentences(nextLine);
+		    	String next = "";
+		    	List<CoreMap> next2 = new ArrayList<CoreMap>();
+		    	int currentLength = 0;
+		    	for(CoreMap sentence: sentences) {
+		    		//if(next.length() + sentence.toString().length() > CHARACTERLIMIT) {
+		    		if(currentLength + sentence.toString().length() > CHARACTERLIMIT) {
+		    			//next = PARSER.coreferenceResolution(next);
+		    			next = PARSER.coreferenceResolution(next2);
+		    			System.out.println(next);
+			    		List<CoreMap> sentencesRelations = PARSER.calculateRelations(next);
+			    		spotlightQueue.put(sentencesRelations);
+//			    		foxQueue.put(sentencesRelations);
+			    		next2 = new ArrayList<CoreMap>();
+			    		currentLength = 0;
+		    		} else {
+		    			next2.add(sentence);
+		    			currentLength += sentence.toString().length();
+		    		}
+		    	}
+		    	if(currentLength > 0) {
+		    		next = PARSER.coreferenceResolution(next2);
+	    			System.out.println(next);
+		    		List<CoreMap> sentencesRelations = PARSER.calculateRelations(next);
+		    		spotlightQueue.put(sentencesRelations);
+//		    		foxQueue.put(sentencesRelations);	    		
+		    	}
+		    	System.out.println("Done with article.");
+//		    	if(currentLine >= STARTLINE) {
+//		    		String line = nextLine.length() > CHARACTERLIMIT+1 ? nextLine.substring(0, CHARACTERLIMIT+1) : nextLine;
+//		    		line = PARSER.coreferenceResolution(line);
+//		    		List<CoreMap> sentences = PARSER.getSentences(line);		    		
+//		    		spotlightQueue.put(sentences);
+//		    		foxQueue.put(sentences);
+//		    	}	
 		    	currentLine++;
 		    }
 		    
@@ -198,9 +226,9 @@ public class RelationExtraction {
 //			System.out.println(r);
 //		}
 		RelationExtraction n = new RelationExtraction();	
-		n.parseProperties();
-		n.toJsonFile();
-//		n.retrieveRelations(new File("resources/out.txt"), "src/main/resources/model.ttl");
+//		n.parseProperties();
+//		n.toJsonFile();
+		n.retrieveRelations(new File("resources/test6.txt"), "src/main/resources/model.ttl");
 //		SpotlightWebservice service = new SpotlightWebservice();
 //		for(Entity e: service.getEntitiesProcessed("During his first two years in office, Obama signed many landmark bills into law. The main reforms were the Patient Protection and Affordable Care Act (often referred to as \"Obamacare\", shortened as the \"Affordable Care Act\"), the Dodd–Frank Wall Street Reform and Consumer Protection Act, and the Don't Ask, Don't Tell Repeal Act of 2010. The American Recovery and Reinvestment Act of 2009 and Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act of 2010 served as economic stimulus amidst the Great Recession. After a lengthy debate over the national debt limit, he signed the Budget Control and the American Taxpayer Relief Acts. In foreign policy, he increased U.S. troop levels in Afghanistan, reduced nuclear weapons with the United States–Russia New START treaty, and ended military involvement in the Iraq War. He ordered military involvement in Libya in opposition to Muammar Gaddafi; Gaddafi was killed by NATO-assisted forces, and he also ordered the military operation that resulted in the deaths of Osama bin Laden and suspected Yemeni Al-Qaeda operative Anwar al-Awlaki.")) {
 //			System.out.println(e);
