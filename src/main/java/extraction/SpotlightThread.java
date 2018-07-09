@@ -197,7 +197,14 @@ public class SpotlightThread implements Runnable {
 	        			}         			
 	        		} else {
 	        			if(numbers.length == 1) {
+	        				int zeros = mapNumber(triple.objectLemmaGloss(), numbers[0]);
 	        				data = numbers[0];
+	        				if(data.contains(".")) {
+	        					data.replace(".", "");
+	        				}
+	        				for(int j = 0; j<zeros; j++) {
+	        				data = data + "0";
+	        				}
 	        			} 
 	        		}
 	        		
@@ -240,6 +247,23 @@ public class SpotlightThread implements Runnable {
 		}		
 	}
 	
+
+	private int mapNumber(String objectLemmaGloss, String number) {					
+		int comma = number.lastIndexOf('.') != -1 ? ( number.length()-1) - number.lastIndexOf('.') : 0;
+		if(objectLemmaGloss.contains("hundret"))
+			return (2-comma);
+		if(objectLemmaGloss.contains("thousand"))	
+			return (3-comma);
+		if(objectLemmaGloss.contains("million"))
+			return (6-comma);
+		if(objectLemmaGloss.contains("billion"))
+			return (9-comma);
+		if(objectLemmaGloss.contains("trillion"))
+			return (12-comma);
+		
+		
+		return 0;
+	}
 
 	private int containsMonth(String object) {
 		for(int i = 0; i<MONTHS.size(); i++) {
