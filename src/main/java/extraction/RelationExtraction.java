@@ -33,6 +33,12 @@ import com.google.common.io.Files;
 import edu.stanford.nlp.util.CoreMap;
 import utils.Relation;
 
+/**
+ * @author Nick Düsterhus
+ * @author Lukas Blübaum
+ *
+ */
+
 public class RelationExtraction {
 		
 	private final static int QUEUESIZE = 1000;
@@ -49,6 +55,18 @@ public class RelationExtraction {
 		
 	private static Model graph = ModelFactory.createDefaultModel() ;
 		
+	/**
+	 * Calls @see parseProperties then puts multiple sentences in a BlockingQueue.
+	 * Creates a SpotlightThread and FoxThread to extract triples.
+	 * 
+	 * @param dump a text file like the wikipedia dump
+	 * @param model path to a Jena Model
+	 * @throws MalformedURLException
+	 * @throws ProtocolException
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws InterruptedException
+	 */
 	private void retrieveRelations(File dump, String model) throws MalformedURLException, ProtocolException, IOException, ParseException, InterruptedException  {		
 		parseProperties();
 		
@@ -127,6 +145,11 @@ public class RelationExtraction {
 		}
 	}
 	
+	
+	/**
+	 * Writes the property List into a json file.
+	 * 
+	 */
 	private void toJsonFile() {
 
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
@@ -148,6 +171,10 @@ public class RelationExtraction {
 	}
 	
 	
+	/**
+	 * Reads a Json-file containing a List of Relations and assigns them to property list.
+	 * 
+	 */
 	private void readJson() {
 		ObjectMapper mapper = new ObjectMapper();
 		try 
@@ -160,6 +187,10 @@ public class RelationExtraction {
 		}
 	}
 	
+	
+	/** Adds the number of properties with exactly the same range and domain to each property
+	 * 
+	 */
 	private void countOfRangeDomain() {
 		for(Relation r: properties) {
 			int count = 0;
@@ -172,9 +203,11 @@ public class RelationExtraction {
 		}
 	}
 	
+	/**Creates List of properties from src/main/resources/ontology_english.nt	 * 
+	 * 
+	 */
 	private void parseProperties() {
-		properties = new ArrayList<Relation>();
-		Model ontology = ModelFactory.createDefaultModel();
+		properties = new ArrayList<Relation>(); Model ontology = ModelFactory.createDefaultModel();
 		ontology.read("src/main/resources/ontology_english.nt");
 		
 		ResIterator subjects = ontology.listSubjects();

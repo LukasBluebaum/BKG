@@ -22,6 +22,13 @@ import org.json.simple.parser.ParseException;
 
 import edu.stanford.nlp.util.CoreMap;
 
+
+
+/**
+ * @author Nick Düsterhus
+ * @author Lukas Blübaum
+ *
+ */
 public class FoxThread implements Runnable {
 
 	private static final FoxWebservice SERVICE = new FoxWebservice();
@@ -32,12 +39,23 @@ public class FoxThread implements Runnable {
 	
 	private BlockingQueue<List<CoreMap>> articles;
 	
+	/**Class Constructor 
+	 * 
+	 * 
+	 * @param graph an Apache Jena model this thread will write to
+	 * @param model a file this thread will write the model in
+	 * @param articles a BlockingQueue containing a List of CoreMap (Stanford CoreNLP)
+	 */
 	public FoxThread(Model graph,File model, BlockingQueue<List<CoreMap>> articles) {
 		this.graph = graph;
 		this.articles = articles;
 		this.model = model;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
+	
 	public void run() {
 		FileWriter writer = null;		
 		try {
@@ -90,6 +108,12 @@ public class FoxThread implements Runnable {
 		
 	}
 
+	
+	/**Extracts subject predicate and object from a Fox response and writes the triple to the graph
+	 * 
+	 * @param statement
+	 * @param iterator
+	 */
 	private void getTriple(Statement statement, StmtIterator iterator) {
 		Resource subject = ResourceFactory.createResource(statement.getObject().toString());
 		Statement next = iterator.next();
@@ -117,6 +141,16 @@ public class FoxThread implements Runnable {
 		
 	}
 	
+	/**
+	 * Sends each sentence to via FoxWebservice to the Fox demo and reads the returned model.
+	 * Calls @see getTriple to iterate over the model.
+	 * 
+	 * @param sentences a List of CoreMap 
+	 * @throws MalformedURLException
+	 * @throws ProtocolException
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	private void getRelationsFox(final List<CoreMap> sentences) throws MalformedURLException, ProtocolException, IOException, ParseException {	
 	    for(CoreMap sentence: sentences) {
 	    	Model model = ModelFactory.createDefaultModel() ;
