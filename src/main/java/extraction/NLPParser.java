@@ -27,7 +27,14 @@ import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations.BasicDependenciesA
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
 
+/**
+ * @author Nick Düsterhus
+ * @author Lukas Blübaum
+ *
+ */
+
 public class NLPParser {
+	
 	private static final  StanfordCoreNLP pipeline;
 	
 	private static final  String ANNOTATORS = "tokenize, ssplit, pos,lemma, depparse, natlog, openie";
@@ -42,6 +49,7 @@ public class NLPParser {
 	
 	private static final List<String> REFERENCES = Arrays.asList("he", "his", "him", "she", "her", "it", "its");
 			
+	
 	static {
 		Properties props = new Properties();
 	    props.setProperty("annotators",ANNOTATORS);
@@ -57,6 +65,10 @@ public class NLPParser {
 	    PIPELINESENTENCES = new StanfordCoreNLP(props3);
 	}
 
+	/**
+	 * @param article
+	 * @return
+	 */
 	public List<CoreMap> calculateRelations(String article) {
         System.out.println(article.length());
 
@@ -68,6 +80,12 @@ public class NLPParser {
         return sentences;
  	}
 	
+	
+	
+	/**
+	 * @param article
+	 * @return
+	 */
 	public List<CoreMap> getSentences(String article) {
         //System.out.println(article);
 
@@ -79,6 +97,11 @@ public class NLPParser {
         return sentences;
  	}
 	
+	/**Checks if given String is a noun or a verb
+	 * 
+	 * @param word a String containing a single word
+	 * @return
+	 */
 	public boolean isNounVerb(String word) {
 		Annotation annotation = new Annotation(word);
         pipeline.annotate(annotation);
@@ -90,6 +113,12 @@ public class NLPParser {
         return token.tag().startsWith("N") || token.tag().startsWith("V");      
 	}
 		
+	
+	/**Finds all binary Relations from a List of sentences and stores them into a HashMap using Stanford OpenIE.
+	 * 
+	 * @param sentences List of CoreMap
+	 * @return a Map with the index of the sentence as key and a Collection of RelationTriples as elements.
+	 */
 	public Map<Integer, Collection<RelationTriple>> binaryRelation(List<CoreMap> sentences){
 		Map<Integer, Collection<RelationTriple>> binaryRelations = new LinkedHashMap<>();
 
@@ -99,6 +128,13 @@ public class NLPParser {
 		return binaryRelations;    
 	}	
 	
+	
+	
+	/**Replaces all annotated coreferences with the referenced noun.
+	 * 
+	 * @param article a String
+	 * @return the given String with all coreferences replaced by the referenced noun
+	 */
 	public String coreferenceResolution(List<CoreMap> article) {
 		//Annotation document = new Annotation(article);
 		Annotation document = new Annotation(article);
@@ -151,6 +187,15 @@ public class NLPParser {
 	    return newArticle;
 	}
 	
+	
+	/**Called by @see coreferenceResolution.
+	 * This method determines if her is a possessive pronoun in this case.
+	 * 
+	 * @param value 
+	 * @param sentence CoreMap
+	 * @param rep representative mentions from CorereferenceChain
+	 * @return if given value is the possessive pronoun her
+	 */
 	private static boolean isHerGenitive(String value, CoreMap sentence, String rep) {
 		if(value.equals("her")) {
 			SemanticGraph basicDeps = sentence.get(BasicDependenciesAnnotation.class);
@@ -172,6 +217,11 @@ public class NLPParser {
 		return false;
 	}
 	
+	
+	/**
+	 * @param input the String to be lemmatised
+	 * @return
+	 */
 	public static String getLemma(String input) {
  		Annotation noun = new Annotation(input);
  		pipeline.annotate(noun);

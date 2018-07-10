@@ -24,6 +24,14 @@ public class FoxWebservice {
 	private final int TIMEOUT = 10000;
 	
 	
+	/**
+	 * 
+	 * @param inputText
+	 * @param lang
+	 * @param taskType
+	 * @return
+	 * @throws Exception
+	 */
 	protected String extract(String inputText, String lang, String taskType) throws Exception {
 		JSONObject urlParameters = new JSONObject();
 
@@ -37,6 +45,16 @@ public class FoxWebservice {
 
 	}
 
+	/**Requests the Fox Demo.
+	 * 
+	 * 
+	 * @param urlParameters
+	 * @param requestURL
+	 * @return
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 * @throws ProtocolException
+	 */
 	private String requestPOST(final JSONObject urlParameters, final String requestURL) throws MalformedURLException, IOException, ProtocolException {
 		try {	
 			URL url = new URL(requestURL);
