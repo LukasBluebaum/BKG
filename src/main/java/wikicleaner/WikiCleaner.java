@@ -12,7 +12,15 @@ public class WikiCleaner {
 	
 	private final static int QUEUESIZE = 10000;
 	
-	public void cleanWikiDump(File input, File output) {
+	/**
+	 * Instantiates and starts a Reader and a Writer thread and an appropriate amount of Worker threads to clean the given file.
+	 * @param in Path to the input file.
+	 * @param out Path to the output file.
+	 */
+	public void cleanWikiDump(String in, String out) {
+		
+		File input = new File(in);
+		File output = new File(out);
 		BlockingQueue<String> readQueue = new ArrayBlockingQueue<String>(QUEUESIZE);	    
 	    BlockingQueue<String> writeQueue = new ArrayBlockingQueue<String>(QUEUESIZE);
 	    
@@ -32,12 +40,7 @@ public class WikiCleaner {
 	}
 	
 	public static void main(String[] args) {
-		File input = new File("resources/enwiki-20171103-pages.tsv");
-		File output = new File("resources/out.txt");
-		
 		WikiCleaner cleaner = new WikiCleaner();
-		cleaner.cleanWikiDump(input, output);
-	}
-	
-	
+		cleaner.cleanWikiDump("resources/enwiki-20171103-pages.tsv", "resources/out.txt");
+	}	
 }

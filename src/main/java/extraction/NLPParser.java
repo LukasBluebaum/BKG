@@ -35,9 +35,9 @@ import edu.stanford.nlp.util.CoreMap;
 
 public class NLPParser {
 	
-	private static final  StanfordCoreNLP pipeline;
+	private static final  StanfordCoreNLP PIPELINERELATIONS;
 	
-	private static final  String ANNOTATORS = "tokenize, ssplit, pos,lemma, depparse, natlog, openie";
+	private static final  String ANNOTATORSRELATIONS = "tokenize, ssplit, pos,lemma, depparse, natlog, openie";
 	
 	private static final  StanfordCoreNLP PIPELINEREF;
 	
@@ -52,8 +52,8 @@ public class NLPParser {
 	
 	static {
 		Properties props = new Properties();
-	    props.setProperty("annotators",ANNOTATORS);
-	    pipeline = new StanfordCoreNLP(props);
+	    props.setProperty("annotators",ANNOTATORSRELATIONS);
+	    PIPELINERELATIONS = new StanfordCoreNLP(props);
 	    
 	    Properties props2 = new Properties();
 	    props2.setProperty("annotators",ANNOTATORSREF);
@@ -65,15 +65,16 @@ public class NLPParser {
 	    PIPELINESENTENCES = new StanfordCoreNLP(props3);
 	}
 
-	/**
+	/** Splits the given string into sentences and finds all binary relations and stores them into a list of
+	 * CoreMaps using Stanford OpenIE.
 	 * @param article
-	 * @return
+	 * @return 
 	 */
 	public List<CoreMap> calculateRelations(String article) {
         System.out.println(article.length());
 
         Annotation annotation = new Annotation(article);
-        pipeline.annotate(annotation);
+        PIPELINERELATIONS.annotate(annotation);
 
         List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
     
@@ -82,13 +83,11 @@ public class NLPParser {
 	
 	
 	
-	/**
+	/** Splits the given String into sentences.
 	 * @param article
-	 * @return
+	 * @return List of sentences.
 	 */
 	public List<CoreMap> getSentences(String article) {
-        //System.out.println(article);
-
         Annotation annotation = new Annotation(article);
         PIPELINESENTENCES.annotate(annotation);
 
@@ -97,14 +96,14 @@ public class NLPParser {
         return sentences;
  	}
 	
-	/**Checks if given String is a noun or a verb
-	 * 
-	 * @param word a String containing a single word
-	 * @return
+	/**
+	 * Checks if the given String is a noun or a verb. 
+	 * @param word A String containing a single word.
+	 * @return True if the string is a noun or verb, false otherwise.
 	 */
-	public boolean isNounVerb(String word) {
+	public boolean isNounOrVerb(String word) {
 		Annotation annotation = new Annotation(word);
-        pipeline.annotate(annotation);
+		PIPELINERELATIONS.annotate(annotation);
 
         List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
         CoreMap sentence = sentences.get(0);
@@ -114,10 +113,10 @@ public class NLPParser {
 	}
 		
 	
-	/**Finds all binary Relations from a List of sentences and stores them into a HashMap using Stanford OpenIE.
-	 * 
-	 * @param sentences List of CoreMap
-	 * @return a Map with the index of the sentence as key and a Collection of RelationTriples as elements.
+	/**
+	 * Returns all binary relations from a list of sentences.
+	 * @param sentences List of CoreMaps.
+	 * @return A Map with the index of the sentence as key and a Collection of RelationTriples as values.
 	 */
 	public Map<Integer, Collection<RelationTriple>> binaryRelation(List<CoreMap> sentences){
 		Map<Integer, Collection<RelationTriple>> binaryRelations = new LinkedHashMap<>();
@@ -130,15 +129,13 @@ public class NLPParser {
 	
 	
 	
-	/**Replaces all annotated coreferences with the referenced noun.
-	 * 
-	 * @param article a String
-	 * @return the given String with all coreferences replaced by the referenced noun
+	/**
+	 * Replaces all annotated coreferences with their representative mention.
+	 * @param article A list of sentences.
+	 * @return The given list of sentences as a string with all coreferences replaced by their representative mention.
 	 */
 	public String coreferenceResolution(List<CoreMap> article) {
-		//Annotation document = new Annotation(article);
 		Annotation document = new Annotation(article);
-	 	System.out.println(article.size());
 		PIPELINEREF.annotate(document);	    
 	    ArrayList<CoreMap> sentences = (ArrayList<CoreMap>) document.get(CoreAnnotations.SentencesAnnotation.class);	      
 	    Map<Integer, CorefChain> coreChain = document.get(CorefCoreAnnotations.CorefChainAnnotation.class);
@@ -149,10 +146,11 @@ public class NLPParser {
 	    	
 	    	for(int i = 0; i<tokens.size(); i++) {
 	    		
-	    		Integer id= tokens.get(i).get(CorefCoreAnnotations.CorefClusterIdAnnotation.class);
+	    		Integer id = tokens.get(i).get(CorefCoreAnnotations.CorefClusterIdAnnotation.class);
 	    		CorefChain chain = coreChain.get(id);
 	    		String value = tokens.get(i).value().toLowerCase();
-	    			 		    		
+	    		
+	    		// no coreference just use the word as it is
 	    		if(chain == null) {
 	    			newArticle += tokens.get(i).value() + " ";
 	    			continue;
@@ -173,7 +171,7 @@ public class NLPParser {
 	    			}
 	    			if(found) {
 	    				String rep = chain.getRepresentativeMention().toString();
-	    				if(value.equals("his") || value.equals("its") || value.equals("hers") || isHerGenitive(value,sentence,rep)) {
+	    				if(value.equals("his") || value.equals("its") || value.equals("hers") || isHerGenitive(value,sentence)) {
 	    					newArticle += rep.substring(1, rep.lastIndexOf("\"")).replace("'s", "").trim() + "'s ";
 	    				} else {
 	    					newArticle += rep.substring(1, rep.lastIndexOf("\"")).replace("'s", "").trim() + " ";
@@ -188,27 +186,27 @@ public class NLPParser {
 	}
 	
 	
-	/**Called by @see coreferenceResolution.
-	 * This method determines if her is a possessive pronoun in this case.
-	 * 
+	/**
+	 * Called by {@link #coreferenceResolution()}.
+	 * This method determines if her is used as a possessive pronoun in this case. Therefore it looks
+	 * for the poss modifier.
 	 * @param value 
-	 * @param sentence CoreMap
-	 * @param rep representative mentions from CorereferenceChain
-	 * @return if given value is the possessive pronoun her
+	 * @param sentence Current sentence.
+	 * @return True the given value is used as a possessive pronoun, false otherwise
 	 */
-	private static boolean isHerGenitive(String value, CoreMap sentence, String rep) {
+	private static boolean isHerGenitive(String value, CoreMap sentence) {
 		if(value.equals("her")) {
 			SemanticGraph basicDeps = sentence.get(BasicDependenciesAnnotation.class);
-            Collection<TypedDependency> typedDeps = basicDeps.typedDependencies();
-                    
-            Iterator<TypedDependency> t = typedDeps.iterator();
-            while(t.hasNext()) {
-            	TypedDependency s = t.next();
-            	String c = s.reln().toString();		    		            	
-            	if(c.contains("poss")) {
-            		String dep = s.dep().toString();
+            Collection<TypedDependency> typedDeps = basicDeps.typedDependencies();                    
+            Iterator<TypedDependency> dependencyIterator = typedDeps.iterator();
+            
+            while(dependencyIterator.hasNext()) {
+            	TypedDependency dependency = dependencyIterator.next();
+            	String depString = dependency.reln().toString();		    		            	
+            	if(depString.contains("poss")) {
+            		String dep = dependency.dep().toString();
             		dep = dep.substring(0, dep.lastIndexOf("/"));
-            		String gov = s.gov().toString();
+            		String gov = dependency.gov().toString();
             		gov = gov.substring(0, gov.lastIndexOf("/"));            		
             		return dep.equals("her") || gov.equals("her");            		
             	}         	
@@ -218,17 +216,19 @@ public class NLPParser {
 	}
 	
 	
-	/**
-	 * @param input the String to be lemmatised
-	 * @return
+	/** 
+	 * Returns the lemmanization of the given string.
+	 * @param 
+	 * @return The lemmanization of the given string.
 	 */
 	public static String getLemma(String input) {
  		Annotation noun = new Annotation(input);
- 		pipeline.annotate(noun);
+ 		PIPELINERELATIONS.annotate(noun);
  		List<CoreMap> sentences = noun.get(SentencesAnnotation.class);
  		if(sentences.size() > 1) return null;
  		CoreMap sentence = sentences.get(0);
  		List<CoreLabel> token = sentence.get(TokensAnnotation.class);
+ 		if(token.size() > 1) return null;
  		return token.get(0).get(LemmaAnnotation.class);
  	}
 }

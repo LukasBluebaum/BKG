@@ -25,14 +25,18 @@ public class FoxWebservice {
 	
 	
 	/**
-	 * 
+	 * Sets the url parameters then calls {@link #requestPost()}.
 	 * @param inputText
 	 * @param lang
 	 * @param taskType
 	 * @return
+	 * @throws IOException 
+	 * @throws ProtocolException 
+	 * @throws MalformedURLException 
 	 * @throws Exception
 	 */
-	protected String extract(String inputText, String lang, String taskType) throws Exception {
+	@SuppressWarnings("unchecked")
+	protected String extract(String inputText, String lang, String taskType) throws IOException  {
 		JSONObject urlParameters = new JSONObject();
 
 		urlParameters.put("type", INPUT);
@@ -45,9 +49,8 @@ public class FoxWebservice {
 
 	}
 
-	/**Requests the Fox Demo.
-	 * 
-	 * 
+	/**
+	 * Requests the Fox Demo.
 	 * @param urlParameters
 	 * @param requestURL
 	 * @return
@@ -55,7 +58,7 @@ public class FoxWebservice {
 	 * @throws IOException
 	 * @throws ProtocolException
 	 */
-	private String requestPOST(final JSONObject urlParameters, final String requestURL) throws MalformedURLException, IOException, ProtocolException {
+	private String requestPOST(final JSONObject urlParameters, final String requestURL) throws IOException {
 		try {	
 			URL url = new URL(requestURL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();

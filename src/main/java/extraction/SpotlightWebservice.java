@@ -40,7 +40,7 @@ public class SpotlightWebservice {
 		return requestPOST(urlParameters, REQUESTURL);
 	}
 	
-	public List<Entity> getEntitiesProcessed(final String inputText) throws MalformedURLException, IOException, ProtocolException, ParseException {
+	public List<Entity> getEntitiesProcessed(final String inputText) throws IOException, ParseException {
 
 		String urlParameters = "text=" + URLEncoder.encode(inputText, "UTF-8");
 		urlParameters += "&confidence=" + CONFIDENCE;
@@ -51,7 +51,7 @@ public class SpotlightWebservice {
 		return entities;
 	}
 	
-	private String requestPOST(final String urlParameters, final String requestURL) throws MalformedURLException, IOException, ProtocolException {
+	private String requestPOST(final String urlParameters, final String requestURL) throws IOException {
 		try {	
 			URL url = new URL(requestURL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -88,7 +88,14 @@ public class SpotlightWebservice {
 		} 
 	}
 	
-	public List<Entity> postProcessing(final String response) throws ParseException{
+	/**
+	 * Processes the response from Spotlight and extracts the entities with their uris, types
+	 * surface forms and offsets.
+	 * @param response A response from the spotlight online demo.
+	 * @return List of processed entities.
+	 * @throws ParseException
+	 */
+	public List<Entity> postProcessing(final String response) throws ParseException {
 		
 		List<Entity> namedEntities = new ArrayList<>();
 		JSONParser parser = new JSONParser();

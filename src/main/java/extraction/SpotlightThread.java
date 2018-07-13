@@ -47,6 +47,13 @@ public class SpotlightThread implements Runnable {
 	
 	private File model;
 	
+	/**
+	 * Constructor 
+	 * @param parser An instance of the NLPParser class.
+	 * @param graph An Apache Jena model this thread will write to.
+	 * @param model The file this thread will write the model to.
+	 * @param articles A BlockingQueue containing a List of CoreMaps (Stanford CoreNLP).
+	 */
 	public SpotlightThread(NLPParser parser, Model graph, File model, BlockingQueue<List<CoreMap>> articles) {
 		this.parser = parser;
 		this.graph = graph;
@@ -54,6 +61,10 @@ public class SpotlightThread implements Runnable {
 		this.articles = articles;
 	}
 	
+	/**
+	 * Takes the next line from the blocking queue, then calls {@link #getRelationsSpotlight()} on this line.
+	 * Writes the graph to a file.
+	 */
 	@Override
 	public void run() {
 		FileWriter writer = null;		
@@ -61,13 +72,11 @@ public class SpotlightThread implements Runnable {
 			writer = new FileWriter(model);
 			
 			int lastWrite = 0;
-			int currentLine = 0;
 			while(true) {
-				currentLine++;
 				lastWrite++;
-				List<CoreMap> article = articles.take();
-				if(article.size() == 0) break;
-				getRelationsSpotlight(article);
+				List<CoreMap> nextLine = articles.take();
+				if(nextLine.size() == 0) break;
+				getRelationsSpotlight(nextLine);
 								
 				if(lastWrite >= RelationExtraction.ARTICLESPERWRITE) {
 					graph.enterCriticalSection(Lock.WRITE);
@@ -85,10 +94,8 @@ public class SpotlightThread implements Runnable {
  	 			
 			graph.enterCriticalSection(Lock.WRITE);
 			try {
-				System.out.println("Spotlight Enter Critical. Write.");
 				graph.write(writer, "TTL");
 			} finally {
-				System.out.println("Spotlight Leave Critical. Write.");
 				graph.leaveCriticalSection();
 			}
 		} catch ( IOException | InterruptedException e) {
@@ -103,26 +110,38 @@ public class SpotlightThread implements Runnable {
 		
 	}
 	
-	public void getRelationsSpotlight(List<CoreMap> sentences) throws InterruptedException {	
-		Thread.sleep(100);
+	/**
+	 * Uses the SpotlightWebservice to get the entities for the current sentences.
+	 * Then calls {@link #retrieveTriples()}.
+	 * @param sentences Current sentences that are to be processed.
+	 */
+	private void getRelationsSpotlight(List<CoreMap> sentences)  {	
 		Map<Integer, Collection<RelationTriple>> binaryRelations = parser.binaryRelation(sentences);	
 		
 		SpotlightWebservice service = new SpotlightWebservice();
 
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		try {
+			Thread.sleep(100);
 			entityList =  (ArrayList<Entity>) service.getEntitiesProcessed(sentences.toString());
-		} catch (IOException | ParseException e) {
+		} catch (IOException | ParseException | InterruptedException e) {
 			e.printStackTrace();
+			return;
 		}
-		Map<Integer, ArrayList<Entity>> entities = mapEntitiesSentences(entityList,sentences);
+		Map<Integer, ArrayList<Entity>> entities = mapEntitiesToSentences(entityList,sentences);
 		
 		for(int i = 0; i<sentences.size(); i++) {
 			retrieveTriples(i, binaryRelations, entities);
 		}
 	}
 	
-	private Map<Integer, ArrayList<Entity>> mapEntitiesSentences(ArrayList<Entity> entities, List<CoreMap> sentences) {
+	/**
+	 * Maps the entities back to the sentence their were found in.
+	 * @param entities Entities which were found in the last call to the spotlight demo.
+	 * @param sentences Sentences that were last send to the spotlight demo.
+	 * @return A HashMap with the sentence index as key and the corresponding entities as values.
+	 */
+	private Map<Integer, ArrayList<Entity>> mapEntitiesToSentences(ArrayList<Entity> entities, List<CoreMap> sentences) {
 		Map<Integer, ArrayList<Entity>> entityMap = new LinkedHashMap<>();	
 		int count = 0;
 		for(int i = 0; i<sentences.size(); i++) {
@@ -136,6 +155,13 @@ public class SpotlightThread implements Runnable {
 		return entityMap;
 	}
 	
+	/**
+	 * Iterates through the binary relations of a sentence and tries to map the subject and object of these to entities which
+	 * were found in the current sentence. Finally tries to map the predicate of the binary relation to an existing property.
+	 * If there is an entity in the subject also calls {@link #literalRelation()} to search for literal relations.
+	 * @param i Index of the current sentence.
+	 * @param binaryRelations List of binary relations in the current sentence.
+	 */
 	private void retrieveTriples(int i, Map<Integer, Collection<RelationTriple>> binaryRelations,
 		Map<Integer, ArrayList<Entity>> entities) {
 		for(Entity entity: entities.get(i))		{
@@ -145,28 +171,23 @@ public class SpotlightThread implements Runnable {
 				for(RelationTriple triple: binaryRelations.get(i)) {					
 									
 					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())
-							|| triple.subjectGloss().contains(entity2.getSurfaceForm()) && triple.objectGloss().contains(entity.getSurfaceForm())){
-						//System.out.println(i +": " + triple.subjectGloss() + " - " + binaryRelations.get(i) + " - " + triple.objectGloss());
+							|| triple.subjectGloss().contains(entity2.getSurfaceForm()) && triple.objectGloss().contains(entity.getSurfaceForm())) {						
 						String tripleRelation = triple.relationLemmaGloss();
-						for(Relation r: RelationExtraction.properties) {
+						for(Relation rel: RelationExtraction.properties) {
 							
-							if( (entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && (entity2.getTypes().contains(r.getRange()) || r.getRange().equals(""))) {
+							if( (entity.getTypes().contains(rel.getDomain()) || rel.getDomain().equals("")) 
+									&& (entity2.getTypes().contains(rel.getRange()) || rel.getRange().equals(""))) {
 								String[] tripleR = tripleRelation.split(" ");
-								//System.out.println("Entity1: " + entity + "entity2" + entity2 + " domain & range true for " + r);
-								for(String s: tripleR) {
-									if(r.getKeywords().contains(s)) {
+								for(String word: tripleR) {
+									if(rel.getKeywords().contains(word)) {
 										Resource subject = ResourceFactory.createResource(entity.getUri());
-										Property predicate = ResourceFactory.createProperty(r.getLabel());
+										Property predicate = ResourceFactory.createProperty(rel.getLabel());
 										RDFNode object = ResourceFactory.createResource(entity2.getUri());
-										Statement t = ResourceFactory.createStatement(subject, predicate, object);
-										//System.out.println(t);	
+										Statement statement = ResourceFactory.createStatement(subject, predicate, object);
 										graph.enterCriticalSection(Lock.WRITE);
 										try {
-											//System.out.println("Spotlight Enter Critical. Add triple.");
-											graph.add(t);	
-											//graph.write(System.out, "TTL");
+											graph.add(statement);	
 										} finally {
-											//System.out.println("Spotlight Leave Critical. Add triple.");
 											graph.leaveCriticalSection();
 										}
 									}
@@ -179,6 +200,14 @@ public class SpotlightThread implements Runnable {
 		}
 	}
 	
+	/**
+	 * Iterates through the binary relations of a sentence and determines if there is a literal in the 
+	 * object of the binary relation. (only dates and numbers) Finally tries to map the predicate of the 
+	 * binary relation to an existing property.
+	 * @param entity An entity which was found in the current sentence.
+	 * @param i Index of the current sentence.
+	 * @param binaryRelations List of binary relations in the current sentence.
+	 */
 	private void literalRelation(Entity entity, int i, Map<Integer, Collection<RelationTriple>> binaryRelations) {
 		for(RelationTriple triple: binaryRelations.get(i)) {
 			String data = null;
@@ -208,35 +237,30 @@ public class SpotlightThread implements Runnable {
 	        		}	        		
 	        	}
 	        	if(data != null) {
-	        		//System.out.println(data);
-	        		for(Relation r: RelationExtraction.properties) {
-						if((entity.getTypes().contains(r.getDomain()) || r.getDomain().equals("")) && r.getPropertyType().equals("data") &&
-								!r.getRange().toLowerCase().contains("string")) {
+	        		for(Relation rel: RelationExtraction.properties) {
+						if((entity.getTypes().contains(rel.getDomain()) || rel.getDomain().equals("")) && rel.getPropertyType().equals("data") &&
+								!rel.getRange().toLowerCase().contains("string")) {
 							String tripleRelation = triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
 							String[] tripleR = tripleRelation.split(" ");	
-							//System.out.println(tripleRelation);
-							for(String s: tripleR) {
-								if(r.getKeywords().contains(s)) {
-									if((data.contains("-") && !r.getRange().contains("date")) ||
-											r.getRange().contains("date") && !data.contains("-") ) {
+							for(String word: tripleR) {
+								if(rel.getKeywords().contains(word)) {
+									//if the number that was found is a date but the found property does not have the range date then break 
+									if((data.contains("-") && !rel.getRange().contains("date")) || rel.getRange().contains("date") && !data.contains("-") ) {
 										break;
 									}									
 									Resource subject = ResourceFactory.createResource(entity.getUri());
-									Property predicate = ResourceFactory.createProperty(r.getLabel());
+									Property predicate = ResourceFactory.createProperty(rel.getLabel());
 									TypeMapper mapper = TypeMapper.getInstance();
-									RDFDatatype type = mapper.getTypeByName(r.getRange());
+									RDFDatatype type = mapper.getTypeByName(rel.getRange());
 									RDFNode object = ResourceFactory.createTypedLiteral(data, type);
-									Statement t = ResourceFactory.createStatement(subject, predicate, object);
-									System.out.println(t);	
+									Statement statement = ResourceFactory.createStatement(subject, predicate, object);									
 									graph.enterCriticalSection(Lock.WRITE);
 									try {
-										//System.out.println("Spotlight Enter Critical. Add triple.");
-										graph.add(t);	
-										//graph.write(System.out, "TTL");
+										graph.add(statement);	
 									} finally {
-										//System.out.println("Spotlight Leave Critical. Add triple.");
 										graph.leaveCriticalSection();
 									}
+									setLabel(entity);
 								}
 							}
 						}
@@ -246,7 +270,12 @@ public class SpotlightThread implements Runnable {
 		}		
 	}
 	
-
+	/**
+	 * Checks if there is a number keyword in the object of the relation. 
+	 * @param objectLemmaGloss object of the current relation
+	 * @param number the number which was found on the object of the current relation
+	 * @return The amount of zeros that need to be added to the given number because of the occuring number keyword.
+	 */
 	private int mapNumber(String objectLemmaGloss, String number) {					
 		int comma = number.lastIndexOf('.') != -1 ? ( number.length()-1) - number.lastIndexOf('.') : 0;
 		if(objectLemmaGloss.contains("hundred"))
@@ -262,7 +291,31 @@ public class SpotlightThread implements Runnable {
 				
 		return 0;
 	}
+	
+	/**
+	 * Creates a triple for the rdfs:label relation and the given entity.
+	 * @param entity
+	 */
+	private void setLabel(Entity entity) {
+		Resource subject = ResourceFactory.createResource(entity.getUri());
+		Property predicate = ResourceFactory.createProperty("http://www.w3.org/2000/01/rdf-schema#/label");		
+		String uri = entity.getUri();
+		String label = uri.substring(uri.lastIndexOf("/")+1).trim().replaceAll("_", " ");
+		RDFNode object = ResourceFactory.createLangLiteral(label, "en");
+		Statement statement = ResourceFactory.createStatement(subject, predicate, object);									
+		graph.enterCriticalSection(Lock.WRITE);
+		try {
+			graph.add(statement);	
+		} finally {
+			graph.leaveCriticalSection();
+		}
+	}
 
+	/**
+	 * Checks if there is a month in the object of the current relation.
+	 * @param object Object of the current relation.
+	 * @return The number of the month in a year, 0 otherwise.
+	 */
 	private int containsMonth(String object) {
 		for(int i = 0; i<MONTHS.size(); i++) {
 			if(object.contains(" " + MONTHS.get(i) + " ") || object.contains(MONTHS.get(i) + " ") ||
@@ -270,5 +323,4 @@ public class SpotlightThread implements Runnable {
 		}
 		return 0;
 	}
-	
 }

@@ -22,6 +22,11 @@ public class OntologyParser {
 	
 	private static final int DATATYPESTARTLINE = 29324;
 	
+	/**
+	 * Processes the given ontology file and extracts all english properties with their comment, range, domain
+	 * and datatype.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		BufferedReader reader = null;
 		FileWriter writer = null;

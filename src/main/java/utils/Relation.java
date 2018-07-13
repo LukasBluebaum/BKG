@@ -1,7 +1,6 @@
 package utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Relation {
@@ -38,11 +37,9 @@ public class Relation {
 
 	public void setRange(String range) {
 		if(range.contains("http://www.w3.org/2001/")) {
-			this.range = range;
-			
-		}else {	
-		
-		this.range = range.substring(range.lastIndexOf("/")+1, range.length());
+			this.range = range;			
+		} else {			
+			this.range = range.substring(range.lastIndexOf("/")+1, range.length());
 		}
 	}
 
@@ -90,12 +87,8 @@ public class Relation {
 		if(propertyType.equals("http://www.w3.org/2002/07/owl#DatatypeProperty") || propertyType.equals("data") ) {
 			this.propertyType = "data";
 		}
-		else
-		{
+		else {
 			this.propertyType = "object";
-		}
-			
-		
+		}	
 	}
-
 }

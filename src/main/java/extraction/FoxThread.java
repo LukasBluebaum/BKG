@@ -22,8 +22,6 @@ import org.json.simple.parser.ParseException;
 
 import edu.stanford.nlp.util.CoreMap;
 
-
-
 /**
  * @author Nick Düsterhus
  * @author Lukas Blübaum
@@ -39,23 +37,23 @@ public class FoxThread implements Runnable {
 	
 	private BlockingQueue<List<CoreMap>> articles;
 	
-	/**Class Constructor 
-	 * 
-	 * 
-	 * @param graph an Apache Jena model this thread will write to
-	 * @param model a file this thread will write the model in
-	 * @param articles a BlockingQueue containing a List of CoreMap (Stanford CoreNLP)
+	/**
+	 * Constructor 
+	 * @param graph An Apache Jena model this thread will write to
+	 * @param model A file this thread will write the model to
+	 * @param articles A BlockingQueue containing a List of CoreMaps (Stanford CoreNLP)
 	 */
 	public FoxThread(Model graph,File model, BlockingQueue<List<CoreMap>> articles) {
 		this.graph = graph;
 		this.articles = articles;
 		this.model = model;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
+	
+	/**
+	 * Takes the next line from the blocking queue, then calls {@link #getRelationsFox()} on this line.
+	 * Writes the graph to a file.
 	 */
 	@Override
-	
 	public void run() {
 		FileWriter writer = null;		
 		try {
@@ -64,36 +62,26 @@ public class FoxThread implements Runnable {
 			int currentLine = 0;
 			while(true) {
 				currentLine++;
-				List<CoreMap> article = articles.take();
-				if(article.size() == 0) {					
-					break;
-				}
-				try {
-					getRelationsFox(article);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
+				List<CoreMap> nextLine = articles.take();
+				if(nextLine.size() == 0) break;					
+
+				getRelationsFox(nextLine);
 				
 				if(currentLine >= RelationExtraction.ARTICLESPERWRITE) {
 					graph.enterCriticalSection(Lock.WRITE);
 					try {
-						System.out.println("Fox Enter Critical. Write.");
 						graph.write(writer, "TTL");
 					} finally {
-						System.out.println("Fox Leave Critical. Write.");
 						graph.leaveCriticalSection();
 					}
 					currentLine = 0;
 				}
 			}               
  	 		
-			System.out.println("-----");
 			graph.enterCriticalSection(Lock.WRITE);
 			try {
-				System.out.println("Fox Enter Critical. Write.");
 				graph.write(writer, "TTL");
 			} finally {
-				System.out.println("Fox Leave Critical. Write.");
 				graph.leaveCriticalSection();
 			}
 		} catch ( IOException | InterruptedException e) {
@@ -109,8 +97,8 @@ public class FoxThread implements Runnable {
 	}
 
 	
-	/**Extracts subject predicate and object from a Fox response and writes the triple to the graph
-	 * 
+	/**
+	 * Extracts subject predicate and object from a Fox response and writes the triple to the graph. 
 	 * @param statement
 	 * @param iterator
 	 */
@@ -126,37 +114,33 @@ public class FoxThread implements Runnable {
 		} else {
 			object = ResourceFactory.createStringLiteral(next.getObject().toString());
 		}	
-		Statement triple = ResourceFactory.createStatement(subject, predicate, object);
-		//System.out.println("Fox:" + triple);		
+		Statement triple = ResourceFactory.createStatement(subject, predicate, object);	
 		
 		graph.enterCriticalSection(Lock.WRITE);
 		try {
-			System.out.println("Fox Enter Critical. Add triple.");
 			graph.add(triple);	
-			graph.write(System.out, "TTL");
 		} finally {
-			System.out.println("Fox Leave Critical. Add triple.");
 			graph.leaveCriticalSection();
 		}
 		
 	}
 	
 	/**
-	 * Sends each sentence to via FoxWebservice to the Fox demo and reads the returned model.
-	 * Calls @see getTriple to iterate over the model.
+	 * Sends each sentence via the FoxWebservice to the Fox online demo and reads the returned model.
+	 * Calls {@link #getTriple()} to iterate over the model.
 	 * 
-	 * @param sentences a List of CoreMap 
+	 * @param sentences A List of CoreMaps.
 	 * @throws MalformedURLException
 	 * @throws ProtocolException
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	private void getRelationsFox(final List<CoreMap> sentences) throws MalformedURLException, ProtocolException, IOException, ParseException {	
+	private void getRelationsFox(final List<CoreMap> sentences) {	
 	    for(CoreMap sentence: sentences) {
 	    	Model model = ModelFactory.createDefaultModel() ;
     		try {
 				model.read(new ByteArrayInputStream(SERVICE.extract(sentence.toString(), "en" , "re").getBytes()),null, "TTL");
-			} catch (Exception e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
     		StmtIterator iterator = model.listStatements();

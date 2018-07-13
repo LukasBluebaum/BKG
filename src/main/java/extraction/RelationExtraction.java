@@ -23,7 +23,6 @@ import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.json.simple.parser.ParseException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -45,8 +44,6 @@ public class RelationExtraction {
 	
 	private static final NLPParser PARSER = new NLPParser();
 	
-	private static final int STARTLINE = 0;
-	
 	protected static final int ARTICLESPERWRITE = 10;
 	
 	protected static ArrayList<Relation> properties;
@@ -56,28 +53,27 @@ public class RelationExtraction {
 	private static Model graph = ModelFactory.createDefaultModel() ;
 		
 	/**
-	 * Calls @see parseProperties then puts multiple sentences in a BlockingQueue.
-	 * Creates a SpotlightThread and FoxThread to extract triples.
-	 * 
-	 * @param dump a text file like the wikipedia dump
-	 * @param model path to a Jena Model
+	 * Calls {@link #parseProperties()} then reads the sentences/strings from the given file and puts them in two BlockingQueues.
+	 * Creates a SpotlightThread and FoxThread, which then read the articles from their given BlockingQueue and try to extract triples.
+	 * @param input Path to a text file like the wikipedia dump.
+	 * @param model Path to a Jena Model, the model will be created if it does not exist yet.
 	 * @throws MalformedURLException
 	 * @throws ProtocolException
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws InterruptedException
 	 */
-	private void retrieveRelations(File dump, String model) throws MalformedURLException, ProtocolException, IOException, ParseException, InterruptedException  {		
+	private void retrieveRelations(String input, String model) throws InterruptedException  {		
 		parseProperties();
 		
 		BufferedReader reader = null;	
-		try {		   
+		try {		
+			File dump = new File(input);
 		    reader =  new BufferedReader(new FileReader(dump));		    
 		    File out = new File(model);		    
 		    if(out.length() != 0) graph.read(new FileInputStream(out),null, "TTL");
 
 		    String nextLine;
-		    int currentLine = 0;
 		    
 		    BlockingQueue<List<CoreMap>> spotlightQueue = new ArrayBlockingQueue<List<CoreMap>>(QUEUESIZE);	    
 		    BlockingQueue<List<CoreMap>> foxQueue = new ArrayBlockingQueue<List<CoreMap>>(QUEUESIZE);		    
@@ -87,34 +83,30 @@ public class RelationExtraction {
 		    Thread spotlight = new Thread(spotlightThread);
 		    spotlight.start();
 		    
-		    Thread fox = new Thread(foxThread);
-		//    fox.start();
+//		    Thread fox = new Thread(foxThread);
+//		    fox.start();
 		    while((nextLine = reader.readLine()) != null) {		
-		    	System.out.println("----");
 		    	List<CoreMap> sentences = PARSER.getSentences(nextLine);
-		    	String next = "";
-		    	List<CoreMap> next2 = new ArrayList<CoreMap>();
+		    	List<CoreMap> nextSentences = new ArrayList<CoreMap>();
 		    	int currentLength = 0;
 		    	for(CoreMap sentence: sentences) {
-		    		//if(next.length() + sentence.toString().length() > CHARACTERLIMIT) {
 		    		if(currentLength + sentence.toString().length() > CHARACTERLIMIT) {
-		    			//next = PARSER.coreferenceResolution(next);
-		    			next = PARSER.coreferenceResolution(next2);
-		    			System.out.println(next);
-			    		List<CoreMap> sentencesRelations = PARSER.calculateRelations(next);
+		    			String coRef = PARSER.coreferenceResolution(nextSentences);
+		    			System.out.println(coRef);
+			    		List<CoreMap> sentencesRelations = PARSER.calculateRelations(coRef);
 			    		spotlightQueue.put(sentencesRelations);
 //			    		foxQueue.put(sentencesRelations);
-			    		next2 = new ArrayList<CoreMap>();
+			    		nextSentences = new ArrayList<CoreMap>();
 			    		currentLength = 0;
 		    		} else {
-		    			next2.add(sentence);
+		    			nextSentences.add(sentence);
 		    			currentLength += sentence.toString().length();
 		    		}
 		    	}
 		    	if(currentLength > 0) {
-		    		next = PARSER.coreferenceResolution(next2);
-	    			System.out.println(next);
-		    		List<CoreMap> sentencesRelations = PARSER.calculateRelations(next);
+		    		String coRef = PARSER.coreferenceResolution(nextSentences);
+	    			System.out.println(coRef);
+		    		List<CoreMap> sentencesRelations = PARSER.calculateRelations(coRef);
 		    		spotlightQueue.put(sentencesRelations);
 //		    		foxQueue.put(sentencesRelations);	    		
 		    	}
@@ -126,13 +118,12 @@ public class RelationExtraction {
 //		    		spotlightQueue.put(sentences);
 //		    		foxQueue.put(sentences);
 //		    	}	
-		    	currentLine++;
 		    }
 		    
 		    spotlightQueue.put(new ArrayList<CoreMap>());
 		    foxQueue.put(new ArrayList<CoreMap>());
 		    spotlight.join();
-		//    fox.join();
+//		    fox.join();
 		    
 		} catch (IOException  e) {
 			e.printStackTrace();
@@ -148,48 +139,36 @@ public class RelationExtraction {
 	
 	/**
 	 * Writes the property List into a json file.
-	 * 
 	 */
 	private void toJsonFile() {
-
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		String json = null;
-
 		try {
-			json = ow.writeValueAsString(properties);
-		} catch (JsonProcessingException e) {
+			String json = ow.writeValueAsString(properties);
+			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("properties.json"));
+			writer.write(json);
+			writer.close();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		 try {
-				OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("properties.json"));
-				writer.write(json);
-				writer.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 	}
 	
 	
 	/**
-	 * Reads a Json-file containing a List of Relations and assigns them to property list.
-	 * 
+	 * Reads a Json-file containing a List of Relations and puts them into a property list.
 	 */
 	private void readJson() {
 		ObjectMapper mapper = new ObjectMapper();
 		try 
-		{  String json = Files.toString(new File("properties.json"), Charsets.UTF_8);
-			
-			properties =   mapper.readValue(json , new TypeReference<ArrayList<Relation>>(){});
+		{  String json = Files.toString(new File("properties.json"), Charsets.UTF_8);			
+			properties = mapper.readValue(json , new TypeReference<ArrayList<Relation>>(){});
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	
-	/** Adds the number of properties with exactly the same range and domain to each property
-	 * 
+	/** 
+	 * Adds the number of properties with exactly the same range and domain to each property.
 	 */
 	private void countOfRangeDomain() {
 		for(Relation r: properties) {
@@ -203,11 +182,12 @@ public class RelationExtraction {
 		}
 	}
 	
-	/**Creates List of properties from src/main/resources/ontology_english.nt	 * 
-	 * 
+	/**
+	 * Creates a List of properties from src/main/resources/ontology_english.nt .
 	 */
 	private void parseProperties() {
-		properties = new ArrayList<Relation>(); Model ontology = ModelFactory.createDefaultModel();
+		properties = new ArrayList<Relation>(); 
+		Model ontology = ModelFactory.createDefaultModel();
 		ontology.read("src/main/resources/ontology_english.nt");
 		
 		ResIterator subjects = ontology.listSubjects();
@@ -224,7 +204,7 @@ public class RelationExtraction {
 					property.setKeys(temp.substring(0, temp.length()-3));
 					
 					ArrayList<String> keys = property.getKeywords();
-					if(keys.size() >= 2 && !PARSER.isNounVerb(keys.get(0))) {
+					if(keys.size() >= 2 && !PARSER.isNounOrVerb(keys.get(0))) {
 						String newKey = "";
 						for(String key: keys) {
 							newKey += " " + key;
@@ -242,9 +222,7 @@ public class RelationExtraction {
 			}	
 			if(!property.toString().contains("null")) properties.add(property);			
 		}
-		
-		
-		
+			
 		countOfRangeDomain();
 	}
 	
@@ -261,7 +239,7 @@ public class RelationExtraction {
 		RelationExtraction n = new RelationExtraction();	
 //		n.parseProperties();
 //		n.toJsonFile();
-		n.retrieveRelations(new File("resources/test6.txt"), "src/main/resources/model.ttl");
+		n.retrieveRelations("resources/test1.txt", "src/main/resources/model.ttl");
 //		SpotlightWebservice service = new SpotlightWebservice();
 //		for(Entity e: service.getEntitiesProcessed("During his first two years in office, Obama signed many landmark bills into law. The main reforms were the Patient Protection and Affordable Care Act (often referred to as \"Obamacare\", shortened as the \"Affordable Care Act\"), the Dodd–Frank Wall Street Reform and Consumer Protection Act, and the Don't Ask, Don't Tell Repeal Act of 2010. The American Recovery and Reinvestment Act of 2009 and Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act of 2010 served as economic stimulus amidst the Great Recession. After a lengthy debate over the national debt limit, he signed the Budget Control and the American Taxpayer Relief Acts. In foreign policy, he increased U.S. troop levels in Afghanistan, reduced nuclear weapons with the United States–Russia New START treaty, and ended military involvement in the Iraq War. He ordered military involvement in Libya in opposition to Muammar Gaddafi; Gaddafi was killed by NATO-assisted forces, and he also ordered the military operation that resulted in the deaths of Osama bin Laden and suspected Yemeni Al-Qaeda operative Anwar al-Awlaki.")) {
 //			System.out.println(e);

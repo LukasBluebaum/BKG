@@ -11,7 +11,7 @@ public class Worker implements Runnable{
 	
 	private static final Pattern PARENTHESES = Pattern.compile("\\(.*?\\)");
 	
-	private static final Pattern SYMBOLS = Pattern.compile("[^a-zA-Z0-9. ]");
+	private static final Pattern SYMBOLS = Pattern.compile("[^a-zA-Z0-9., ]");
 	
 	private static final Pattern NULLCHAR = Pattern.compile("\0");
 	
@@ -67,6 +67,11 @@ public class Worker implements Runnable{
 		} 
 	}
 	
+	/**
+	 * Removes nullchars, urls, parantheses, special symbols and whitespace from the given string.
+	 * @param article
+	 * @return
+	 */
 	private String cleanArticle(String article) {
 		//article = NULLCHAR.matcher(article).replaceAll("");
 		article = URLS.matcher(article).replaceAll("");
