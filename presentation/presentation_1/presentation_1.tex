@@ -115,12 +115,12 @@ University of Paderborn \\ % Your institution for the title page
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Extraction and cleaning of text from Wikipedia Dump}
+\frametitle{Extraction and Cleaning of text from Wikipedia Dump}
 \begin{block}{Foundation}
-	Wikipedia Dump consisting of plain text without markup, infoboxes or chapter subdivision 
+	Wikipedia dump consisting of plain text without markup, infoboxes or chapter subdivision 
 \end{block}
 \begin{itemize}
-	\item Using regular expressions to remove unnecessary URLs, parentheses, whitespace, nullchar, symbols
+	\item Using regular expressions to remove unnecessary URLs, parentheses, whitespace, null char, symbols
 	\item WikiCleaner class using Writer and Reader Threads for faster cleaning
 \end{itemize}
 \end{frame}
@@ -195,7 +195,7 @@ University of Paderborn \\ % Your institution for the title page
 \end{itemize}
 \end{block}
 \begin{itemize}
-	\item[] $\Rightarrow$ Done by given Frameworks
+	\item[] $\Rightarrow$ Done by given frameworks
 \end{itemize}
 
 \end{frame}
@@ -209,13 +209,13 @@ University of Paderborn \\ % Your institution for the title page
 \begin{frame}
 \frametitle{Relation Extraction}
 \begin{itemize}
-	\item Two ways of extracting Relations:
+	\item Two ways of extracting relations:
 	\begin{itemize}
 		\item Fox in 're' mode, performing entity recognition as well as relation extraction
 		\begin{itemize}
 			\item Saving triple statements
 		\end{itemize}
-		\item Our RelationExtraction Method using OpenIE and Spotlight 
+		\item Our RelationExtraction method using OpenIE and Spotlight 
 	\end{itemize}
 	\item Limited to the first part of each article (summarizes the facts)
 \end{itemize}
@@ -255,7 +255,7 @@ University of Paderborn \\ % Your institution for the title page
 \begin{itemize}
 	\item Splitting sentences into shorter fragments, appeal to natural logic to maintain context
 	\item Traverse dependency parse tree recursively \cite{p1}
-	\item Disadvantage in our case: have to filter for entity to entity relation 
+	\item Disadvantage in our case: have to filter for entity to entity relations 
 	\item After finding the binary relation (OpenIE Triple) between entities: Map them to DBpedia ontology
 \end{itemize}
 \end{frame}
@@ -292,13 +292,13 @@ University of Paderborn \\ % Your institution for the title page
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Upcoming Task}
+\frametitle{Upcoming Tasks}
 \begin{itemize}
 	\item Already able to build a knowledge graph, but thinking about further improvements for our own relation extraction
 	\begin{itemize}
 		\item e.g. more keywords / heuristics for finding the best property
 		\item e.g. find entity to literal relations 
-		\item long runtime due to response time of Fox/Spotlight and delay for scheduling Fox/Spotlight requests
+		\item long runtime due to the response time of Fox/Spotlight and delay for scheduling Fox/Spotlight requests
 		\item[] $\Rightarrow$ avoid running it before all improvements are made
 	\end{itemize}
 	\item Benchmarking as soon as we are pleased with the result (whether improvements are needed)
@@ -350,10 +350,10 @@ University of Paderborn \\ % Your institution for the title page
 	\item \textit{Named Entity Recognition and mapping surface form back to sentences} \\
 	\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Havard University} .
 	\end{itemize}
-	\item Enity to literal extraction: Obama - be bear on - August 4 1961. \begin{itemize} \item Search for entity in subject of the binary relations. \\ $\Rightarrow$ Obama (Types: Person, ...) 
+	\item Entity to literal extraction: Obama - be bear on - August 4 1961. \begin{itemize} \item Search for entity in subject of the binary relations. \\ $\Rightarrow$ Obama (Types: Person, ...) 
 	\item Search for literal in object: $\Rightarrow$ detects numbers 
 	\item Search if object contains a date if not extract single literal: \\ $\Rightarrow$ detects month + numbers (date found)
-	\item Convert to dateformat: $\Rightarrow$  1961-08-04
+	\item Convert to date format: $\Rightarrow$  1961-08-04
 	\item Map relation to property: keyword: bear  $\Rightarrow$ dbo:birthDate (Domain: Person Range: xsd:date)
 	\item write dbo:Barack\_Obama dbo:birhtDate "1961-08-04"\textasciicircum{}\textasciicircum{}xsd:date to graph.
 	\end{itemize}		 
@@ -367,7 +367,7 @@ University of Paderborn \\ % Your institution for the title page
 		\item \textit{Named Entity Recognition and mapping surface form back to sentences} \\
 		\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Havard University} .
 		\end{itemize}
-		\item Enity to entity extraction: Obama - graduate from - Havard University \begin{itemize} \item Search for entity in subject and in object of the binary relations. \\ $\Rightarrow$ Obama (Types: Person, ...), Hardvard University (Type: EducationalInstitution )
+		\item Enity to entity extraction: Obama - graduate from - Havard University \begin{itemize} \item Search for entity in subject and in object of the binary relations. \\ $\Rightarrow$ Obama (Types: Person, ...), Havard University (Type: EducationalInstitution )
 			\item Iterate over all properties with given domain and range
 			\item Map relation to property: \\ keyword: graduate $\Rightarrow$ dbo:almaMater
 			\item write dbo:Barack\_Obama dbo:almaMater dbo:Havard\_University to graph.
