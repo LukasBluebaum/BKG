@@ -332,12 +332,12 @@ University of Paderborn \\ % Your institution for the title page
 \begin{example}[]
 	\begin{itemize}
 		\item \textit{Multiple Sentences (as many as Spotlight can handle):} \\
-		\begin{itemize} \item Obama was born on August 4, 1961, at Kapiolani Medical Center for Women and Children in Honolulu, Hawaii. He graduated from Havard University.
+		\begin{itemize} \item Obama was born on August 4, 1961, at Kapiolani Medical Center for Women and Children in Honolulu, Hawaii. He graduated from Harvard University.
 		\end{itemize}
-		\item Coreference Resolution:  \begin{itemize} \item Obama was born on August 4 , 1961 , at Kapiolani Medical Center for Women and Children in Honolulu , Hawaii . Obama graduated from Havard University. 
+		\item Coreference Resolution:  \begin{itemize} \item Obama was born on August 4 , 1961 , at Kapiolani Medical Center for Women and Children in Honolulu , Hawaii . Obama graduated from Harvard University. 
 		\end{itemize}
 	\item Binary Relation Extraction:  \begin{itemize} \item First sentence: Obama - be bear on - August 4 1961. (among others)
-    \item Second sentence: Obama - graduate from - Havard Law school (among others)
+    \item Second sentence: Obama - graduate from - Harvard Law school (among others)
 	\end{itemize}	 
 	\end{itemize}
 \end{example}
@@ -348,7 +348,7 @@ University of Paderborn \\ % Your institution for the title page
 \begin{example}
 	\begin{itemize}
 	\item \textit{Named Entity Recognition and mapping surface form back to sentences} \\
-	\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Havard University} .
+	\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Harvard University} .
 	\end{itemize}
 	\item Entity to literal extraction: Obama - be bear on - August 4 1961. \begin{itemize} \item Search for entity in subject of the binary relations. \\ $\Rightarrow$ Obama (Types: Person, ...) 
 	\item Search for literal in object: $\Rightarrow$ detects numbers 
@@ -365,12 +365,12 @@ University of Paderborn \\ % Your institution for the title page
 \begin{example}
 	\begin{itemize}
 		\item \textit{Named Entity Recognition and mapping surface form back to sentences} \\
-		\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Havard University} .
+		\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Harvard University} .
 		\end{itemize}
-		\item Enity to entity extraction: Obama - graduate from - Havard University \begin{itemize} \item Search for entity in subject and in object of the binary relations. \\ $\Rightarrow$ Obama (Types: Person, ...), Havard University (Type: EducationalInstitution )
+		\item Enity to entity extraction: Obama - graduate from - Harvard University \begin{itemize} \item Search for entity in subject and in object of the binary relations. \\ $\Rightarrow$ Obama (Types: Person, ...), Harvard University (Type: EducationalInstitution )
 			\item Iterate over all properties with given domain and range
 			\item Map relation to property: \\ keyword: graduate $\Rightarrow$ dbo:almaMater
-			\item write dbo:Barack\_Obama dbo:almaMater dbo:Havard\_University to graph.
+			\item write dbo:Barack\_Obama dbo:almaMater dbo:Harvard\_University to graph.
 		\end{itemize}		 
 
 	\end{itemize}
