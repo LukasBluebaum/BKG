@@ -42,16 +42,32 @@ public class RelationExtraction {
 		
 	private final static int QUEUESIZE = 1000;
 	
-	private static final NLPParser PARSER = new NLPParser();
-	
 	protected static final int ARTICLESPERWRITE = 10;
 	
 	protected static ArrayList<Relation> properties;
 	
 	private static final int CHARACTERLIMIT = 5000;
 		
-	private static Model graph = ModelFactory.createDefaultModel() ;
+	private static Model graph;
+	
+	private static NLPParser parser;
 		
+	/**
+	 * Initializes model and parser. If a properties.json file at the specified location exists, this file will be loaded.
+	 * Otherwise the default ontology will be loaded.
+	 */
+	public RelationExtraction() {
+		graph = ModelFactory.createDefaultModel() ;
+		parser = new NLPParser();
+		File out = new File("src/main/resources/properties.json");		    
+	    if(out.exists()) {
+	    	loadJson();
+	    } else {
+	    	parseProperties();
+	    }
+	}
+	
+	
 	/**
 	 * Calls {@link #parseProperties()} then reads the sentences/strings from the given file and puts them in two BlockingQueues.
 	 * Creates a SpotlightThread and FoxThread, which then read the articles from their given BlockingQueue and try to extract triples.
@@ -64,7 +80,6 @@ public class RelationExtraction {
 	 * @throws InterruptedException
 	 */
 	private void retrieveRelations(String input, String model) throws InterruptedException  {		
-		parseProperties();
 		
 		BufferedReader reader = null;	
 		try {		
@@ -77,7 +92,7 @@ public class RelationExtraction {
 		    
 		    BlockingQueue<List<CoreMap>> spotlightQueue = new ArrayBlockingQueue<List<CoreMap>>(QUEUESIZE);	    
 		    BlockingQueue<List<CoreMap>> foxQueue = new ArrayBlockingQueue<List<CoreMap>>(QUEUESIZE);		    
-		    SpotlightThread spotlightThread = new SpotlightThread(PARSER,graph,out,spotlightQueue);
+		    SpotlightThread spotlightThread = new SpotlightThread(parser,graph,out,spotlightQueue);
 		    FoxThread foxThread = new FoxThread(graph,out,foxQueue);
 		    
 		    Thread spotlight = new Thread(spotlightThread);
@@ -86,14 +101,14 @@ public class RelationExtraction {
 //		    Thread fox = new Thread(foxThread);
 //		    fox.start();
 		    while((nextLine = reader.readLine()) != null) {		
-		    	List<CoreMap> sentences = PARSER.getSentences(nextLine);
+		    	List<CoreMap> sentences = parser.getSentences(nextLine);
 		    	List<CoreMap> nextSentences = new ArrayList<CoreMap>();
 		    	int currentLength = 0;
 		    	for(CoreMap sentence: sentences) {
 		    		if(currentLength + sentence.toString().length() > CHARACTERLIMIT) {
-		    			String coRef = PARSER.coreferenceResolution(nextSentences);
+		    			String coRef = parser.coreferenceResolution(nextSentences);
 		    			System.out.println(coRef);
-			    		List<CoreMap> sentencesRelations = PARSER.calculateRelations(coRef);
+			    		List<CoreMap> sentencesRelations = parser.calculateRelations(coRef);
 			    		spotlightQueue.put(sentencesRelations);
 //			    		foxQueue.put(sentencesRelations);
 			    		nextSentences = new ArrayList<CoreMap>();
@@ -104,9 +119,9 @@ public class RelationExtraction {
 		    		}
 		    	}
 		    	if(currentLength > 0) {
-		    		String coRef = PARSER.coreferenceResolution(nextSentences);
+		    		String coRef = parser.coreferenceResolution(nextSentences);
 	    			System.out.println(coRef);
-		    		List<CoreMap> sentencesRelations = PARSER.calculateRelations(coRef);
+		    		List<CoreMap> sentencesRelations = parser.calculateRelations(coRef);
 		    		spotlightQueue.put(sentencesRelations);
 //		    		foxQueue.put(sentencesRelations);	    		
 		    	}
@@ -140,6 +155,7 @@ public class RelationExtraction {
 	/**
 	 * Writes the property List into a json file.
 	 */
+	@SuppressWarnings("unused")
 	private void toJsonFile() {
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 		try {
@@ -156,10 +172,10 @@ public class RelationExtraction {
 	/**
 	 * Reads a Json-file containing a List of Relations and puts them into a property list.
 	 */
-	private void readJson() {
+	private void loadJson() {
 		ObjectMapper mapper = new ObjectMapper();
 		try 
-		{  String json = Files.toString(new File("properties.json"), Charsets.UTF_8);			
+		{  String json = Files.toString(new File("src/main/resources/properties.json"), Charsets.UTF_8);			
 			properties = mapper.readValue(json , new TypeReference<ArrayList<Relation>>(){});
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -204,7 +220,7 @@ public class RelationExtraction {
 					property.setKeys(temp.substring(0, temp.length()-3));
 					
 					ArrayList<String> keys = property.getKeywords();
-					if(keys.size() >= 2 && !PARSER.isNounOrVerb(keys.get(0))) {
+					if(keys.size() >= 2 && !parser.isNounOrVerb(keys.get(0))) {
 						String newKey = "";
 						for(String key: keys) {
 							newKey += " " + key;
@@ -239,7 +255,7 @@ public class RelationExtraction {
 		RelationExtraction n = new RelationExtraction();	
 //		n.parseProperties();
 //		n.toJsonFile();
-		n.retrieveRelations("resources/test1.txt", "src/main/resources/model.ttl");
+		n.retrieveRelations("resources/out.txt", "src/main/resources/model.ttl");
 //		SpotlightWebservice service = new SpotlightWebservice();
 //		for(Entity e: service.getEntitiesProcessed("During his first two years in office, Obama signed many landmark bills into law. The main reforms were the Patient Protection and Affordable Care Act (often referred to as \"Obamacare\", shortened as the \"Affordable Care Act\"), the Dodd–Frank Wall Street Reform and Consumer Protection Act, and the Don't Ask, Don't Tell Repeal Act of 2010. The American Recovery and Reinvestment Act of 2009 and Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act of 2010 served as economic stimulus amidst the Great Recession. After a lengthy debate over the national debt limit, he signed the Budget Control and the American Taxpayer Relief Acts. In foreign policy, he increased U.S. troop levels in Afghanistan, reduced nuclear weapons with the United States–Russia New START treaty, and ended military involvement in the Iraq War. He ordered military involvement in Libya in opposition to Muammar Gaddafi; Gaddafi was killed by NATO-assisted forces, and he also ordered the military operation that resulted in the deaths of Osama bin Laden and suspected Yemeni Al-Qaeda operative Anwar al-Awlaki.")) {
 //			System.out.println(e);

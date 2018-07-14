@@ -1,7 +1,49 @@
+<http://dbpedia.org/resource/Honolulu>
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
+                <http://schema.org/Place> , <http://www.wikidata.org/entity/Q515> , <http://dbpedia.org/ontology/Location> , <http://schema.org/City> , <http://dbpedia.org/ontology/Settlement> , <http://dbpedia.org/ontology/City> , <http://dbpedia.org/ontology/Place> , <http://www.wikidata.org/entity/Q486972> , <http://dbpedia.org/ontology/PopulatedPlace> ;
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Honolulu"@en ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Honolulu"@en .
+
+<http://dbpedia.org/resource/Nazi_Germany>
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
+                <http://schema.org/Country> , <http://dbpedia.org/ontology/PopulatedPlace> , <http://dbpedia.org/ontology/Location> , <http://dbpedia.org/ontology/Place> , <http://dbpedia.org/ontology/Country> , <http://www.wikidata.org/entity/Q6256> , <http://schema.org/Place> ;
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Nazi Germany"@en ;
+        <http://dbpedia.org/ontology/populationTotal>
+                "8256000"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Nazi Germany"@en .
+
+<http://dbpedia.org/resource/Germany>
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
+                <http://dbpedia.org/ontology/Country> , <http://dbpedia.org/ontology/Place> , <http://schema.org/Place> , <http://schema.org/Country> , <http://dbpedia.org/ontology/Location> , <http://dbpedia.org/ontology/PopulatedPlace> , <http://www.wikidata.org/entity/Q6256> ;
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Germany"@en ;
+        <http://dbpedia.org/ontology/populationTotal>
+                "82000000"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> , "82000000000000"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+        <http://dbpedia.org/ontology/populationUrban>
+                "82000000"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Germany"@en .
+
 <http://dbpedia.org/resource/Barack_Obama>
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
+                <http://dbpedia.org/ontology/Person> , <http://www.wikidata.org/entity/Q24229398> , <file:///C:/Users/Lukas/Documents/BKG/http> , <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#NaturalPerson> , <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent> , <http://www.wikidata.org/entity/Q215627> , <http://www.wikidata.org/entity/Q5> , <http://dbpedia.org/ontology/President> , <http://dbpedia.org/ontology/Agent> , <http://www.wikidata.org/entity/Q82955> , <http://schema.org/Person> , <http://www.wikidata.org/entity/Q30461> , <http://dbpedia.org/ontology/Politician> ;
         <http://www.w3.org/2000/01/rdf-schema#/label>
                 "Barack Obama"@en ;
         <http://dbpedia.org/ontology/birthPlace>
                 <http://dbpedia.org/resource/Hawaii> , <http://dbpedia.org/resource/Honolulu> ;
-        <http://dbpedia.org/ontology/birthYear>
-                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> .
+        <http://dbpedia.org/ontology/citizenship>
+                <http://dbpedia.org/resource/Hawaii> , <http://dbpedia.org/resource/Honolulu> ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Barack Obama"@en .
+
+<http://dbpedia.org/resource/Hawaii>
+        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
+                <http://dbpedia.org/ontology/PopulatedPlace> , <http://dbpedia.org/ontology/Location> , <http://dbpedia.org/ontology/AdministrativeRegion> , <http://dbpedia.org/ontology/Place> , <http://www.wikidata.org/entity/Q3455524> , <http://dbpedia.org/ontology/Region> , <http://schema.org/Place> , <http://schema.org/AdministrativeArea> ;
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Hawaii"@en ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Hawaii"@en .

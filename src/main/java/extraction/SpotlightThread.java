@@ -21,6 +21,9 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.shared.Lock;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import edu.stanford.nlp.ie.util.RelationTriple;
@@ -123,7 +126,10 @@ public class SpotlightThread implements Runnable {
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		try {
 			Thread.sleep(100);
-			entityList =  (ArrayList<Entity>) service.getEntitiesProcessed(sentences.toString());
+			String result = service.getEntities(sentences.toString());
+			entityList =  (ArrayList<Entity>) service.postProcessing(result);
+			writeTypes(result);
+			
 		} catch (IOException | ParseException | InterruptedException e) {
 			e.printStackTrace();
 			return;
@@ -156,6 +162,50 @@ public class SpotlightThread implements Runnable {
 	}
 	
 	/**
+	 * Writes the types for the entities into the graph.
+	 * @param response Last spotlight demo response.
+	 * @throws ParseException
+	 */
+	private void writeTypes(final String response) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) parser.parse(response);
+
+		JSONArray resources = (JSONArray) jsonObject.get("Resources");
+		if (resources != null) {
+			for (Object res : resources.toArray()) {
+				JSONObject next = (JSONObject) res;
+				String uri = ((String) next.get("@URI"));
+				String type = ((String) next.get("@types"));
+				
+				String[] comma = type.split(",");
+				String typeUri = "";
+				for(String typeLink: comma) {
+					String[] split = typeLink.split(":");
+					switch(split[0]) {
+					case("Wikidata") : typeUri =  "http://www.wikidata.org/entity/" + split[1]; break;
+					case("DUL") : typeUri =  "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#" + split[1]; break;
+					case("DBpedia") : typeUri =  "http://dbpedia.org/ontology/" + split[1]; break;
+					case("Schema") : typeUri =  "http://schema.org/" + split[1]; break;
+					}
+					if(split[0].toLowerCase().startsWith("http")) {
+						typeUri = Character.toLowerCase(split[0].charAt(0)) + split[0].substring(1);
+					}
+					Resource subject = ResourceFactory.createResource(uri);
+					Property predicate = ResourceFactory.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#/type");
+					RDFNode object = ResourceFactory.createResource(typeUri);
+					Statement statement = ResourceFactory.createStatement(subject, predicate, object);
+					graph.enterCriticalSection(Lock.WRITE);
+					try {
+						graph.add(statement);	
+					} finally {
+						graph.leaveCriticalSection();
+					}
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Iterates through the binary relations of a sentence and tries to map the subject and object of these to entities which
 	 * were found in the current sentence. Finally tries to map the predicate of the binary relation to an existing property.
 	 * If there is an entity in the subject also calls {@link #literalRelation()} to search for literal relations.
@@ -172,25 +222,25 @@ public class SpotlightThread implements Runnable {
 									
 					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())
 							|| triple.subjectGloss().contains(entity2.getSurfaceForm()) && triple.objectGloss().contains(entity.getSurfaceForm())) {						
-						String tripleRelation = triple.relationLemmaGloss();
+						String tripleRelation = triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
 						for(Relation rel: RelationExtraction.properties) {
 							
 							if( (entity.getTypes().contains(rel.getDomain()) || rel.getDomain().equals("")) 
 									&& (entity2.getTypes().contains(rel.getRange()) || rel.getRange().equals(""))) {
-								String[] tripleR = tripleRelation.split(" ");
-								for(String word: tripleR) {
-									if(rel.getKeywords().contains(word)) {
-										Resource subject = ResourceFactory.createResource(entity.getUri());
-										Property predicate = ResourceFactory.createProperty(rel.getLabel());
-										RDFNode object = ResourceFactory.createResource(entity2.getUri());
-										Statement statement = ResourceFactory.createStatement(subject, predicate, object);
-										graph.enterCriticalSection(Lock.WRITE);
-										try {
-											graph.add(statement);	
-										} finally {
-											graph.leaveCriticalSection();
-										}
+								String[] tripleR = tripleRelation.toLowerCase().split(" ");
+								if(checkKeywords(rel,tripleR)) {	
+									Resource subject = ResourceFactory.createResource(entity.getUri());
+									Property predicate = ResourceFactory.createProperty(rel.getLabel());
+									RDFNode object = ResourceFactory.createResource(entity2.getUri());
+									Statement statement = ResourceFactory.createStatement(subject, predicate, object);
+									graph.enterCriticalSection(Lock.WRITE);
+									try {
+										graph.add(statement);	
+									} finally {
+										graph.leaveCriticalSection();
 									}
+									setLabelAndName(entity);
+									setLabelAndName(entity2);
 								}
 							}
 						}					
@@ -241,33 +291,60 @@ public class SpotlightThread implements Runnable {
 						if((entity.getTypes().contains(rel.getDomain()) || rel.getDomain().equals("")) && rel.getPropertyType().equals("data") &&
 								!rel.getRange().toLowerCase().contains("string")) {
 							String tripleRelation = triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
-							String[] tripleR = tripleRelation.split(" ");	
-							for(String word: tripleR) {
-								if(rel.getKeywords().contains(word)) {
-									//if the number that was found is a date but the found property does not have the range date then break 
-									if((data.contains("-") && !rel.getRange().contains("date")) || rel.getRange().contains("date") && !data.contains("-") ) {
-										break;
-									}									
-									Resource subject = ResourceFactory.createResource(entity.getUri());
-									Property predicate = ResourceFactory.createProperty(rel.getLabel());
-									TypeMapper mapper = TypeMapper.getInstance();
-									RDFDatatype type = mapper.getTypeByName(rel.getRange());
-									RDFNode object = ResourceFactory.createTypedLiteral(data, type);
-									Statement statement = ResourceFactory.createStatement(subject, predicate, object);									
-									graph.enterCriticalSection(Lock.WRITE);
-									try {
-										graph.add(statement);	
-									} finally {
-										graph.leaveCriticalSection();
-									}
-									setLabel(entity);
+							String[] tripleR = tripleRelation.toLowerCase().split(" ");	
+							if(checkKeywords(rel,tripleR)) {	
+								//if the number that was found is a date but the found property does not have the range date then break 
+								if((data.contains("-") && !rel.getRange().contains("date")) || rel.getRange().contains("date") && !data.contains("-") ) {
+									break;
+								}									
+								Resource subject = ResourceFactory.createResource(entity.getUri());
+								Property predicate = ResourceFactory.createProperty(rel.getLabel());
+								TypeMapper mapper = TypeMapper.getInstance();
+								RDFDatatype type = mapper.getTypeByName(rel.getRange());
+								RDFNode object = ResourceFactory.createTypedLiteral(data, type);
+								Statement statement = ResourceFactory.createStatement(subject, predicate, object);									
+								graph.enterCriticalSection(Lock.WRITE);
+								try {
+									graph.add(statement);	
+								} finally {
+									graph.leaveCriticalSection();
 								}
+								setLabelAndName(entity);
 							}
 						}
 					}		
 	        	}        	
 			}		
 		}		
+	}
+	
+	/**
+	 * Checks the words inside the predicate and object of the binary relation against the list of keywords  
+	 * for the current property.
+	 * @param rel 
+	 * @param tripleR Predicate and object of the current binary relation. 
+	 * @return True if the keywords for the property match words inside the predicate and object of the binary relation,
+	 * false otherwise.
+	 */
+	private boolean checkKeywords(Relation rel, String[] tripleR) {
+		ArrayList<String> keywords= rel.getKeywords();
+		
+		ArrayList<String> wordsFound = new ArrayList<String>(Arrays.asList(tripleR));
+		for(String keyList: keywords) {
+			// one or multiple keywords have to appear together
+			String[] partKey = keyList.split(" ");
+			boolean found = false;
+			for(String key: partKey) {
+				if(wordsFound.contains(key)) {
+					found = true;
+				} else {
+					found = false;
+					break;
+				}
+			}
+			if(found) return true;
+		}		
+		return false;
 	}
 	
 	/**
@@ -293,22 +370,28 @@ public class SpotlightThread implements Runnable {
 	}
 	
 	/**
-	 * Creates a triple for the rdfs:label relation and the given entity.
+	 * Creates two triples for the rdfs:label and foaf:name relation and the given entity.
 	 * @param entity
 	 */
-	private void setLabel(Entity entity) {
+	private void setLabelAndName(Entity entity) {
 		Resource subject = ResourceFactory.createResource(entity.getUri());
 		Property predicate = ResourceFactory.createProperty("http://www.w3.org/2000/01/rdf-schema#/label");		
 		String uri = entity.getUri();
 		String label = uri.substring(uri.lastIndexOf("/")+1).trim().replaceAll("_", " ");
 		RDFNode object = ResourceFactory.createLangLiteral(label, "en");
-		Statement statement = ResourceFactory.createStatement(subject, predicate, object);									
+		Statement statement = ResourceFactory.createStatement(subject, predicate, object);	
+		
+		Resource subjectName = ResourceFactory.createResource(entity.getUri());
+		Property predicateName = ResourceFactory.createProperty("http://xmlns.com/foaf/0.1/name");		
+		RDFNode objectName = ResourceFactory.createLangLiteral(label, "en");
+		Statement statementName = ResourceFactory.createStatement(subjectName, predicateName, objectName);	
 		graph.enterCriticalSection(Lock.WRITE);
 		try {
 			graph.add(statement);	
+			graph.add(statementName);	
 		} finally {
 			graph.leaveCriticalSection();
-		}
+		}	
 	}
 
 	/**

@@ -46,8 +46,10 @@ public class SpotlightWebservice {
 		urlParameters += "&confidence=" + CONFIDENCE;
 		urlParameters += "&support=" + SUPPORT;
 
-		List<Entity> entities = postProcessing(requestPOST(urlParameters, REQUESTURL));
-		System.out.println("Entities: " + entities);
+		String result = requestPOST(urlParameters, REQUESTURL);
+		
+		List<Entity> entities = postProcessing(result);
+		//System.out.println("Entities: " + entities);
 		return entities;
 	}
 	
