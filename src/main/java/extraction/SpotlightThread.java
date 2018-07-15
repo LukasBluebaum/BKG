@@ -72,7 +72,7 @@ public class SpotlightThread implements Runnable {
 	public void run() {
 		FileWriter writer = null;		
 		try {
-			writer = new FileWriter(model);
+			//writer = new FileWriter(model,false);
 			
 			int lastWrite = 0;
 			while(true) {
@@ -81,23 +81,26 @@ public class SpotlightThread implements Runnable {
 				if(nextLine.size() == 0) break;
 				getRelationsSpotlight(nextLine);
 								
-				if(lastWrite >= RelationExtraction.ARTICLESPERWRITE) {
+				//if(lastWrite >= RelationExtraction.ARTICLESPERWRITE) {
 					graph.enterCriticalSection(Lock.WRITE);
 					try {
-						System.out.println("Spotlight Enter Critical. Write.");
-						System.out.println("Spotlight:" + lastWrite);
+						//System.out.println("Spotlight Enter Critical. Write.");
+						//System.out.println("Spotlight:" + lastWrite);
+						writer = new FileWriter(model,false);
 						graph.write(writer, "TTL");
 					} finally {
-						System.out.println("Spotlight Leave Critical. Write.");
+						//System.out.println("Spotlight Leave Critical. Write.");
 						graph.leaveCriticalSection();
 					}
 					lastWrite = 0;
-				}
+				//}
 			}               
  	 			
 			graph.enterCriticalSection(Lock.WRITE);
 			try {
+				writer = new FileWriter(model,false);
 				graph.write(writer, "TTL");
+				graph.write(System.out,"TTL");
 			} finally {
 				graph.leaveCriticalSection();
 			}
@@ -128,7 +131,7 @@ public class SpotlightThread implements Runnable {
 			Thread.sleep(100);
 			String result = service.getEntities(sentences.toString());
 			entityList =  (ArrayList<Entity>) service.postProcessing(result);
-			writeTypes(result);
+			//writeTypes(result);
 			
 		} catch (IOException | ParseException | InterruptedException e) {
 			e.printStackTrace();
@@ -190,15 +193,17 @@ public class SpotlightThread implements Runnable {
 					if(split[0].toLowerCase().startsWith("http")) {
 						typeUri = Character.toLowerCase(split[0].charAt(0)) + split[0].substring(1);
 					}
-					Resource subject = ResourceFactory.createResource(uri);
-					Property predicate = ResourceFactory.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#/type");
-					RDFNode object = ResourceFactory.createResource(typeUri);
-					Statement statement = ResourceFactory.createStatement(subject, predicate, object);
-					graph.enterCriticalSection(Lock.WRITE);
-					try {
-						graph.add(statement);	
-					} finally {
-						graph.leaveCriticalSection();
+					if(typeUri.length() != 0) {
+						Resource subject = ResourceFactory.createResource(uri);
+						Property predicate = ResourceFactory.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#/type");
+						RDFNode object = ResourceFactory.createResource(typeUri);
+						Statement statement = ResourceFactory.createStatement(subject, predicate, object);
+						graph.enterCriticalSection(Lock.WRITE);
+						try {
+							graph.add(statement);	
+						} finally {
+							graph.leaveCriticalSection();
+						}
 					}
 				}
 			}
@@ -218,10 +223,11 @@ public class SpotlightThread implements Runnable {
 			if(entity == null) return;
 			literalRelation(entity, i, binaryRelations);
 			for(Entity entity2: entities.get(i)) {
+				if(entity.getUri().equals(entity2.getUri())) continue;
 				for(RelationTriple triple: binaryRelations.get(i)) {					
 									
-					if(triple.subjectGloss().contains(entity.getSurfaceForm()) && triple.objectGloss().contains(entity2.getSurfaceForm())
-							|| triple.subjectGloss().contains(entity2.getSurfaceForm()) && triple.objectGloss().contains(entity.getSurfaceForm())) {						
+					if(triple.subjectGloss().trim().equals(entity.getSurfaceForm()) && triple.objectGloss().trim().equals(entity2.getSurfaceForm())
+							/*|| triple.subjectGloss().trim().equals(entity2.getSurfaceForm()) && triple.objectGloss().contains(entity.getSurfaceForm())*/) {						
 						String tripleRelation = triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
 						for(Relation rel: RelationExtraction.properties) {
 							
@@ -261,7 +267,7 @@ public class SpotlightThread implements Runnable {
 	private void literalRelation(Entity entity, int i, Map<Integer, Collection<RelationTriple>> binaryRelations) {
 		for(RelationTriple triple: binaryRelations.get(i)) {
 			String data = null;
-			if(triple.subjectGloss().contains(entity.getSurfaceForm())){
+			if(triple.subjectGloss().trim().equals(entity.getSurfaceForm())){
 				String value = COMMA.matcher(triple.objectLemmaGloss()).replaceAll("");
 				value = NUMBERS.matcher(value).replaceAll(" ");
 	        	if(!value.trim().isEmpty()) {
@@ -272,7 +278,9 @@ public class SpotlightThread implements Runnable {
 	        			if(numbers.length == 2) {
 	        				data = numbers[1] + "-" + (month < 10 ? "0" + month : month) + "-" +
 	        						(numbers[0].length() != 1 ? numbers[0] : "0" + numbers[0]);
-	        			}         			
+	        			}else if(numbers.length == 1) {
+	        				data = numbers[0];
+	        			}
 	        		} else {
 	        			if(numbers.length == 1) {
 	        				int zeros = mapNumber(triple.objectLemmaGloss(), numbers[0]);
@@ -286,7 +294,7 @@ public class SpotlightThread implements Runnable {
 	        			} 
 	        		}	        		
 	        	}
-	        	if(data != null) {
+	        	if(data != null && data.length() > 0) {
 	        		for(Relation rel: RelationExtraction.properties) {
 						if((entity.getTypes().contains(rel.getDomain()) || rel.getDomain().equals("")) && rel.getPropertyType().equals("data") &&
 								!rel.getRange().toLowerCase().contains("string")) {
@@ -296,7 +304,11 @@ public class SpotlightThread implements Runnable {
 								//if the number that was found is a date but the found property does not have the range date then break 
 								if((data.contains("-") && !rel.getRange().contains("date")) || rel.getRange().contains("date") && !data.contains("-") ) {
 									break;
-								}									
+								}
+								//if the property has year as range but the found number does not consist of 4 digits break
+								if(rel.getRange().contains("Year") && data.length() != 4) {
+									break;
+								}
 								Resource subject = ResourceFactory.createResource(entity.getUri());
 								Property predicate = ResourceFactory.createProperty(rel.getLabel());
 								TypeMapper mapper = TypeMapper.getInstance();

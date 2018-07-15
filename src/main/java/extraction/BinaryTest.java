@@ -79,7 +79,7 @@ public class BinaryTest {
 //	 		writer.close();
 	 		
 	 		
-		 	Annotation doc = new Annotation("Obama was born on August 4, 1961, at Kapiolani Medical Center for Women and Children in Honolulu, Hawaii. Obama graduated from Harvard University.");
+		 	Annotation doc = new Annotation("His mother spent most of the next two decades in Indonesia, divorcing Lolo in 1980 and earning a PhD degree in 1992, before dying in 1995 in Hawaii following unsuccessful treatment for ovarian and uterine cancer.");
 		 	
 			pipeline.annotate(doc);
 			for (CoreMap sentence : doc.get(CoreAnnotations.SentencesAnnotation.class)) {

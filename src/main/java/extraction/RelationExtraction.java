@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -46,7 +47,7 @@ public class RelationExtraction {
 	
 	protected static ArrayList<Relation> properties;
 	
-	private static final int CHARACTERLIMIT = 5000;
+	private static final int CHARACTERLIMIT = 4500;
 		
 	private static Model graph;
 	
@@ -100,15 +101,26 @@ public class RelationExtraction {
 		    
 //		    Thread fox = new Thread(foxThread);
 //		    fox.start();
-		    while((nextLine = reader.readLine()) != null) {		
+		    while((nextLine = reader.readLine()) != null) {	
+		    	final long startTime2 = System.currentTimeMillis();
+		    	
+		    	System.out.println(nextLine.length());
 		    	List<CoreMap> sentences = parser.getSentences(nextLine);
 		    	List<CoreMap> nextSentences = new ArrayList<CoreMap>();
 		    	int currentLength = 0;
 		    	for(CoreMap sentence: sentences) {
 		    		if(currentLength + sentence.toString().length() > CHARACTERLIMIT) {
+		    			final long startTime1 = System.currentTimeMillis();
 		    			String coRef = parser.coreferenceResolution(nextSentences);
-		    			System.out.println(coRef);
+		    			final long endTime1 = System.currentTimeMillis();
+		    			final long test1 = endTime1-startTime1;
+		    			System.out.println("Relation:" + TimeUnit.MILLISECONDS.toSeconds(test1));
+		    			
+		    			final long startTime = System.currentTimeMillis();
 			    		List<CoreMap> sentencesRelations = parser.calculateRelations(coRef);
+			    		final long endTime = System.currentTimeMillis();
+			    		final long test = endTime-startTime;
+		    			System.out.println("Relation:" + TimeUnit.MILLISECONDS.toSeconds(test));
 			    		spotlightQueue.put(sentencesRelations);
 //			    		foxQueue.put(sentencesRelations);
 			    		nextSentences = new ArrayList<CoreMap>();
@@ -120,12 +132,13 @@ public class RelationExtraction {
 		    	}
 		    	if(currentLength > 0) {
 		    		String coRef = parser.coreferenceResolution(nextSentences);
-	    			System.out.println(coRef);
 		    		List<CoreMap> sentencesRelations = parser.calculateRelations(coRef);
 		    		spotlightQueue.put(sentencesRelations);
 //		    		foxQueue.put(sentencesRelations);	    		
 		    	}
-		    	System.out.println("Done with article.");
+		    	final long endTime2 = System.currentTimeMillis();
+    			final long test2 = endTime2-startTime2;
+    			System.out.println("Done with article:" + TimeUnit.MILLISECONDS.toSeconds(test2));
 //		    	if(currentLine >= STARTLINE) {
 //		    		String line = nextLine.length() > CHARACTERLIMIT+1 ? nextLine.substring(0, CHARACTERLIMIT+1) : nextLine;
 //		    		line = PARSER.coreferenceResolution(line);
@@ -255,7 +268,7 @@ public class RelationExtraction {
 		RelationExtraction n = new RelationExtraction();	
 //		n.parseProperties();
 //		n.toJsonFile();
-		n.retrieveRelations("resources/out.txt", "src/main/resources/model.ttl");
+		n.retrieveRelations("resources/abrahamlincoln.txt", "src/main/resources/model.ttl");
 //		SpotlightWebservice service = new SpotlightWebservice();
 //		for(Entity e: service.getEntitiesProcessed("During his first two years in office, Obama signed many landmark bills into law. The main reforms were the Patient Protection and Affordable Care Act (often referred to as \"Obamacare\", shortened as the \"Affordable Care Act\"), the Dodd–Frank Wall Street Reform and Consumer Protection Act, and the Don't Ask, Don't Tell Repeal Act of 2010. The American Recovery and Reinvestment Act of 2009 and Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act of 2010 served as economic stimulus amidst the Great Recession. After a lengthy debate over the national debt limit, he signed the Budget Control and the American Taxpayer Relief Acts. In foreign policy, he increased U.S. troop levels in Afghanistan, reduced nuclear weapons with the United States–Russia New START treaty, and ended military involvement in the Iraq War. He ordered military involvement in Libya in opposition to Muammar Gaddafi; Gaddafi was killed by NATO-assisted forces, and he also ordered the military operation that resulted in the deaths of Osama bin Laden and suspected Yemeni Al-Qaeda operative Anwar al-Awlaki.")) {
 //			System.out.println(e);

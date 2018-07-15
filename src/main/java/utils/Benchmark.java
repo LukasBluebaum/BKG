@@ -3,6 +3,10 @@ package utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,8 +40,8 @@ public class Benchmark {
 			while (it.hasNext()) {
 			     Statement stmt = it.next();
 			     if(subject.contains(stmt.getSubject())) {
-			    	 sizeModel++;
-			    	 
+			    	 System.out.println(stmt);
+			    	 sizeModel++;	    	 
 			     }
 			}
 			
@@ -72,6 +76,7 @@ public class Benchmark {
 		 int validDump = 0;
 		 int totalDump = 0;
 		 try {
+
 			dumpModel.read(new FileInputStream(dump),null, "TTL");
 			StmtIterator it =  dumpModel.listStatements();
 			while (it.hasNext()) {
@@ -99,14 +104,21 @@ public class Benchmark {
 	
 	
 	public static void main(String[] args) {
-	
-		Benchmark b = new Benchmark("src/main/resources/model.ttl", "Presidents_of_the_United_States" );
-		List<String> dumps = Arrays.asList("src/main/resources/disambiguations_en.ttl", "src/main/resources/instance_types_en.ttl", "src/main/resources/instance_types_transitive_en.ttl",
-										    "src/main/resources/labels_en.ttl","src/main/resources/long_abstracts_en.ttl", "src/main/resources/mappingbased_literals_en.ttl", 
-											"src/main/resources/mappingbased_objects_en.ttl", "src/main/resources/persondata_en.ttl", "src/main/resources/specific_mappingbased_properties_en.ttl", "src/main/resources/transitive_redirects_en.ttl");
+		final PrintStream err = new PrintStream(System.err);
+		try {
+			System.setErr(new PrintStream("text"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Benchmark b = new Benchmark("resources/model.ttl", "Presidents_of_the_United_States" );
+//		List<String> dumps = Arrays.asList("src/main/resources/disambiguations_en.ttl", "src/main/resources/instance_types_en.ttl", "src/main/resources/instance_types_transitive_en.ttl",
+//										    "src/main/resources/labels_en.ttl","src/main/resources/long_abstracts_en.ttl", "src/main/resources/mappingbased_literals_en.ttl", 
+//											"src/main/resources/mappingbased_objects_en.ttl", "src/main/resources/persondata_en.ttl", "src/main/resources/specific_mappingbased_properties_en.ttl", "src/main/resources/transitive_redirects_en.ttl");
 		
-	 
+		List<String> dumps = Arrays.asList("resources/instance_types_en.ttl");
 		b.benchmark(dumps);
+		System.setErr(err);
 	}	
 		
 		

@@ -29,7 +29,7 @@
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \author{Lukas Bl{\"u}baum \and Nick D{\"u}sterhus \and Monika Werner}
 %
-\authorrunning{L. Bl{\"u}baum,Nick D{\"u}sterhus  et al.}
+\authorrunning{L. Bl{\"u}baum, Nick D{\"u}sterhus  et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
@@ -44,7 +44,7 @@
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-The goal of this proseminar was to create an encyclopetic knowledge graph from a large text corpus like a wikipedia dump. In order to learn and better understand the basics of Semantic Web technologies. For this we were given a wikipedia dump and the core ontology of DBpedia. To facilitate this task we were introduced to several tools including FOX and DBpedia Spotlight \cite{spotlight}. The whole project is written in Java and as license we used the GNU General Public License v3.0. The documented source code, including instructions on how to run the code, can be found on the given Github repository.
+The goal of this proseminar was to create an encyclopetic knowledge graph from a large text corpus like a wikipedia dump. In order to learn and better understand the basics of Semantic Web technologies. For this we were given a wikipedia dump and the core ontology of DBpedia. To facilitate this task we were introduced to several tools including FOX \cite{fox} and DBpedia Spotlight \cite{spotlight}. The whole project is written in Java and as license we used the GNU General Public License v3.0. The documented source code, including instructions on how to run the code, can be found on the given Github repository.
 
 \keywords{Knowledge Graphs  \and Semantic Web \and Coreference Resolution \and Named Entity Recognition
 \and Entity Disambiguation \and Relation Extraction \and Fox \and Spotlight }
@@ -100,7 +100,7 @@ For this step we use the DBpedia Spotlight web service. We send the text to DBpe
 
 \section{Entity Disambiguation}
 The Entity Disambiguation itself is already done by Spotlight and Fox. Spotlight for example has two approaches for this.
-After they have located a candidate they take the information next to the surface form as information and try to determine the best match based on that. They also try to weigh words on their ability to actually disambiguate between candidates \cite{disambiguate}. Fox and AGDISTIS \cite{agdistis} were already discussed in the lecture.
+After they have located a candidate they take the information next to the surface form as information and try to determine the best match based on that. They also try to weigh words on their ability to actually disambiguate between candidates \cite{disambiguate}. Fox and AGDISTIS \cite{agdistis} \cite{agdistis2} were already discussed in the lecture.
 
 \section{Relation Extraction}
 

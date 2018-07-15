@@ -19,11 +19,12 @@ public class Worker implements Runnable{
 	
 	private static final ArrayList<String> PRESIDENTS = new ArrayList<String>(Arrays.asList("John_Adams", "John_Quincy_Adams" ,"Chester_A._Arthur" ,
 			"James_Buchanan", "George_H._W._Bush","George_W._Bush","Jimmy_Carter","Grover_Cleveland","Bill_Clinton","Calvin_Coolidge","Dwight_D._Eisenhower",
-			"Millard_Fillmore","Gerald_Ford", "James_A._Garfield","Ulysses_S._Grant","Andrew_Johnson","Abraham_Lincoln","Warren_G._Harding",
-			"Benjamin_Harrison","William_Henry_Harrison", "Rutherford_B._Hayes","Herbert_Hoover","Andrew_Jackson","Thomas_Jefferson","Lyndon_B._Johnson",
-			"John_F._Kennedy","James_Madison", "William_McKinley","James_Monroe","Richard_Nixon","Franklin_Pierce","James_K._Polk",
+			"Millard_Fillmore","Gerald_Ford", "James_A._Garfield","Ulysses_S._Grant","Warren_G._Harding",
+			"Benjamin_Harrison","William_Henry_Harrison", "Rutherford_B._Hayes","Herbert_Hoover","Andrew_Jackson","Thomas_Jefferson","Andrew_Johnson","Lyndon_B._Johnson",
+			"John_F._Kennedy","Abraham_Lincoln","James_Madison", "William_McKinley","James_Monroe","Richard_Nixon","Barack_Obama","Franklin_Pierce","James_K._Polk",
 			"Ronald_Reagan","Franklin_D._Roosevelt", "Theodore_Roosevelt","William_Howard_Taft","Zachary_Taylor","Harry_S._Truman","Donald_Trump","John_Tyler",
-			"Martin_Van_Buren","George_Washington", "Woodrow_Wilson", "Barack_Obama"));
+			"Martin_Van_Buren","George_Washington", "Woodrow_Wilson", "List_of_Presidents_of_the_United_States", "Lifespan_timeline_of_Presidents_of_the_United_States",
+			"President_of_the_United_States"));
 	
 	private BlockingQueue<String> readQueue = null;
 	

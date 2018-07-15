@@ -1,49 +1,115 @@
-<http://dbpedia.org/resource/Honolulu>
-        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
-                <http://schema.org/Place> , <http://www.wikidata.org/entity/Q515> , <http://dbpedia.org/ontology/Location> , <http://schema.org/City> , <http://dbpedia.org/ontology/Settlement> , <http://dbpedia.org/ontology/City> , <http://dbpedia.org/ontology/Place> , <http://www.wikidata.org/entity/Q486972> , <http://dbpedia.org/ontology/PopulatedPlace> ;
+<http://dbpedia.org/resource/Whig_Party_(United_States)>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Honolulu"@en ;
+                "Whig Party (United States)"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Honolulu"@en .
+                "Whig Party (United States)"@en .
 
-<http://dbpedia.org/resource/Nazi_Germany>
-        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
-                <http://schema.org/Country> , <http://dbpedia.org/ontology/PopulatedPlace> , <http://dbpedia.org/ontology/Location> , <http://dbpedia.org/ontology/Place> , <http://dbpedia.org/ontology/Country> , <http://www.wikidata.org/entity/Q6256> , <http://schema.org/Place> ;
+<http://dbpedia.org/resource/Federal_government_of_the_United_States>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Nazi Germany"@en ;
-        <http://dbpedia.org/ontology/populationTotal>
-                "8256000"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                "Federal government of the United States"@en ;
+        <http://dbpedia.org/ontology/battle>
+                <http://dbpedia.org/resource/American_Civil_War> ;
         <http://xmlns.com/foaf/0.1/name>
-                "Nazi Germany"@en .
+                "Federal government of the United States"@en .
 
-<http://dbpedia.org/resource/Germany>
-        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
-                <http://dbpedia.org/ontology/Country> , <http://dbpedia.org/ontology/Place> , <http://schema.org/Place> , <http://schema.org/Country> , <http://dbpedia.org/ontology/Location> , <http://dbpedia.org/ontology/PopulatedPlace> , <http://www.wikidata.org/entity/Q6256> ;
+<http://dbpedia.org/resource/George_B._McClellan>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Germany"@en ;
-        <http://dbpedia.org/ontology/populationTotal>
-                "82000000"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> , "82000000000000"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
-        <http://dbpedia.org/ontology/populationUrban>
-                "82000000"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                "George B. McClellan"@en ;
+        <http://dbpedia.org/ontology/battle>
+                <http://dbpedia.org/resource/American_Civil_War> ;
         <http://xmlns.com/foaf/0.1/name>
-                "Germany"@en .
+                "George B. McClellan"@en .
 
-<http://dbpedia.org/resource/Barack_Obama>
-        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
-                <http://dbpedia.org/ontology/Person> , <http://www.wikidata.org/entity/Q24229398> , <file:///C:/Users/Lukas/Documents/BKG/http> , <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#NaturalPerson> , <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent> , <http://www.wikidata.org/entity/Q215627> , <http://www.wikidata.org/entity/Q5> , <http://dbpedia.org/ontology/President> , <http://dbpedia.org/ontology/Agent> , <http://www.wikidata.org/entity/Q82955> , <http://schema.org/Person> , <http://www.wikidata.org/entity/Q30461> , <http://dbpedia.org/ontology/Politician> ;
+<http://dbpedia.org/resource/List_of_ethnic_slurs>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Barack Obama"@en ;
-        <http://dbpedia.org/ontology/birthPlace>
-                <http://dbpedia.org/resource/Hawaii> , <http://dbpedia.org/resource/Honolulu> ;
-        <http://dbpedia.org/ontology/citizenship>
-                <http://dbpedia.org/resource/Hawaii> , <http://dbpedia.org/resource/Honolulu> ;
+                "List of ethnic slurs"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Barack Obama"@en .
+                "List of ethnic slurs"@en .
 
-<http://dbpedia.org/resource/Hawaii>
-        <http://www.w3.org/1999/02/22-rdf-syntax-ns#/type>
-                <http://dbpedia.org/ontology/PopulatedPlace> , <http://dbpedia.org/ontology/Location> , <http://dbpedia.org/ontology/AdministrativeRegion> , <http://dbpedia.org/ontology/Place> , <http://www.wikidata.org/entity/Q3455524> , <http://dbpedia.org/ontology/Region> , <http://schema.org/Place> , <http://schema.org/AdministrativeArea> ;
+<http://dbpedia.org/resource/Patent>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Hawaii"@en ;
+                "Patent"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Hawaii"@en .
+                "Patent"@en .
+
+<http://dbpedia.org/resource/Malaria>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Malaria"@en ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Malaria"@en .
+
+<http://dbpedia.org/resource/Religion>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Religion"@en ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Religion"@en .
+
+<http://dbpedia.org/resource/Milk_sickness>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Milk sickness"@en ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Milk sickness"@en .
+
+<http://dbpedia.org/resource/Personal_flotation_device>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Personal flotation device"@en ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Personal flotation device"@en .
+
+<http://dbpedia.org/resource/Nancy_Lincoln>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Nancy Lincoln"@en ;
+        <http://dbpedia.org/ontology/deathCause>
+                <http://dbpedia.org/resource/Milk_sickness> ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Nancy Lincoln"@en .
+
+<http://dbpedia.org/resource/Mexican–American_War>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Mexican–American War"@en ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Mexican–American War"@en .
+
+<http://dbpedia.org/resource/Abraham_Lincoln>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Abraham Lincoln"@en ;
+        <http://dbpedia.org/ontology/battle>
+                <http://dbpedia.org/resource/Mexican–American_War> , <http://dbpedia.org/resource/American_Civil_War> ;
+        <http://dbpedia.org/ontology/deathYear>
+                "15"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/majorityLeader>
+                1948 , 4 ;
+        <http://dbpedia.org/ontology/party>
+                <http://dbpedia.org/resource/Whig_Party_(United_States)> ;
+        <http://dbpedia.org/ontology/patent>
+                <http://dbpedia.org/resource/Patent> , <http://dbpedia.org/resource/Personal_flotation_device> ;
+        <http://dbpedia.org/ontology/religion>
+                <http://dbpedia.org/resource/Religion> ;
+        <http://dbpedia.org/ontology/uses>
+                <http://dbpedia.org/resource/List_of_ethnic_slurs> ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Abraham Lincoln"@en .
+
+<http://dbpedia.org/resource/American_Civil_War>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "American Civil War"@en ;
+        <http://xmlns.com/foaf/0.1/name>
+                "American Civil War"@en .
+
+<http://dbpedia.org/resource/William_Wallace_Lincoln>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "William Wallace Lincoln"@en ;
+        <http://dbpedia.org/ontology/birthDate>
+                "1850-12-21"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://dbpedia.org/ontology/deathCause>
+                <http://dbpedia.org/resource/Malaria> ;
+        <http://xmlns.com/foaf/0.1/name>
+                "William Wallace Lincoln"@en .
+
+<http://dbpedia.org/resource/Robert_Todd_Lincoln_Beckwith>
+        <http://www.w3.org/2000/01/rdf-schema#/label>
+                "Robert Todd Lincoln Beckwith"@en ;
+        <http://dbpedia.org/ontology/activeYearsEndYear>
+                "1844"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Robert Todd Lincoln Beckwith"@en .

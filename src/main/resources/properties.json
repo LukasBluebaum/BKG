@@ -3738,7 +3738,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/deathYear",
-  "keywords" : [ "death", "kill", "die", "murder", "assasinate" ],
+  "keywords" : [ "death", "kill", "die", "murder", "assasinate" , "assasination" ],
   "range" : "http://www.w3.org/2001/XMLSchema#gYear",
   "domain" : "Person",
   "countRelation" : 6,
@@ -6027,7 +6027,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/timeInSpace",
-  "keywords" : [ "total", "time", "spend", "space" ],
+  "keywords" : [ "time space" ],
   "range" : "http://www.w3.org/2001/XMLSchema#double",
   "domain" : "",
   "countRelation" : 34,
@@ -6804,7 +6804,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/deathDate",
-  "keywords" : [ "death", "date", "die", "kill" ],
+  "keywords" : [ "death", "date", "die", "kill" , "assasination" , "assasinate" ],
   "range" : "http://www.w3.org/2001/XMLSchema#date",
   "domain" : "Person",
   "countRelation" : 11,
@@ -7567,7 +7567,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/electionDate",
-  "keywords" : [ "election" ],
+  "keywords" : [ "elect" ],
   "range" : "http://www.w3.org/2001/XMLSchema#date",
   "domain" : "Person",
   "countRelation" : 11,
@@ -10241,7 +10241,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/commander",
-  "keywords" : [ "commander", "command", "during", "leader" ],
+  "keywords" : [ "commander" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
@@ -10668,7 +10668,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/weapon",
-  "keywords" : [ "weapon" ],
+  "keywords" : [ "" ],
   "range" : "",
   "domain" : "Person",
   "countRelation" : 27,
@@ -10689,7 +10689,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/releaseDate",
-  "keywords" : [ "release", "date", "come", "out", "release" ],
+  "keywords" : [ "release", "come out" ],
   "range" : "http://www.w3.org/2001/XMLSchema#date",
   "domain" : "",
   "countRelation" : 23,
@@ -11207,7 +11207,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/follows",
-  "keywords" : [ "follow" ],
+  "keywords" : [ "" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 63,
@@ -11900,7 +11900,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/governor",
-  "keywords" : [ "governor" ],
+  "keywords" : [ "governor of" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
@@ -12411,7 +12411,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/followedBy",
-  "keywords" : [ "follow" ],
+  "keywords" : [ "" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 63,
@@ -13678,7 +13678,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/leader",
-  "keywords" : [ "leader", "mayor" ],
+  "keywords" : [ "leader", "mayor" , "head of" ],
   "range" : "Person",
   "domain" : "",
   "countRelation" : 38,
@@ -14385,7 +14385,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/second",
-  "keywords" : [ "second" ],
+  "keywords" : [ "" ],
   "range" : "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
   "domain" : "Person",
   "countRelation" : 26,
@@ -16149,7 +16149,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/origin",
-  "keywords" : [ "origin", "make", "start" ],
+  "keywords" : [ "origin" ],
   "range" : "PopulatedPlace",
   "domain" : "",
   "countRelation" : 12,
@@ -16954,7 +16954,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/year",
-  "keywords" : [ "year" ],
+  "keywords" : [ "" ],
   "range" : "http://www.w3.org/2001/XMLSchema#gYear",
   "domain" : "",
   "countRelation" : 16,
@@ -18060,7 +18060,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/language",
-  "keywords" : [ "language", "write" ],
+  "keywords" : [ "language" ],
   "range" : "Language",
   "domain" : "",
   "countRelation" : 4,
@@ -18641,7 +18641,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/age",
-  "keywords" : [ "age", "old" ],
+  "keywords" : [ "" ],
   "range" : "http://www.w3.org/2001/XMLSchema#integer",
   "domain" : "Agent",
   "countRelation" : 1,
@@ -18837,7 +18837,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/uses",
-  "keywords" : [ "use" ],
+  "keywords" : [ "" ],
   "range" : "",
   "domain" : "",
   "countRelation" : 63,
