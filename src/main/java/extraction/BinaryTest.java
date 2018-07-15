@@ -79,7 +79,7 @@ public class BinaryTest {
 //	 		writer.close();
 	 		
 	 		
-		 	Annotation doc = new Annotation("In 1988, Obama enrolled in Harvard Law School, where he was the first black president of the Harvard Law Review.");
+		 	Annotation doc = new Annotation("Obama was born on August 4, 1961, at Kapiolani Medical Center for Women and Children in Honolulu, Hawaii. Obama graduated from Harvard University.");
 		 	
 			pipeline.annotate(doc);
 			for (CoreMap sentence : doc.get(CoreAnnotations.SentencesAnnotation.class)) {
