@@ -122,6 +122,11 @@ public class NLPParser {
 		Map<Integer, Collection<RelationTriple>> binaryRelations = new LinkedHashMap<>();
 
 		for(int i = 0; i<sentences.size(); i++) {
+//			System.out.println(sentences.get(i));
+//			if(sentences.get(i).toString().contains("Honolulu")) {
+//				System.out.println("------------------------");
+//				System.out.println(sentences.get(i).get(NaturalLogicAnnotations.RelationTriplesAnnotation.class));
+//			}
 		    binaryRelations.put(i, sentences.get(i).get(NaturalLogicAnnotations.RelationTriplesAnnotation.class));
 		}
 		return binaryRelations;    

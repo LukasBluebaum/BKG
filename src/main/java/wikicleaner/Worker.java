@@ -10,8 +10,9 @@ public class Worker implements Runnable{
 	private static final Pattern URLS = Pattern.compile("http.*?\\s");
 	
 	private static final Pattern PARENTHESES = Pattern.compile("\\(.*?\\)");
+	private static final Pattern PARENTHESESD = Pattern.compile("\\[.*?\\]");
 	
-	private static final Pattern SYMBOLS = Pattern.compile("[^a-zA-Z0-9., ]");
+	private static final Pattern SYMBOLS = Pattern.compile("[^a-zA-Z0-9.,:' ]");
 	
 	private static final Pattern NULLCHAR = Pattern.compile("\0");
 	
@@ -46,21 +47,25 @@ public class Worker implements Runnable{
 					writeQueue.put(WikiCleaner.END);
 					break;
 				}
-				article = NULLCHAR.matcher(article).replaceAll("");
-				int i = article.indexOf("\t");
-				
-				if(i != -1) {
-					String s = article.substring(0, i);
-					s = s.substring(s.lastIndexOf("/")+1);
-					if(containsPresident(s) && article.length() > 10000) {
-						System.out.println(s);
+				//article = NULLCHAR.matcher(article).replaceAll("");
+//				int i = article.indexOf("\t");
+//				
+//				if(i != -1) {
+//					String s = article.substring(0, i);
+//					s = s.substring(s.lastIndexOf("/")+1);
+//					if(/*containsPresident(s) */ s.equals("Barack_Obama") && article.length() > 10000) {
+//						System.out.println(s);
+						System.out.println(article.substring(0,20));
+						System.out.println(article.length());
 						String clean = cleanArticle(article);
-						if(clean.length() > 20000) {
+						System.out.println(clean.substring(0,20));
+						System.out.println(clean.length());
+//						if(clean.length() > 20000) {
 							writeQueue.put(clean);
-						}
-					}
-					
-				}							
+//						}
+//					}
+//					
+//				}							
 				//writeQueue.put(cleanArticle(article));
 			}          
 		} catch(InterruptedException e) {
@@ -74,9 +79,13 @@ public class Worker implements Runnable{
 	 * @return
 	 */
 	private String cleanArticle(String article) {
-		//article = NULLCHAR.matcher(article).replaceAll("");
+		article = NULLCHAR.matcher(article).replaceAll("");
+		//article = article.replaceAll("\\\\n", "");
+		//article = test(article);
+
 		article = URLS.matcher(article).replaceAll("");
 		article = PARENTHESES.matcher(article).replaceAll("");
+		article = PARENTHESESD.matcher(article).replaceAll("");
 		article = SYMBOLS.matcher(article).replaceAll("");
 		article = WHITESPACE.matcher(article).replaceAll(" ");
 		return article;
@@ -87,5 +96,32 @@ public class Worker implements Runnable{
 			if(object.equals(PRESIDENTS.get(i))) return true;
 		}
 		return false;
+	}
+	
+	private String test(String test) {
+		String article = "";
+		for (int i = 0; i < test.length(); i++){
+		    while(test.charAt(i) != '=') {
+		    	article += test.charAt(i);
+		    	i++;
+		    	if(test.charAt(i) == '.') {
+		    		article += test.charAt(i) + " ";
+		    		i++;
+		    	}
+		    	if(i == test.length()-1) return article;
+		    } 
+		    while(test.charAt(i) == '=') {		    	
+		    	i++;
+		    } 
+		    while(test.charAt(i) != '=') {
+		    	i++;
+		    } 
+		    while(test.charAt(i) == '=') {		    	
+		    	i++;
+		    } 
+		    i--;
+		    //Process char
+		}
+		return article;
 	}
 }

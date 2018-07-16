@@ -41,6 +41,6 @@ public class WikiCleaner {
 	
 	public static void main(String[] args) {
 		WikiCleaner cleaner = new WikiCleaner();
-		cleaner.cleanWikiDump("resources/enwiki-20171103-pages.tsv", "resources/out.txt");
+		cleaner.cleanWikiDump("resources/out2.txt", "resources/o.txt");
 	}	
 }

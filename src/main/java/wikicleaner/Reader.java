@@ -26,9 +26,9 @@ public class Reader implements Runnable{
     	 		String article =null;
     	 		while((article=reader.readLine())!=null) { 
     	 			// only consider lines with valid articles
-    	 			if(article.length() > 1 && article.charAt(1) == 'h') {         	
+//    	 			if(article.length() > 1 && article.charAt(1) == 'h') {         	
     	 				readQueue.put(article);
-    	 			}
+    	 			//}
     	 		}
     	 		readQueue.put(WikiCleaner.END);  
             

@@ -1,115 +1,145 @@
-<http://dbpedia.org/resource/Whig_Party_(United_States)>
+<http://dbpedia.org/resource/2009_Nobel_Peace_Prize>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Whig Party (United States)"@en ;
+                "2009 Nobel Peace Prize"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Whig Party (United States)"@en .
+                "2009 Nobel Peace Prize"@en .
 
-<http://dbpedia.org/resource/Federal_government_of_the_United_States>
+<http://dbpedia.org/resource/Congressional_Budget_Office>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Federal government of the United States"@en ;
-        <http://dbpedia.org/ontology/battle>
-                <http://dbpedia.org/resource/American_Civil_War> ;
+                "Congressional Budget Office"@en ;
+        <http://dbpedia.org/ontology/budget>
+                "2010"^^<http://www.w3.org/2001/XMLSchema#double> ;
         <http://xmlns.com/foaf/0.1/name>
-                "Federal government of the United States"@en .
+                "Congressional Budget Office"@en .
 
-<http://dbpedia.org/resource/George_B._McClellan>
+<http://dbpedia.org/resource/President_of_the_United_States>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "George B. McClellan"@en ;
-        <http://dbpedia.org/ontology/battle>
-                <http://dbpedia.org/resource/American_Civil_War> ;
+                "President of the United States"@en ;
+        <http://dbpedia.org/ontology/date>
+                "2009-01-20"^^<http://www.w3.org/2001/XMLSchema#date> ;
         <http://xmlns.com/foaf/0.1/name>
-                "George B. McClellan"@en .
+                "President of the United States"@en .
 
-<http://dbpedia.org/resource/List_of_ethnic_slurs>
+<http://dbpedia.org/resource/Presidency_of_Barack_Obama>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "List of ethnic slurs"@en ;
+                "Presidency of Barack Obama"@en ;
+        <http://dbpedia.org/ontology/activeYearsStartYear>
+                "2010"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/budget>
+                "2011"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://dbpedia.org/ontology/conflict>
+                <http://dbpedia.org/resource/Arab–Israeli_conflict> ;
+        <http://dbpedia.org/ontology/rating>
+                "60"^^<http://www.w3.org/2001/XMLSchema#float> ;
+        <http://dbpedia.org/ontology/startYear>
+                "2010"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
         <http://xmlns.com/foaf/0.1/name>
-                "List of ethnic slurs"@en .
+                "Presidency of Barack Obama"@en .
 
-<http://dbpedia.org/resource/Patent>
+<http://dbpedia.org/resource/Honolulu>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Patent"@en ;
+                "Honolulu"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Patent"@en .
+                "Honolulu"@en .
 
-<http://dbpedia.org/resource/Malaria>
+<http://dbpedia.org/resource/Central_Intelligence_Agency>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Malaria"@en ;
+                "Central Intelligence Agency"@en ;
+        <http://dbpedia.org/ontology/activeYearsStartYear>
+                "2010"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/product>
+                <http://dbpedia.org/resource/Military_intelligence> ;
+        <http://dbpedia.org/ontology/startYear>
+                "2010"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
         <http://xmlns.com/foaf/0.1/name>
-                "Malaria"@en .
+                "Central Intelligence Agency"@en .
 
-<http://dbpedia.org/resource/Religion>
+<http://dbpedia.org/resource/Community_organizing>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Religion"@en ;
+                "Community organizing"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Religion"@en .
+                "Community organizing"@en .
 
-<http://dbpedia.org/resource/Milk_sickness>
+<http://dbpedia.org/resource/Arab–Israeli_conflict>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Milk sickness"@en ;
+                "Arab–Israeli conflict"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Milk sickness"@en .
+                "Arab–Israeli conflict"@en .
 
-<http://dbpedia.org/resource/Personal_flotation_device>
+<http://dbpedia.org/resource/Military_intelligence>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Personal flotation device"@en ;
+                "Military intelligence"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Personal flotation device"@en .
+                "Military intelligence"@en .
 
-<http://dbpedia.org/resource/Nancy_Lincoln>
+<http://dbpedia.org/resource/Columbia_Law_School>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Nancy Lincoln"@en ;
-        <http://dbpedia.org/ontology/deathCause>
-                <http://dbpedia.org/resource/Milk_sickness> ;
+                "Columbia Law School"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Nancy Lincoln"@en .
+                "Columbia Law School"@en .
 
-<http://dbpedia.org/resource/Mexican–American_War>
+<http://dbpedia.org/resource/Barack_Obama_Sr.>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Mexican–American War"@en ;
+                "Barack Obama Sr."@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Mexican–American War"@en .
+                "Barack Obama Sr."@en .
 
-<http://dbpedia.org/resource/Abraham_Lincoln>
+<http://dbpedia.org/resource/Barack_Obama>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Abraham Lincoln"@en ;
-        <http://dbpedia.org/ontology/battle>
-                <http://dbpedia.org/resource/Mexican–American_War> , <http://dbpedia.org/resource/American_Civil_War> ;
+                "Barack Obama"@en ;
+        <http://dbpedia.org/ontology/almaMater>
+                <http://dbpedia.org/resource/Columbia_Law_School> ;
+        <http://dbpedia.org/ontology/award>
+                <http://dbpedia.org/resource/2009_Nobel_Peace_Prize> ;
+        <http://dbpedia.org/ontology/birthPlace>
+                <http://dbpedia.org/resource/Hawaii> , <http://dbpedia.org/resource/Honolulu> ;
+        <http://dbpedia.org/ontology/birthYear>
+                "1961"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/college>
+                <http://dbpedia.org/resource/Columbia_Law_School> ;
         <http://dbpedia.org/ontology/deathYear>
-                "15"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
-        <http://dbpedia.org/ontology/majorityLeader>
-                1948 , 4 ;
-        <http://dbpedia.org/ontology/party>
-                <http://dbpedia.org/resource/Whig_Party_(United_States)> ;
-        <http://dbpedia.org/ontology/patent>
-                <http://dbpedia.org/resource/Patent> , <http://dbpedia.org/resource/Personal_flotation_device> ;
-        <http://dbpedia.org/ontology/religion>
-                <http://dbpedia.org/resource/Religion> ;
-        <http://dbpedia.org/ontology/uses>
-                <http://dbpedia.org/resource/List_of_ethnic_slurs> ;
+                "1982"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/father>
+                <http://dbpedia.org/resource/Barack_Obama_Sr.> ;
+        <http://dbpedia.org/ontology/livingPlace>
+                <http://dbpedia.org/resource/Hawaii> ;
+        <http://dbpedia.org/ontology/mother>
+                <http://dbpedia.org/resource/Ann_Dunham> ;
+        <http://dbpedia.org/ontology/profession>
+                <http://dbpedia.org/resource/Community_organizing> ;
+        <http://dbpedia.org/ontology/rating>
+                "60"^^<http://www.w3.org/2001/XMLSchema#float> ;
+        <http://dbpedia.org/ontology/relative>
+                <http://dbpedia.org/resource/Barack_Obama_Sr.> , <http://dbpedia.org/resource/Ann_Dunham> ;
+        <http://dbpedia.org/ontology/releaseDate>
+                "2010-09-27"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://dbpedia.org/ontology/residence>
+                <http://dbpedia.org/resource/Hawaii> ;
+        <http://dbpedia.org/ontology/university>
+                <http://dbpedia.org/resource/Columbia_Law_School> ;
+        <http://dbpedia.org/ontology/victory>
+                "2006"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
         <http://xmlns.com/foaf/0.1/name>
-                "Abraham Lincoln"@en .
+                "Barack Obama"@en .
 
-<http://dbpedia.org/resource/American_Civil_War>
+<http://dbpedia.org/resource/Poverty_in_the_United_States>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "American Civil War"@en ;
+                "Poverty in the United States"@en ;
+        <http://dbpedia.org/ontology/activeYearsStartYear>
+                "2014"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+        <http://dbpedia.org/ontology/startYear>
+                "2014"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
         <http://xmlns.com/foaf/0.1/name>
-                "American Civil War"@en .
+                "Poverty in the United States"@en .
 
-<http://dbpedia.org/resource/William_Wallace_Lincoln>
+<http://dbpedia.org/resource/Ann_Dunham>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "William Wallace Lincoln"@en ;
-        <http://dbpedia.org/ontology/birthDate>
-                "1850-12-21"^^<http://www.w3.org/2001/XMLSchema#date> ;
-        <http://dbpedia.org/ontology/deathCause>
-                <http://dbpedia.org/resource/Malaria> ;
+                "Ann Dunham"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "William Wallace Lincoln"@en .
+                "Ann Dunham"@en .
 
-<http://dbpedia.org/resource/Robert_Todd_Lincoln_Beckwith>
+<http://dbpedia.org/resource/Hawaii>
         <http://www.w3.org/2000/01/rdf-schema#/label>
-                "Robert Todd Lincoln Beckwith"@en ;
-        <http://dbpedia.org/ontology/activeYearsEndYear>
-                "1844"^^<http://www.w3.org/2001/XMLSchema#gYear> ;
+                "Hawaii"@en ;
         <http://xmlns.com/foaf/0.1/name>
-                "Robert Todd Lincoln Beckwith"@en .
+                "Hawaii"@en .

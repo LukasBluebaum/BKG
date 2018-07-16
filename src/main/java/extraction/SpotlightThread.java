@@ -100,7 +100,6 @@ public class SpotlightThread implements Runnable {
 			try {
 				writer = new FileWriter(model,false);
 				graph.write(writer, "TTL");
-				graph.write(System.out,"TTL");
 			} finally {
 				graph.leaveCriticalSection();
 			}
@@ -224,13 +223,17 @@ public class SpotlightThread implements Runnable {
 			literalRelation(entity, i, binaryRelations);
 			for(Entity entity2: entities.get(i)) {
 				if(entity.getUri().equals(entity2.getUri())) continue;
-				for(RelationTriple triple: binaryRelations.get(i)) {					
-									
-					if(triple.subjectGloss().trim().equals(entity.getSurfaceForm()) && triple.objectGloss().trim().equals(entity2.getSurfaceForm())
-							/*|| triple.subjectGloss().trim().equals(entity2.getSurfaceForm()) && triple.objectGloss().contains(entity.getSurfaceForm())*/) {						
-						String tripleRelation = triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
+				for(RelationTriple triple: binaryRelations.get(i)) {	
+				
+					if((triple.subjectGloss().trim().equals(entity.getSurfaceForm()) || triple.subjectGloss().trim().equals(entity.getSurfaceForm() + "'s")
+							|| triple.subjectGloss().trim().equals(entity.getSurfaceForm() + " 's")
+							|| triple.subjectGloss().trim().equals(entity.getSurfaceForm() + "s")) && triple.objectGloss().trim().equals(entity2.getSurfaceForm())
+							) {		
+						String tripleRelation = triple.subjectLemmaGloss() + " " + triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
+					
 						for(Relation rel: RelationExtraction.properties) {
-							
+							if(rel.getLabel().contains("birthPlace") && triple.objectLemmaGloss().contains("Honolulu"))
+								System.out.println("1" + entity);
 							if( (entity.getTypes().contains(rel.getDomain()) || rel.getDomain().equals("")) 
 									&& (entity2.getTypes().contains(rel.getRange()) || rel.getRange().equals(""))) {
 								String[] tripleR = tripleRelation.toLowerCase().split(" ");
@@ -240,7 +243,16 @@ public class SpotlightThread implements Runnable {
 									RDFNode object = ResourceFactory.createResource(entity2.getUri());
 									Statement statement = ResourceFactory.createStatement(subject, predicate, object);
 									graph.enterCriticalSection(Lock.WRITE);
+									
 									try {
+										try {
+											FileWriter fw = new FileWriter(new File("log"), true);
+											fw.write(rel.getLabel() + ": " + tripleRelation + "\r\n");
+											fw.close();
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
 										graph.add(statement);	
 									} finally {
 										graph.leaveCriticalSection();
@@ -267,7 +279,8 @@ public class SpotlightThread implements Runnable {
 	private void literalRelation(Entity entity, int i, Map<Integer, Collection<RelationTriple>> binaryRelations) {
 		for(RelationTriple triple: binaryRelations.get(i)) {
 			String data = null;
-			if(triple.subjectGloss().trim().equals(entity.getSurfaceForm())){
+			if(triple.subjectGloss().trim().equals(entity.getSurfaceForm()) || triple.subjectGloss().trim().equals(entity.getSurfaceForm() + "'s")
+					|| triple.subjectGloss().trim().equals(entity.getSurfaceForm() + " 's") || triple.subjectGloss().trim().equals(entity.getSurfaceForm() + "s")){
 				String value = COMMA.matcher(triple.objectLemmaGloss()).replaceAll("");
 				value = NUMBERS.matcher(value).replaceAll(" ");
 	        	if(!value.trim().isEmpty()) {
@@ -298,16 +311,16 @@ public class SpotlightThread implements Runnable {
 	        		for(Relation rel: RelationExtraction.properties) {
 						if((entity.getTypes().contains(rel.getDomain()) || rel.getDomain().equals("")) && rel.getPropertyType().equals("data") &&
 								!rel.getRange().toLowerCase().contains("string")) {
-							String tripleRelation = triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
+							String tripleRelation = triple.subjectLemmaGloss() + " " + triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
 							String[] tripleR = tripleRelation.toLowerCase().split(" ");	
 							if(checkKeywords(rel,tripleR)) {	
 								//if the number that was found is a date but the found property does not have the range date then break 
 								if((data.contains("-") && !rel.getRange().contains("date")) || rel.getRange().contains("date") && !data.contains("-") ) {
-									break;
+									continue;
 								}
 								//if the property has year as range but the found number does not consist of 4 digits break
 								if(rel.getRange().contains("Year") && data.length() != 4) {
-									break;
+									continue;
 								}
 								Resource subject = ResourceFactory.createResource(entity.getUri());
 								Property predicate = ResourceFactory.createProperty(rel.getLabel());
@@ -317,6 +330,13 @@ public class SpotlightThread implements Runnable {
 								Statement statement = ResourceFactory.createStatement(subject, predicate, object);									
 								graph.enterCriticalSection(Lock.WRITE);
 								try {
+									try {
+										FileWriter fw = new FileWriter(new File("log"), true);
+										fw.write(rel.getLabel() + ": " + tripleRelation + "\r\n");
+										fw.close();
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 									graph.add(statement);	
 								} finally {
 									graph.leaveCriticalSection();

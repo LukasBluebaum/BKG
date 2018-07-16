@@ -1162,7 +1162,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/majorityLeader",
-  "keywords" : [ "majority", "leader", "offfice holder" ],
+  "keywords" : [ "majority leader", "offfice holder" ],
   "range" : "http://www.w3.org/2001/XMLSchema#integer",
   "domain" : "",
   "countRelation" : 10,
@@ -2450,7 +2450,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/killedBy",
-  "keywords" : [ "kill", "assasinate", "murder" ],
+  "keywords" : [ "kill", "assassinate", "murder" ],
   "range" : "http://www.w3.org/2001/XMLSchema#string",
   "domain" : "Person",
   "countRelation" : 98,
@@ -3738,7 +3738,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/deathYear",
-  "keywords" : [ "death", "kill", "die", "murder", "assasinate" , "assasination" ],
+  "keywords" : [ "death", "kill", "die", "murder", "assassinate" , "assassination" ],
   "range" : "http://www.w3.org/2001/XMLSchema#gYear",
   "domain" : "Person",
   "countRelation" : 6,
@@ -6804,7 +6804,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/deathDate",
-  "keywords" : [ "death", "date", "die", "kill" , "assasination" , "assasinate" ],
+  "keywords" : [ "death", "date", "die", "kill" , "assassination" , "assassinate" ],
   "range" : "http://www.w3.org/2001/XMLSchema#date",
   "domain" : "Person",
   "countRelation" : 11,
@@ -17486,7 +17486,7 @@
   "propertyType" : "object"
 }, {
   "label" : "http://dbpedia.org/ontology/deathPlace",
-  "keywords" : [ "death", "place", "die" ],
+  "keywords" : [ "death", "place", "die" , "assassination" , "assassinate" ],
   "range" : "Place",
   "domain" : "Person",
   "countRelation" : 9,
@@ -18102,7 +18102,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/networth",
-  "keywords" : [ "networth" ],
+  "keywords" : [ "networth", "net worth" ],
   "range" : "http://www.w3.org/2001/XMLSchema#double",
   "domain" : "Person",
   "countRelation" : 6,
@@ -19656,7 +19656,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/activeYearsEndYear",
-  "keywords" : [ "active year end year", "until" ],
+  "keywords" : [ "active year end year", "active until"],
   "range" : "http://www.w3.org/2001/XMLSchema#gYear",
   "domain" : "",
   "countRelation" : 16,

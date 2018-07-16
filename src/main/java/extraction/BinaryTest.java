@@ -79,7 +79,7 @@ public class BinaryTest {
 //	 		writer.close();
 	 		
 	 		
-		 	Annotation doc = new Annotation("His mother spent most of the next two decades in Indonesia, divorcing Lolo in 1980 and earning a PhD degree in 1992, before dying in 1995 in Hawaii following unsuccessful treatment for ovarian and uterine cancer.");
+		 	Annotation doc = new Annotation("Barack Hussein Obama II born August 4 1961, is an American attorney and politician who served as the 44th President of the United States from January 20, 2009, to January 20, 2017.");
 		 	
 			pipeline.annotate(doc);
 			for (CoreMap sentence : doc.get(CoreAnnotations.SentencesAnnotation.class)) {
