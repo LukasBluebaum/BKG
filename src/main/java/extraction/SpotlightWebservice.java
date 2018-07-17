@@ -21,6 +21,13 @@ import org.json.simple.parser.ParseException;
 
 import utils.Entity;
 
+/**
+ * Requests DBpedia spotlight and processes the output.
+ * @author Lukas Blübaum
+ * @author Nick Düsterhus
+ * @author Monika Werner
+ *
+ */
 public class SpotlightWebservice {
 	
     private final String REQUESTURL = "http://model.dbpedia-spotlight.org/en/annotate";
@@ -31,6 +38,15 @@ public class SpotlightWebservice {
 	
 	private final int TIMEOUT = 10000;
 	
+	/**
+	 * Sets the parameters for the next Spotlight request and calls {@link #requestPOST(String, String)}.
+	 * @param inputText Current sentences.
+	 * @return Output from DBpedia Spotlight.
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 * @throws ProtocolException
+	 * @throws ParseException
+	 */
 	public String getEntities(final String inputText) throws MalformedURLException, IOException, ProtocolException, ParseException {
 
 		String urlParameters = "text=" + URLEncoder.encode(inputText, "UTF-8");
@@ -39,20 +55,14 @@ public class SpotlightWebservice {
 
 		return requestPOST(urlParameters, REQUESTURL);
 	}
-	
-	public List<Entity> getEntitiesProcessed(final String inputText) throws IOException, ParseException {
-
-		String urlParameters = "text=" + URLEncoder.encode(inputText, "UTF-8");
-		urlParameters += "&confidence=" + CONFIDENCE;
-		urlParameters += "&support=" + SUPPORT;
-
-		String result = requestPOST(urlParameters, REQUESTURL);
 		
-		List<Entity> entities = postProcessing(result);
-		//System.out.println("Entities: " + entities);
-		return entities;
-	}
-	
+	/**
+	 * Sends a POST request to the Spotlight demo.
+	 * @param urlParameters Parameters for the request.
+	 * @param requestURL Spotlight demo url.
+	 * @return Response from Spotlight.
+	 * @throws IOException
+	 */
 	private String requestPOST(final String urlParameters, final String requestURL) throws IOException {
 		try {	
 			URL url = new URL(requestURL);

@@ -23,9 +23,10 @@ import org.json.simple.parser.ParseException;
 import edu.stanford.nlp.util.CoreMap;
 
 /**
+ * Performs relation extraction using the FOX demo for relation extraction.
  * @author Nick Düsterhus
  * @author Lukas Blübaum
- *
+ * @author Monika Werner
  */
 public class FoxThread implements Runnable {
 
@@ -38,10 +39,10 @@ public class FoxThread implements Runnable {
 	private BlockingQueue<List<CoreMap>> articles;
 	
 	/**
-	 * Constructor 
-	 * @param graph An Apache Jena model this thread will write to
-	 * @param model A file this thread will write the model to
-	 * @param articles A BlockingQueue containing a List of CoreMaps (Stanford CoreNLP)
+	 * Constructor, initializes graph, model and BlockingQueue.
+	 * @param graph An Apache Jena model this thread will write to.
+	 * @param model A file this thread will write the model to.
+	 * @param articles A BlockingQueue containing a List of CoreMaps (Stanford CoreNLP).
 	 */
 	public FoxThread(Model graph,File model, BlockingQueue<List<CoreMap>> articles) {
 		this.graph = graph;
@@ -56,9 +57,7 @@ public class FoxThread implements Runnable {
 	@Override
 	public void run() {
 		FileWriter writer = null;		
-		try {
-			writer = new FileWriter(model);
-			
+		try {			
 			int currentLine = 0;
 			while(true) {
 				currentLine++;
@@ -67,19 +66,21 @@ public class FoxThread implements Runnable {
 
 				getRelationsFox(nextLine);
 				
-				if(currentLine >= RelationExtraction.ARTICLESPERWRITE) {
+//				if(currentLine >= RelationExtraction.ARTICLESPERWRITE) {
 					graph.enterCriticalSection(Lock.WRITE);
 					try {
+						writer = new FileWriter(model,false);
 						graph.write(writer, "TTL");
 					} finally {
 						graph.leaveCriticalSection();
 					}
 					currentLine = 0;
-				}
+//				}
 			}               
  	 		
 			graph.enterCriticalSection(Lock.WRITE);
 			try {
+				writer = new FileWriter(model,false);
 				graph.write(writer, "TTL");
 			} finally {
 				graph.leaveCriticalSection();
@@ -98,7 +99,7 @@ public class FoxThread implements Runnable {
 
 	
 	/**
-	 * Extracts subject predicate and object from a Fox response and writes the triple to the graph. 
+	 * Extracts subject predicate and object from a FOX response and writes the triple to the graph. 
 	 * @param statement
 	 * @param iterator
 	 */
@@ -115,7 +116,7 @@ public class FoxThread implements Runnable {
 			object = ResourceFactory.createStringLiteral(next.getObject().toString());
 		}	
 		Statement triple = ResourceFactory.createStatement(subject, predicate, object);	
-		
+		System.out.println(triple);
 		graph.enterCriticalSection(Lock.WRITE);
 		try {
 			graph.add(triple);	
@@ -126,7 +127,7 @@ public class FoxThread implements Runnable {
 	}
 	
 	/**
-	 * Sends each sentence via the FoxWebservice to the Fox online demo and reads the returned model.
+	 * Sends each sentence via the FoxWebservice to the FOX online demo and reads the returned model.
 	 * Calls {@link #getTriple()} to iterate over the model.
 	 * 
 	 * @param sentences A List of CoreMaps.
@@ -140,6 +141,7 @@ public class FoxThread implements Runnable {
 	    	Model model = ModelFactory.createDefaultModel() ;
     		try {
 				model.read(new ByteArrayInputStream(SERVICE.extract(sentence.toString(), "en" , "re").getBytes()),null, "TTL");
+				System.out.println("-");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

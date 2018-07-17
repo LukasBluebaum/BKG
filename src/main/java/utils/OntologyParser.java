@@ -5,7 +5,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Parses the given ontology and extracts only the english properties with their comment, range, domain and datatype.
+ * @author Lukas Blübaum
+ * @author Nick Düsterhus
+ * @author Monika Werner
+ */
 public class OntologyParser {
 	
 	private static final String DOMAIN = "http://www.w3.org/2000/01/rdf-schema#domain";

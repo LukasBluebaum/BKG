@@ -5,6 +5,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Writes the cleaned lines to the given output file.
+ * @author Lukas Blübaum
+ * @author Nick Düsterhus
+ * @author Monika Werner
+ *
+ */
 public class Writer implements Runnable{
  
 	private BlockingQueue<String> writeQueue;

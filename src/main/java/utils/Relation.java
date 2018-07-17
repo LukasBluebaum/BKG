@@ -3,6 +3,12 @@ package utils;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+/**
+ * Each instance represents a DBpedia ontology property. 
+ * @author Lukas Blübaum
+ * @author Nick Düsterhus
+ * @author Monika Werner
+ */
 public class Relation {
 	
 	private String label;

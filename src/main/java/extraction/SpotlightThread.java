@@ -31,27 +31,49 @@ import edu.stanford.nlp.util.CoreMap;
 import utils.Entity;
 import utils.Relation;
 
+/**
+ * Performs relation extraction using the Spotlight demo for named entity recognition.
+ * @author Lukas Blübaum
+ * @author Nick Düsterhus
+ * @author Monika Werner
+ */
 public class SpotlightThread implements Runnable {
 	
+	/**
+	 * Regex to remove whitespace.
+	 */
 	private static final Pattern WHITESPACE = Pattern.compile("\\s+");
 
+	/**
+	 * Regex to remove commas.
+	 */
 	private static final Pattern COMMA = Pattern.compile(",");
 	
+	/**
+	 * Regex to remove everything but numbers.
+	 */
 	private static final Pattern NUMBERS = Pattern.compile("[^0-9.]");
 	
+	/**
+	 * List of all months.
+	 */
 	private static final ArrayList<String> MONTHS = new ArrayList<String>(Arrays.asList("January", "February" ,"March" ,
 			"April", "May","June","July","August","September","October","November","December"));
+	
 	
 	private NLPParser parser;
 	
 	private Model graph;
 	
+	/**
+	 * Contains sentences from the text document. Handed over by the {@link RelationExtraction} class.
+	 */
 	private BlockingQueue<List<CoreMap>> articles;
 	
 	private File model;
 	
 	/**
-	 * Constructor 
+	 * Constructor, initializes parser, model, graph and BlockingQueue.
 	 * @param parser An instance of the NLPParser class.
 	 * @param graph An Apache Jena model this thread will write to.
 	 * @param model The file this thread will write the model to.
@@ -71,9 +93,7 @@ public class SpotlightThread implements Runnable {
 	@Override
 	public void run() {
 		FileWriter writer = null;		
-		try {
-			//writer = new FileWriter(model,false);
-			
+		try {			
 			int lastWrite = 0;
 			while(true) {
 				lastWrite++;
@@ -144,9 +164,9 @@ public class SpotlightThread implements Runnable {
 	}
 	
 	/**
-	 * Maps the entities back to the sentence their were found in.
-	 * @param entities Entities which were found in the last call to the spotlight demo.
-	 * @param sentences Sentences that were last send to the spotlight demo.
+	 * Maps the entities back to the sentence they were found in.
+	 * @param entities Entities which were found in the last call to the Spotlight demo.
+	 * @param sentences Sentences that were last send to the Spotlight demo.
 	 * @return A HashMap with the sentence index as key and the corresponding entities as values.
 	 */
 	private Map<Integer, ArrayList<Entity>> mapEntitiesToSentences(ArrayList<Entity> entities, List<CoreMap> sentences) {
@@ -165,7 +185,7 @@ public class SpotlightThread implements Runnable {
 	
 	/**
 	 * Writes the types for the entities into the graph.
-	 * @param response Last spotlight demo response.
+	 * @param response Last Spotlight demo response.
 	 * @throws ParseException
 	 */
 	private void writeTypes(final String response) throws ParseException {
@@ -211,7 +231,7 @@ public class SpotlightThread implements Runnable {
 	
 	/**
 	 * Iterates through the binary relations of a sentence and tries to map the subject and object of these to entities which
-	 * were found in the current sentence. Finally tries to map the predicate of the binary relation to an existing property.
+	 * were found in the current sentence. Finally tries to map the binary relation to an existing property.
 	 * If there is an entity in the subject also calls {@link #literalRelation()} to search for literal relations.
 	 * @param i Index of the current sentence.
 	 * @param binaryRelations List of binary relations in the current sentence.
@@ -232,8 +252,6 @@ public class SpotlightThread implements Runnable {
 						String tripleRelation = triple.subjectLemmaGloss() + " " + triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
 					
 						for(Relation rel: RelationExtraction.properties) {
-							if(rel.getLabel().contains("birthPlace") && triple.objectLemmaGloss().contains("Honolulu"))
-								System.out.println("1" + entity);
 							if( (entity.getTypes().contains(rel.getDomain()) || rel.getDomain().equals("")) 
 									&& (entity2.getTypes().contains(rel.getRange()) || rel.getRange().equals(""))) {
 								String[] tripleR = tripleRelation.toLowerCase().split(" ");
@@ -250,7 +268,6 @@ public class SpotlightThread implements Runnable {
 											fw.write(rel.getLabel() + ": " + tripleRelation + "\r\n");
 											fw.close();
 										} catch (IOException e) {
-											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
 										graph.add(statement);	
@@ -270,7 +287,7 @@ public class SpotlightThread implements Runnable {
 	
 	/**
 	 * Iterates through the binary relations of a sentence and determines if there is a literal in the 
-	 * object of the binary relation. (only dates and numbers) Finally tries to map the predicate of the 
+	 * object of the binary relation. (only dates and numbers) Finally tries to map the 
 	 * binary relation to an existing property.
 	 * @param entity An entity which was found in the current sentence.
 	 * @param i Index of the current sentence.
@@ -353,10 +370,10 @@ public class SpotlightThread implements Runnable {
 	/**
 	 * Checks the words inside the predicate and object of the binary relation against the list of keywords  
 	 * for the current property.
-	 * @param rel 
-	 * @param tripleR Predicate and object of the current binary relation. 
-	 * @return True if the keywords for the property match words inside the predicate and object of the binary relation,
-	 * false otherwise.
+	 * @param rel Current property.
+	 * @param tripleR Current binary relation. 
+	 * @return True if the keywords for the property match words inside the binary relation, false otherwise. (Sometimes more than one
+	 * keyword has to be matched, specified for each property in the properties.json file)
 	 */
 	private boolean checkKeywords(Relation rel, String[] tripleR) {
 		ArrayList<String> keywords= rel.getKeywords();
@@ -380,9 +397,10 @@ public class SpotlightThread implements Runnable {
 	}
 	
 	/**
-	 * Checks if there is a number keyword in the object of the relation. 
-	 * @param objectLemmaGloss object of the current relation
-	 * @param number the number which was found on the object of the current relation
+	 * Tries to find the amount of zeros that have to be added to the given number, so it 
+	 * checks if there is a number keyword in the object of the relation. 
+	 * @param objectLemmaGloss Object of the current relation
+	 * @param number The number which was found on the object of the current relation.
 	 * @return The amount of zeros that need to be added to the given number because of the occuring number keyword.
 	 */
 	private int mapNumber(String objectLemmaGloss, String number) {					
@@ -403,7 +421,7 @@ public class SpotlightThread implements Runnable {
 	
 	/**
 	 * Creates two triples for the rdfs:label and foaf:name relation and the given entity.
-	 * @param entity
+	 * @param entity Current entity.
 	 */
 	private void setLabelAndName(Entity entity) {
 		Resource subject = ResourceFactory.createResource(entity.getUri());

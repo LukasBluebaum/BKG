@@ -2,6 +2,12 @@ package utils;
 
 import java.util.ArrayList;
 
+/**
+ * Each instance represents a entity we received from Spotlight.
+ * @author Lukas Blübaum
+ * @author Nick Düsterhus
+ * @author Monika Werner
+ */
 public class Entity {
 	
 	private ArrayList<String> types = new ArrayList<String>();

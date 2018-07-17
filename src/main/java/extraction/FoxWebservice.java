@@ -13,6 +13,13 @@ import java.net.URL;
 
 import org.json.simple.JSONObject;
 
+/**
+ * Requests the FOX demo and processes the output.
+ * @author Lukas Blübaum
+ * @author Nick Düsterhus
+ * @author Monika Werner
+ *
+ */
 public class FoxWebservice {
 	
 	private final String REQUESTURL = "http://fox-demo.aksw.org/fox";
@@ -25,7 +32,7 @@ public class FoxWebservice {
 	
 	
 	/**
-	 * Sets the url parameters then calls {@link #requestPost()}.
+	 * Sets the parameters for the next FOX request and calls {@link #requestPost()}.
 	 * @param inputText
 	 * @param lang
 	 * @param taskType
@@ -50,7 +57,7 @@ public class FoxWebservice {
 	}
 
 	/**
-	 * Requests the Fox Demo.
+	 * Requests the FOX Demo.
 	 * @param urlParameters
 	 * @param requestURL
 	 * @return
