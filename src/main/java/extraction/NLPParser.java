@@ -28,9 +28,10 @@ import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
 
 /**
+ * Responsible for sentence splitting, coreference resolution and binary relation detection.
  * @author Nick Düsterhus
  * @author Lukas Blübaum
- *
+ * @author Monika Werner
  */
 
 public class NLPParser {
@@ -122,11 +123,6 @@ public class NLPParser {
 		Map<Integer, Collection<RelationTriple>> binaryRelations = new LinkedHashMap<>();
 
 		for(int i = 0; i<sentences.size(); i++) {
-//			System.out.println(sentences.get(i));
-//			if(sentences.get(i).toString().contains("Honolulu")) {
-//				System.out.println("------------------------");
-//				System.out.println(sentences.get(i).get(NaturalLogicAnnotations.RelationTriplesAnnotation.class));
-//			}
 		    binaryRelations.put(i, sentences.get(i).get(NaturalLogicAnnotations.RelationTriplesAnnotation.class));
 		}
 		return binaryRelations;    

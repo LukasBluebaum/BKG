@@ -4,6 +4,12 @@ import java.io.File;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Handles the cleaning of the wikipedia dump. Using {@link Reader}, {@link Reader} and {@link Writer}.
+ * @author Lukas Blübaum
+ * @author Nick Düsterhus
+ * @author Monika Werner
+ */
 public class WikiCleaner {
 	
 	protected final static int WORKERAMOUNT = 4;
@@ -13,7 +19,7 @@ public class WikiCleaner {
 	private final static int QUEUESIZE = 10000;
 	
 	/**
-	 * Instantiates and starts a Reader and a Writer thread and an appropriate amount of Worker threads to clean the given file.
+	 * Instantiates and starts a {@link Reader} and a {@link Writer} thread and an appropriate amount of {@link Reader} threads to clean the given file.
 	 * @param in Path to the input file.
 	 * @param out Path to the output file.
 	 */
@@ -41,6 +47,6 @@ public class WikiCleaner {
 	
 	public static void main(String[] args) {
 		WikiCleaner cleaner = new WikiCleaner();
-		cleaner.cleanWikiDump("resources/out2.txt", "resources/o.txt");
+		cleaner.cleanWikiDump("resources/enwiki-20171103-pages.tsv", "resources/out.txt");
 	}	
 }

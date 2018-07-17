@@ -6,6 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Reads the lines from the dump and forwards them to the {@link Worker}.
+ * @author Lukas Blübaum
+ * @author Nick Düsterhus
+ * @author Monika Werner
+ *
+ */
 public class Reader implements Runnable{
 
 	private BlockingQueue<String> readQueue;
@@ -25,10 +32,10 @@ public class Reader implements Runnable{
             
     	 		String article =null;
     	 		while((article=reader.readLine())!=null) { 
-    	 			// only consider lines with valid articles
-//    	 			if(article.length() > 1 && article.charAt(1) == 'h') {         	
+    	 			// only consider lines with valid articles - has a link in the first column
+    	 			if(article.length() > 1 && article.charAt(1) == 'h') {         	
     	 				readQueue.put(article);
-    	 			//}
+    	 			}
     	 		}
     	 		readQueue.put(WikiCleaner.END);  
             
