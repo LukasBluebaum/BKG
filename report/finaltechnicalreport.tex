@@ -47,7 +47,7 @@
 The goal of this proseminar was to create an encyclopetic knowledge graph from a large text corpus like a wikipedia dump. In order to learn and better understand the basics of Semantic Web technologies. For this we were given a wikipedia dump and the core ontology of DBpedia. To facilitate this task we were introduced to several tools including FOX \cite{fox} and DBpedia Spotlight \cite{spotlight}. The whole project is written in Java and as license we used the GNU General Public License v3.0. The documented source code, including instructions on how to run the code, can be found on the given Github repository.
 
 \keywords{Knowledge Graphs  \and Semantic Web \and Coreference Resolution \and Named Entity Recognition
-\and Entity Disambiguation \and Relation Extraction \and Fox \and Spotlight }
+\and Entity Disambiguation \and Relation Extraction \and FOX \and Spotlight }
 \end{abstract}
 
 
@@ -55,10 +55,10 @@ The goal of this proseminar was to create an encyclopetic knowledge graph from a
 Websites like Wikipedia contain a large volume of information. Unfortunately this information is mainly unstructured, for example in the form of natural language text. So the detection of complex informationen can be quite difficult. One approach to structure this knowledge is the extraction of triples from the natural language text. These triples consist of a subject, predicate and object and can then be displayed as a knowledge graph. The creation of such a knowledge graph is the main goal of this project. \\
 
 To carry out this projekt several steps had to be taken. At first we had to process the given wikipedia dump and the core ontology. For the wikipedia dump this meant cleaning the text and for the core ontology we filtered some not required information. The next steps included Named Entity Recognition, Entity Disambiguation and Relation Extraction.
-As frameworks for the Named Entity Recognition and Entity Disambiguation we used Fox and Spotlight. For the Relation extraction we implemented to approaches. The first approach takes the sentences and sends them to Fox in "re" mode to directly extract the triples. The second one, our own approach, uses Spotlight and the Stanford Core NLP \cite{stanford}. Finally we evaluated the results in relation to runtime and correctness. Here we measured how many triples from DBpedia we extracted per article, and manually checked the correctness of triples that are not contained in DBpedia. Due to time constraints we chose the category of U.S. Presidents for the evaluation.
+As frameworks for the Named Entity Recognition and Entity Disambiguation we used FOX and Spotlight. For the Relation extraction we implemented to approaches. The first approach takes the sentences and sends them to FOX in "re" mode to directly extract the triples. The second one, our own approach, uses Spotlight and the Stanford Core NLP \cite{stanford}. Finally we evaluated the results in relation to runtime and correctness. Here we measured how many triples from DBpedia we extracted per article, and manually checked the correctness of triples that are not contained in DBpedia. Due to time constraints we chose the category of U.S. Presidents for the evaluation.
 
 \subsection{Architecture}
-Just a few points to the architecture of our project. We used the WikiCleaner and OntologyParser classes to process the given DBpedia ontology and wikipedia dump. Then the RelationExtraction class starts two threads, one for the Fox approach and one for our own approach These two threads then try to extract the triples with the help of the NLPParser class and the webservices classes that query the online Fox demo and Spotlight demo respectively. As the last step the extracted triples will be written to a RDF graph.
+Just a few points to the architecture of our project. We used the WikiCleaner and OntologyParser classes to process the given DBpedia ontology and wikipedia dump. Then the RelationExtraction class starts two threads, one for the FOX approach and one for our own approach These two threads then try to extract the triples with the help of the NLPParser class and the webservices classes that query the online FOX demo and Spotlight demo respectively. As the last step the extracted triples will be written to a RDF graph.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{architecture.png}
@@ -70,14 +70,14 @@ Just a few points to the architecture of our project. We used the WikiCleaner an
 The preprocessing consists of the cleaning of the wikipedia dump and the coreference resolution.
 \subsection{Extraction and cleaning of the text from a wikipedia dump}
 As the foundation we were provided with a wikipedia dump. This wikipedia dump already came without markup, infoboxes 
-or chapter subdivisions. The fact that there are no infoboxes already presented some problems, but more to that during the evaluation and discussion. But there were still some elements that were undesired for the later steps in this process. Such elements include unnecessary URLs, text in parenthesis, whitespace, nullchars and special symbols. We removed the texts passages in parenthesis because the Stanford Core NLP had some problems with these during the binary relation extraction for our own approach later on. The elements were removed under application of some regular expressions. 
+or chapter subdivisions. The fact that there are no infoboxes already presented some problems, but more to that during the evaluation and discussion. But there were still some elements that were undesired for the later steps in this process. Such elements include unnecessary URLs, text in parenthesis, whitespace, nullchars and special symbols. We removed the texts passages in parenthesis because the Stanford CoreNLP had some problems with these during the binary relation extraction for our own approach later on. The elements were removed under application of some regular expressions. 
 \pagebreak
 
 The result is a simple text containing only the letters from the english alphabet, numbers, periods, commas and of course simple spaces. In order to speed up the cleaning process, we used a combination of Reader,Worker and Writer threads. To handle the concurreny we used BlockingQueues from the standard Java libraries. One which the Reader thread uses to pass the read lines to the Worker threads and another one which the Worker threads use to pass the cleaned lines to the Writer thread.
 
 
 \subsection{Coreference Resolution}
-Another step that needs to be taken before the information can be properly extracted is the coreference resolution, so that Spotlight and Fox can also recognize named entities in sentences were previously only a coreference appeared. Therefore we have to replace the pronouns with their representative mention. To actually find this representative mention we used the coref annotator \cite{coref} of the Stanford Core NLP.  
+Another step that needs to be taken before the information can be properly extracted is the coreference resolution, so that Spotlight and FOX can also recognize named entities in sentences were previously only a coreference appeared. Therefore we have to replace the pronouns with their representative mention. To actually find this representative mention we used the coref annotator \cite{coref} of the Stanford CoreNLP.  
 
 \begin{example} John met Judy in 1960. He married her during his college year.\end{example}
 
@@ -87,7 +87,7 @@ The result would look like this:
 \begin{example} John met Judy in 1960. John married Judy during John's college year. \end{example}
 
 
-This example already shows one of the challenges that arise during the coreference resolution. Possesive pronouns have to be detected and handled accordingly. So in this case \textit{his} should not be replaced with \textit{John} but rather with \textit{John's}. To make this distinction we use the dependency parser \cite{parser} of the Stanford Core NLP. Here we take the pronoun in question and then determine if it appears in connection with a possesion modifier relation. If it does, we adjust the representative mention the pronoun will be replaced with accordingly.
+This example already shows one of the challenges that arise during the coreference resolution. Possesive pronouns have to be detected and handled accordingly. So in this case \textit{his} should not be replaced with \textit{John} but rather with \textit{John's}. To make this distinction we use the dependency parser \cite{parser} of the Stanford CoreNLP. Here we take the pronoun in question and then determine if it appears in connection with a possesion modifier relation. If it does, we adjust the representative mention the pronoun will be replaced with accordingly.
 
 
 
@@ -99,12 +99,12 @@ For this step we use the DBpedia Spotlight web service. We send the text to DBpe
 
 
 \section{Entity Disambiguation}
-The Entity Disambiguation itself is already done by Spotlight and Fox. Spotlight for example has two approaches for this.
-After they have located a candidate they take the information next to the surface form as information and try to determine the best match based on that. They also try to weigh words on their ability to actually disambiguate between candidates \cite{disambiguate}. Fox and AGDISTIS \cite{agdistis} \cite{agdistis2} were already discussed in the lecture.
+The Entity Disambiguation itself is already done by Spotlight and FOX. Spotlight for example has two approaches for this.
+After they have located a candidate they take the information next to the surface form as information and try to determine the best match based on that. They also try to weigh words on their ability to actually disambiguate between candidates \cite{disambiguate}. FOX and AGDISTIS \cite{agdistis} \cite{agdistis2} were already discussed in the lecture.
 
 \section{Relation Extraction}
 
-\subsection{Using Fox}
+\subsection{Using FOX}
 \subsection{Own Approach}
 After recognizing the entities correctly we need to find the relations between them mentioned in the given Wikipedia dump to finish our knowledge graph. The relation become the edges of the graph.
 
