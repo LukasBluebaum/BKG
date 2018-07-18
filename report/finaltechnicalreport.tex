@@ -33,7 +33,7 @@
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{University of Paderborn, Padeborn 33098, Germany \\
+\institute{University of Paderborn, Paderborn 33098, Germany \\
 %\email{lncs@springer.com}\\ 
 \email{\{lukasbl,nduester,mwerner\}@uni-paderborn.de} \\
 \url{https://github.com/LukasBluebaum/BKG} 
@@ -44,7 +44,7 @@
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-The goal of this proseminar was to create an encyclopetic knowledge graph from a large text corpus like a wikipedia dump. In order to learn and better understand the basics of Semantic Web technologies. For this we were given a wikipedia dump and the core ontology of DBpedia. To facilitate this task we were introduced to several tools including FOX \cite{fox} and DBpedia Spotlight \cite{spotlight}. The whole project is written in Java and as license we used the GNU General Public License v3.0. The documented source code, including instructions on how to run the code, can be found on the given GitHub repository.
+The goal of this proseminar was to create an encyclopedic knowledge graph from a large text corpus like a Wikipedia dump. In order to learn and better understand the basics of Semantic Web technologies. For this, we were given a Wikipedia dump and the core ontology of DBpedia. To facilitate this task we were introduced to several tools including FOX \cite{fox} and DBpedia Spotlight \cite{spotlight}. The whole project is written in Java and as license we used the GNU General Public License v3.0. The documented source code, including instructions on how to run the code can be found on the given GitHub repository.
 
 \keywords{Knowledge Graph  \and Semantic Web \and Coreference Resolution \and Named Entity Recognition
 \and Entity Disambiguation \and Relation Extraction \and FOX \and Spotlight }
@@ -52,13 +52,13 @@ The goal of this proseminar was to create an encyclopetic knowledge graph from a
 
 
 \section{Introduction}
-Websites like Wikipedia contain a large volume of information. Unfortunately this information is mainly unstructured, for example in the form of natural language text. So the detection of complex informationen can be quite difficult. One approach to structure this knowledge is the extraction of triples from the natural language text. These triples consist of a subject, predicate and object and can then be displayed as a knowledge graph. The creation of such a knowledge graph is the main goal of this project. \\
+Websites like Wikipedia contain a large volume of information. Unfortunately, this information is mainly unstructured, for example in the form of natural language text. So the detection of complex information can be quite difficult. One approach to structure this knowledge is the extraction of triples from the natural language text. These triples consist of a subject, predicate and object and can then be displayed as a knowledge graph. The creation of such a knowledge graph is the main goal of this project. \\
 
-To carry out this projekt several steps had to be taken. At first we had to process the given wikipedia dump and the core ontology. For the wikipedia dump this meant cleaning the text and for the core ontology we filtered some not required information. The next steps included Named Entity Recognition, Entity Disambiguation and Relation Extraction.
-As frameworks for the Named Entity Recognition and Entity Disambiguation we used FOX and Spotlight. For the Relation extraction we implemented to approaches. The first approach takes the sentences and sends them to FOX in "re" mode to directly extract the triples. The second one, our own approach, uses Spotlight and the Stanford Core NLP \cite{stanford}. Finally we evaluated the results in relation to runtime and correctness. Here we measured how many triples from DBpedia we extracted per article, and manually checked the correctness of triples that are not contained in DBpedia. Due to time constraints we chose the category of U.S. Presidents for the evaluation.
+To carry out this project several steps had to be taken. At first, we had to process the given Wikipedia dump and the core ontology. For the Wikipedia dump this meant cleaning the text and for the core ontology, we filtered some not required information. The next steps included Named Entity Recognition, Entity Disambiguation and Relation Extraction.
+As frameworks for the Named Entity Recognition and Entity Disambiguation we used FOX and Spotlight. For the Relation extraction we implemented to approaches. The first approach takes the sentences and sends them to FOX in "re" mode to directly extract the triples. The second one, our own approach, uses Spotlight and the Stanford Core NLP \cite{stanford}. Finally, we evaluated the results in relation to runtime and correctness. Here we measured how many triples from DBpedia we extracted per article, and manually checked the correctness of triples that are not contained in DBpedia. Due to time constraints we chose the category of U.S. Presidents for the evaluation.
 
 \subsection{Architecture}
-Just a few points to the architecture of our project. We used the WikiCleaner and OntologyParser classes to process the given DBpedia ontology and wikipedia dump. Then the RelationExtraction class starts two threads, one for the FOX approach and one for our own approach These two threads then try to extract the triples with the help of the NLPParser class and the webservices classes that query the online FOX demo and Spotlight demo respectively. As the last step the extracted triples will be written to a RDF graph.
+Just a few points to the architecture of our project. We used the WikiCleaner and OntologyParser classes to process the given DBpedia ontology and Wikipedia dump. Then the RelationExtraction class starts two threads, one for the FOX approach and one for our own approach These two threads then try to extract the triples with the help of the NLPParser class and the web services classes that query the online FOX demo and Spotlight demo respectively. As the last step, the extracted triples will be written to an RDF graph.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{architecture.png}
@@ -67,32 +67,32 @@ Just a few points to the architecture of our project. We used the WikiCleaner an
 
 
 \section{Preprocessing}
-The preprocessing consists of the cleaning of the wikipedia dump and the coreference resolution.
-\subsection{Extraction and cleaning of the text from a wikipedia dump}
-As the foundation we were provided with a wikipedia dump. This wikipedia dump already came without markup, infoboxes 
+The preprocessing consists of the cleaning of the Wikipedia dump and the coreference resolution.
+\subsection{Extraction and cleaning of the text from a Wikipedia dump}
+As the foundation, we were provided with a Wikipedia dump. This Wikipedia dump already came without markup, infoboxes 
 or chapter subdivisions. The fact that there are no infoboxes already presented some problems, but more to that during the evaluation and discussion. But there were still some elements that were undesired for the later steps in this process. Such elements include unnecessary URLs, text in parenthesis, whitespace, nullchars and special symbols. We removed the texts passages in parenthesis because the Stanford CoreNLP had some problems with these during the binary relation extraction for our own approach later on. The elements were removed under application of some regular expressions. 
 \pagebreak
 
-The result is a simple text containing only the letters from the english alphabet, numbers, periods, commas and of course simple spaces. In order to speed up the cleaning process, we used a combination of Reader,Worker and Writer threads. To handle the concurreny we used BlockingQueues from the standard Java libraries. One which the Reader thread uses to pass the read lines to the Worker threads and another one which the Worker threads use to pass the cleaned lines to the Writer thread.
+The result is a simple text containing only the letters from the english alphabet, numbers, periods, commas and of course simple spaces. In order to speed up the cleaning process, we used a combination of Reader, Worker and Writer threads. To handle the concurrency we used BlockingQueues from the standard Java libraries. One which the Reader thread uses to pass the read lines to the Worker threads and another one which the Worker threads use to pass the cleaned lines to the Writer thread.
 
 
 \subsection{Coreference Resolution}
-Another step that needs to be taken before the information can be properly extracted is the coreference resolution, so that Spotlight and FOX can also recognize named entities in sentences were previously only a coreference appeared. Therefore we have to replace the pronouns with their representative mention. To actually find this representative mention we used the coref annotator \cite{coref} of the Stanford CoreNLP.  
+Another step that needs to be taken before the information can be properly extracted is the coreference resolution, so that Spotlight and FOX can also recognize named entities in sentences where previously only a coreference appeared. Therefore we have to replace the pronouns with their representative mention. To actually find this representative mention we used the coref annotator \cite{coref} of the Stanford CoreNLP.  
 
 \begin{example} John met Judy in 1960. He married her during his college year.\end{example}
 
-In this sentence we obviously want to replace the he, her and his with their corresponding representative mention.
+In this sentence, we obviously want to replace the he, her and his with their corresponding representative mention.
 The result would look like this: 
 
 \begin{example} John met Judy in 1960. John married Judy during John's college year. \end{example}
 
 
-This example already shows one of the challenges that arise during the coreference resolution. Possesive pronouns have to be detected and handled accordingly. So in this case \textit{his} should not be replaced with \textit{John} but rather with \textit{John's}. To make this distinction we use the dependency parser \cite{parser} of the Stanford CoreNLP. Here we take the pronoun in question and then determine if it appears in connection with a possesion modifier relation. If it does, we adjust the representative mention the pronoun will be replaced with accordingly.
+This example already shows one of the challenges that arise during the coreference resolution. Possessive pronouns have to be detected and handled accordingly. So in this case \textit{his} should not be replaced with \textit{John} but rather with \textit{John's}. To make this distinction we use the dependency parser \cite{parser} of the Stanford CoreNLP. Here we take the pronoun in question and then determine if it appears in connection with a possession modifier relation. If it does, we adjust the representative mention the pronoun will be replaced with accordingly.
 
 
 
 \section{Named Entity Recognition}
-For this step we use the DBpedia Spotlight web service. We send the text to DBpedia Spotlight and receive a JSON response. The response is then parsed and the found entities and their information is stored in objects of our Entity class. As information we keep the uri, surface form, offset and the types. Since we send more than one sentence at a time to Spotlight we need to keep the offset to map the entities back to their corresponding sentence where they appeared. The surface form we need later on for our own relation extraction where we have to locate the entities inside binary relations. In addition to that we also keep the types because during our own relation extraction we compare these to the range and domain of some properties.
+For this step, we use the DBpedia Spotlight web service. We send the text to DBpedia Spotlight and receive a JSON response. The response is then parsed and the found entities and their information is stored in objects of our Entity class. As information we keep the URI, surface form, offset and the types. Since we send more than one sentence at a time to Spotlight we need to keep the offset to map the entities back to their corresponding sentence where they appeared. The surface form we need later on for our own relation extraction where we have to locate the entities inside binary relations. In addition to that we also keep the types because during our own relation extraction we compare these to the range and domain of some properties.
 
 
 
@@ -119,9 +119,9 @@ With the entities and relation stored the next task is to map those to DBpedia p
 The properties are stored as a list, converted to JSON and saved as a file that we could manually or automatically edit.
 A keyword String attribute that consists of multiple words, can be interpreted as a vector of which all words have to be found to map a relation to the property. We worked with lemmatized keywords and binary relations to reduce the needed amount of keywords. \\
 
-We then iterate through all the entities and binary relation for a sentence and try to match the subject and the object of the binary relation to entities. Afterwards we map the keywords to the binary relation and check for the range and type. If everything matches we create a triple and write it to the graph. \\
+We then iterate through all the entities and binary relation for a sentence and try to match the subject and the object of the binary relation to entities. Afterwards, we map the keywords to the binary relation and check for the range and type. If everything matches we create a triple and write it to the graph. \\
 
-For entity to literal relations, we first match the subject of the binary relation to an entity. Then we search for numbers inside the object. In case that we also find a month and two numbers we convert them to the xsd:date format. If we only find a number, we keep this number for the keyword matching step. Often Wikipedia plain text literals are partly written-out. To account for these cases we convert them to the actual number. 
+For entity to literal relations, we first match the subject of the binary relation to an entity. Then we search for numbers inside the object. In case that we also find a month and two numbers, we convert them to the xsd:date format. If we only find a number, we keep this number for the keyword matching step. Often Wikipedia plain text literals are partly written-out. To account for these cases we convert them to the actual number. 
 \begin{example} 82 million $\Rightarrow$ 82000000 \end{example}
    
 \section{Example}
@@ -139,7 +139,7 @@ After the coreference resolution the sentence will look like this:
 	Women and Children in Honolulu, Hawaii. Obama graduated from Harvard
 	University.\end{example}
 
-Next we use OpenIE to extract binary relations from the sentences, some of them are listed in the following table.
+Next, we use OpenIE to extract binary relations from the sentences, some of them are listed in the following table.
 
 
 \begin{table}
@@ -180,7 +180,7 @@ Now as already discussed we will try to map the subject, predicate and object to
 		\end{tabularx}
 	\end{center}
 \end{table}
-In Table 2 you can see the matchings that occured for this sentence. After we matched the entity 
+In Table 2 you can see the matchings that occurred for this sentence. After we matched the entity 
 \textit{dbr:Barack\_Obama} to the surface form contained in the subject, we also detect a month and two numbers in the object. Then we convert these into the correct date format \textit{1961-08-04}. Afterwards we map the 
 word bear to \textit{dbo:birhDate} and since the types of the entity and literal match, we have found the first triple.
 
@@ -242,9 +242,9 @@ plot coordinates{
 	\item SSD
 \end{itemize}
 \subsection{Correctness}
-For the evaluation we wrote a Benchmark class that takes a category and one or more dumps as input and then queries all subjects from the given category. Then we compare all triples from our graph that have a subject from the category with those from the dumps. \\
+For the evaluation, we wrote a Benchmark class that takes a category and one or more dumps as input and then queries all subjects from the given category. Then we compare all triples from our graph that have a subject from the category with those from the dumps. \\
 
-We selected the category \textit{Presidents of the United States}. First we compared our result to the given dumps, then we selected 100 triples randomly that were not contained in the dumps and checked them manually.\\
+We selected the category \textit{Presidents of the United States}. First, we compared our result to the given dumps, then we selected 100 triples randomly that were not contained in the dumps and checked them manually.\\
 
 From the 2810 triples contained in the dump - from the chosen category - we also found 556. Note here that this also contains types we received from Spotlight, without the types these numbers are 2320 and 121. From the 100 randomly selected triples 46 were correct. This leads to a recall 
 of 0.197 and precision of 0.46. So the resulting F-measure amounts 0.27. In the evaluation folder on the GitHub repository we provided the used files.
@@ -259,7 +259,7 @@ of 0.197 and precision of 0.46. So the resulting F-measure amounts 0.27. In the 
 In conclusion, our system can find relations from plain text utilizing two different strategies by FOX and our own algorithm. Our software relies on Spotlight for Named Entity Recognition and Stanford CoreNLP with OpenIE as our main tool to extract logically coherent relations.
 By coreferencing the articles we can consider each sentence for itself. Our algorithm scales with the amount of keywords that are added to the mentioned property file. It can theoretically find relations for all DBpedia properties, besides Entity to String relations since we lack context to reach a good precision on those. \\ 
 
-In the following we will discuss some difficulties and possible improvements. Many triples can only be found in the infoboxes so we cannot find them in the text itself. For example the height of a person. We only focused DBpedia ontology properties - except types and names - so it can distort the benchmarking since our system is not designed to find properties based on the structure of the text like dbo:abstract or other namespaces like $<$http://purl.org/dc/terms/description$>$. We also missed some triples or extracted incorrect ones because of the disambiguations. For example Spotlight often falsely recognized parties not as the actual party but rather as the history of that party. In addition to that the disambiguation also fluctuated depending on the amount of text.\\
+In the following, we will discuss some difficulties and possible improvements. Many triples can only be found in the infoboxes so we cannot find them in the text itself. For example the height of a person. We only focused DBpedia ontology properties - except types and names - so it can distort the benchmarking since our system is not designed to find properties based on the structure of the text like dbo:abstract or other namespaces like $<$http://purl.org/dc/terms/description$>$. We also missed some triples or extracted incorrect ones because of the disambiguations. For example Spotlight often falsely recognized parties not as the actual party but rather as the history of that party. In addition to that the disambiguation also fluctuated depending on the amount of text.\\
 
 The main improvement that could be made, would be to adjust the information including the keywords for the properties. Since sometimes we miss context if the property lacks the domain and/or range. For example dbo:citizenship not having range dbo:Country. A huge number of carefully selected keywords or maybe even negative keywords so words that should not occur would also improve the property selection. 
 
