@@ -156,7 +156,7 @@ Next we use OpenIE to extract binary relations from the sentences, some of them 
 		\end{tabularx}
 	\end{center}
 \end{table}
-
+\pagebreak
 Then Spotlight will find the following Named Entities.
 
 \begin{example}
@@ -180,11 +180,12 @@ Now as already discussed we will try to map the subject, predicate and object to
 		\end{tabularx}
 	\end{center}
 \end{table}
-
-
+In Table 2 you can see the matchings that occured for this sentence. After we matched the entity 
+\textit{dbr:Barack\_Obama} to the surface form contained in the subject, we also detect a month and two numbers in the object. Then we convert these into the correct date format \textit{1961-08-04}. Afterwards we map the 
+word bear to \textit{dbo:birhDate} and since the types of the entity and literal match, we have found the first triple.
 
 \begin{table}
-	\caption{Mappings entity to entity relation. For the third binary relation of Table 1.}\label{tab3}
+	\caption{Mappings entity to entity relation. For the second binary relation of Table 1.}\label{tab3}
 	\begin{center}
 		\begin{tabularx}{\textwidth}{@{}|l|l|Y|@{}}
 			\hline
@@ -197,7 +198,9 @@ Now as already discussed we will try to map the subject, predicate and object to
 		\end{tabularx}
 	\end{center}
 \end{table}
-So finally we get these two triples and write them to the graph. In this example we could also find the triple with the birth place of Honolulu. 
+
+As you can see in Table 3 in one binary relation we find the surface forms of the entity \textit{dbr:Barack\_Obama} in the subject and \textit{dbr:Harvard\_University} in the object. Since the binary relation also contains the word graduate which maps to \textit{dbo:almaMater} and the types of the two entity also match, we have found the second triple. 
+
 
 \section{Benchmark and Evaluation}
 Note that for benchmarking and evaluation we only used our relation extraction approach.
