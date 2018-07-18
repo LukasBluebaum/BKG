@@ -1,8 +1,12 @@
 package utils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
@@ -101,9 +105,36 @@ public class Benchmark {
 		}
 	}
 	
+	public void merge(List<String> dumps) throws IOException {
 	
+		FileWriter fw = new FileWriter(new File("resources/dump.txt"),true);	
+		for(String path : dumps) {
+		     System.out.println(path);		
+			 String line;
+			 BufferedReader br = new BufferedReader(new FileReader(path));
+			       while ((line = br.readLine()) != null) { 
+			    	   for(Resource r: subject) {
+			    		   if(line.startsWith("<"+ r +">")) {
+			    			   fw.write(line + "\r\n");
+			    		   }
+			    			   
+			    	   }
+			    	  
+		       } 
+		
+			 br.close();
 	
+		}
+		
+		  fw.close();
+		}
+	
+		
 	public static void main(String[] args) {
+		try {
+	       
+	   
+		
 		final PrintStream err = new PrintStream(System.err);
 		try {
 			System.setErr(new PrintStream("text"));
@@ -112,14 +143,23 @@ public class Benchmark {
 			e.printStackTrace();
 		}
 		Benchmark b = new Benchmark("resources/model.ttl", "Presidents_of_the_United_States" );
-//		List<String> dumps = Arrays.asList("src/main/resources/disambiguations_en.ttl", "src/main/resources/instance_types_en.ttl", "src/main/resources/instance_types_transitive_en.ttl",
-//										    "src/main/resources/labels_en.ttl","src/main/resources/long_abstracts_en.ttl", "src/main/resources/mappingbased_literals_en.ttl", 
-//											"src/main/resources/mappingbased_objects_en.ttl", "src/main/resources/persondata_en.ttl", "src/main/resources/specific_mappingbased_properties_en.ttl", "src/main/resources/transitive_redirects_en.ttl");
+		List<String> dumps = Arrays.asList("resources/disambiguations_en.ttl", "resources/instance_types_en.ttl", "resources/instance_types_transitive_en.ttl",
+										    "resources/labels_en.ttl","resources/long_abstracts_en.ttl", "resources/mappingbased_literals_en.ttl", 
+											"resources/mappingbased_objects_en.ttl", "resources/persondata_en.ttl" , "resources/specific_mappingbased_properties_en.ttl" ,  "resources/transitive_redirects_en.ttl" );
 		
-		List<String> dumps = Arrays.asList("resources/instance_types_en.ttl");
-		b.benchmark(dumps);
+	//	List<String> dumps = Arrays.asList("resources/instance_types_en.ttl");
+		try {
+			b.merge(dumps);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.setErr(err);
-	}	
+	
 		
-		
+	 } catch (Throwable ex) {
+	        System.err.println("Uncaught exception - " + ex.getMessage());
+	        ex.printStackTrace(System.err);
+	    }
+	}
 }
