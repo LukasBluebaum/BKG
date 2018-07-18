@@ -4,8 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
@@ -18,7 +16,6 @@ import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.shared.Lock;
-import org.json.simple.parser.ParseException;
 
 import edu.stanford.nlp.util.CoreMap;
 
@@ -51,7 +48,7 @@ public class FoxThread implements Runnable {
 	}
 	
 	/**
-	 * Takes the next line from the blocking queue, then calls {@link #getRelationsFox()} on this line.
+	 * Takes the next line from the blocking queue, then calls {@link #getRelationsFox(List)} on this line.
 	 * Writes the graph to a file.
 	 */
 	@Override
@@ -113,13 +110,9 @@ public class FoxThread implements Runnable {
 	
 	/**
 	 * Sends each sentence via the FoxWebservice to the FOX online demo and reads the returned model.
-	 * Calls {@link #getTriple()} to iterate over the model.
+	 * Calls {@link #getTriple(Statement, StmtIterator)} to iterate over the model.
 	 * 
 	 * @param sentences A List of CoreMaps.
-	 * @throws MalformedURLException
-	 * @throws ProtocolException
-	 * @throws IOException
-	 * @throws ParseException
 	 */
 	private void getRelationsFox(final List<CoreMap> sentences) {	
 	    for(CoreMap sentence: sentences) {

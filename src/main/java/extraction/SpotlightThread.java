@@ -87,7 +87,7 @@ public class SpotlightThread implements Runnable {
 	}
 	
 	/**
-	 * Takes the next line from the blocking queue, then calls {@link #getRelationsSpotlight()} on this line.
+	 * Takes the next line from the blocking queue, then calls {@link #getRelationsSpotlight(List)} on this line.
 	 * Writes the graph to a file.
 	 */
 	@Override
@@ -121,7 +121,7 @@ public class SpotlightThread implements Runnable {
 	
 	/**
 	 * Uses the SpotlightWebservice to get the entities for the current sentences.
-	 * Then calls {@link #retrieveTriples()}.
+	 * Then calls {@link #retrieveTriples(int, Map, Map)}.
 	 * @param sentences Current sentences that are to be processed.
 	 */
 	private void getRelationsSpotlight(List<CoreMap> sentences)  {	
@@ -223,7 +223,7 @@ public class SpotlightThread implements Runnable {
 	/**
 	 * Iterates through the binary relations of a sentence and tries to map the subject and object of these to entities which
 	 * were found in the current sentence. Finally tries to map the binary relation to an existing property.
-	 * If there is an entity in the subject also calls {@link #literalRelation()} to search for literal relations.
+	 * If there is an entity in the subject also calls {@link #literalRelation(Entity, int, Map)} to search for literal relations.
 	 * @param i Index of the current sentence.
 	 * @param binaryRelations List of binary relations in the current sentence.
 	 */
@@ -251,16 +251,8 @@ public class SpotlightThread implements Runnable {
 									Property predicate = ResourceFactory.createProperty(rel.getLabel());
 									RDFNode object = ResourceFactory.createResource(entity2.getUri());
 									Statement statement = ResourceFactory.createStatement(subject, predicate, object);
-									graph.enterCriticalSection(Lock.WRITE);
-									
+									graph.enterCriticalSection(Lock.WRITE);								
 									try {
-										try {
-											FileWriter fw = new FileWriter(new File("log"), true);
-											fw.write(rel.getLabel() + ": " + tripleRelation + "\r\n");
-											fw.close();
-										} catch (IOException e) {
-											e.printStackTrace();
-										}
 										graph.add(statement);	
 									} finally {
 										graph.leaveCriticalSection();
@@ -341,13 +333,6 @@ public class SpotlightThread implements Runnable {
 								Statement statement = ResourceFactory.createStatement(subject, predicate, object);									
 								graph.enterCriticalSection(Lock.WRITE);
 								try {
-									try {
-										FileWriter fw = new FileWriter(new File("log"), true);
-										fw.write(rel.getLabel() + ": " + tripleRelation + "\r\n");
-										fw.close();
-									} catch (IOException e) {
-										e.printStackTrace();
-									}
 									graph.add(statement);	
 								} finally {
 									graph.leaveCriticalSection();

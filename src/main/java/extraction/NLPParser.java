@@ -187,7 +187,7 @@ public class NLPParser {
 	
 	
 	/**
-	 * Called by {@link #coreferenceResolution()}.
+	 * Called by {@link #coreferenceResolution(List)}.
 	 * This method determines if her is used as a possessive pronoun in this case. Therefore it looks
 	 * for the poss modifier.
 	 * @param value 
@@ -218,7 +218,7 @@ public class NLPParser {
 	
 	/** 
 	 * Returns the lemmanization of the given string.
-	 * @param 
+	 * @param input 
 	 * @return The lemmanization of the given string.
 	 */
 	public static String getLemma(String input) {

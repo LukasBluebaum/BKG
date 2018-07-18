@@ -55,7 +55,6 @@ public class SpotlightWebservice {
 	 * @param urlParameters Parameters for the request.
 	 * @param requestURL Spotlight demo url.
 	 * @return Response from Spotlight.
-	 * @throws IOException
 	 */
 	private String requestPOST(final String urlParameters, final String requestURL){
 		try {	

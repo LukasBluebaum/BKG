@@ -201,7 +201,7 @@ public class Benchmark {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			Benchmark b = new Benchmark("evaluation/model.ttl", "Presidents_of_the_United_States" );
+			Benchmark b = new Benchmark("evaluation/completeModel.ttl", "Presidents_of_the_United_States" );
 //			List<String> dumps = Arrays.asList("resources/disambiguations_en.ttl", "resources/instance_types_en.ttl", "resources/instance_types_transitive_en.ttl",
 //											    "resources/labels_en.ttl","resources/long_abstracts_en.ttl", "resources/mappingbased_literals_en.ttl", 
 //												"resources/mappingbased_objects_en.ttl", "resources/persondata_en.ttl" , "resources/specific_mappingbased_properties_en.ttl" ,  "resources/transitive_redirects_en.ttl" );
@@ -213,7 +213,7 @@ public class Benchmark {
 //				e.printStackTrace();
 //			}
 	
-			List<String> dump = Arrays.asList("evaluation/dump.ttl");
+			List<String> dump = Arrays.asList("evaluation/dumpOnlyPresidents.ttl");
 			b.benchmark(dump);
 		
 		 } catch (Throwable ex) {

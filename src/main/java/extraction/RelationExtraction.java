@@ -7,14 +7,11 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -22,7 +19,6 @@ import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
-import org.json.simple.parser.ParseException;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -82,11 +78,6 @@ public class RelationExtraction {
 	 * Creates a {@link SpotlightThread} and {@link FoxThread}, which then read the articles from their given BlockingQueue and try to extract triples.
 	 * @param input Path to a text file like the wikipedia dump.
 	 * @param model Path to a Jena Model, the model will be created if it does not exist yet.
-	 * @throws MalformedURLException
-	 * @throws ProtocolException
-	 * @throws IOException
-	 * @throws ParseException
-	 * @throws InterruptedException
 	 */
 	private void retrieveRelations(String input, String model)  {		
 		
@@ -109,9 +100,7 @@ public class RelationExtraction {
 		    
 //		    Thread fox = new Thread(foxThread);
 //		    fox.start();
-		    while((nextLine = reader.readLine()) != null) {	
-		    	final long startTime2 = System.currentTimeMillis();
-		    	
+		    while((nextLine = reader.readLine()) != null) {			    	
 		    	List<CoreMap> sentences = parser.getSentences(nextLine);	    	
 		    	List<CoreMap> nextSentences = new ArrayList<CoreMap>();
 		    	int currentLength = 0;
@@ -135,10 +124,6 @@ public class RelationExtraction {
 		    		spotlightQueue.put(sentencesRelations);		    		
 //		    		foxQueue.put(sentencesRelations);	    		
 		    	}
-		    	final long endTime2 = System.currentTimeMillis();
-    			final long test2 = endTime2-startTime2;
-    			double i = (double) TimeUnit.MILLISECONDS.toSeconds(test2);
-    			System.out.println("Done with article: (" + nextLine.length() + "," + (i/60.0) + ")");
 		    }
 		    
 		    spotlightQueue.put(new ArrayList<CoreMap>());
@@ -250,6 +235,6 @@ public class RelationExtraction {
 	
 	public static void main(String[] args)   {
 		RelationExtraction n = new RelationExtraction();	
-		n.retrieveRelations("resources/o.txt", "src/main/resources/model.ttl");
+		n.retrieveRelations("evaluation/cleanedArticlesPresidents.txt", "evaluation/model.ttl");
 	}
 }

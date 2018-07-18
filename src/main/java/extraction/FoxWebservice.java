@@ -32,7 +32,7 @@ public class FoxWebservice {
 	
 	
 	/**
-	 * Sets the parameters for the next FOX request and calls {@link #requestPost()}.
+	 * Sets the parameters for the next FOX request and calls {@link #requestPOST(JSONObject, String)}.
 	 * @param inputText
 	 * @param lang
 	 * @param taskType
@@ -40,7 +40,6 @@ public class FoxWebservice {
 	 * @throws IOException 
 	 * @throws ProtocolException 
 	 * @throws MalformedURLException 
-	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	protected String extract(String inputText, String lang, String taskType) throws IOException  {
