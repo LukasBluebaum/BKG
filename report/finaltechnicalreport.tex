@@ -107,12 +107,12 @@ After they have located a candidate they take the information next to the surfac
 \subsection{Using FOX}
 FOX, can be used additionally to our relation extraction algorithm. FOX and our algorithm run in different threads in order to increase the number of triples with a reduced runtime. Here we just request FOX in 're' mode and then parse the output and write the triples that were found to the graph.
 \subsection{Own Approach}
-Our algorithm relies on the coreference resolution as well as Stanford OpenIE.
+Our algorithm relies on the coreference resolution as well as Stanford OpenIE \cite{openie}.
 Third person pronouns are replaced by their representative mention. Our algorithm tries to send as many sentences as Spotlight can handle at once to reduce the number of requests which leads to a reduced runtime. Moreover, this provides Spotlight more context to perform disambiguation. \\
 
 We build an entity class to save all the information we received, including the offset and the surface form to match the entities back to the sentences as well as the types. Those types are triples itself, but they are also needed to determine which properties would be a valid match according to their respective domain and range.
 In the next step, we had to process Wikipedia sentences to extract binary relations between entities. Since Wikipedia sentences tend to be more complex simple dependency parsing can lead to failure.
-We decided to use OpenIE, a system that extracts binary relation triples from a text. OpenIE recursively traverses the dependency tree to find independent clauses. It then searches for shorter arguments that are logically entailed by the original sentence. It also uses a proof system to only create logically coherent clauses.
+We decided to use OpenIE, a system that extracts binary relation triples from a text. OpenIE recursively traverses the dependency tree to find independent clauses \cite{openie}. It then searches for shorter arguments that are logically entailed by the original sentence \cite{openie}. It also uses a proof system to only create logically coherent clauses \cite{openie}.
 We precompute the relations and save them for each sentence. \\
 
 With the entities and relation stored the next task is to map those to DBpedia properties. Therefore we parse the DBpedia ontology and create Property (Relation) Objects. Each Property Object contains the label, domain, range and a number of keywords that allow us to map the property to natural language text. The first list of keywords is generated from the property labels. 
