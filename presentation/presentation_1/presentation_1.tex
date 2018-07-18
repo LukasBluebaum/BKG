@@ -79,6 +79,9 @@
 \usepackage{todonotes}
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{pgfplots}
+\usepgfplotslibrary{external}
+
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -93,7 +96,7 @@ University of Paderborn \\ % Your institution for the title page
 \medskip
 \textit{https://github.com/LukasBluebaum/BKG} % Your email address
 }
-\date{June 21, 2018} % Date, can be changed to a custom date
+\date{July 19, 2018} % Date, can be changed to a custom date
 
 \begin{document}
 
@@ -115,7 +118,7 @@ University of Paderborn \\ % Your institution for the title page
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Extraction and Cleaning of text from Wikipedia Dump}
+\frametitle{Extraction and cleaning of text from Wikipedia Dump}
 \begin{block}{Foundation}
 	Wikipedia dump consisting of plain text without markup, infoboxes or chapter subdivision 
 \end{block}
@@ -217,33 +220,26 @@ University of Paderborn \\ % Your institution for the title page
 		\end{itemize}
 		\item Our RelationExtraction method using OpenIE and Spotlight 
 	\end{itemize}
-	\item Limited to the first part of each article (summarizes the facts)
 \end{itemize}
 \end{frame}
 
 %------------------------------------------------
 
-\begin{frame}
-\frametitle{Relation Extraction: Fox}
 
-\begin{figure}
-	\begin{center}
-		\includegraphics[scale=0.38]{FoxExtraction.PNG}
-	\end{center}
-\end{figure}
-\end{frame}
-
-%------------------------------------------------
 
 \begin{frame}
 \frametitle{Relation Extraction: Own Approach}
 \begin{itemize}
 	\item Parsing ontology and creating a list of properties
-	\item Using Spotlight for NER, so we can run it concurrent to Fox
+	\item Write these to a JSON-File 
+	\begin{itemize}
+		\item Can then be edited manually or automatically
+	\end{itemize}
+	\item Using Spotlight for NER, so we can run it concurrent to FOX
 	\item Using Stanford CoreNLP 
 	\begin{itemize}
-		\item experimented with different approaches to find relations given two entities (search algorithms on dependency trees, semanticGraph)
-		\item decided to use OpenIE
+		\item Experimented with different approaches to find relations given two entities (search algorithms on dependency trees, semanticGraph)
+		\item Decided to use OpenIE
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -254,7 +250,7 @@ University of Paderborn \\ % Your institution for the title page
 \frametitle{Relation Extraction: OpenIE }
 \begin{itemize}
 	\item Splitting sentences into shorter fragments, appeal to natural logic to maintain context
-	\item Traverse dependency parse tree recursively \cite{p1}
+	\item Traverse dependency tree recursively \cite{p1}
 	\item Disadvantage in our case: have to filter for entity to entity relations 
 	\item After finding the binary relation (OpenIE Triple) between entities: Map them to DBpedia ontology
 \end{itemize}
@@ -268,11 +264,67 @@ University of Paderborn \\ % Your institution for the title page
 	\item Parse DBpedia properties to Java objects
 	\item Search for a valid property (check domain and range)
 	\item Map relation to keywords to find proper property 
+	\begin{itemize}
+		\item If a keyword String consists of multiple words
+		\item[] $\Rightarrow$ All words have to be found to map a relation to the property
+		\item Work with lemmatization
+	\end{itemize}
+	\item Also searches for numbers to find entity to literal relations
 	\item Write triple to graph
 \end{itemize}
 \end{frame}
 
 %------------------------------------------------
+\begin{frame}
+\frametitle{Relation Extraction 1.1 }
+\begin{example}[]
+	\begin{itemize}
+		\item \textit{Multiple Sentences (as many as Spotlight can handle):} \\
+		\begin{itemize} \item Obama was born on August 4, 1961, at Kapiolani Medical Center for Women and Children in Honolulu, Hawaii. He graduated from Harvard University.
+		\end{itemize}
+		\item Coreference Resolution:  \begin{itemize} \item Obama was born on August 4 , 1961 , at Kapiolani Medical Center for Women and Children in Honolulu , Hawaii . Obama graduated from Harvard University. 
+		\end{itemize}
+		\item Binary Relation Extraction:  \begin{itemize} \item First sentence: Obama - be bear on - August 4 1961. (among others)
+			\item Second sentence: Obama - graduate from - Harvard University (among others)
+		\end{itemize}	 
+	\end{itemize}
+\end{example}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Relation Extraction 1.2 - Entity to Literal Relation}
+\begin{example}
+\begin{itemize}
+	\item \textit{Named Entity Recognition and mapping surface form back to sentences} \\
+	\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Harvard University} .
+	\end{itemize}
+	\item Entity to literal extraction: Obama - be bear on - August 4 1961. \begin{itemize} \item Search for entity in subject of the binary relations \\ $\Rightarrow$ Obama (Types: Person, ...) 
+		\item Search for literal in object: $\Rightarrow$ detects numbers 
+		\item Search if object contains a date if not extract single literal: \\ $\Rightarrow$ detects month + numbers (date found)
+		\item Convert to date format: $\Rightarrow$  1961-08-04
+		\item Map relation to property: keyword: bear  $\Rightarrow$ dbo:birthDate \\ (Domain: Person - Range: xsd:date)
+		\item Write dbo:Barack\_Obama dbo:birthDate "1961-08-04"\textasciicircum{}\textasciicircum{}xsd:date to graph
+	\end{itemize}		 
+\end{itemize}
+\end{example}
+\end{frame}
+\begin{frame}
+\frametitle{Relation Extraction 1.3 - Entity to Entity Relation}
+\begin{example}
+\begin{itemize}
+\item \textit{Named Entity Recognition and mapping surface form back to sentences} \\
+\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Harvard University} .
+\end{itemize}
+\item Entity to entity extraction: Obama - graduate from - Harvard University \begin{itemize} \item Search for entity in subject and in object of the binary relations \\ $\Rightarrow$ Obama (Types: Person, ...), Harvard University (Type: EducationalInstitution )
+	\item Iterate over all properties with given domain and range
+	\item Map relation to property: \\ keyword: graduate $\Rightarrow$ dbo:almaMater
+	\item Write dbo:Barack\_Obama dbo:almaMater dbo:Harvard\_University to graph
+\end{itemize}		 
+
+\end{itemize}
+\end{example}
+\end{frame}
+
 
 %------------------------------------------------
 \section{Architecture}
@@ -288,24 +340,103 @@ University of Paderborn \\ % Your institution for the title page
 %------------------------------------------------
 
 %------------------------------------------------
-\section{Upcoming Tasks}
-%------------------------------------------------
 
+%------------------------------------------------
+\section{Benchmark}
+%------------------------------------------------
 \begin{frame}
-\frametitle{Upcoming Tasks}
+\frametitle{Benchmark}
 \begin{itemize}
-	\item Already able to build a knowledge graph, but thinking about further improvements for our own relation extraction
-	\begin{itemize}
-		\item e.g. more keywords / heuristics for finding the best property
-		\item e.g. find entity to literal relations 
-		\item long runtime due to the response time of Fox/Spotlight and delay for scheduling Fox/Spotlight requests
-		\item[] $\Rightarrow$ avoid running it before all improvements are made
-	\end{itemize}
-	\item Benchmarking as soon as we are pleased with the result (whether improvements are needed)
+	\item Benchmark class: Given a category and one or more dumps
+	\item Querying for all subjects of the given category
+	\item Can merge multiple n-triple dumps into one file to load it in memory
+	\item Counts and compares all relations with a subject of the given category for the model and dumps
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Benchmarking our result}
+
+\begin{block}{Approach}
+	\begin{itemize}
+		\item Selected category: \textbf{Presidents of the United States}
+		\item Compared our result with the given dumps 
+		\item Selected 100 triples randomly that were not contained in the dumps and checked them manually
+		\item Only used our relation extraction approach for the benchmarking
+	\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Result}
+\begin{itemize}
+	\item From the 2810 triples contained in the dumps we also found 556 
+	\item Out of the 100 randomly sampled triples 46 were correct.
+	\item[] $\Rightarrow$ Recall = 0.197
+	\item[] $\Rightarrow$ Precision = 0.46
+	\item[] $\Rightarrow$ F-measure = 0.27
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Runtime}
+\begin{tikzpicture}
+\begin{axis}[%
+scale only axis,
+width=4in,
+height=2.6in,
+xlabel=Length in characters,
+ylabel= Time in minutes,
+xmin=0, xmax=120000,
+ymin=0, ymax=8,
+axis on top]
+\addplot[
+ybar,
+bar width=0.0502874in, 
+bar shift=0in,
+fill=blue!40,
+draw=black] 
+plot coordinates{ 
+	(111453,3.3666666666666667) (94918,4.116666666666666) (85842,3.95) (85233,2.716666666666667) (50916,1.3166666666666667) (119839,4.466666666666667) (97655,2.6333333333333333) (95166,2.7333333333333334) (75964,7.05) (77587,3.7) (58296,3.716666666666667) (58807,5.55) (75869,6.35) (65114,1.8666666666666667) (87427,3.283333333333333) (57004,1.5666666666666667) (46195,1.9333333333333333) (104960,3.433333333333333) (89576,2.35) (102306,3.1333333333333333) (104061,2.85) (107992,2.716666666666667) (93254,2.25) (88178,4.783333333333333) (76518,3.3666666666666667) (118674,4.25) (48980,3.533333333333333) (74002,1.9666666666666666) (112234,3.316666666666667) (92795,3.8)
+	(103164,3.0) (80339,2.216666666666667) (86315,3.8333333333333335) (111862,3.533333333333333) (56341,1.5166666666666666) (106587,6.816666666666666) (59495,4.033333333333333) (50342,1.45) (64839,1.9166666666666667) (53873,1.6666666666666667) (68984,2.1) (42456,1.1833333333333333) (71311,2.066666666666667) (97937,2.816666666666667) (3766,0.1) (9602,0.55) (53799,1.2666666666666666) (43464,1.4) (17488,0.48333333333333334) (12635,0.4166666666666667)  (84084,2.3666666666666667) (2444,0.08333333333333333) (2409,0.03333333333333333) (7190,0.16666666666666666) (33914,1.0) (43369,1.0166666666666666) (3174,0.18333333333333332) (75744,2.4166666666666665)
+	(66070,1.6) (42017,0.9666666666666667) (5942,0.06666666666666667) (28364,0.6166666666666667) (9997,0.5166666666666667) (2238,1.2333333333333334) (5458,0.11666666666666667) (51101,1.3333333333333333) (1642,0.31666666666666665) (19755,0.4666666666666667) (29098,0.6166666666666667) (50725,1.2833333333333334) (16995,0.55) (19289,0.4666666666666667) (43271,1.2333333333333334) (7043,0.18333333333333332) (6724,0.5666666666666667) (44063,3.9166666666666665) (40813,1.5333333333333334) (111453,3.066666666666667) (72158,1.5333333333333334) (84186,2.3833333333333333) (27028,1.2833333333333334) (71598,2.6) (57741,1.7333333333333334) (39596,1.1) (30098,0.8) (1648,0.03333333333333333)
+};
+
+\end{axis}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+\frametitle{Runtime}
+\begin{itemize}
+	\item Approximately 70-80\% of the runtime is the Stanford Coref-Annotator
+	\item Initial runtime due to loading of the models neglected (only once at the start)
+\end{itemize}
+
+\end{frame}
+
 %------------------------------------------------
+\section{Discussion}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Discussion}
+\begin{itemize}
+	\item Many information can only be found in the infoboxes (Example: height)
+	\item Missing triples due to false disambiguations (Example: History of some party)
+	\item Disambiguations can change depending on the amount of text
+	\item Main difficulty - mapping of properties:
+	\begin{itemize}
+		\item We miss context on properties that lack domain and/or range
+		\item Huge number of carefully selected keywords are needed (Example: appointer as keyword leads to the inverse of the expected result)		
+	\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
 
 \begin{frame}
 \frametitle{References}
@@ -325,56 +456,6 @@ University of Paderborn \\ % Your institution for the title page
 			In Proceedings of the Association of Computational Linguistics (ACL) } 2.
 	\end{thebibliography}
 }
-\end{frame}
-
-\begin{frame}
-\frametitle{Relation Extraction 1.1 - Entity to Literal Relation}
-\begin{example}[]
-	\begin{itemize}
-		\item \textit{Multiple Sentences (as many as Spotlight can handle):} \\
-		\begin{itemize} \item Obama was born on August 4, 1961, at Kapiolani Medical Center for Women and Children in Honolulu, Hawaii. He graduated from Harvard University.
-		\end{itemize}
-		\item Coreference Resolution:  \begin{itemize} \item Obama was born on August 4 , 1961 , at Kapiolani Medical Center for Women and Children in Honolulu , Hawaii . Obama graduated from Harvard University. 
-		\end{itemize}
-	\item Binary Relation Extraction:  \begin{itemize} \item First sentence: Obama - be bear on - August 4 1961. (among others)
-    \item Second sentence: Obama - graduate from - Harvard University (among others)
-	\end{itemize}	 
-	\end{itemize}
-\end{example}
-\end{frame}
-%------------------------------------------------
-\begin{frame}
-\frametitle{Relation Extraction 1.2 - Entity to Literal Relation}
-\begin{example}
-	\begin{itemize}
-	\item \textit{Named Entity Recognition and mapping surface form back to sentences} \\
-	\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Harvard University} .
-	\end{itemize}
-	\item Entity to literal extraction: Obama - be bear on - August 4 1961. \begin{itemize} \item Search for entity in subject of the binary relations. \\ $\Rightarrow$ Obama (Types: Person, ...) 
-	\item Search for literal in object: $\Rightarrow$ detects numbers 
-	\item Search if object contains a date if not extract single literal: \\ $\Rightarrow$ detects month + numbers (date found)
-	\item Convert to date format: $\Rightarrow$  1961-08-04
-	\item Map relation to property: keyword: bear  $\Rightarrow$ dbo:birthDate (Domain: Person Range: xsd:date)
-	\item write dbo:Barack\_Obama dbo:birthDate "1961-08-04"\textasciicircum{}\textasciicircum{}xsd:date to graph.
-	\end{itemize}		 
-\end{itemize}
-\end{example}
-\end{frame}
-\begin{frame}
-\frametitle{Relation Extraction 1.3 - Entity to Entity Relation}
-\begin{example}
-	\begin{itemize}
-		\item \textit{Named Entity Recognition and mapping surface form back to sentences} \\
-		\begin{itemize} \item \underline{Obama} was born on August 4, 1961, at \underline{Kapiolani} Medical Center for Women and Children in \underline{Honolulu}, \underline{Hawaii}. \underline{Obama} graduated from \underline{Harvard University} .
-		\end{itemize}
-		\item Enity to entity extraction: Obama - graduate from - Harvard University \begin{itemize} \item Search for entity in subject and in object of the binary relations. \\ $\Rightarrow$ Obama (Types: Person, ...), Harvard University (Type: EducationalInstitution )
-			\item Iterate over all properties with given domain and range
-			\item Map relation to property: \\ keyword: graduate $\Rightarrow$ dbo:almaMater
-			\item write dbo:Barack\_Obama dbo:almaMater dbo:Harvard\_University to graph.
-		\end{itemize}		 
-
-	\end{itemize}
-\end{example}
 \end{frame}
 
 

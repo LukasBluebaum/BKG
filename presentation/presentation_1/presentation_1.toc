@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Preprocessing (Cleaning and Coreference Resolution)}{3}{0}{1}
+\beamer@sectionintoc {2}{Named Entity Recognition}{6}{0}{2}
+\beamer@sectionintoc {3}{Entity Disambiguation}{7}{0}{3}
+\beamer@sectionintoc {4}{Relation Extraction}{8}{0}{4}
+\beamer@sectionintoc {5}{Architecture}{15}{0}{5}
+\beamer@sectionintoc {6}{Benchmark}{16}{0}{6}
+\beamer@sectionintoc {7}{Discussion}{21}{0}{7}

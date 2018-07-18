@@ -8,7 +8,7 @@
 \usepackage{tabularx}
 \usepackage{pgfplots}
 \usepgfplotslibrary{external}
-
+\usepackage{caption}
 \pgfplotsset{width=\textwidth,compat=1.9}
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -16,7 +16,7 @@
 % If you use the hyperref package, please uncomment the following line
 % to display URLs in blue roman font according to Springer's eBook style:
 % \renewcommand\UrlFont{\color{blue}\rmfamily}
-
+\raggedbottom
 \begin{document}
 %
 \title{Building a Knowledge Graph}
@@ -25,7 +25,7 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-
+\renewcommand*\labelitemi{\textbullet}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \author{Lukas Bl{\"u}baum \and Nick D{\"u}sterhus \and Monika Werner}
 %
@@ -44,9 +44,9 @@
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-The goal of this proseminar was to create an encyclopetic knowledge graph from a large text corpus like a wikipedia dump. In order to learn and better understand the basics of Semantic Web technologies. For this we were given a wikipedia dump and the core ontology of DBpedia. To facilitate this task we were introduced to several tools including FOX \cite{fox} and DBpedia Spotlight \cite{spotlight}. The whole project is written in Java and as license we used the GNU General Public License v3.0. The documented source code, including instructions on how to run the code, can be found on the given Github repository.
+The goal of this proseminar was to create an encyclopetic knowledge graph from a large text corpus like a wikipedia dump. In order to learn and better understand the basics of Semantic Web technologies. For this we were given a wikipedia dump and the core ontology of DBpedia. To facilitate this task we were introduced to several tools including FOX \cite{fox} and DBpedia Spotlight \cite{spotlight}. The whole project is written in Java and as license we used the GNU General Public License v3.0. The documented source code, including instructions on how to run the code, can be found on the given GitHub repository.
 
-\keywords{Knowledge Graphs  \and Semantic Web \and Coreference Resolution \and Named Entity Recognition
+\keywords{Knowledge Graph  \and Semantic Web \and Coreference Resolution \and Named Entity Recognition
 \and Entity Disambiguation \and Relation Extraction \and FOX \and Spotlight }
 \end{abstract}
 
@@ -105,25 +105,25 @@ After they have located a candidate they take the information next to the surfac
 \section{Relation Extraction}
 
 \subsection{Using FOX}
+FOX, can be used additionally to our relation extraction algorithm. FOX and our algorithm run in different threads in order to increase the number of triples with a reduced runtime. Here we just request FOX in 're' mode and then parse the output and write the triples that were found to the graph.
 \subsection{Own Approach}
-After recognizing the entities correctly we need to find the relations between them mentioned in the given Wikipedia dump to finish our knowledge graph. The relation become the edges of the graph.
+Our algorithm relies on the coreference resolution as well as Stanford OpenIE.
+Third person pronouns are replaced by their representative mention. Our algorithm tries to send as many sentences as Spotlight can handle at once to reduce the number of requests which leads to a reduced runtime. Moreover, this provides Spotlight more context to perform disambiguation. \\
 
-The type of relation we are most interested in are binary relations, so relations between only two entities an not more. Therefore, we need to find those first. The relations of this type that can be found in our example include:
-\begin{example}
-First sentence: Obama - be bear on - August 4 1961. (among others)
+We build an entity class to save all the information we received, including the offset and the surface form to match the entities back to the sentences as well as the types. Those types are triples itself, but they are also needed to determine which properties would be a valid match according to their respective domain and range.
+In the next step, we had to process Wikipedia sentences to extract binary relations between entities. Since Wikipedia sentences tend to be more complex simple dependency parsing can lead to failure.
+We decided to use OpenIE, a system that extracts binary relation triples from a text. OpenIE recursively traverses the dependency tree to find independent clauses. It then searches for shorter arguments that are logically entailed by the original sentence. It also uses a proof system to only create logically coherent clauses.
+We precompute the relations and save them for each sentence. \\
 
-Second sentence: Obama - graduate from - Havard Law school (among others)\end{example}
+With the entities and relation stored the next task is to map those to DBpedia properties. Therefore we parse the DBpedia ontology and create Property (Relation) Objects. Each Property Object contains the label, domain, range and a number of keywords that allow us to map the property to natural language text. The first list of keywords is generated from the property labels. 
+The properties are stored as a list, converted to JSON and saved as a file that we could manually or automatically edit.
+A keyword String attribute that consists of multiple words, can be interpreted as a vector of which all words have to be found to map a relation to the property. We worked with lemmatized keywords and binary relations to reduce the needed amount of keywords. \\
 
-Afterwards, we add the relation to our graph. In order to do so, we first look at the subject of the binary relation. In both sentences from our example we recognize "Obama" as the subject with its type including "Person". Then we look at the object of the relation. In the first sentence, we detect that the object contains numbers, which can indicate that the object contains either a date or a number literal. We check whether the object is a date and if it is not, we extract it as a single literal of a fitting number type if it is a number or keep it as a string if the number just happens to be part of a name and therefore not convertable to any other type of literal. In our case, we detect "August" is a month and therefore convert the whole object to the proper dateformat 1961-08-04. In the second sentence, we detect "Hardvard University" as another entity of type EducationalInstitution. Then, in order to be able to map the found relation to the correct property, we look at the predicate of the sentences and check for keywords. In our first sentence, we find "bear" in a relation with "Person" as the domain and xsd:date as range so we search for a property which fits this keyword, domain and range and get dbo:birthDate, while in our second sentence we find the keyword "graduate" with "Person" as domain and " EducationalInstitution" as range and get dbo:almaMater as the fitting property. With these informations, we turned the first and second sentence of our example into the following triples:
-\begin{example} First sentence: dbo:Barack\_Obama dbo:birhtDate "1961-08-04".
-	
-	Second sentence: dbo:Barack\_Obama dbo:almaMater dbo:Havard\_University.\end{example}
+We then iterate through all the entities and binary relation for a sentence and try to match the subject and the object of the binary relation to entities. Afterwards we map the keywords to the binary relation and check for the range and type. If everything matches we create a triple and write it to the graph. \\
 
-These triples can now be properly added to our knowledge graph. After this has been done with all found triples our knowledge graph from the given text is as far completed as the programm is capable to do so.
-
-For this step again we use FOX and Spotlight. We use FOX in "re" mode for entity recognition and relation extraction, however FOX does not recognize many triples and misses too many relations. Therefore we implemented our own method using Spotlight and OpenIE.
-We use DBdia Spotlight first for named entity recognition so that we can run our method concurrent to FOX. 
-
+For entity to literal relations, we first match the subject of the binary relation to an entity. Then we search for numbers inside the object. In case that we also find a month and two numbers we convert them to the xsd:date format. If we only find a number, we keep this number for the keyword matching step. Often Wikipedia plain text literals are partly written-out. To account for these cases we convert them to the actual number. 
+\begin{example} 82 million $\Rightarrow$ 82000000 \end{example}
+   
 \section{Example}
 In the following we will demonstrate the whole process at an example.
 
@@ -165,7 +165,6 @@ Women and Children in \textbf{Honolulu}, \textbf{Hawaii}. \textbf{Obama} graduat
 \textbf{Harvard University} .\end{example}
 
 Now as already discussed we will try to map the subject, predicate and object to entities, properties and entities or literals. Here we distinguish between entity to literal relation and entity to entity relation.
-\pagebreak
 
 \begin{table}
 	\caption{Mappings entity to literal relation. For the first binary relation of Table 1.}\label{tab2}
@@ -181,6 +180,8 @@ Now as already discussed we will try to map the subject, predicate and object to
 		\end{tabularx}
 	\end{center}
 \end{table}
+
+
 
 \begin{table}
 	\caption{Mappings entity to entity relation. For the third binary relation of Table 1.}\label{tab3}
@@ -198,18 +199,24 @@ Now as already discussed we will try to map the subject, predicate and object to
 \end{table}
 So finally we get these two triples and write them to the graph. In this example we could also find the triple with the birth place of Honolulu. 
 
-\section{Evaluation}
+\section{Benchmark and Evaluation}
+Note that for benchmarking and evaluation we only used our relation extraction approach.
 \subsection{Runtime}
+We measured the runtime of 100 articles in length of characters per time in minutes (see the graph below). We considered articles of different lengths to demonstrate how the runtime develops if the articles get longer. A huge share of the runtime is due to the coref annotator of the Stanford CoreNLP. This also explains the outliers because the coref Annotator then just takes longer for these sentences.
+
+  
+
 
 \begin{tikzpicture}
+
 \begin{axis}[%
 scale only axis,
 width=5in,
 height=4in,
 xlabel=Length in characters,
 ylabel= Time in minutes,
-xmin=100000, xmax=150000,
-ymin=4, ymax=5,
+xmin=0, xmax=120000,
+ymin=0, ymax=8,
 axis on top]
 \addplot[
 ybar,
@@ -218,15 +225,42 @@ bar shift=0in,
 fill=blue!40,
 draw=black] 
 plot coordinates{ 
-	(108100,4.5) (110800,4.5) (120800,4.6) (130800,4.7) (140800,4.8)
+	(111453,3.3666666666666667) (94918,4.116666666666666) (85842,3.95) (85233,2.716666666666667) (50916,1.3166666666666667) (119839,4.466666666666667) (97655,2.6333333333333333) (95166,2.7333333333333334) (75964,7.05) (77587,3.7) (58296,3.716666666666667) (58807,5.55) (75869,6.35) (65114,1.8666666666666667) (87427,3.283333333333333) (57004,1.5666666666666667) (46195,1.9333333333333333) (104960,3.433333333333333) (89576,2.35) (102306,3.1333333333333333) (104061,2.85) (107992,2.716666666666667) (93254,2.25) (88178,4.783333333333333) (76518,3.3666666666666667) (118674,4.25) (48980,3.533333333333333) (74002,1.9666666666666666) (112234,3.316666666666667) (92795,3.8)
+	(103164,3.0) (80339,2.216666666666667) (86315,3.8333333333333335) (111862,3.533333333333333) (56341,1.5166666666666666) (106587,6.816666666666666) (59495,4.033333333333333) (50342,1.45) (64839,1.9166666666666667) (53873,1.6666666666666667) (68984,2.1) (42456,1.1833333333333333) (71311,2.066666666666667) (97937,2.816666666666667) (3766,0.1) (9602,0.55) (53799,1.2666666666666666) (43464,1.4) (17488,0.48333333333333334) (12635,0.4166666666666667)  (84084,2.3666666666666667) (2444,0.08333333333333333) (2409,0.03333333333333333) (7190,0.16666666666666666) (33914,1.0) (43369,1.0166666666666666) (3174,0.18333333333333332) (75744,2.4166666666666665)
+	(66070,1.6) (42017,0.9666666666666667) (5942,0.06666666666666667) (28364,0.6166666666666667) (9997,0.5166666666666667) (2238,1.2333333333333334) (5458,0.11666666666666667) (51101,1.3333333333333333) (1642,0.31666666666666665) (19755,0.4666666666666667) (29098,0.6166666666666667) (50725,1.2833333333333334) (16995,0.55) (19289,0.4666666666666667) (43271,1.2333333333333334) (7043,0.18333333333333332) (6724,0.5666666666666667) (44063,3.9166666666666665) (40813,1.5333333333333334) (111453,3.066666666666667) (72158,1.5333333333333334) (84186,2.3833333333333333) (27028,1.2833333333333334) (71598,2.6) (57741,1.7333333333333334) (39596,1.1) (30098,0.8) (1648,0.03333333333333333)
 };
 
 \end{axis}
 \end{tikzpicture}
-
+\subsubsection{Computer Specifications}
+\begin{itemize} 
+	\item OS: Windows 10 
+	\item CPU: Intel Core i5-7600K 
+	\item SSD
+\end{itemize}
 \subsection{Correctness}
+For the evaluation we wrote a Benchmark class that takes a category and one or more dumps as input and then queries all subjects from the given category. Then we compare all triples from our graph that have a subject from the category with those from the dumps. \\
+
+We selected the category \textit{Presidents of the United States}. First we compared our result to the given dumps, then we selected 100 triples randomly that were not contained in the dumps and checked them manually.\\
+
+From the 2810 triples contained in the dump - from the chosen category - we also found 556. Note here that this also contains types we received from Spotlight, without the types these numbers are 2320 and 121. From the 100 randomly selected triples 46 were correct. This leads to a recall 
+of 0.197 and precision of 0.46. So the resulting F-measure amounts 0.27. In the evaluation folder on the GitHub repository we provided the used files.
+\subsubsection{The provided dumps (2016-10)} 
+\begin{itemize} 
+	\item disambiguations\_en.ttl, instance\_types\_en.ttl, labels\_en.ttl, long\_abstracts\_en.ttl,
+	mappingbased\_literals\_en.ttl, mappingbased\_objects\_en.ttl, persondata\_en.ttl, specific\_mappingbased\_properties\_en.ttl, transitive\_redirects\_en.ttl
+\end{itemize}
 
 
+\section{Discussion}
+In conclusion, our system can find relations from plain text utilizing two different strategies by FOX and our own algorithm. Our software relies on Spotlight for Named Entity Recognition and Stanford CoreNLP with OpenIE as our main tool to extract logically coherent relations.
+By coreferencing the articles we can consider each sentence for itself. Our algorithm scales with the amount of keywords that are added to the mentioned property file. It can theoretically find relations for all DBpedia properties, besides Entity to String relations since we lack context to reach a good precision on those. \\ 
+
+In the following we will discuss some difficulties and possible improvements. Many triples can only be found in the infoboxes so we cannot find them in the text itself. For example the height of a person. We only focused DBpedia ontology properties - except types and names - so it can distort the benchmarking since our system is not designed to find properties based on the structure of the text like dbo:abstract or other namespaces like $<$http://purl.org/dc/terms/description$>$. We also missed some triples or extracted incorrect ones because of the disambiguations. For example Spotlight often falsely recognized parties not as the actual party but rather as the history of that party. In addition to that the disambiguation also fluctuated depending on the amount of text.\\
+
+The main improvement that could be made, would be to adjust the information including the keywords for the properties. Since sometimes we miss context if the property lacks the domain and/or range. For example dbo:citizenship not having range dbo:Country. A huge number of carefully selected keywords or maybe even negative keywords so words that should not occur would also improve the property selection. 
+
+ 
 % ---- Bibliography ----
 %
 % BibTeX users should specify bibliography style 'splncs04'.

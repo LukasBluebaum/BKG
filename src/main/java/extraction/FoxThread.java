@@ -58,33 +58,20 @@ public class FoxThread implements Runnable {
 	public void run() {
 		FileWriter writer = null;		
 		try {			
-			int currentLine = 0;
 			while(true) {
-				currentLine++;
 				List<CoreMap> nextLine = articles.take();
 				if(nextLine.size() == 0) break;					
 
 				getRelationsFox(nextLine);
 				
-//				if(currentLine >= RelationExtraction.ARTICLESPERWRITE) {
-					graph.enterCriticalSection(Lock.WRITE);
-					try {
-						writer = new FileWriter(model,false);
-						graph.write(writer, "TTL");
-					} finally {
-						graph.leaveCriticalSection();
-					}
-					currentLine = 0;
-//				}
+				graph.enterCriticalSection(Lock.WRITE);
+				try {
+					writer = new FileWriter(model,false);
+					graph.write(writer, "TTL");
+				} finally {
+					graph.leaveCriticalSection();
+				}
 			}               
- 	 		
-			graph.enterCriticalSection(Lock.WRITE);
-			try {
-				writer = new FileWriter(model,false);
-				graph.write(writer, "TTL");
-			} finally {
-				graph.leaveCriticalSection();
-			}
 		} catch ( IOException | InterruptedException e) {
 			e.printStackTrace();   
 		} finally{
@@ -93,10 +80,8 @@ public class FoxThread implements Runnable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} 
-		
+		} 	
 	}
-
 	
 	/**
 	 * Extracts subject predicate and object from a FOX response and writes the triple to the graph. 
@@ -147,8 +132,7 @@ public class FoxThread implements Runnable {
 			}
     		StmtIterator iterator = model.listStatements();
     					    		
-    		while(iterator.hasNext())
-    		{
+    		while(iterator.hasNext()) {
     			Statement s = iterator.next();
     			if(s.getPredicate().toString().contains("subject")) {
     				getTriple(s , iterator);

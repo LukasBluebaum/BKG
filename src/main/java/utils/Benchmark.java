@@ -32,11 +32,13 @@ public class Benchmark {
 	private int totalStatements = 0;
 	private int valid = 0;
 	private int sizeModel = 0;
-	
+	private int sizeWithoutTypes = 0;
+	private int validWithoutTypes = 0;
+	private int sizeWithoutTypesDump = 0;
 	
 	
 	public Benchmark(String modelPath, String category) {
-		 initializeSubjects("Presidents_of_the_United_States");
+		 initializeSubjects(category);
 		 File m = new File(modelPath);
 		 try {
 			model.read(new FileInputStream(m),null, "TTL");
@@ -44,13 +46,13 @@ public class Benchmark {
 			while (it.hasNext()) {
 			     Statement stmt = it.next();
 			     if(subject.contains(stmt.getSubject())) {
-			    	 System.out.println(stmt);
 			    	 sizeModel++;	    	 
+			    	if(! stmt.getPredicate().toString().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) {
+			    		sizeWithoutTypes ++;
+			    	}
 			     }
-			}
-			
+			}			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -71,7 +73,9 @@ public class Benchmark {
 			benchmarkForDump(path);
 		}
 		
-		System.out.println("The model contains " + sizeModel + "statements of given category. " + valid + " are classified as valid by the dumps. All dumps combined contain " + totalStatements + "statements of given category"  );
+		System.out.println("The model contains " + sizeModel + " statements of given category. " + valid + " are classified as valid by the dumps. All dumps combined contain " + totalStatements + " statements of given category"  );
+		System.out.println("The model contains " + sizeWithoutTypes + " statements of given category that are not types. " + validWithoutTypes + " are classified as valid by the dumps. All dumps combined contain " + totalStatements + " statements of given category"  );
+		
 	}
 	
 	private void benchmarkForDump(String file) {
@@ -86,24 +90,57 @@ public class Benchmark {
 			while (it.hasNext()) {
 			     Statement stmt = it.next();
 			     if(subject.contains(stmt.getSubject())) {
-			    	 totalStatements++;
+			    	 totalStatements++;			    	 
 			    	 totalDump++;
+			    	 if(!stmt.getPredicate().toString().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) {
+				    		sizeWithoutTypesDump++;
+				     } 
 			    	 if(model.contains(stmt)) {
+			    		 System.out.println(stmt);
 			    		 validDump++;
+			    		 if(! stmt.getPredicate().toString().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) {
+					    		validWithoutTypes++;
+					     } 		    		
 			    		 valid++;
 			    	 }
-			    		 
 			     }
 			     
 			}
-			System.out.println(dump.toString() + "contains " + totalDump + "statements of given category and the given model contains " + validDump + " of them." );
-			
+			System.out.println("The given dump " + dump.toString() + " contains " + totalDump + " statements of given category and the given model contains " + validDump + " of them." );
+			System.out.println(sizeWithoutTypesDump);
+			writeNotFound(dumpModel);
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public void writeNotFound(Model dump) {
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(new File("resources/notFound.txt"),true);
+		
+			StmtIterator it =  model.listStatements();
+			while(it.hasNext()) {
+				 Statement stmt = it.next();
+			     if(subject.contains(stmt.getSubject())) {
+			    	 if(!dump.contains(stmt)) {
+			    		 fw.write(stmt + "\r\n");
+			    	 }
+			     }
+			} 
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	
 	public void merge(List<String> dumps) throws IOException {
 	
@@ -116,16 +153,11 @@ public class Benchmark {
 			    	   for(Resource r: subject) {
 			    		   if(line.startsWith("<"+ r +">")) {
 			    			   fw.write(line + "\r\n");
-			    		   }
-			    			   
-			    	   }
-			    	  
-		       } 
-		
-			 br.close();
-	
-		}
-		
+			    		   }			    			   
+			    	   }		    	  
+		       } 		
+			 br.close();	
+		}		
 		  fw.close();
 		}
 	
@@ -143,19 +175,21 @@ public class Benchmark {
 			e.printStackTrace();
 		}
 		Benchmark b = new Benchmark("resources/model.ttl", "Presidents_of_the_United_States" );
-		List<String> dumps = Arrays.asList("resources/disambiguations_en.ttl", "resources/instance_types_en.ttl", "resources/instance_types_transitive_en.ttl",
-										    "resources/labels_en.ttl","resources/long_abstracts_en.ttl", "resources/mappingbased_literals_en.ttl", 
-											"resources/mappingbased_objects_en.ttl", "resources/persondata_en.ttl" , "resources/specific_mappingbased_properties_en.ttl" ,  "resources/transitive_redirects_en.ttl" );
+//		List<String> dumps = Arrays.asList("resources/disambiguations_en.ttl", "resources/instance_types_en.ttl", "resources/instance_types_transitive_en.ttl",
+//										    "resources/labels_en.ttl","resources/long_abstracts_en.ttl", "resources/mappingbased_literals_en.ttl", 
+//											"resources/mappingbased_objects_en.ttl", "resources/persondata_en.ttl" , "resources/specific_mappingbased_properties_en.ttl" ,  "resources/transitive_redirects_en.ttl" );
 		
 	//	List<String> dumps = Arrays.asList("resources/instance_types_en.ttl");
-		try {
-			b.merge(dumps);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+////			b.merge(dumps);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		System.setErr(err);
 	
+		List<String> dump = Arrays.asList("resources/dump.ttl");
+		b.benchmark(dump);
 		
 	 } catch (Throwable ex) {
 	        System.err.println("Uncaught exception - " + ex.getMessage());

@@ -94,35 +94,19 @@ public class SpotlightThread implements Runnable {
 	public void run() {
 		FileWriter writer = null;		
 		try {			
-			int lastWrite = 0;
 			while(true) {
-				lastWrite++;
 				List<CoreMap> nextLine = articles.take();
 				if(nextLine.size() == 0) break;
 				getRelationsSpotlight(nextLine);
 								
-				//if(lastWrite >= RelationExtraction.ARTICLESPERWRITE) {
-					graph.enterCriticalSection(Lock.WRITE);
-					try {
-						//System.out.println("Spotlight Enter Critical. Write.");
-						//System.out.println("Spotlight:" + lastWrite);
-						writer = new FileWriter(model,false);
-						graph.write(writer, "TTL");
-					} finally {
-						//System.out.println("Spotlight Leave Critical. Write.");
-						graph.leaveCriticalSection();
-					}
-					lastWrite = 0;
-				//}
+				graph.enterCriticalSection(Lock.WRITE);
+				try {
+					writer = new FileWriter(model,false);
+					graph.write(writer, "TTL");
+				} finally {
+					graph.leaveCriticalSection();
+				}
 			}               
- 	 			
-			graph.enterCriticalSection(Lock.WRITE);
-			try {
-				writer = new FileWriter(model,false);
-				graph.write(writer, "TTL");
-			} finally {
-				graph.leaveCriticalSection();
-			}
 		} catch ( IOException | InterruptedException e) {
 			e.printStackTrace();   
 		} finally{
@@ -148,13 +132,13 @@ public class SpotlightThread implements Runnable {
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		try {
 			String result = null;
-			//try until Spotlight returns something
+			//try 10 times for each sentences list if Spotlight returns an error
 			int i = 0;
 			while(result == null) {
 				Thread.sleep(200);
 				result = service.getEntities(sentences.toString());
 				i++;
-				if(i == 10) System.exit(1);
+				if(i == 10) return;
 			}
 			entityList =  (ArrayList<Entity>) service.postProcessing(result);
 			writeTypes(result);
@@ -221,7 +205,7 @@ public class SpotlightThread implements Runnable {
 					}
 					if(typeUri.length() != 0) {
 						Resource subject = ResourceFactory.createResource(uri);
-						Property predicate = ResourceFactory.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#/type");
+						Property predicate = ResourceFactory.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
 						RDFNode object = ResourceFactory.createResource(typeUri);
 						Statement statement = ResourceFactory.createStatement(subject, predicate, object);
 						graph.enterCriticalSection(Lock.WRITE);
@@ -252,9 +236,9 @@ public class SpotlightThread implements Runnable {
 				if(entity.getUri().equals(entity2.getUri())) continue;
 				for(RelationTriple triple: binaryRelations.get(i)) {	
 				
-					if((triple.subjectGloss().trim().equals(entity.getSurfaceForm()) || triple.subjectGloss().trim().equals(entity.getSurfaceForm() + "'s")
-							|| triple.subjectGloss().trim().equals(entity.getSurfaceForm() + " 's")
-							|| triple.subjectGloss().trim().equals(entity.getSurfaceForm() + "s")) && triple.objectGloss().trim().equals(entity2.getSurfaceForm())
+					String subjectForm = triple.subjectGloss().trim();
+					if((subjectForm.equals(entity.getSurfaceForm()) || subjectForm.equals(entity.getSurfaceForm() + "'s")
+							|| subjectForm.equals(entity.getSurfaceForm() + " 's") || subjectForm.equals(entity.getSurfaceForm() + "s")) && triple.objectGloss().trim().equals(entity2.getSurfaceForm())
 							) {		
 						String tripleRelation = triple.subjectLemmaGloss() + " " + triple.relationLemmaGloss() + " " + triple.objectLemmaGloss();
 					
@@ -303,8 +287,9 @@ public class SpotlightThread implements Runnable {
 	private void literalRelation(Entity entity, int i, Map<Integer, Collection<RelationTriple>> binaryRelations) {
 		for(RelationTriple triple: binaryRelations.get(i)) {
 			String data = null;
-			if(triple.subjectGloss().trim().equals(entity.getSurfaceForm()) || triple.subjectGloss().trim().equals(entity.getSurfaceForm() + "'s")
-					|| triple.subjectGloss().trim().equals(entity.getSurfaceForm() + " 's") || triple.subjectGloss().trim().equals(entity.getSurfaceForm() + "s")){
+			String subjectForm = triple.subjectGloss().trim();
+			if(subjectForm.equals(entity.getSurfaceForm()) || subjectForm.equals(entity.getSurfaceForm() + "'s")
+					|| subjectForm.equals(entity.getSurfaceForm() + " 's") || subjectForm.equals(entity.getSurfaceForm() + "s")){
 				String value = COMMA.matcher(triple.objectLemmaGloss()).replaceAll("");
 				value = NUMBERS.matcher(value).replaceAll(" ");
 	        	if(!value.trim().isEmpty()) {
@@ -312,9 +297,11 @@ public class SpotlightThread implements Runnable {
 	        		value = WHITESPACE.matcher(value).replaceAll(" ");
 	    			String[] numbers = value.trim().split(" ");
 	        		if(month != 0) {	        			
-	        			if(numbers.length == 2) {
-	        				data = numbers[1] + "-" + (month < 10 ? "0" + month : month) + "-" +
-	        						(numbers[0].length() != 1 ? numbers[0] : "0" + numbers[0]);
+	        			if(numbers.length == 2 && !numbers[0].equals(".") && !numbers[1].equals(".")) {
+	        				if((numbers[0].length() >= 1 && numbers[0].length() <=2)  && numbers[1].length() >= 3 ) {
+	        					data = numbers[1] + "-" + (month < 10 ? "0" + month : month) + "-" +
+		        						(numbers[0].length() != 1 ? numbers[0] : "0" + numbers[0]);
+	        				} 
 	        			}else if(numbers.length == 1) {
 	        				data = numbers[0];
 	        			}
@@ -432,7 +419,7 @@ public class SpotlightThread implements Runnable {
 	 */
 	private void setLabelAndName(Entity entity) {
 		Resource subject = ResourceFactory.createResource(entity.getUri());
-		Property predicate = ResourceFactory.createProperty("http://www.w3.org/2000/01/rdf-schema#/label");		
+		Property predicate = ResourceFactory.createProperty("http://www.w3.org/2000/01/rdf-schema#label");		
 		String uri = entity.getUri();
 		String label = uri.substring(uri.lastIndexOf("/")+1).trim().replaceAll("_", " ");
 		RDFNode object = ResourceFactory.createLangLiteral(label, "en");

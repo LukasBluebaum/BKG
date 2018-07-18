@@ -44,9 +44,7 @@ import utils.Relation;
 public class RelationExtraction {
 		
 	private final static int QUEUESIZE = 1000;
-	
-	protected static final int ARTICLESPERWRITE = 10;
-	
+		
 	/**
 	 * List of DBpedia ontology properties {@link utils.Relation}
 	 */
@@ -78,8 +76,7 @@ public class RelationExtraction {
 	    	parseProperties();
 	    }
 	}
-	
-	
+		
 	/**
 	 * Reads the sentences/strings from the given file and puts them in two BlockingQueues.
 	 * Creates a {@link SpotlightThread} and {@link FoxThread}, which then read the articles from their given BlockingQueue and try to extract triples.
@@ -91,7 +88,7 @@ public class RelationExtraction {
 	 * @throws ParseException
 	 * @throws InterruptedException
 	 */
-	private void retrieveRelations(String input, String model) throws InterruptedException  {		
+	private void retrieveRelations(String input, String model)  {		
 		
 		BufferedReader reader = null;	
 		try {		
@@ -103,7 +100,7 @@ public class RelationExtraction {
 		    String nextLine;
 		    
 		    BlockingQueue<List<CoreMap>> spotlightQueue = new ArrayBlockingQueue<List<CoreMap>>(QUEUESIZE);	    
-		    BlockingQueue<List<CoreMap>> foxQueue = new ArrayBlockingQueue<List<CoreMap>>(QUEUESIZE);		    
+//		    BlockingQueue<List<CoreMap>> foxQueue = new ArrayBlockingQueue<List<CoreMap>>(QUEUESIZE);		    
 		    SpotlightThread spotlightThread = new SpotlightThread(parser,graph,out,spotlightQueue);
 //		    FoxThread foxThread = new FoxThread(graph,out,foxQueue);
 		    
@@ -115,23 +112,14 @@ public class RelationExtraction {
 		    while((nextLine = reader.readLine()) != null) {	
 		    	final long startTime2 = System.currentTimeMillis();
 		    	
-//		    	System.out.println(nextLine.length());
 		    	List<CoreMap> sentences = parser.getSentences(nextLine);	    	
 		    	List<CoreMap> nextSentences = new ArrayList<CoreMap>();
 		    	int currentLength = 0;
+
 		    	for(CoreMap sentence: sentences) {
 		    		if(currentLength + sentence.toString().length() > CHARACTERLIMIT) {
-//		    			final long startTime1 = System.currentTimeMillis();
 		    			String coRef = parser.coreferenceResolution(nextSentences);
-//		    			final long endTime1 = System.currentTimeMillis();
-//		    			final long test1 = endTime1-startTime1;
-//		    			System.out.println("Relation:" + TimeUnit.MILLISECONDS.toSeconds(test1));
-		    				    			
-//		    			final long startTime = System.currentTimeMillis();
 			    		List<CoreMap> sentencesRelations = parser.calculateRelations(coRef);
-//			    		final long endTime = System.currentTimeMillis();
-//			    		final long test = endTime-startTime;
-//		    			System.out.println("Relation:" + TimeUnit.MILLISECONDS.toSeconds(test));
 			    		spotlightQueue.put(sentencesRelations);
 //			    		foxQueue.put(sentencesRelations);
 			    		nextSentences = new ArrayList<CoreMap>();
@@ -144,29 +132,20 @@ public class RelationExtraction {
 		    	if(currentLength > 0) {
 		    		String coRef = parser.coreferenceResolution(nextSentences);
 		    		List<CoreMap> sentencesRelations = parser.calculateRelations(coRef);
-		    		spotlightQueue.put(sentencesRelations);
-		    		
+		    		spotlightQueue.put(sentencesRelations);		    		
 //		    		foxQueue.put(sentencesRelations);	    		
 		    	}
 		    	final long endTime2 = System.currentTimeMillis();
     			final long test2 = endTime2-startTime2;
     			double i = (double) TimeUnit.MILLISECONDS.toSeconds(test2);
     			System.out.println("Done with article: (" + nextLine.length() + "," + (i/60.0) + ")");
-//		    	if(currentLine >= STARTLINE) {
-//		    		String line = nextLine.length() > CHARACTERLIMIT+1 ? nextLine.substring(0, CHARACTERLIMIT+1) : nextLine;
-//		    		line = PARSER.coreferenceResolution(line);
-//		    		List<CoreMap> sentences = PARSER.getSentences(line);		    		
-//		    		spotlightQueue.put(sentences);
-//		    		foxQueue.put(sentences);
-//		    	}	
 		    }
 		    
 		    spotlightQueue.put(new ArrayList<CoreMap>());
 		    spotlight.join();
 //		    foxQueue.put(new ArrayList<CoreMap>());
-//		    fox.join();
-		    
-		} catch (IOException  e) {
+//		    fox.join();	    
+		} catch (IOException | InterruptedException  e) {
 			e.printStackTrace();
 		} finally {		   
 		    try {
@@ -225,7 +204,7 @@ public class RelationExtraction {
 	}
 	
 	/**
-	 * Creates a List of properties from src/main/resources/ontology_english.nt .
+	 * Creates a List of properties from src/main/resources/ontology_english.nt . Extracts the label, uri, domain and range.
 	 */
 	private void parseProperties() {
 		properties = new ArrayList<Relation>(); 
@@ -269,30 +248,8 @@ public class RelationExtraction {
 	}
 	
 	
-	public static void main(String[] args) throws Exception  {
-//		RelationExtraction n = new RelationExtraction();
-//		n.parseProperties();
-//		n.toJsonFile();
-//		properties = null;
-//		n.readJson();
-//		for(Relation r: properties) {
-//			System.out.println(r);
-//		}
+	public static void main(String[] args)   {
 		RelationExtraction n = new RelationExtraction();	
-//		n.parseProperties();
-//		n.toJsonFile();
 		n.retrieveRelations("resources/o.txt", "src/main/resources/model.ttl");
-//		SpotlightWebservice service = new SpotlightWebservice();
-//		for(Entity e: service.getEntitiesProcessed("During his first two years in office, Obama signed many landmark bills into law. The main reforms were the Patient Protection and Affordable Care Act (often referred to as \"Obamacare\", shortened as the \"Affordable Care Act\"), the Dodd–Frank Wall Street Reform and Consumer Protection Act, and the Don't Ask, Don't Tell Repeal Act of 2010. The American Recovery and Reinvestment Act of 2009 and Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act of 2010 served as economic stimulus amidst the Great Recession. After a lengthy debate over the national debt limit, he signed the Budget Control and the American Taxpayer Relief Acts. In foreign policy, he increased U.S. troop levels in Afghanistan, reduced nuclear weapons with the United States–Russia New START treaty, and ended military involvement in the Iraq War. He ordered military involvement in Libya in opposition to Muammar Gaddafi; Gaddafi was killed by NATO-assisted forces, and he also ordered the military operation that resulted in the deaths of Osama bin Laden and suspected Yemeni Al-Qaeda operative Anwar al-Awlaki.")) {
-//			System.out.println(e);
-//		}
-	
-//		NLPParser p = new NLPParser();
-//		List<CoreMap> list = p.getSentences("Linkin Park's genre is rock");
-//		Map<Integer, Collection<RelationTriple>> binaryRelations = p.binaryRelation(list);
-//		for(RelationTriple triple: binaryRelations.get(0)) {			
-//			System.out.println(0 +": " + triple.subjectGloss() + " - " + triple.relationGloss() + " - " + triple.objectGloss());
-//		}
-//		p.binaryRelation2(null);
 	}
 }
