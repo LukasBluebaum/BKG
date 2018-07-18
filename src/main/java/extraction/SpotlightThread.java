@@ -147,10 +147,17 @@ public class SpotlightThread implements Runnable {
 
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		try {
-			Thread.sleep(100);
-			String result = service.getEntities(sentences.toString());
+			String result = null;
+			//try until Spotlight returns something
+			int i = 0;
+			while(result == null) {
+				Thread.sleep(200);
+				result = service.getEntities(sentences.toString());
+				i++;
+				if(i == 10) System.exit(1);
+			}
 			entityList =  (ArrayList<Entity>) service.postProcessing(result);
-			//writeTypes(result);
+			writeTypes(result);
 			
 		} catch (IOException | ParseException | InterruptedException e) {
 			e.printStackTrace();
@@ -210,7 +217,7 @@ public class SpotlightThread implements Runnable {
 					case("Schema") : typeUri =  "http://schema.org/" + split[1]; break;
 					}
 					if(split[0].toLowerCase().startsWith("http")) {
-						typeUri = Character.toLowerCase(split[0].charAt(0)) + split[0].substring(1);
+						typeUri = Character.toLowerCase(split[0].charAt(0)) + split[0].substring(1) + ":" + split[1] ;
 					}
 					if(typeUri.length() != 0) {
 						Resource subject = ResourceFactory.createResource(uri);

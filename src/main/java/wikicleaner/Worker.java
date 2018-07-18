@@ -56,19 +56,20 @@ public class Worker implements Runnable{
 					break;
 				}
 				article = NULLCHAR.matcher(article).replaceAll("");
-				int i = article.indexOf("\t");
-				
-				if(i != -1) {
-					String s = article.substring(0, i);
-					s = s.substring(s.lastIndexOf("/")+1);
-					if(containsPresident(s)  && article.length() > 10000) {
-						System.out.println(s);
-						String clean = cleanArticle(article);
-						if(clean.length() > 20000) {
-							writeQueue.put(clean);
-						}
-					}				
-				}							
+//				int i = article.indexOf("\t");
+//				
+//				if(i != -1) {
+//					String s = article.substring(0, i);
+//					s = s.substring(s.lastIndexOf("/")+1);
+//					if(containsPresident(s)  && article.length() > 10000) {
+//						System.out.println(s);
+//						String clean = cleanArticle(article);
+//						if(clean.length() > 20000) {
+//							writeQueue.put(clean);
+//						}
+//					}				
+//				}							
+				writeQueue.put(cleanArticle(article));
 			}          
 		} catch(InterruptedException e) {
 			e.printStackTrace();

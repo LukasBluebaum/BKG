@@ -72,7 +72,6 @@ public class NLPParser {
 	 * @return 
 	 */
 	public List<CoreMap> calculateRelations(String article) {
-        System.out.println(article.length());
 
         Annotation annotation = new Annotation(article);
         PIPELINERELATIONS.annotate(annotation);

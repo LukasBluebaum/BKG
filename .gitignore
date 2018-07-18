@@ -188,3 +188,8 @@ src/main/resources/WordNet-3.0/doc/html/Makefile
 src/main/resources/WordNet-3.0/doc/Makefile.in
 src/main/resources/WordNet-3.0/doc/Makefile.am
 src/main/resources/WordNet-3.0/doc/Makefile
+report/finaltechnicalreport.synctex.gz
+report/finaltechnicalreport.log
+report/finaltechnicalreport.bbl
+report/finaltechnicalreport.aux
+report/finaltechnicalreport.blg

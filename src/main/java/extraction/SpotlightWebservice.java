@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -42,12 +39,9 @@ public class SpotlightWebservice {
 	 * Sets the parameters for the next Spotlight request and calls {@link #requestPOST(String, String)}.
 	 * @param inputText Current sentences.
 	 * @return Output from DBpedia Spotlight.
-	 * @throws MalformedURLException
 	 * @throws IOException
-	 * @throws ProtocolException
-	 * @throws ParseException
 	 */
-	public String getEntities(final String inputText) throws MalformedURLException, IOException, ProtocolException, ParseException {
+	public String getEntities(final String inputText) throws IOException {
 
 		String urlParameters = "text=" + URLEncoder.encode(inputText, "UTF-8");
 		urlParameters += "&confidence=" + CONFIDENCE;
@@ -63,7 +57,7 @@ public class SpotlightWebservice {
 	 * @return Response from Spotlight.
 	 * @throws IOException
 	 */
-	private String requestPOST(final String urlParameters, final String requestURL) throws IOException {
+	private String requestPOST(final String urlParameters, final String requestURL){
 		try {	
 			URL url = new URL(requestURL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -94,7 +88,7 @@ public class SpotlightWebservice {
 			connection.disconnect();
 	
 			return sb.toString();
-		} catch(SocketTimeoutException e) {
+		} catch(IOException e) {
 			System.out.println("TimeOut");	
 			return null;
 		} 

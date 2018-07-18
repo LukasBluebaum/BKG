@@ -4333,7 +4333,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/profession",
-  "keywords" : [ "profession", "work" ],
+  "keywords" : [ "profession", "work", "was", "is" ],
   "range" : "",
   "domain" : "Person",
   "countRelation" : 27,
@@ -4795,7 +4795,7 @@
   "propertyType" : "data"
 }, {
   "label" : "http://dbpedia.org/ontology/almaMater",
-  "keywords" : [ "alma mater", "attend", "study", "graduate", "alma", "mater" , "degree" ],
+  "keywords" : [ "alma mater", "attend", "study", "graduate", "alma", "mater" , "degree" , "university", "college" ],
   "range" : "EducationalInstitution",
   "domain" : "Person",
   "countRelation" : 4,
