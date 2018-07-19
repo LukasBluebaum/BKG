@@ -132,7 +132,7 @@ public class SpotlightThread implements Runnable {
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		try {
 			String result = null;
-			//try 10 times for each sentences list if Spotlight returns an error
+			//try 10 times for each sentences list in case Spotlight returns an error
 			int i = 0;
 			while(result == null) {
 				Thread.sleep(200);

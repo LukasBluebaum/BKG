@@ -94,7 +94,6 @@ public class FoxWebservice {
 			connection.disconnect();
 			return sb.toString();
 		} catch(SocketTimeoutException e) {
-			System.out.println("TimeOut");	
 			return null;
 		} 
 	}

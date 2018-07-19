@@ -88,7 +88,6 @@ public class SpotlightWebservice {
 	
 			return sb.toString();
 		} catch(IOException e) {
-			System.out.println("TimeOut");	
 			return null;
 		} 
 	}
