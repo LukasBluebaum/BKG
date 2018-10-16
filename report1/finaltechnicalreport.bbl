@@ -1,0 +1,58 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{openie}
+Angeli, G., Premkumar, M.J.J., Manning, C.D.: Leveraging linguistic structure
+  for open domain information extraction. In: Proceedings of the 53rd Annual
+  Meeting of the Association for Computational Linguistics and the 7th
+  International Joint Conference on Natural Language Processing (Volume 1: Long
+  Papers). vol.~1, pp. 344--354 (2015)
+
+\bibitem{spotlight}
+Daiber, J., Jakob, M., Hokamp, C., Mendes, P.N.: Improving efficiency and
+  accuracy in multilingual entity extraction. In: Proceedings of the 9th
+  International Conference on Semantic Systems (I-Semantics) (2013)
+
+\bibitem{stanford}
+Manning, C.D., Surdeanu, M., Bauer, J., Finkel, J., Bethard, S.J., McClosky,
+  D.: The {Stanford} {CoreNLP} natural language processing toolkit. In:
+  Association for Computational Linguistics (ACL) System Demonstrations. pp.
+  55--60 (2014), \url{http://www.aclweb.org/anthology/P/P14/P14-5010}
+
+\bibitem{disambiguate}
+Mendes, P.N., Jakob, M., Garc\'{\i}a-Silva, A., Bizer, C.: Dbpedia spotlight:
+  Shedding light on the web of documents. In: Proceedings of the 7th
+  International Conference on Semantic Systems. p.~3. I-Semantics '11 (2011)
+
+\bibitem{agdistis}
+Moussallem, D., Usbeck, R., R{\"o}der, M., {Ngonga Ngomo}, A.C.: Mag: A
+  multilingual, knowledge-base agnostic and deterministic entity linking
+  approach. In: K-CAP 2017: Knowledge Capture Conference. p.~8. ACM (2017),
+  \url{https://svn.aksw.org/papers/2017/KCAP\_MAG/sigconf-main.pdf}
+
+\bibitem{parser}
+Nivre, J., de~Marneffe, M.C., Ginter, F., Goldberg, Y., Hajic, J., Manning,
+  C.D., McDonald, R., Petrov, S., Pyysalo, S., Silveira, N., Tsarfaty, R.,
+  Zeman, D.: Universal dependencies v1: A multilingual treebank collection. In:
+  Proceedings of the Tenth International Conference on Language Resources and
+  Evaluation (LREC 2016) (2016)
+
+\bibitem{coref}
+Recasens, M., {de Marneffe}, M.C., Potts, C.: The life and death of discourse
+  entities: Identifying singleton mentions. In: North American Association for
+  Computational Linguistics (NAACL) (2013)
+
+\bibitem{fox}
+Speck, R., {Ngonga Ngomo}, A.C.: Ensemble learning for named entity
+  recognition. In: The Semantic Web – ISWC 2014, Lecture Notes in Computer
+  Science, vol.~8796. Springer International Publishing (2014)
+
+\bibitem{agdistis2}
+Usbeck, R., {Ngonga Ngomo}, A.C., Auer, S., Gerber, D., Both, A.: Agdistis -
+  graph-based disambiguation of named entities using linked data. In: 13th
+  International Semantic Web Conference (2014),
+  \url{http://svn.aksw.org/papers/2014/ISWC\_AGDISTIS/public.pdf}
+
+\end{thebibliography}
