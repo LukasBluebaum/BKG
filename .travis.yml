@@ -2,7 +2,7 @@ language: java
 sudo: false
 
 script: 
-  - mvn test -B
+  - mvn clean install -B
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
