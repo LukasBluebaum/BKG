@@ -42,7 +42,7 @@ public class NLPParser {
 	
 	private static final  StanfordCoreNLP PIPELINEREF;
 	
-	private static final  String ANNOTATORSREF = "pos,lemma,ner,parse,core";
+	private static final  String ANNOTATORSREF = "pos,lemma,ner,parse,coref";
 	
 	private static final  StanfordCoreNLP PIPELINESENTENCES;
 	
@@ -233,8 +233,7 @@ public class NLPParser {
  	}
 	
 	public static void main(String[] args) {
-		NLPParser p = new NLPParser();
-		System.out.println(p.getLemma("runs"));
+		System.out.println(NLPParser.getLemma("runs"));
 	}
 	
 }
